@@ -1,9 +1,9 @@
 NAME = fractol
-SOURCES = hooks.c main.c keyhooks.c utils.c
+SOURCES = hooks.c main.c keyhooks.c utils.c draw.c
 HEADER = include
 SRC_PATH  = src
 OBJ_PATH  = objs
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror
 LDLIBS = -L./libft -lft -L./minilibx-linux -lmlx -L./ft_printf -lftprintf -lm -lXext -lX11 -lz
 LIBFT_DIR = libft
 PRINTF_DIR = ft_printf
@@ -23,14 +23,15 @@ getmlxlib:
 		rm minilibx-linux.tgz; \
 	fi
 debug:
-	@cc -ggdb3 $(CFLAGS) $(INCLUDES) $(SRCS) $(LDLIBS) -o debug
+	@cc -ggdb3 $(CFLAGS) $(INCLUDES) $(SRCS) $(LDLIBS) -o $(NAME)
 	@echo "---Debug mode---"
-	@gdb -ex run ./debug Mandelbrot
+	@gdb -ex run $(NAME)
 
 mem:
 	@cc -ggdb3 $(CFLAGS) $(INCLUDES) $(SRCS) $(LDLIBS) -o debug
 	@echo "---Debug mode---"
-	@help50 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./debug Mandelbrot
+	@help50 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./debug
+
 
 $(NAME): $(OBJS)
 	make mlibft
@@ -54,15 +55,18 @@ printf:
 	@echo "building ftprintf.........."
 	@make -s -C $(PRINTF_DIR)
 
+
 clean: fclean
-	@rm -rf $(OBJ_PATH)
+	rm -rf $(OBJ_PATH)
 	@rm -f *.o
 	@rm -f debug
-	@make fclean -s -C $(LIBFT_DIR)
-	@make fclean -s -C $(PRINTF_DIR)
-	@make clean -s -C $(MLX_DIR)
+	make fclean -s -C $(LIBFT_DIR)
+	make fclean -s -C $(PRINTF_DIR)
+	make clean -s -C $(MLX_DIR)
 
 fclean:
-	@rm -rf $(NAME)
+	rm -rf $(NAME)
 
 re : fclean all
+
+.PHONY: all clean fclean re

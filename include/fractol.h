@@ -6,7 +6,7 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:40:18 by carlo             #+#    #+#             */
-/*   Updated: 2023/10/03 11:11:03 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/04 10:41:09 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_3d
 	t_image			img;
 	int				color;
 	int				menu;
+
+	float			fps;
 }					t_3d;
 
 void				init_img(t_3d *d);
@@ -71,7 +73,14 @@ int					motion_hook(int x, int y, t_3d *d);
 int					key_hook(int keycode, t_3d *d);
 int					mouse_scaling_hook(int button, int x, int y, t_3d *d);
 
-int					ft_clip(int n, int min, int max);
 int					terminate(t_3d *d);
+
+void				draw(t_3d *d);
+
+/*
+	UTILS
+*/
+int					ft_max(int n, int m);
+int					ft_clip(int n, int min, int max);
 
 #endif 

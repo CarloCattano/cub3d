@@ -1,23 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/29 13:38:02 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/03 11:28:53 by carlo            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../include/fractol.h"
 
 static int	init_variables(t_3d *d);
-static int	init_fractal(t_3d *d);
 
 /* static void	draw_fractal(t_3d *d) */
 /* my_mlx_pixel_put(d, d->i.x, d->i.y, (int)color_pixel(d, i)); */
-
 
 /*
 	Initialize image
@@ -55,37 +42,32 @@ int	terminate(t_3d *d)
 	return (0);
 }
 
+int loop_hook(t_3d *d)
+{
+	draw(d);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_3d	d;
 	(void)ac;
 	(void)av;
-	/* if (ac < 2 || ac >= 4 || !init_fractal(&d, av[1], av[2])) */
-	/* { */
-	/* 	ft_putendl_fd("some error", 1); */
-	/* 	exit(-1); */
-	/* } */
-	/* else if (!(init_variables(&d))) */
-	/* 	ft_putendl_fd("Failed to initialize variables", 1); */
-
-	//fractol(&d);
-
+	
 	if (!(init_variables(&d)))
 	{
 		ft_putendl_fd("Failed to initialize variables", 1);
 		terminate(&d);
 	}
-	if(!init_fractal(&d))
-	{
-		ft_putendl_fd("some error", 1);
-		terminate(&d);
-	}	
+	
 	mlx_mouse_hook(d.img.win, mouse_scaling_hook, &d);
 	mlx_hook(d.img.win, ON_KEYDOWN, 1L << 0, key_hook, &d);
 	mlx_hook(d.img.win, ON_MOUSEMOVE, 1 << 6, motion_hook, &d);
 	mlx_hook(d.img.win, ON_WINDOWCLOSE, 1L << 17, terminate, &d);
+	mlx_loop_hook(d.img.mlx, loop_hook, &d);
 	mlx_loop(d.img.mlx);
 	terminate(&d);
+	
 	return (0);
 }
 
@@ -107,8 +89,3 @@ static int	init_variables(t_3d *d)
 	return (1);
 }
 
-static int	init_fractal(t_3d *d)
-{
-	(void)d;
-	return (1);
-}

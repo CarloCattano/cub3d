@@ -1,0 +1,6 @@
+tags
+.idea
+.vscode
+compile_commands.json
+*.o
+minilibx-linux
