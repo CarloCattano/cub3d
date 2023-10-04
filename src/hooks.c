@@ -1,4 +1,4 @@
-#include "../include/fractol.h"
+#include "../include/cub3d.h"
 
 /*
 	mouse pos 

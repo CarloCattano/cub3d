@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   keyhooks.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:34:17 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/03 11:25:04 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/04 12:09:42 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fractol.h"
+#include "../include/cub3d.h"
 
 /* static void	set_color(int k, t_3d *d) */
 /* { */

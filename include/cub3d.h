@@ -1,17 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 21:40:18 by carlo             #+#    #+#             */
-/*   Updated: 2023/10/04 10:41:09 by carlo            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "mlx.h"
 # include "libft.h"
@@ -27,6 +16,13 @@ enum {
 	ON_MOUSEMOVE = 6,
 	ON_WINDOWCLOSE = 17
 };
+
+
+typedef struct s_2d
+{
+    int	x;
+    int	y;
+}					t_2d;
 
 typedef struct s_rgb
 {
@@ -53,12 +49,18 @@ typedef struct s_image
 	int				endian;
 }					t_image;
 
+typedef struct player
+{
+    t_point     pos;
+    t_point     dir;
+}               t_player;
+
 typedef struct s_3d
 {
 	t_image			img;
 	int				color;
 	int				menu;
-
+    t_player        player;
 	float			fps;
 }					t_3d;
 
@@ -76,6 +78,9 @@ int					mouse_scaling_hook(int button, int x, int y, t_3d *d);
 int					terminate(t_3d *d);
 
 void				draw(t_3d *d);
+
+void                init_player(t_player *player);
+void                drawPlayer(t_3d *d);
 
 /*
 	UTILS

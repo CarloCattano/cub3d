@@ -1,10 +1,7 @@
 
-#include "../include/fractol.h"
+#include "../include/cub3d.h"
 
 static int	init_variables(t_3d *d);
-
-/* static void	draw_fractal(t_3d *d) */
-/* my_mlx_pixel_put(d, d->i.x, d->i.y, (int)color_pixel(d, i)); */
 
 /*
 	Initialize image
@@ -22,14 +19,6 @@ void	init_img(t_3d *d)
 	d->img.sizeline = sizeline;
 	d->img.endian = endian;
 }
-
-/* static void	my_mlx_pixel_put(t_3d *d, int x, int y, int color) */
-/* { */
-/* 	char	*dst; */
-
-/* 	dst = d->img.data + (y * d->img.sizeline + x * (d->img.bpp >> 3)); */
-/* 	*(unsigned int *)dst = color; */
-/* } */
 
 int	terminate(t_3d *d)
 {
@@ -88,4 +77,3 @@ static int	init_variables(t_3d *d)
 	d->menu = 0;
 	return (1);
 }
-

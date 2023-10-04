@@ -1,5 +1,5 @@
-NAME = fractol
-SOURCES = hooks.c main.c keyhooks.c utils.c draw.c
+NAME = cub3d
+SOURCES = hooks.c main.c keyhooks.c utils.c draw.c player.c
 HEADER = include
 SRC_PATH  = src
 OBJ_PATH  = objs
@@ -14,7 +14,6 @@ SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
 
 all: $(NAME)
-
 getmlxlib:
 	@if [ ! -d minilibx-linux ]; then \
 		echo "Downloading miniLibX..."; \
@@ -58,8 +57,6 @@ printf:
 
 clean: fclean
 	rm -rf $(OBJ_PATH)
-	@rm -f *.o
-	@rm -f debug
 	make fclean -s -C $(LIBFT_DIR)
 	make fclean -s -C $(PRINTF_DIR)
 	make clean -s -C $(MLX_DIR)

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42Berlin.de>    +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 12:37:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/04 10:19:20 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/04 12:09:42 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fractol.h"
+#include "../include/cub3d.h"
 
 int	ft_clip(int n, int min, int max)
 {

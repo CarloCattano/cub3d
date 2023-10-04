@@ -1,12 +1,6 @@
-#include "../include/fractol.h"
+#include "../include/cub3d.h"
 #include <mlx.h>
 #include <time.h>
-
-typedef struct s_2d
-{
-	unsigned int	x;
-	unsigned int	y;
-}					t_2d;
 
 static void	my_mlx_pixel_put(t_3d *d, int x, int y, int color)
 {
@@ -40,7 +34,6 @@ void	draw_line(t_3d *d, t_2d p1, t_2d p2, int color)
 		i++;
 	}
 }
-
 
 void clearCanvas(t_3d *d)
 {
@@ -87,29 +80,35 @@ static void	fps_counter(t_3d *d)
 	mlx_string_put(d->img.mlx, d->img.win, 34, 10, 0xFFFFFF, fps_str);
 }
 
+
+int test_color = 0xFF0000;
+
 void draw(t_3d *d)
 {
 	t_2d	p1;
 	t_2d	p2;
-	int		color;
+	//int		color;
 
 	if (testCount < HEIGHT - 10)
 		testCount++;
-	else if(testCount >= HEIGHT - 10)
-		testCount = 1;
-	
-	color = 0x00FF00;
-	p1.x = WIDTH >> 1;
+	else testCount = 1;
+
+    p1.x = WIDTH >> 1;
 	p1.y = HEIGHT >> 1;
 	p2.x = 0;
 	p2.y = testCount;
 	
 	clearCanvas(d);
 
-	draw_line(d, p1, p2, color);
-	
+	draw_line(d, p1, p2, test_color);
+
+    init_player(&d->player);
+    drawPlayer(d);
+
+
 	mlx_put_image_to_window(d->img.mlx, d->img.win, d->img.image, 0, 0);
 	fps_counter(d);
+    test_color = rand() % 0xFF00ef40;
 }
 
 
