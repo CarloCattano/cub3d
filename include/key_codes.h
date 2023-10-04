@@ -6,15 +6,15 @@
 /*   By: xcarlo <xcarlo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:58:41 by ccattano          #+#    #+#             */
-/*   Updated: 2023/02/08 18:10:03 by xcarlo           ###   ########.fr       */
+/*   Updated: 2023/10/04 23:24:35 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_CODES_H
 # define KEY_CODES_H
 
-# define KEY_UP			65364
-# define KEY_DOWN		65362
+# define KEY_UP			65362
+# define KEY_DOWN		65364
 # define KEY_LEFT		65363
 # define KEY_RIGHT		65361
 # define KEY_PAD_ADD	61

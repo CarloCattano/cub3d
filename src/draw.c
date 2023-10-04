@@ -10,13 +10,13 @@ static void	my_mlx_pixel_put(t_3d *d, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_line(t_3d *d, t_2d p1, t_2d p2, int color)
+void	draw_line(t_3d *d, t_point p1, t_point p2, int color)
 {
-	int		i;
-	t_2d	delta;
-	t_2d	sign;
-	t_2d	abs_delta;
-	t_2d	current;
+	int			i;
+	t_point		delta;
+	t_point		sign;
+	t_point		abs_delta;
+	t_point		current;
 
 	delta.x = p2.x - p1.x;
 	delta.y = p2.y - p1.y;
@@ -85,9 +85,8 @@ int test_color = 0xFF0000;
 
 void draw(t_3d *d)
 {
-	t_2d	p1;
-	t_2d	p2;
-	//int		color;
+	t_point	p1;
+	t_point	p2;
 
 	if (testCount < HEIGHT - 10)
 		testCount++;
@@ -99,12 +98,8 @@ void draw(t_3d *d)
 	p2.y = testCount;
 	
 	clearCanvas(d);
-
 	draw_line(d, p1, p2, test_color);
-
-    init_player(&d->player);
     drawPlayer(d);
-
 
 	mlx_put_image_to_window(d->img.mlx, d->img.win, d->img.image, 0, 0);
 	fps_counter(d);

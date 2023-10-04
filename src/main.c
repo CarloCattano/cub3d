@@ -39,7 +39,7 @@ int loop_hook(t_3d *d)
 
 int	main(int ac, char **av)
 {
-	t_3d	d;
+	t_3d			d;
 	(void)ac;
 	(void)av;
 	
@@ -50,7 +50,8 @@ int	main(int ac, char **av)
 	}
 	
 	mlx_mouse_hook(d.img.win, mouse_scaling_hook, &d);
-	mlx_hook(d.img.win, ON_KEYDOWN, 1L << 0, key_hook, &d);
+	mlx_hook(d.img.win, ON_KEYDOWN, 1L << 0, key_down_hook, &d);
+	mlx_hook(d.img.win, ON_KEYUP, 1L << 1, key_up_hook, &d);
 	mlx_hook(d.img.win, ON_MOUSEMOVE, 1 << 6, motion_hook, &d);
 	mlx_hook(d.img.win, ON_WINDOWCLOSE, 1L << 17, terminate, &d);
 	mlx_loop_hook(d.img.mlx, loop_hook, &d);
@@ -65,13 +66,15 @@ static int	init_variables(t_3d *d)
 	d->img.mlx = mlx_init();
 	d->img.win = mlx_new_window(d->img.mlx, WIDTH, HEIGHT, "Fractol");
 	
+
 	if (!(d->img.mlx))
 		ft_putendl_fd("failed to init mlx", 1);
 	if (!(d->img.win))
 		ft_putendl_fd("Error creating window", 1);
 	
 	init_img(d);
-	
+	init_player(d);
+
 	if (!d->img.image)
 		ft_putendl_fd("Error creating image", 1);
 	d->menu = 0;

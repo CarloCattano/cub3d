@@ -6,21 +6,11 @@
 /*   By: ccattano <ccattano@student.42Berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:39:31 by ccattano          #+#    #+#             */
-/*   Updated: 2023/01/29 14:15:52 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/10/04 23:23:50 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-size_t	ft_strlen(const char *str)
-{
-	int	count;
-
-	count = 0;
-	while (str[count] != '\0')
-		count++;
-	return (count);
-}
 
 void	ft_format(va_list args, const char *format, int *len, int *i)
 {

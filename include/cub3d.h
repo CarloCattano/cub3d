@@ -13,10 +13,17 @@
 
 enum {
 	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
 	ON_MOUSEMOVE = 6,
 	ON_WINDOWCLOSE = 17
 };
 
+
+typedef struct ctrl_states 
+{
+	int upDown;
+	int leftRight;
+}				t_ctrl_states;
 
 typedef struct s_2d
 {
@@ -35,8 +42,13 @@ typedef struct s_point
 {
 	int			x;
 	int			y;
-	int			z;
 }				t_point;
+
+typedef struct s_fpoint
+{
+	float			x;
+	float			y;
+}				t_fpoint;
 
 typedef struct s_image
 {
@@ -51,8 +63,10 @@ typedef struct s_image
 
 typedef struct player
 {
-    t_point     pos;
-    t_point     dir;
+    t_point     	pos;
+    t_fpoint		dir;
+	int				speed;
+	t_ctrl_states 	ctrl;
 }               t_player;
 
 typedef struct s_3d
@@ -72,14 +86,17 @@ void				settings(t_3d *d);
 */
 
 int					motion_hook(int x, int y, t_3d *d);
-int					key_hook(int keycode, t_3d *d);
+int					key_down_hook(int keycode, t_3d *d);
+int					key_up_hook(int keycode, t_3d *d);
 int					mouse_scaling_hook(int button, int x, int y, t_3d *d);
 
 int					terminate(t_3d *d);
 
 void				draw(t_3d *d);
 
-void                init_player(t_player *player);
+void				draw_line(t_3d *d, t_point p1, t_point p2, int color);
+
+void                init_player(t_3d *d);
 void                drawPlayer(t_3d *d);
 
 /*
