@@ -2,7 +2,7 @@
 #include <mlx.h>
 #include <time.h>
 
-void	draw_line(t_3d *d, t_point p1, t_point p2, int color)
+void	draw_line(t_data *d, t_point p1, t_point p2, int color)
 {
 	int			i;
 	t_point		delta;
@@ -27,7 +27,7 @@ void	draw_line(t_3d *d, t_point p1, t_point p2, int color)
 	}
 }
 
-void clearCanvas(t_3d *d)
+void clearCanvas(t_data *d)
 {
 	int i;
 	int j;
@@ -54,7 +54,7 @@ static time_t fps_time = 0;
 static time_t fps_time2 = 0;
 static char *fps_str = NULL;
 
-static void	fps_counter(t_3d *d)
+static void	fps_counter(t_data *d)
 {
 	fps_count++;
 	fps_time2 = time(NULL);
@@ -75,7 +75,7 @@ static void	fps_counter(t_3d *d)
 
 int test_color = 0xFF0000;
 
-void draw(t_3d *d)
+void draw(t_data *d)
 {
 	t_point	p1;
 	t_point	p2;

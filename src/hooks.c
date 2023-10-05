@@ -4,7 +4,7 @@
 	mouse pos 
 */
 
-int	motion_hook(int x, int y, t_3d *d)
+int	motion_hook(int x, int y, t_data *d)
 {
 	(void)d;
 	(void)x;
@@ -12,7 +12,7 @@ int	motion_hook(int x, int y, t_3d *d)
 	return (1);
 }
 
-int	mouse_scaling_hook(int k, int x, int y, t_3d *d)
+int	mouse_scaling_hook(int k, int x, int y, t_data *d)
 {
 	(void)d;
 	if ((k == 1 || k == 2 || k == SCROLL_UP || k == SCROLL_DOWN)

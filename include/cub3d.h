@@ -44,11 +44,11 @@ typedef struct s_point
 	int			y;
 }				t_point;
 
-typedef struct s_fpoint
+typedef struct s_dpoint
 {
-	float			x;
-	float			y;
-}				t_fpoint;
+	double			x;
+	double			y;
+}				t_dpoint;
 
 typedef struct s_image
 {
@@ -64,7 +64,7 @@ typedef struct s_image
 typedef struct player
 {
     t_point     	pos;
-    t_fpoint		dir;
+    t_dpoint		dir;
 	int				speed;
 	t_ctrl_states 	ctrl;
 }               t_player;
@@ -76,35 +76,35 @@ typedef struct s_3d
 	int				menu;
     t_player        player;
 	float			fps;
-}					t_3d;
+}					t_data;
 
-void				init_img(t_3d *d);
-void				settings(t_3d *d);
+void				init_img(t_data *d);
+void				settings(t_data *d);
 
 /*
 	HOOKS
 */
 
-int					motion_hook(int x, int y, t_3d *d);
-int					key_down_hook(int keycode, t_3d *d);
-int					key_up_hook(int keycode, t_3d *d);
-int					mouse_scaling_hook(int button, int x, int y, t_3d *d);
+int					motion_hook(int x, int y, t_data *d);
+int					key_down_hook(int keycode, t_data *d);
+int					key_up_hook(int keycode, t_data *d);
+int					mouse_scaling_hook(int button, int x, int y, t_data *d);
 
-int					terminate(t_3d *d);
+int					terminate(t_data *d);
 
-void				draw(t_3d *d);
+void				draw(t_data *d);
 
-void				draw_line(t_3d *d, t_point p1, t_point p2, int color);
+void				draw_line(t_data *d, t_point p1, t_point p2, int color);
 
-void                init_player(t_3d *d);
-void                drawPlayer(t_3d *d);
+void                init_player(t_data *d);
+void                drawPlayer(t_data *d);
 
 /*
 	UTILS
 */
 int					ft_max(int n, int m);
 int					ft_clip(int n, int min, int max);
-void				print_debug(t_3d *d, char *str);
-void				mlx_pixel_put_image(t_image *img, int x, int y, int color);
+void				print_debug(t_data *d, char *str);
+void				my_mlx_pixel_put(t_data *d, int x, int y, int color);
 
 #endif 

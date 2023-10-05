@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 12:37:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/05 09:39:13 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/05 09:55:19 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int ft_max(int a, int b)
 	return (a > b ? a : b);
 }
 
-void print_debug(t_3d *d, char *str)
+void print_debug(t_data *d, char *str)
 {
 	mlx_string_put(d->img.mlx, d->img.win, 200, 10, 0x00FF00, str);
 }
 
 
-void	my_mlx_pixel_put(t_3d *d, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *d, int x, int y, int color)
 {
     char	*dst;
 

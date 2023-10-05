@@ -1,13 +1,13 @@
 
 #include "../include/cub3d.h"
 
-static int	init_variables(t_3d *d);
+static int	init_variables(t_data *d);
 
 /*
 	Initialize image
 */
 
-void	init_img(t_3d *d)
+void	init_img(t_data *d)
 {
 	int	bpp;
 	int	sizeline;
@@ -20,7 +20,7 @@ void	init_img(t_3d *d)
 	d->img.endian = endian;
 }
 
-int	terminate(t_3d *d)
+int	terminate(t_data *d)
 {
 	mlx_destroy_image(d->img.mlx, d->img.image);
 	mlx_destroy_window(d->img.mlx, d->img.win);
@@ -31,7 +31,7 @@ int	terminate(t_3d *d)
 	return (0);
 }
 
-int loop_hook(t_3d *d)
+int loop_hook(t_data *d)
 {
 	draw(d);
 	return (0);
@@ -39,7 +39,7 @@ int loop_hook(t_3d *d)
 
 int	main(int ac, char **av)
 {
-	t_3d			d;
+	t_data			d;
 	(void)ac;
 	(void)av;
 	
@@ -62,7 +62,7 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-static int	init_variables(t_3d *d)
+static int	init_variables(t_data *d)
 {
 	d->img.mlx = mlx_init();
 	d->img.win = mlx_new_window(d->img.mlx, WIDTH, HEIGHT, "Fractol");
