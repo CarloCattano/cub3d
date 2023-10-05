@@ -104,5 +104,7 @@ void                drawPlayer(t_3d *d);
 */
 int					ft_max(int n, int m);
 int					ft_clip(int n, int min, int max);
+void				print_debug(t_3d *d, char *str);
+void				mlx_pixel_put_image(t_image *img, int x, int y, int color);
 
 #endif 

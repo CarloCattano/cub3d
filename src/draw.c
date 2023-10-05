@@ -2,14 +2,6 @@
 #include <mlx.h>
 #include <time.h>
 
-static void	my_mlx_pixel_put(t_3d *d, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = d->img.data + (y * d->img.sizeline + x * (d->img.bpp >> 3));
-	*(unsigned int *)dst = color;
-}
-
 void	draw_line(t_3d *d, t_point p1, t_point p2, int color)
 {
 	int			i;
@@ -105,5 +97,6 @@ void draw(t_3d *d)
 	fps_counter(d);
     test_color = rand() % 0xFF00ef40;
 }
+
 
 

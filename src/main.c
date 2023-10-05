@@ -49,6 +49,7 @@ int	main(int ac, char **av)
 		terminate(&d);
 	}
 	
+	mlx_do_key_autorepeatoff(d.img.mlx); // does it work?
 	mlx_mouse_hook(d.img.win, mouse_scaling_hook, &d);
 	mlx_hook(d.img.win, ON_KEYDOWN, 1L << 0, key_down_hook, &d);
 	mlx_hook(d.img.win, ON_KEYUP, 1L << 1, key_up_hook, &d);

@@ -8,12 +8,21 @@ void init_player(t_3d *d)
 	d->player.pos.x = 42;
 	d->player.pos.y = 42;
 	d->player.dir.x = 1;
-	d->player.dir.y = 1;
+	d->player.dir.y = 0;
 	d->player.speed = 1;
 	d->player.ctrl.upDown = 0;
 	d->player.ctrl.leftRight = 0;
 }
-void draw_direction(t_3d *d)
+
+int angleVector(t_3d *d)
+{
+	float angle;
+	
+	angle = atan2(d->player.dir.y, d->player.dir.x);
+	return ((int)angle);
+}
+
+void draw_line_angle(t_3d *d, int angle)
 {
 	t_point origin;
 	t_point p2;
@@ -21,37 +30,41 @@ void draw_direction(t_3d *d)
 	origin.x = d->player.pos.x;
 	origin.y = d->player.pos.y;
 
-	p2.x = d->player.pos.x + d->player.dir.x * 10;
-	p2.y = d->player.pos.y + d->player.dir.y * 10;
+	p2.x = d->player.pos.x + (cos(angle) * 20.0f);
+	p2.y = d->player.pos.y + (sin(angle) * 20.0f);
 	draw_line(d, origin, p2, 0xFF0000);
+}
 
+void draw_direction(t_3d *d)
+{
+	draw_line_angle(d, angleVector(d));
 }
 
 void movePlayer(t_3d *d)
 {
+	float turnSpeed;
+	turnSpeed = 0.05;
 
-	// check for bounds
-	int canMove = d->player.pos.x > 1 && d->player.pos.x < WIDTH-4 && d->player.pos.y > 0 && d->player.pos.y < HEIGHT ? 1 : 0;
-
-	if (d->player.ctrl.upDown == 1 && canMove)
+	if (d->player.ctrl.upDown == 1)
 	{
 		d->player.pos.y += d->player.dir.y * d->player.speed;
 		d->player.pos.x += d->player.dir.x * d->player.speed;
 	}
-	if (d->player.ctrl.upDown == -1 && canMove)
+	else if (d->player.ctrl.upDown == -1 )
 	{
 		d->player.pos.y -= d->player.dir.y * d->player.speed;
 		d->player.pos.x -= d->player.dir.x * d->player.speed;
 	}
-	if (d->player.ctrl.leftRight == -1)
-	{
-		d->player.dir.x = d->player.dir.x * cos(0.1) - d->player.dir.y * sin(0.1);
-		d->player.dir.y = d->player.dir.x * sin(0.1) + d->player.dir.y * cos(0.1);
-	}
+	
 	if (d->player.ctrl.leftRight == 1)
 	{
-		d->player.dir.x = d->player.dir.x * cos(-0.1) - d->player.dir.y * sin(-0.1);
-		d->player.dir.y = d->player.dir.x * sin(-0.1) + d->player.dir.y * cos(-0.1);
+		d->player.dir.x = d->player.dir.x * cos(turnSpeed) - d->player.dir.y * sin(turnSpeed);
+		d->player.dir.y = d->player.dir.x * sin(turnSpeed) + d->player.dir.y * cos(turnSpeed);
+	}
+	else if (d->player.ctrl.leftRight == -1)
+	{
+		d->player.dir.x = d->player.dir.x * cos(-turnSpeed) - d->player.dir.y * sin(-turnSpeed);
+		d->player.dir.y = d->player.dir.x * sin(-turnSpeed) + d->player.dir.y * cos(-turnSpeed);
 	}
 }
 
@@ -60,15 +73,6 @@ void drawPlayer(t_3d *d)
 	draw_square(d->player.pos.x - 5, d->player.pos.y - 5, 10, 10, d);
 	draw_direction(d);
 	movePlayer(d);
-}
-
-
-static void	my_mlx_pixel_put(t_3d *d, int x, int y, int color)
-{
-    char	*dst;
-
-    dst = d->img.data + (y * d->img.sizeline + x * (d->img.bpp >> 3));
-    *(unsigned int *)dst = color;
 }
 
 static void draw_square(int x, int y, int w, int h, t_3d *d)
