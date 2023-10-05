@@ -23,6 +23,7 @@ typedef struct ctrl_states
 {
 	int upDown;
 	int leftRight;
+	int turn;
 }				t_ctrl_states;
 
 typedef struct s_2d
@@ -64,7 +65,7 @@ typedef struct s_image
 typedef struct player
 {
     t_point     	pos;
-    t_dpoint		dir;
+    t_dpoint		dir; // direction vector (normalized) in radians (0 = right, PI/2 = up, PI = left, 3PI/2 = down)
 	int				speed;
 	t_ctrl_states 	ctrl;
 }               t_player;

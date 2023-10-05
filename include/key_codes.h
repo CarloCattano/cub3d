@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_codes.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xcarlo <xcarlo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:58:41 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/04 23:24:35 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/05 11:49:00 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,20 @@
 
 # define KEY_UP			65362
 # define KEY_DOWN		65364
-# define KEY_LEFT		65363
-# define KEY_RIGHT		65361
-# define KEY_PAD_ADD	61
-# define KEY_PAD_SUB	45
-# define KEY_PAD_0		48
-# define KEY_PAD_1		49
-# define KEY_PAD_2		50
-# define KEY_PAD_3		51
-# define KEY_PAD_4		52
-# define KEY_PAD_5		53
-# define KEY_PAD_6		54
-# define KEY_PAD_7		55
-# define KEY_PAD_8		56
-# define KEY_PAD_9		57
+# define KEY_LEFT		65361
+# define KEY_RIGHT		65363
+
+# define KEY_A			97
+# define KEY_S			115
+# define KEY_W			119
+# define KEY_D			100
+
 # define KEY_SPACE		32
 # define KEY_ESCAPE		65307
-# define KEY_H			104
+
 # define KEY_R			114
-# define SCROLL_UP		4
-# define SCROLL_DOWN	5
+
 # define MOUSE_LEFT		1
 # define MOUSE_RIGHT	3
-# define KEY_Y          121
-# define KEY_U          117
 
 #endif
