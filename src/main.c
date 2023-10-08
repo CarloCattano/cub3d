@@ -11,6 +11,10 @@ int	main(int ac, char **av)
 {
 	t_data			d;
 
+t_rgb myColors = {255, 0, 0};
+
+printf("myColors: %x\n", ft_rgb2hex(myColors));
+
 	if (!(init_variables(&d)) || ac != 2)
 	{
 		ft_putendl_fd("Failed to initialize variables", 1);

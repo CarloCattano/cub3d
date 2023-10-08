@@ -6,7 +6,7 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/08 20:31:26 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:59:47 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void	clr_ctx(t_data *d)
 	ft_bzero(d->img.data, WIDTH * HEIGHT * (d->img.bpp / 8));
 }
 
+
+
+
+
 static void	grid_display(t_data *d)
 {
 	int	i;
@@ -56,7 +60,7 @@ static void	grid_display(t_data *d)
 		while (j++ < HEIGHT)
 		{
 			if (i % BLOCK == 0 || j % BLOCK == 0)
-				my_mlx_pixel_put(d, i, j, 0xAAFFFFFF);
+				my_mlx_pixel_put(d, i, j,  0xff0000ff);
 		}
 	}
 }
