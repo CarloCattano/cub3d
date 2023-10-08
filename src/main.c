@@ -31,7 +31,7 @@ int	terminate(t_data *d)
 	return (0);
 }
 
-int loop_hook(t_data *d)
+int	loop_hook(t_data *d)
 {
 	draw(d);
 	return (0);
@@ -40,16 +40,16 @@ int loop_hook(t_data *d)
 int	main(int ac, char **av)
 {
 	t_data			d;
-	(void)ac;
-	(void)av;
-	
+	(void)			ac;
+	(void)			av;
+
 	if (!(init_variables(&d)))
 	{
 		ft_putendl_fd("Failed to initialize variables", 1);
 		terminate(&d);
 	}
-	
-	mlx_do_key_autorepeatoff(d.img.mlx); // does it work?
+
+	mlx_do_key_autorepeatoff(d.img.mlx);
 	mlx_mouse_hook(d.img.win, mouse_scaling_hook, &d);
 	mlx_hook(d.img.win, ON_KEYDOWN, 1L << 0, key_down_hook, &d);
 	mlx_hook(d.img.win, ON_KEYUP, 1L << 1, key_up_hook, &d);
@@ -58,7 +58,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(d.img.mlx, loop_hook, &d);
 	mlx_loop(d.img.mlx);
 	terminate(&d);
-	
+
 	return (0);
 }
 
@@ -66,13 +66,13 @@ static int	init_variables(t_data *d)
 {
 	d->img.mlx = mlx_init();
 	d->img.win = mlx_new_window(d->img.mlx, WIDTH, HEIGHT, "Fractol");
-	
+
 
 	if (!(d->img.mlx))
 		ft_putendl_fd("failed to init mlx", 1);
 	if (!(d->img.win))
 		ft_putendl_fd("Error creating window", 1);
-	
+
 	init_img(d);
 	init_player(d);
 

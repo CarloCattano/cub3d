@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/08 19:54:47 by ccattano          #+#    #+#             */
+/*   Updated: 2023/10/08 20:26:52 by ccattano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 #include <mlx.h>
 #include <time.h>
@@ -12,7 +24,7 @@ void	draw_line(t_data *d, t_point p1, t_point p2, int color)
 
 	delta.x = p2.x - p1.x;
 	delta.y = p2.y - p1.y;
-	
+
 	abs_delta = delta;
 	sign.x = delta.x > 0 ? 1 : -1;
 	sign.y = delta.y > 0 ? 1 : -1;
@@ -27,10 +39,10 @@ void	draw_line(t_data *d, t_point p1, t_point p2, int color)
 	}
 }
 
-void clearCanvas(t_data *d)
+void	clr_ctx(t_data *d)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < WIDTH)
@@ -46,56 +58,32 @@ void clearCanvas(t_data *d)
 	mlx_put_image_to_window(d->img.mlx, d->img.win, d->img.image, 0, 0);
 }
 
-static int	testCount = 0;
-
-static int fps = 0;
-static int fps_count = 0;
-static time_t fps_time = 0;
-static time_t fps_time2 = 0;
-static char *fps_str = NULL;
-
-static void	fps_counter(t_data *d)
+static void	grid_display(t_data *d)
 {
-	fps_count++;
-	fps_time2 = time(NULL);
-	if (fps_time2 - fps_time >= 1)
-	{
-		fps = fps_count;
-		fps_count = 0;
-		fps_time = fps_time2;
-	}
+	int	i;
+	int	j;
 
-	if (fps_str)
-		free(fps_str);
-	fps_str = ft_itoa(fps);
-	mlx_string_put(d->img.mlx, d->img.win, 4, 10, 0xFFAAFF, "FPS: ");
-	mlx_string_put(d->img.mlx, d->img.win, 34, 10, 0xFFFFFF, fps_str);
+	i = 0;
+	j = 0;
+	while (i < WIDTH)
+	{
+		j = 0;
+		while (j < HEIGHT)
+		{
+			if (i % BLOCK == 0 || j % BLOCK == 0)
+				my_mlx_pixel_put(d, i, j, 0xAAFFFFFF);
+			j++;
+		}
+		i++;
+	}
 }
 
-
-int test_color = 0xFF0000;
-
-void draw(t_data *d)
+void	draw(t_data *d)
 {
-	t_point	p1;
-	t_point	p2;
-
-	if (testCount < HEIGHT - 10)
-		testCount++;
-	else testCount = 1;
-
-    p1.x = WIDTH >> 1;
-	p1.y = HEIGHT >> 1;
-	p2.x = 0;
-	p2.y = testCount;
-	
-	clearCanvas(d);
-	draw_line(d, p1, p2, test_color);
-    drawPlayer(d);
-
+	clr_ctx(d);
+	grid_display(d);
+	draw_player(d);
 	mlx_put_image_to_window(d->img.mlx, d->img.win, d->img.image, 0, 0);
-	fps_counter(d);
-    test_color = rand() % 0xFF00ef40;
 }
 
 

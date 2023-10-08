@@ -10,6 +10,7 @@
 # include "key_codes.h"
 # define WIDTH 680
 # define HEIGHT 680
+# define BLOCK 42
 
 enum {
 	ON_KEYDOWN = 2,
@@ -21,16 +22,16 @@ enum {
 
 typedef struct ctrl_states 
 {
-	int upDown;
-	int leftRight;
-	int turn;
-}				t_ctrl_states;
+	int		up_down;
+	int		left_right;
+	int		turn;
+}			t_ctrl_states;
 
 typedef struct s_2d
 {
-    int	x;
-    int	y;
-}					t_2d;
+	int		x;
+	int		y;
+}			t_2d;
 
 typedef struct s_rgb
 {
@@ -47,35 +48,35 @@ typedef struct s_point
 
 typedef struct s_dpoint
 {
-	double			x;
-	double			y;
+	double		x;
+	double		y;
 }				t_dpoint;
 
 typedef struct s_image
 {
-	void			*mlx;
-	void			*win;
-	int				*image;
-	char			*data;
-	int				bpp;
-	int				sizeline;
-	int				endian;
-}					t_image;
+	void		*mlx;
+	void		*win;
+	int			*image;
+	char		*data;
+	int			bpp;
+	int			sizeline;
+	int			endian;
+}				t_image;
 
 typedef struct player
 {
-    t_point     	pos;
-    t_dpoint		dir; // direction vector (normalized) in radians (0 = right, PI/2 = up, PI = left, 3PI/2 = down)
+	t_point			pos;
+	t_dpoint		dir;
 	int				speed;
-	t_ctrl_states 	ctrl;
-}               t_player;
+	t_ctrl_states	ctrl;
+}					t_player;
 
 typedef struct s_3d
 {
 	t_image			img;
 	int				color;
 	int				menu;
-    t_player        player;
+	t_player		player;
 	float			fps;
 }					t_data;
 
@@ -97,8 +98,8 @@ void				draw(t_data *d);
 
 void				draw_line(t_data *d, t_point p1, t_point p2, int color);
 
-void                init_player(t_data *d);
-void                drawPlayer(t_data *d);
+void				init_player(t_data *d);
+void					draw_player(t_data *d);
 
 /*
 	UTILS

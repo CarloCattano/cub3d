@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 12:37:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/05 09:55:19 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/08 20:16:55 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ int	ft_rgb2hex(t_rgb rgb)
 	return (hex);
 }
 
-int ft_max(int a, int b)
+int	ft_max(int a, int b)
 {
-	return (a > b ? a : b);
+	if (a > b)
+		return (a);
+	return (b);
 }
 
-void print_debug(t_data *d, char *str)
+void	print_debug(t_data *d, char *str)
 {
 	mlx_string_put(d->img.mlx, d->img.win, 200, 10, 0x00FF00, str);
 }
@@ -42,8 +44,8 @@ void print_debug(t_data *d, char *str)
 
 void	my_mlx_pixel_put(t_data *d, int x, int y, int color)
 {
-    char	*dst;
+	char	*dst;
 
-    dst = d->img.data + (y * d->img.sizeline + x * (d->img.bpp >> 3));
-    *(unsigned int *)dst = color;
+	dst = d->img.data + (y * d->img.sizeline + x * (d->img.bpp >> 3));
+	*(unsigned int *)dst = color;
 }
