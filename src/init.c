@@ -6,7 +6,7 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:36:21 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/08 20:37:08 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/10/09 00:03:47 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	init_variables(t_data *d)
 		ft_putendl_fd("Error creating window", 1);
 
 	init_img(d);
-	init_player(d);
+	/* init_player(d); */
 
 	if (!d->img.image)
 		ft_putendl_fd("Error creating image", 1);

@@ -34,7 +34,7 @@ mem:
 run: all
 	@./$(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): getmlxlib $(OBJS)
 	make mlibft
 	make mlx
 	make printf

@@ -23,6 +23,14 @@ printf("myColors: %x\n", ft_rgb2hex(myColors));
 	ft_putendl_fd("Program initialized successfully", 1);
 	ft_putendl_fd(av[1], 1);
 
+	d.player.posX = 22;
+	d.player.posY = 12;
+	d.player.dirX = -1;
+	d.player.dirY = 0;
+	d.planeX = 0;
+	d.planeY = 0.66;
+	d.player.moveSpeed = 1;
+	
 	mlx_do_key_autorepeatoff(d.img.mlx);
 	mlx_mouse_hook(d.img.win, mouse_scaling_hook, &d);
 	mlx_hook(d.img.win, ON_KEYDOWN, 1L << 0, key_down_hook, &d);

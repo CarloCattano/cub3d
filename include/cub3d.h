@@ -55,9 +55,11 @@ typedef struct s_image
 
 typedef struct player
 {
-	t_point			pos;
-	t_fpoint		dir;
-	int				speed;
+	double			posX;
+	double			posY;
+	double			dirX;
+	double			dirY;
+	int				moveSpeed;
 	t_ctrl_states	ctrl;
 }					t_player;
 
@@ -68,6 +70,10 @@ typedef struct s_3d
 	int				menu;
 	t_player		player;
 	float			fps;
+	double			planeX;
+	double			planeY;
+	double			time;
+	double			oldTime;
 }					t_data;
 
 void				init_img(t_data *d);
@@ -88,7 +94,7 @@ void				draw(t_data *d);
 
 void				draw_line(t_data *d, t_point p1, t_point p2, int color);
 
-void				init_player(t_data *d);
+/* void				init_player(t_data *d); */
 void				draw_player(t_data *d);
 
 /*
@@ -99,7 +105,7 @@ int					ft_clip(int n, int min, int max);
 void				print_debug(t_data *d, char *str);
 void				my_mlx_pixel_put(t_data *d, int x, int y, int color);
 int					ft_rgb2hex(t_rgb rgb);
-
+int					ft_abs(int n);
 
 int					terminate(t_data *d);
 
