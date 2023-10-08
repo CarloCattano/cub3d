@@ -1,6 +1,7 @@
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
 # include <unistd.h>
 # include <math.h>
 # include "mlx.h"
@@ -59,16 +60,16 @@ typedef struct player
 	double			posY;
 	double			dirX;
 	double			dirY;
-	int				moveSpeed;
+	float			moveSpeed;
 	t_ctrl_states	ctrl;
 }					t_player;
 
 typedef struct s_3d
 {
 	t_image			img;
-	int				color;
-	int				menu;
+	t_image			mmap;
 	t_player		player;
+	int				color;
 	float			fps;
 	double			planeX;
 	double			planeY;
@@ -94,7 +95,7 @@ void				draw(t_data *d);
 
 void				draw_line(t_data *d, t_point p1, t_point p2, int color);
 
-/* void				init_player(t_data *d); */
+void				init_player(t_data *d);
 void				draw_player(t_data *d);
 
 /*
