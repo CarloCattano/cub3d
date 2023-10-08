@@ -6,7 +6,7 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/08 20:26:52 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:31:26 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,17 @@ void	draw_line(t_data *d, t_point p1, t_point p2, int color)
 	sign.y = delta.y > 0 ? 1 : -1;
 	current = p1;
 	i = 0;
-	while (i <= ft_max(abs_delta.x, abs_delta.y))
+	while (i++ <= ft_max(abs_delta.x, abs_delta.y))
 	{
 		my_mlx_pixel_put(d, current.x, current.y, color);
 		current.x += sign.x;
 		current.y += sign.y;
-		i++;
 	}
 }
 
 void	clr_ctx(t_data *d)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < WIDTH)
-	{
-		j = 0;
-		while (j < HEIGHT)
-		{
-			my_mlx_pixel_put(d, i, j, 0);
-			j++;
-		}
-		i++;
-	}
-	mlx_put_image_to_window(d->img.mlx, d->img.win, d->img.image, 0, 0);
+	ft_bzero(d->img.data, WIDTH * HEIGHT * (d->img.bpp / 8));
 }
 
 static void	grid_display(t_data *d)
@@ -65,16 +50,14 @@ static void	grid_display(t_data *d)
 
 	i = 0;
 	j = 0;
-	while (i < WIDTH)
+	while (i++ < WIDTH)
 	{
 		j = 0;
-		while (j < HEIGHT)
+		while (j++ < HEIGHT)
 		{
 			if (i % BLOCK == 0 || j % BLOCK == 0)
 				my_mlx_pixel_put(d, i, j, 0xAAFFFFFF);
-			j++;
 		}
-		i++;
 	}
 }
 
@@ -85,6 +68,3 @@ void	draw(t_data *d)
 	draw_player(d);
 	mlx_put_image_to_window(d->img.mlx, d->img.win, d->img.image, 0, 0);
 }
-
-
-

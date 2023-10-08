@@ -1,36 +1,6 @@
 
 #include "../include/cub3d.h"
 
-static int	init_variables(t_data *d);
-
-/*
-	Initialize image
-*/
-
-void	init_img(t_data *d)
-{
-	int	bpp;
-	int	sizeline;
-	int	endian;
-
-	d->img.image = mlx_new_image(d->img.mlx, WIDTH, HEIGHT);
-	d->img.data = mlx_get_data_addr(d->img.image, &bpp, &sizeline, &endian);
-	d->img.bpp = bpp;
-	d->img.sizeline = sizeline;
-	d->img.endian = endian;
-}
-
-int	terminate(t_data *d)
-{
-	mlx_destroy_image(d->img.mlx, d->img.image);
-	mlx_destroy_window(d->img.mlx, d->img.win);
-	mlx_destroy_display(d->img.mlx);
-	free(d->img.mlx);
-	ft_putendl_fd("Program terminated Gracefully ❤️", 1);
-	exit (0);
-	return (0);
-}
-
 int	loop_hook(t_data *d)
 {
 	draw(d);
@@ -40,14 +10,14 @@ int	loop_hook(t_data *d)
 int	main(int ac, char **av)
 {
 	t_data			d;
-	(void)			ac;
-	(void)			av;
 
-	if (!(init_variables(&d)))
+	if (!(init_variables(&d)) || ac != 2)
 	{
 		ft_putendl_fd("Failed to initialize variables", 1);
 		terminate(&d);
 	}
+	ft_putendl_fd("Program initialized successfully", 1);
+	ft_putendl_fd(av[1], 1);
 
 	mlx_do_key_autorepeatoff(d.img.mlx);
 	mlx_mouse_hook(d.img.win, mouse_scaling_hook, &d);
@@ -60,24 +30,4 @@ int	main(int ac, char **av)
 	terminate(&d);
 
 	return (0);
-}
-
-static int	init_variables(t_data *d)
-{
-	d->img.mlx = mlx_init();
-	d->img.win = mlx_new_window(d->img.mlx, WIDTH, HEIGHT, "Fractol");
-
-
-	if (!(d->img.mlx))
-		ft_putendl_fd("failed to init mlx", 1);
-	if (!(d->img.win))
-		ft_putendl_fd("Error creating window", 1);
-
-	init_img(d);
-	init_player(d);
-
-	if (!d->img.image)
-		ft_putendl_fd("Error creating image", 1);
-	d->menu = 0;
-	return (1);
 }

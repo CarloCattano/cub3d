@@ -1,5 +1,5 @@
 NAME = cub3d
-SOURCES = hooks.c main.c keyhooks.c utils.c draw.c player.c
+SOURCES = hooks.c main.c keyhooks.c utils.c draw.c player.c init.c exit.c
 HEADER = include
 SRC_PATH  = src
 OBJ_PATH  = objs
@@ -55,7 +55,6 @@ mlx: getmlxlib
 printf:
 	@echo "building ftprintf.........."
 	@make -s -C $(PRINTF_DIR)
-
 
 clean: fclean
 	rm -rf $(OBJ_PATH)

@@ -6,7 +6,7 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:51:56 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/08 20:27:10 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:43:10 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "../minilibx-linux/mlx.h"
 #include <math.h>
 
-#define ROTATION_ANGLE 0.04f
 
 static void	draw_square(int x, int y, int w, int h, t_data *d);
 
@@ -72,7 +71,6 @@ void	movePlayer(t_data *d)
 	d->player.pos.y = n_player_y;
 }
 
-
 void	draw_player(t_data *d)
 {
 	draw_square(d->player.pos.x - 5, d->player.pos.y - 5, 10, 10, d);
@@ -86,14 +84,11 @@ static void	draw_square(int x, int y, int w, int h, t_data *d)
 	int	i;
 
 	i = 0;
-	while (i < w)
+	while (i++ < w)
 	{
 		j = 0;
-		while (j < h)
-		{
+		while (j++ < h)
 			my_mlx_pixel_put(d, x + i, y + j, 0xFF00FFFF);
-			j++;
-		}
 		i++;
 	}
 }
