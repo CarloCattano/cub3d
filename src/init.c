@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:36:21 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/09 01:33:05 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/17 11:24:17 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_minimap(t_data *d)
 
 int	init_variables(t_data *d)
 {
+	read_file();
 	d->img.mlx = mlx_init();
 	d->img.win = mlx_new_window(d->img.mlx, WIDTH, HEIGHT, "Fractol");
 	if (!(d->img.mlx))

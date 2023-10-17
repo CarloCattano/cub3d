@@ -108,6 +108,8 @@ void				my_mlx_pixel_put(t_data *d, int x, int y, int color);
 int					ft_rgb2hex(t_rgb rgb);
 int					ft_abs(int n);
 
+int					read_file();
+
 int					terminate(t_data *d);
 
 #endif 
