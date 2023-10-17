@@ -17,7 +17,7 @@ all: $(NAME)
 getmlxlib:
 	@if [ ! -d minilibx-linux ]; then \
 		echo "Downloading miniLibX..."; \
-		wget https://cdn.intra.42.fr/document/document/20217/minilibx-linux.tgz; \
+		wget https://cdn.intra.42.fr/document/document/21669/minilibx-linux.tgz; \
 		tar -xzf minilibx-linux.tgz; \
 		rm minilibx-linux.tgz; \
 	fi
