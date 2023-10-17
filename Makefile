@@ -32,7 +32,7 @@ mem:
 	@help50 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./debug
 
 run: all
-	@./$(NAME)
+	@./$(NAME) "Cubemap.cub"
 
 $(NAME): getmlxlib $(OBJS)
 	make mlibft
