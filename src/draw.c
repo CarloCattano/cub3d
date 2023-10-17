@@ -6,12 +6,11 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/09 01:20:26 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/17 11:10:22 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-#include "constants.h"
 #include <mlx.h>
 #include <time.h>
 
