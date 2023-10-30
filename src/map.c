@@ -14,22 +14,23 @@
 
 char *path = "./res/maps/lodev.cub";
 
-int read_file(){
+int	read_file()
+{
+
+	char buffer[1024];
+	ssize_t nread;
 	int fd = open(path, O_RDONLY);
+	
 	if (fd == -1) {
 		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
-
-	char buffer[1024];
-	ssize_t nread;
 	while ((nread = read(fd, buffer, sizeof(buffer))) > 0) {
 		if (write(STDOUT_FILENO, buffer, nread) != nread) {
 			perror("Error writing to stdout");
 			exit(EXIT_FAILURE);
 		}
 	}
-
 	if (nread == -1) {
 		perror("Error reading file");
 		exit(EXIT_FAILURE);
