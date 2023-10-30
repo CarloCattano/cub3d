@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/30 14:33:29 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/30 14:36:12 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,16 @@ void	draw(t_data *d)
 	while (x++ < WIDTH)
 	{
 		double cameraX = 2 * x / (double)WIDTH - 1; //x-coordinate in camera space
-		// init ray position and direction
+		//	init ray position and direction
 		double rayDirX = d->player.dirX + d->planeX * cameraX;
 		double rayDirY = d->player.dirY + d->planeY * cameraX;
-		//which box of the map we're in
+		//	which box of the map we're in
 	  	int mapX = (int)d->player.posX;
 	  	int mapY = (int)d->player.posY;
-	  	//length of ray from current position to next x or y-side
+		//	length of ray from current position to next x or y-side
 	  	double sideDistX;
 	  	double sideDistY;
-	  	 //length of ray from one x or y-side to next x or y-side
+		//	length of ray from one x or y-side to next x or y-side
 	  	double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1.0 / rayDirX);
 	  	double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1.0 / rayDirY);
 	  	double perpWallDist;
@@ -126,7 +126,7 @@ void	draw(t_data *d)
 				mapY += stepY;
 				side = 1;
 	  		}
-	  	  //Check if ray has hit a wall
+			//Check if ray has hit a wall
 			if (worldMap[mapX][mapY] > 0)
 				hit = 1;
 	  	}
@@ -156,12 +156,11 @@ void	draw(t_data *d)
 	  	vertical_line(x, drawStart, drawEnd, color, d);
 	}
 
-    if (d->player.ctrl.up_down == 1)
+    if (d->player.ctrl.up_down == 1)     //move if no wall behind you
     {
       if(worldMap[(int)(d->player.posX + d->player.dirX * d->player.moveSpeed)][(int)d->player.posY] == 0) d->player.posX += d->player.dirX * d->player.moveSpeed * 0.5;
       if(worldMap[(int)d->player.posX][(int)(d->player.posY + d->player.dirY * d->player.moveSpeed)] == 0) d->player.posY += d->player.dirY * d->player.moveSpeed * 0.5;
     }
-    //move backwards if no wall behind you
     if (d->player.ctrl.up_down == -1)
     {
       if(worldMap[(int)(d->player.posX - d->player.dirX * d->player.moveSpeed)][(int)d->player.posY] == 0) d->player.posX -= d->player.dirX * d->player.moveSpeed * 0.5;
@@ -170,23 +169,21 @@ void	draw(t_data *d)
 	
 	if (d->player.ctrl.turn == -1)  	//rotate to the right
     {
-	  //both camera direction and camera plane must be rotated
-	  double oldDirX = d->player.dirX;
-	  d->player.dirX = d->player.dirX * cos(-ROT_SPEED) - d->player.dirY * sin(-ROT_SPEED);
-	  d->player.dirY = oldDirX * sin(-ROT_SPEED) + d->player.dirY * cos(-ROT_SPEED);
+	  double oldDirX = d->player.dirX; 		  //both camera direction and camera plane must be rotated
+	  d->player.dirX = d->player.dirX * cos(-ROT_S) - d->player.dirY * sin(-ROT_S);
+	  d->player.dirY = oldDirX * sin(-ROT_S) + d->player.dirY * cos(-ROT_S);
 	  double oldPlaneX = d->planeX;
-	  d->planeX = d->planeX * cos(-ROT_SPEED) - d->planeY * sin(-ROT_SPEED);
-	  d->planeY = oldPlaneX * sin(-ROT_SPEED) + d->planeY * cos(-ROT_SPEED);
+	  d->planeX = d->planeX * cos(-ROT_S) - d->planeY * sin(-ROT_S);
+	  d->planeY = oldPlaneX * sin(-ROT_S) + d->planeY * cos(-ROT_S);
 	}
 	if (d->player.ctrl.turn == 1) 	//rotate to the left
     {
-	  //both camera direction and camera plane must be rotated
-	  double oldDirX = d->player.dirX;
-	  d->player.dirX = d->player.dirX * cos(ROT_SPEED) - d->player.dirY * sin(ROT_SPEED);
-	  d->player.dirY = oldDirX * sin(ROT_SPEED) + d->player.dirY * cos(ROT_SPEED);
+	  double oldDirX = d->player.dirX;	  //both camera direction and camera plane must be rotated
+	  d->player.dirX = d->player.dirX * cos(ROT_S) - d->player.dirY * sin(ROT_S);
+	  d->player.dirY = oldDirX * sin(ROT_S) + d->player.dirY * cos(ROT_S);
 	  double oldPlaneX = d->planeX;
-	  d->planeX = d->planeX * cos(ROT_SPEED) - d->planeY * sin(ROT_SPEED);
-	  d->planeY = oldPlaneX * sin(ROT_SPEED) + d->planeY * cos(ROT_SPEED);
+	  d->planeX = d->planeX * cos(ROT_S) - d->planeY * sin(ROT_S);
+	  d->planeY = oldPlaneX * sin(ROT_S) + d->planeY * cos(ROT_S);
 	}
 	mlx_put_image_to_window(d->img.mlx, d->img.win, d->img.image, 0, 0);
 	draw_minimap(d);

@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:46:03 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/30 14:25:03 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/30 14:34:57 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define BLOCK 42
 # define ROTATION_ANGLE 0.04f
 # define MOVE_SPEED 0.1
-# define ROT_SPEED 0.02
+# define ROT_S 0.02
 # define FOV 1.0472f
 # define RAY 0.0087f
 # define PI 3.14159265358979323846
