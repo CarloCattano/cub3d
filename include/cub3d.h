@@ -48,6 +48,18 @@ typedef struct s_image
 	int			endian;
 }				t_image;
 
+typedef struct s_ray
+{
+    double	rayDirX;
+    double	rayDirY;
+    double	deltaDistX;
+    double	deltaDistY;
+    int		stepX;
+    int		stepY;
+    double	sideDistX;
+    double	sideDistY;
+}			t_ray;
+
 typedef struct player
 {
 	double			posX;

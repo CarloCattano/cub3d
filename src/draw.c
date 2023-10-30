@@ -6,7 +6,7 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/30 15:30:29 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:53:28 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,42 @@ void	clr_ctx(t_data *d)
 	ft_bzero(d->img.data, WIDTH * HEIGHT * (d->img.bpp / 8));
 }
 
+void calculate_step_and_side_distances(t_ray *ray, t_data *d) {
+    if (ray->rayDirX < 0) {
+        ray->stepX = -1;
+        ray->sideDistX = (d->player.posX - (int)d->player.posX) * ray->deltaDistX;
+    }
+    else {
+        ray->stepX = 1;
+        ray->sideDistX = ((int)d->player.posX + 1.0 - d->player.posX) * ray->deltaDistX;
+    }
+    
+    if (ray->rayDirY < 0) {
+        ray->stepY = -1;
+        ray->sideDistY = (d->player.posY - (int)d->player.posY) * ray->deltaDistY;
+    }
+    else {
+        ray->stepY = 1;
+        ray->sideDistY = ((int)d->player.posY + 1.0 - d->player.posY) * ray->deltaDistY;
+    }
+}
+
+char wall_orientation(double rayAngle)
+{
+    char Direction;
+
+    if (rayAngle >= -M_PI_4 && rayAngle < M_PI_4)
+        Direction = 'E'; // East
+    else if (rayAngle >= M_PI_4 && rayAngle < 3 * M_PI_4)
+        Direction = 'S'; // South
+    else if (rayAngle >= -3 * M_PI_4 && rayAngle < -M_PI_4)
+        Direction = 'N'; // North
+    else
+        Direction = 'W'; // West
+
+    return Direction;
+}
+
 void	draw(t_data *d)
 {
 	int	x;
@@ -43,73 +79,47 @@ void	draw(t_data *d)
 	clr_ctx(d);
 	while (x++ < WIDTH)
 	{
-		double cameraX = 2 * x / (double)WIDTH - 1; //x-coordinate in camera space
+		unsigned int	color = 0;
+		double 			cameraX = 2 * x / (double)WIDTH - 1; //x-coordinate in camera space
 		//	init ray position and direction
-		double rayDirX = d->player.dirX + d->planeX * cameraX;
-		double rayDirY = d->player.dirY + d->planeY * cameraX;
+		double 			rayDirX = d->player.dirX + d->planeX * cameraX;
+		double 			rayDirY = d->player.dirY + d->planeY * cameraX;
 		//	which box of the map we're in
-	  	int mapX = (int)d->player.posX;
-	  	int mapY = (int)d->player.posY;
-		//	length of ray from current position to next x or y-side
-	  	double sideDistX;
-	  	double sideDistY;
+	  	int 			mapX = (int)d->player.posX;
+	  	int 			mapY = (int)d->player.posY;
 		//	length of ray from one x or y-side to next x or y-side
-	  	double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1.0 / rayDirX);
-	  	double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1.0 / rayDirY);
-	  	double perpWallDist;
-	  	//what direction to step in x or y-direction (either +1 or -1)
-	  	int stepX;
-	  	int stepY;
-	  	int hit = 0; 		//was there a wall hit?
-	  	int side; 			//was a NS or a EW wall hit?
-		//	calculate step and initial sideDist
-	  	if (rayDirX < 0)
-	  	{
-	  	  stepX = -1;
-	  	  sideDistX = (d->player.posX - mapX) * deltaDistX;
-	  	}
-	  	else
-	  	{
-	  	  stepX = 1;
-	  	  sideDistX = (mapX + 1.0 - d->player.posX) * deltaDistX;
-	  	}
-	  	if (rayDirY < 0)
-	  	{
-	  	  stepY = -1;
-	  	  sideDistY = (d->player.posY - mapY) * deltaDistY;
-	  	}
-	  	else
-	  	{
-	  	  stepY = 1;
-	  	  sideDistY = (mapY + 1.0 - d->player.posY) * deltaDistY;
-	  	}
+	  	double			deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1.0 / rayDirX);
+	  	double			deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1.0 / rayDirY);
+	  	double			perpWallDist;
+	  	int 			hit = 0; 		//was there a wall hit?
+	  	int 			side; 			//was a NS or a EW wall hit?
 		
 		// DIRECTION
-		double rayAngle = atan2(rayDirY, rayDirX); // Calculate the ray angle
+		double			rayAngle = atan2(rayDirY, rayDirX); // Calculate the ray angle
+		t_ray 			ray;
+		
+		ray.rayDirX = rayDirX;
+		ray.rayDirY = rayDirY;
+		ray.deltaDistX = deltaDistX;
+		ray.deltaDistY = deltaDistY;
 
-        // Determine the cardinal direction
-        char wallDirection;
-        if (rayAngle >= -M_PI_4 && rayAngle < M_PI_4)
-            wallDirection = 'E'; // East
-        else if (rayAngle >= M_PI_4 && rayAngle < 3 * M_PI_4)
-            wallDirection = 'S'; // South
-        else if (rayAngle >= -3 * M_PI_4 && rayAngle < -M_PI_4)
-            wallDirection = 'N'; // North
-        else
-            wallDirection = 'W'; // West
+		calculate_step_and_side_distances(&ray, d);
+		
+        // Determine the wall orientation
+        char wallDirection = wall_orientation(rayAngle);
 
 		//	perform DDA
 	  	while (hit == 0)
 	  	{
 	        //jump to next map square, either in x-direction, or in y-direction
-			if (sideDistX < sideDistY)
+			if (ray.sideDistX < ray.sideDistY)
 	  	  	{
-				sideDistX += deltaDistX;
-				mapX += stepX;
+				ray.sideDistX += ray.deltaDistX;
+				mapX += ray.stepX;
 				side = 0;
 	  	  	} else {
-				sideDistY += deltaDistY;
-				mapY += stepY;
+				ray.sideDistY += ray.deltaDistY;
+				mapY += ray.stepY;
 				side = 1;
 	  		}
 			//Check if ray has hit a wall
@@ -119,9 +129,9 @@ void	draw(t_data *d)
 		//	Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
 	  	if(side == 0)
 		{
-			perpWallDist = (sideDistX - deltaDistX);
+			perpWallDist = (ray.sideDistX - ray.deltaDistX);
 		} else {
-			perpWallDist = (sideDistY - deltaDistY);
+			perpWallDist = (ray.sideDistY - ray.deltaDistY);
 		}
 		//	Calculate height of line to draw on screen
 	  	int lineHeight = (int)(HEIGHT / perpWallDist);
@@ -133,21 +143,21 @@ void	draw(t_data *d)
 		if(drawEnd >= HEIGHT)
 			drawEnd = HEIGHT - 1;
 		//choose wall color
-	  	unsigned int	color = 0;
+
 		if (d->worldMap[mapX][mapY] == 1)
 		{
-			if (wallDirection == 'N')
-                color = 0xFF0000FF; // Blue for North-facing walls
-            else if (wallDirection == 'S')
-                color = 0xFF00FF00; // Green for South-facing walls
-            else if (wallDirection == 'E')
-                color = 0xFFFF0000; // Red for East-facing walls
-            else if (wallDirection == 'W')
+			// if (wallDirection == 'N')
+            //     color = 0xFF0000FF; // Blue for North-facing walls
+            // else if (wallDirection == 'S')
+            //     color = 0xFF00FF00; // Green for South-facing walls
+            // else if (wallDirection == 'E')
+            //     color = 0xFFFF0000; // Red for East-facing walls
+            // else if (wallDirection == 'W')
+			(void)wallDirection;
                 color = 0xFF00FFFF; // Cyan for West-facing walls
-			
 		}
 	  	//give x and y sides different brightness
-	  	//if (side == 1) color = color >> 1;
+	  	if (side == 1) color = color >> 1;
 	  	//draw the pixels of the stripe as a vertical line
 	  	vertical_line(x, drawStart, drawEnd, color, d);
 	}
