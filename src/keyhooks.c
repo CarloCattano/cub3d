@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhooks.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:32 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/30 13:09:39 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:23:45 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	key_down_hook(int k, t_data *d)
 		d->player.ctrl.turn = 1;
 
 	if (k == KEY_ESCAPE)
-		terminate(d);
+		mlx_terminate(d);
 	return (k);
 }
 

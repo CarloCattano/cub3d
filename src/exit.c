@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:35:16 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/08 20:40:50 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:24:13 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	terminate(t_data *d)
+int	mlx_terminate(t_data *d)
 {
 	mlx_destroy_image(d->img.mlx, d->img.image);
 	mlx_destroy_window(d->img.mlx, d->img.win);

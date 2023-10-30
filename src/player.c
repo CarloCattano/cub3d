@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:11:22 by carlo             #+#    #+#             */
-/*   Updated: 2023/10/30 13:04:24 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:09:23 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	init_player(t_data *d)
 	d->player.dirY = 0;
 	d->player.posX = 4;
 	d->player.posY = 4;
-	d->player.moveSpeed = 0.2;
+	d->player.moveSpeed = MOVE_SPEED;
 	d->player.ctrl.up_down = 0;
 	d->player.ctrl.left_right = 0;
 	d->player.ctrl.turn = 0;
 }
 
-void	draw_player(t_data *d)
+void	draw_minimap(t_data *d)
 {
 	double scaled = 180.0 / MAPWIDTH;
 	double posX = d->player.posX * scaled;
@@ -61,3 +61,4 @@ static void	draw_square(int x, int y, int w, int h, t_data *d)
 		i++;
 	}
 }
+
