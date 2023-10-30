@@ -3,44 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/30 14:36:12 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/30 15:30:29 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include <mlx.h>
 #include <time.h>
-
-int worldMap[MAPWIDTH][MAPHEIGHT] =
-{
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,1,0,0,0,1},
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,5,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
 
 static void vertical_line(int x, int drawStart, int drawEnd, unsigned int color, t_data *d)
 {
@@ -112,6 +84,20 @@ void	draw(t_data *d)
 	  	  sideDistY = (mapY + 1.0 - d->player.posY) * deltaDistY;
 	  	}
 		
+		// DIRECTION
+		double rayAngle = atan2(rayDirY, rayDirX); // Calculate the ray angle
+
+        // Determine the cardinal direction
+        char wallDirection;
+        if (rayAngle >= -M_PI_4 && rayAngle < M_PI_4)
+            wallDirection = 'E'; // East
+        else if (rayAngle >= M_PI_4 && rayAngle < 3 * M_PI_4)
+            wallDirection = 'S'; // South
+        else if (rayAngle >= -3 * M_PI_4 && rayAngle < -M_PI_4)
+            wallDirection = 'N'; // North
+        else
+            wallDirection = 'W'; // West
+
 		//	perform DDA
 	  	while (hit == 0)
 	  	{
@@ -127,7 +113,7 @@ void	draw(t_data *d)
 				side = 1;
 	  		}
 			//Check if ray has hit a wall
-			if (worldMap[mapX][mapY] > 0)
+			if (d->worldMap[mapX][mapY] > 0)
 				hit = 1;
 	  	}
 		//	Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
@@ -147,44 +133,26 @@ void	draw(t_data *d)
 		if(drawEnd >= HEIGHT)
 			drawEnd = HEIGHT - 1;
 		//choose wall color
-	  	unsigned int	color;
-		if (worldMap[mapX][mapY] == 1)
-			color = 0xFFAA00A2;
+	  	unsigned int	color = 0;
+		if (d->worldMap[mapX][mapY] == 1)
+		{
+			if (wallDirection == 'N')
+                color = 0xFF0000FF; // Blue for North-facing walls
+            else if (wallDirection == 'S')
+                color = 0xFF00FF00; // Green for South-facing walls
+            else if (wallDirection == 'E')
+                color = 0xFFFF0000; // Red for East-facing walls
+            else if (wallDirection == 'W')
+                color = 0xFF00FFFF; // Cyan for West-facing walls
+			
+		}
 	  	//give x and y sides different brightness
-	  	if (side == 1) color = color >> 1;
+	  	//if (side == 1) color = color >> 1;
 	  	//draw the pixels of the stripe as a vertical line
 	  	vertical_line(x, drawStart, drawEnd, color, d);
 	}
 
-    if (d->player.ctrl.up_down == 1)     //move if no wall behind you
-    {
-      if(worldMap[(int)(d->player.posX + d->player.dirX * d->player.moveSpeed)][(int)d->player.posY] == 0) d->player.posX += d->player.dirX * d->player.moveSpeed * 0.5;
-      if(worldMap[(int)d->player.posX][(int)(d->player.posY + d->player.dirY * d->player.moveSpeed)] == 0) d->player.posY += d->player.dirY * d->player.moveSpeed * 0.5;
-    }
-    if (d->player.ctrl.up_down == -1)
-    {
-      if(worldMap[(int)(d->player.posX - d->player.dirX * d->player.moveSpeed)][(int)d->player.posY] == 0) d->player.posX -= d->player.dirX * d->player.moveSpeed * 0.5;
-      if(worldMap[(int)d->player.posX][(int)(d->player.posY - d->player.dirY * d->player.moveSpeed)] == 0) d->player.posY -= d->player.dirY * d->player.moveSpeed * 0.5;
-    }
-	
-	if (d->player.ctrl.turn == -1)  	//rotate to the right
-    {
-	  double oldDirX = d->player.dirX; 		  //both camera direction and camera plane must be rotated
-	  d->player.dirX = d->player.dirX * cos(-ROT_S) - d->player.dirY * sin(-ROT_S);
-	  d->player.dirY = oldDirX * sin(-ROT_S) + d->player.dirY * cos(-ROT_S);
-	  double oldPlaneX = d->planeX;
-	  d->planeX = d->planeX * cos(-ROT_S) - d->planeY * sin(-ROT_S);
-	  d->planeY = oldPlaneX * sin(-ROT_S) + d->planeY * cos(-ROT_S);
-	}
-	if (d->player.ctrl.turn == 1) 	//rotate to the left
-    {
-	  double oldDirX = d->player.dirX;	  //both camera direction and camera plane must be rotated
-	  d->player.dirX = d->player.dirX * cos(ROT_S) - d->player.dirY * sin(ROT_S);
-	  d->player.dirY = oldDirX * sin(ROT_S) + d->player.dirY * cos(ROT_S);
-	  double oldPlaneX = d->planeX;
-	  d->planeX = d->planeX * cos(ROT_S) - d->planeY * sin(ROT_S);
-	  d->planeY = oldPlaneX * sin(ROT_S) + d->planeY * cos(ROT_S);
-	}
+	handle_player(d);
 	mlx_put_image_to_window(d->img.mlx, d->img.win, d->img.image, 0, 0);
 	draw_minimap(d);
 }

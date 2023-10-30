@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhooks.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:32 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/30 14:23:45 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/30 15:06:43 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 int	key_down_hook(int k, t_data *d)
 {
-	if (k == KEY_UP)
+	if (k == KEY_UP || k == KEY_W)
 		d->player.ctrl.up_down = 1;
-	else if (k == KEY_DOWN)
+	else if (k == KEY_DOWN || k == KEY_S)
 		d->player.ctrl.up_down = -1;
 	if (k == KEY_A)
 		d->player.ctrl.left_right = -1;
@@ -35,7 +35,7 @@ int	key_down_hook(int k, t_data *d)
 
 int	key_up_hook(int k, t_data *d)
 {
-	if (k == KEY_UP || k == KEY_DOWN)
+	if (k == KEY_UP || k == KEY_DOWN || k == KEY_S || k == KEY_W)
 		d->player.ctrl.up_down = 0;
 	if (k == KEY_A || k == KEY_D)
 		d->player.ctrl.left_right = 0;

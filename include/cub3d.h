@@ -62,6 +62,7 @@ typedef struct s_3d
 {
 	t_image			img;
 	t_image			mmap;
+	int 			worldMap[24][24];
 	t_player		player;
 	int				color;
 	float			fps;
@@ -86,6 +87,7 @@ int					mouse_scaling_hook(int button, int x, int y, t_data *d);
 int					mlx_terminate(t_data *d);
 
 void				draw(t_data *d);
+void				handle_player(t_data *d);
 
 void				draw_line(t_data *d, t_point p1, t_point p2, int color);
 

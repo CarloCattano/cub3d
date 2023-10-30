@@ -1,5 +1,5 @@
 NAME = cub3d
-SOURCES = hooks.c main.c keyhooks.c utils.c draw.c player.c init.c exit.c map.c
+SOURCES = hooks.c main.c keyhooks.c utils.c draw.c player.c init.c exit.c map.c minimap.c
 HEADER = include
 SRC_PATH  = src
 OBJ_PATH  = objs
