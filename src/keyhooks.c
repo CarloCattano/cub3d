@@ -6,12 +6,12 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:32 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/08 20:15:33 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:08:27 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-#include "key_codes.h"
+#include "../include/key_codes.h"
 
 int	key_down_hook(int k, t_data *d)
 {
