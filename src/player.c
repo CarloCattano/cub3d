@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlo <no@way.zip>                         +#+  +:+       +#+        */
+/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:11:22 by carlo             #+#    #+#             */
-/*   Updated: 2023/10/09 01:42:54 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/30 13:04:24 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	init_player(t_data *d)
 {
 	d->player.dirX = 1;
 	d->player.dirY = 0;
-	d->player.posX = 22;
-	d->player.posY = 22;
+	d->player.posX = 4;
+	d->player.posY = 4;
 	d->player.moveSpeed = 0.2;
 	d->player.ctrl.up_down = 0;
 	d->player.ctrl.left_right = 0;
@@ -30,7 +30,7 @@ void	init_player(t_data *d)
 
 void	draw_player(t_data *d)
 {
-	double scaled = 180 / MAPWIDTH;
+	double scaled = 180.0 / MAPWIDTH;
 	double posX = d->player.posX * scaled;
 	double posY = d->player.posY * scaled;
 

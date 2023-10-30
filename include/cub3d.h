@@ -106,7 +106,7 @@ int					ft_clip(int n, int min, int max);
 void				print_debug(t_data *d, char *str);
 void				my_mlx_pixel_put(t_data *d, int x, int y, int color);
 int					ft_rgb2hex(t_rgb rgb);
-int					ft_abs(int n);
+double				ft_abs(double n);
 
 int					read_file();
 

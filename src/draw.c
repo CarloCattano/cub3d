@@ -6,7 +6,7 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/17 11:10:22 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/30 13:04:02 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int worldMap[MAPWIDTH][MAPHEIGHT] =
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-void verLine(int x, int drawStart, int drawEnd, int color, t_data *d)
+static void vertical_line(int x, int drawStart, int drawEnd, int color, t_data *d)
 {
 	int	y;
 
@@ -50,11 +50,11 @@ void verLine(int x, int drawStart, int drawEnd, int color, t_data *d)
 	while (y++ < HEIGHT)
 	{
 		if (y < drawStart)
-			my_mlx_pixel_put(d, x, y, 0);
+			my_mlx_pixel_put(d, x, y, 0xFF0000FF);
 		else if (y > drawStart && y < drawEnd)
 			my_mlx_pixel_put(d, x, y, color);
 		else if (y > drawEnd)
-			my_mlx_pixel_put(d, x, y, 0);
+			my_mlx_pixel_put(d, x, y, 0xFF00FF00);
 	}
 }
 
@@ -72,9 +72,12 @@ void	draw(t_data *d)
 	while (x++ < WIDTH)
 	{
 		double cameraX = 2 * x / (double)WIDTH - 1; //x-coordinate in camera space
+		
+		// init ray position and direction 
 		double rayDirX = d->player.dirX + d->planeX * cameraX;
 		double rayDirY = d->player.dirY + d->planeY * cameraX;
-  		//which box of the map we're in
+  		
+		//which box of the map we're in
       	int mapX = (int)d->player.posX;
       	int mapY = (int)d->player.posY;
 
@@ -83,16 +86,16 @@ void	draw(t_data *d)
       	double sideDistY;
 
       	 //length of ray from one x or y-side to next x or y-side
-      	double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1 / rayDirX);
-      	double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1 / rayDirY);
+      	double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1.0 / rayDirX);
+      	double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1.0 / rayDirY);
       	double perpWallDist;
 
       	//what direction to step in x or y-direction (either +1 or -1)
       	int stepX;
       	int stepY;
 
-      	int hit = 0; //was there a wall hit?
-      	int side; //was a NS or a EW wall hit?
+      	int hit = 0; 		//was there a wall hit?
+      	int side; 			//was a NS or a EW wall hit?
 		
 		//	calculate step and initial sideDist
       	if (rayDirX < 0)
@@ -144,15 +147,17 @@ void	draw(t_data *d)
 		} else {
 			perpWallDist = (sideDistY - deltaDistY);
 		}
+		
 		//	Calculate height of line to draw on screen
       	int lineHeight = (int)(HEIGHT / perpWallDist);
 
       	//calculate lowest and highest pixel to fill in current stripe
       	int drawStart = -lineHeight / 2 + HEIGHT / 2;
+		int drawEnd = lineHeight / 2 + HEIGHT / 2;
       	if(drawStart < 0)
 			drawStart = 0;
-      	int drawEnd = lineHeight / 2 + HEIGHT / 2;
-      	if(drawEnd >= HEIGHT)
+			
+		if(drawEnd >= HEIGHT)
 			drawEnd = HEIGHT - 1;
    	  	
 		//choose wall color
@@ -160,9 +165,10 @@ void	draw(t_data *d)
       	switch(worldMap[mapX][mapY])
       	{
       	  case 1:  color = 0xFFFF0000; break; //red
-      	  case 2:  color = 0xFF00FF00; break; //green
-      	  case 3:  color = 0xFF0000FF; break; //blue
-      	  case 4:  color = 0xFFFFFFFF; break; //white
+      	  case 2:  
+		  	color = 0xFFFF0000; break; //green
+      	  case 3:  color = 0xFFFF0000; break; //blue
+      	  case 4:  color = 0xFFFF0000; break; //white
       	  default: color = 0xFF223322; break; //yellow
       	}
 
@@ -170,20 +176,20 @@ void	draw(t_data *d)
       	if (side == 1) {color = color/ 2;}
 
       	//draw the pixels of the stripe as a vertical line
-      	verLine(x, drawStart, drawEnd, color, d);
+      	vertical_line(x, drawStart, drawEnd, color, d);
     }
 	
 	//move forward if no wall in front of you
     if (d->player.ctrl.up_down == 1)
     {
-      if(worldMap[(int)(d->player.posX + d->player.dirX * d->player.moveSpeed)][(int)d->player.posY] == 0) d->player.posX += d->player.dirX * d->player.moveSpeed;
-      if(worldMap[(int)d->player.posX][(int)(d->player.posY + d->player.dirY * d->player.moveSpeed)] == 0) d->player.posY += d->player.dirY * d->player.moveSpeed;
+      if(worldMap[(int)(d->player.posX + d->player.dirX * d->player.moveSpeed)][(int)d->player.posY] == 0) d->player.posX += d->player.dirX * d->player.moveSpeed * 0.5;
+      if(worldMap[(int)d->player.posX][(int)(d->player.posY + d->player.dirY * d->player.moveSpeed)] == 0) d->player.posY += d->player.dirY * d->player.moveSpeed * 0.5;
     }
     //move backwards if no wall behind you
     if (d->player.ctrl.up_down == -1)
     {
-      if(worldMap[(int)(d->player.posX - d->player.dirX * d->player.moveSpeed)][(int)d->player.posY] == 0) d->player.posX -= d->player.dirX * d->player.moveSpeed;
-      if(worldMap[(int)d->player.posX][(int)(d->player.posY - d->player.dirY * d->player.moveSpeed)] == 0) d->player.posY -= d->player.dirY * d->player.moveSpeed;
+      if(worldMap[(int)(d->player.posX - d->player.dirX * d->player.moveSpeed)][(int)d->player.posY] == 0) d->player.posX -= d->player.dirX * d->player.moveSpeed * 0.5;
+      if(worldMap[(int)d->player.posX][(int)(d->player.posY - d->player.dirY * d->player.moveSpeed)] == 0) d->player.posY -= d->player.dirY * d->player.moveSpeed * 0.5;
     }
     //rotate to the right
     if (d->player.ctrl.turn == -1)
