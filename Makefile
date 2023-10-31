@@ -13,6 +13,8 @@ INCLUDES = -I./include -I./libft -I./minilibx-linux -I./ft_printf
 SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
 
+TST = tst.c 
+
 all: $(NAME)
 
 getmlxlib:
@@ -49,6 +51,9 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)/$(NAME).h
 mlibft:
 	@echo "building lbft.........."
 	@make -s -C $(LIBFT_DIR)
+
+tst:
+	cc $(CFLAGS) $(TST) -o tst $(INCLUDES) $(LDLIBS)
 
 mlx: getmlxlib
 	@echo "building mlx.........."
