@@ -37,22 +37,28 @@ typedef struct s_point
 	int			y;
 }				t_point;
 
-typedef struct s_fpoint
-{
-	float		x;
-	float		y;
-}				t_fpoint;
-
 typedef struct s_image
 {
 	void		*mlx;
 	void		*win;
 	int			*image;
 	char		*data;
-	int			bpp;
 	int			sizeline;
+	int			bpp;
 	int			endian;
 }				t_image;
+
+typedef struct s_ray
+{
+    double	rayDirX;
+    double	rayDirY;
+    double	deltaDistX;
+    double	deltaDistY;
+    int		stepX;
+    int		stepY;
+    double	sideDistX;
+    double	sideDistY;
+}			t_ray;
 
 typedef struct player
 {
@@ -68,6 +74,7 @@ typedef struct s_3d
 {
 	t_image			img;
 	t_image			mmap;
+	int 			worldMap[24][24];
 	t_player		player;
 	int				color;
 	float			fps;
@@ -79,7 +86,7 @@ typedef struct s_3d
 
 void				init_img(t_data *d);
 int					init_variables(t_data *d);
-int					terminate(t_data *d);
+int					mlx_terminate(t_data *d);
 /*
 	HOOKS
 */
@@ -89,15 +96,15 @@ int					key_down_hook(int keycode, t_data *d);
 int					key_up_hook(int keycode, t_data *d);
 int					mouse_scaling_hook(int button, int x, int y, t_data *d);
 
-int					terminate(t_data *d);
+int					mlx_terminate(t_data *d);
 
 void				draw(t_data *d);
+void				handle_player(t_data *d);
 
 void				draw_line(t_data *d, t_point p1, t_point p2, int color);
 
 void				init_player(t_data *d);
-void				draw_player(t_data *d);
-
+void				draw_minimap(t_data *d);
 /*
 	UTILS
 */
@@ -106,8 +113,8 @@ int					ft_clip(int n, int min, int max);
 void				print_debug(t_data *d, char *str);
 void				my_mlx_pixel_put(t_data *d, int x, int y, int color);
 int					ft_rgb2hex(t_rgb rgb);
-int					ft_abs(int n);
+double				ft_abs(double n);
 
-int					terminate(t_data *d);
+int					read_file();
 
-#endif 
+#endif

@@ -7,3 +7,7 @@ compile_commands.json
 minilibx-linux
 MLX42
 test
+*.a
+cub3d
+debug
+

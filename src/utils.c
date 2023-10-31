@@ -6,7 +6,7 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 12:37:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/08 23:40:55 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/30 12:44:16 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	ft_max(int a, int b)
 	return (b);
 }
 
-int ft_abs(int n)
+double ft_abs(double n)
 {
-	if (n < 0)
+	if (n < 0.0)
 		return (-n);
 	return (n);
 }

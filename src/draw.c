@@ -6,44 +6,15 @@
 /*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/09 01:20:26 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/30 15:53:28 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-#include "constants.h"
 #include <mlx.h>
 #include <time.h>
 
-int worldMap[MAPWIDTH][MAPHEIGHT] =
-{
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,5,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
-
-void verLine(int x, int drawStart, int drawEnd, int color, t_data *d)
+static void vertical_line(int x, int drawStart, int drawEnd, unsigned int color, t_data *d)
 {
 	int	y;
 
@@ -51,17 +22,53 @@ void verLine(int x, int drawStart, int drawEnd, int color, t_data *d)
 	while (y++ < HEIGHT)
 	{
 		if (y < drawStart)
-			my_mlx_pixel_put(d, x, y, 0);
+			my_mlx_pixel_put(d, x, y, 0xFF0000FF);
 		else if (y > drawStart && y < drawEnd)
 			my_mlx_pixel_put(d, x, y, color);
 		else if (y > drawEnd)
-			my_mlx_pixel_put(d, x, y, 0);
+			my_mlx_pixel_put(d, x, y, 0xAA008800);
 	}
 }
 
 void	clr_ctx(t_data *d)
 {
 	ft_bzero(d->img.data, WIDTH * HEIGHT * (d->img.bpp / 8));
+}
+
+void calculate_step_and_side_distances(t_ray *ray, t_data *d) {
+    if (ray->rayDirX < 0) {
+        ray->stepX = -1;
+        ray->sideDistX = (d->player.posX - (int)d->player.posX) * ray->deltaDistX;
+    }
+    else {
+        ray->stepX = 1;
+        ray->sideDistX = ((int)d->player.posX + 1.0 - d->player.posX) * ray->deltaDistX;
+    }
+    
+    if (ray->rayDirY < 0) {
+        ray->stepY = -1;
+        ray->sideDistY = (d->player.posY - (int)d->player.posY) * ray->deltaDistY;
+    }
+    else {
+        ray->stepY = 1;
+        ray->sideDistY = ((int)d->player.posY + 1.0 - d->player.posY) * ray->deltaDistY;
+    }
+}
+
+char wall_orientation(double rayAngle)
+{
+    char Direction;
+
+    if (rayAngle >= -M_PI_4 && rayAngle < M_PI_4)
+        Direction = 'E'; // East
+    else if (rayAngle >= M_PI_4 && rayAngle < 3 * M_PI_4)
+        Direction = 'S'; // South
+    else if (rayAngle >= -3 * M_PI_4 && rayAngle < -M_PI_4)
+        Direction = 'N'; // North
+    else
+        Direction = 'W'; // West
+
+    return Direction;
 }
 
 void	draw(t_data *d)
@@ -72,143 +79,91 @@ void	draw(t_data *d)
 	clr_ctx(d);
 	while (x++ < WIDTH)
 	{
-		double cameraX = 2 * x / (double)WIDTH - 1; //x-coordinate in camera space
-		double rayDirX = d->player.dirX + d->planeX * cameraX;
-		double rayDirY = d->player.dirY + d->planeY * cameraX;
-  		//which box of the map we're in
-      	int mapX = (int)d->player.posX;
-      	int mapY = (int)d->player.posY;
-
-      	//length of ray from current position to next x or y-side
-      	double sideDistX;
-      	double sideDistY;
-
-      	 //length of ray from one x or y-side to next x or y-side
-      	double deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1 / rayDirX);
-      	double deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1 / rayDirY);
-      	double perpWallDist;
-
-      	//what direction to step in x or y-direction (either +1 or -1)
-      	int stepX;
-      	int stepY;
-
-      	int hit = 0; //was there a wall hit?
-      	int side; //was a NS or a EW wall hit?
+		unsigned int	color = 0;
+		double 			cameraX = 2 * x / (double)WIDTH - 1; //x-coordinate in camera space
+		//	init ray position and direction
+		double 			rayDirX = d->player.dirX + d->planeX * cameraX;
+		double 			rayDirY = d->player.dirY + d->planeY * cameraX;
+		//	which box of the map we're in
+	  	int 			mapX = (int)d->player.posX;
+	  	int 			mapY = (int)d->player.posY;
+		//	length of ray from one x or y-side to next x or y-side
+	  	double			deltaDistX = (rayDirX == 0) ? 1e30 : ft_abs(1.0 / rayDirX);
+	  	double			deltaDistY = (rayDirY == 0) ? 1e30 : ft_abs(1.0 / rayDirY);
+	  	double			perpWallDist;
+	  	int 			hit = 0; 		//was there a wall hit?
+	  	int 			side; 			//was a NS or a EW wall hit?
 		
-		//	calculate step and initial sideDist
-      	if (rayDirX < 0)
-      	{
-      	  stepX = -1;
-      	  sideDistX = (d->player.posX - mapX) * deltaDistX;
-      	}
-      	else
-      	{
-      	  stepX = 1;
-      	  sideDistX = (mapX + 1.0 - d->player.posX) * deltaDistX;
-      	}
-      	if (rayDirY < 0)
-      	{
-      	  stepY = -1;
-      	  sideDistY = (d->player.posY - mapY) * deltaDistY;
-      	}
-      	else
-      	{
-      	  stepY = 1;
-      	  sideDistY = (mapY + 1.0 - d->player.posY) * deltaDistY;
-      	}
+		// DIRECTION
+		double			rayAngle = atan2(rayDirY, rayDirX); // Calculate the ray angle
+		t_ray 			ray;
 		
+		ray.rayDirX = rayDirX;
+		ray.rayDirY = rayDirY;
+		ray.deltaDistX = deltaDistX;
+		ray.deltaDistY = deltaDistY;
+
+		calculate_step_and_side_distances(&ray, d);
+		
+        // Determine the wall orientation
+        char wallDirection = wall_orientation(rayAngle);
+
 		//	perform DDA
-      	while (hit == 0)
-      	{
-      	  //jump to next map square, either in x-direction, or in y-direction
-      	  if (sideDistX < sideDistY)
-      	  {
-      	    sideDistX += deltaDistX;
-      	    mapX += stepX;
-      	    side = 0;
-      	  }
-      	  else
-      	  {
-      	    sideDistY += deltaDistY;
-      	    mapY += stepY;
-      	    side = 1;
-      	  }
-	  	  //Check if ray has hit a wall
-      	  if (worldMap[mapX][mapY] > 0)
-			  hit = 1;
-      	} 
- 		
+	  	while (hit == 0)
+	  	{
+	        //jump to next map square, either in x-direction, or in y-direction
+			if (ray.sideDistX < ray.sideDistY)
+	  	  	{
+				ray.sideDistX += ray.deltaDistX;
+				mapX += ray.stepX;
+				side = 0;
+	  	  	} else {
+				ray.sideDistY += ray.deltaDistY;
+				mapY += ray.stepY;
+				side = 1;
+	  		}
+			//Check if ray has hit a wall
+			if (d->worldMap[mapX][mapY] > 0)
+				hit = 1;
+	  	}
 		//	Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
-      	if(side == 0)
+	  	if(side == 0)
 		{
-			perpWallDist = (sideDistX - deltaDistX);
+			perpWallDist = (ray.sideDistX - ray.deltaDistX);
 		} else {
-			perpWallDist = (sideDistY - deltaDistY);
+			perpWallDist = (ray.sideDistY - ray.deltaDistY);
 		}
 		//	Calculate height of line to draw on screen
-      	int lineHeight = (int)(HEIGHT / perpWallDist);
-
-      	//calculate lowest and highest pixel to fill in current stripe
-      	int drawStart = -lineHeight / 2 + HEIGHT / 2;
-      	if(drawStart < 0)
+	  	int lineHeight = (int)(HEIGHT / perpWallDist);
+	  	//calculate lowest and highest pixel to fill in current stripe
+	  	int drawStart = -lineHeight / 2 + HEIGHT / 2;
+		int drawEnd = lineHeight / 2 + HEIGHT / 2;
+	  	if(drawStart < 0)
 			drawStart = 0;
-      	int drawEnd = lineHeight / 2 + HEIGHT / 2;
-      	if(drawEnd >= HEIGHT)
+		if(drawEnd >= HEIGHT)
 			drawEnd = HEIGHT - 1;
-   	  	
 		//choose wall color
-      	int	color;
-      	switch(worldMap[mapX][mapY])
-      	{
-      	  case 1:  color = 0xFFFF0000; break; //red
-      	  case 2:  color = 0xFF00FF00; break; //green
-      	  case 3:  color = 0xFF0000FF; break; //blue
-      	  case 4:  color = 0xFFFFFFFF; break; //white
-      	  default: color = 0xFF223322; break; //yellow
-      	}
 
-      	//give x and y sides different brightness
-      	if (side == 1) {color = color/ 2;}
+		if (d->worldMap[mapX][mapY] == 1)
+		{
+			// if (wallDirection == 'N')
+            //     color = 0xFF0000FF; // Blue for North-facing walls
+            // else if (wallDirection == 'S')
+            //     color = 0xFF00FF00; // Green for South-facing walls
+            // else if (wallDirection == 'E')
+            //     color = 0xFFFF0000; // Red for East-facing walls
+            // else if (wallDirection == 'W')
+			(void)wallDirection;
+                color = 0xFF00FFFF; // Cyan for West-facing walls
+		}
+	  	//give x and y sides different brightness
+	  	if (side == 1) color = color >> 1;
+	  	//draw the pixels of the stripe as a vertical line
+	  	vertical_line(x, drawStart, drawEnd, color, d);
+	}
 
-      	//draw the pixels of the stripe as a vertical line
-      	verLine(x, drawStart, drawEnd, color, d);
-    }
-	
-	//move forward if no wall in front of you
-    if (d->player.ctrl.up_down == 1)
-    {
-      if(worldMap[(int)(d->player.posX + d->player.dirX * d->player.moveSpeed)][(int)d->player.posY] == 0) d->player.posX += d->player.dirX * d->player.moveSpeed;
-      if(worldMap[(int)d->player.posX][(int)(d->player.posY + d->player.dirY * d->player.moveSpeed)] == 0) d->player.posY += d->player.dirY * d->player.moveSpeed;
-    }
-    //move backwards if no wall behind you
-    if (d->player.ctrl.up_down == -1)
-    {
-      if(worldMap[(int)(d->player.posX - d->player.dirX * d->player.moveSpeed)][(int)d->player.posY] == 0) d->player.posX -= d->player.dirX * d->player.moveSpeed;
-      if(worldMap[(int)d->player.posX][(int)(d->player.posY - d->player.dirY * d->player.moveSpeed)] == 0) d->player.posY -= d->player.dirY * d->player.moveSpeed;
-    }
-    //rotate to the right
-    if (d->player.ctrl.turn == -1)
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = d->player.dirX;
-      d->player.dirX = d->player.dirX * cos(-ROT_SPEED) - d->player.dirY * sin(-ROT_SPEED);
-      d->player.dirY = oldDirX * sin(-ROT_SPEED) + d->player.dirY * cos(-ROT_SPEED);
-      double oldPlaneX = d->planeX;
-      d->planeX = d->planeX * cos(-ROT_SPEED) - d->planeY * sin(-ROT_SPEED);
-      d->planeY = oldPlaneX * sin(-ROT_SPEED) + d->planeY * cos(-ROT_SPEED);
-    }
-    //rotate to the left
-    if (d->player.ctrl.turn == 1)
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = d->player.dirX;
-      d->player.dirX = d->player.dirX * cos(ROT_SPEED) - d->player.dirY * sin(ROT_SPEED);
-      d->player.dirY = oldDirX * sin(ROT_SPEED) + d->player.dirY * cos(ROT_SPEED);
-      double oldPlaneX = d->planeX;
-      d->planeX = d->planeX * cos(ROT_SPEED) - d->planeY * sin(ROT_SPEED);
-      d->planeY = oldPlaneX * sin(ROT_SPEED) + d->planeY * cos(ROT_SPEED);
-    }
+	handle_player(d);
 	mlx_put_image_to_window(d->img.mlx, d->img.win, d->img.image, 0, 0);
-	draw_player(d);
+	draw_minimap(d);
 }
 

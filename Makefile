@@ -1,5 +1,5 @@
 NAME = cub3d
-SOURCES = hooks.c main.c keyhooks.c utils.c draw.c player.c init.c exit.c
+SOURCES = hooks.c main.c keyhooks.c utils.c draw.c player.c init.c exit.c map.c minimap.c
 HEADER = include
 SRC_PATH  = src
 OBJ_PATH  = objs
@@ -14,6 +14,7 @@ SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
 
 all: $(NAME)
+
 getmlxlib:
 	@if [ ! -d minilibx-linux ]; then \
 		echo "Downloading miniLibX..."; \
@@ -21,15 +22,16 @@ getmlxlib:
 		tar -xzf minilibx-linux.tgz; \
 		rm minilibx-linux.tgz; \
 	fi
+
 debug:
 	@cc -ggdb3 $(CFLAGS) $(INCLUDES) $(SRCS) $(LDLIBS) -o $(NAME)
 	@echo "---Debug mode---"
-	@gdb -ex run $(NAME)
+	@gdb -ex run $(NAME) "Cubemap.cub"
 
 mem:
 	@cc -ggdb3 $(CFLAGS) $(INCLUDES) $(SRCS) $(LDLIBS) -o debug
 	@echo "---Debug mode---"
-	@help50 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./debug
+	@help50 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./debug somemap.cub
 
 run: all
 	@./$(NAME) "Cubemap.cub"

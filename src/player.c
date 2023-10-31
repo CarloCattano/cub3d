@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlo <no@way.zip>                         +#+  +:+       +#+        */
+/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:11:22 by carlo             #+#    #+#             */
-/*   Updated: 2023/10/09 01:42:54 by carlo            ###   ########.fr       */
+/*   Updated: 2023/10/30 15:30:05 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,77 @@
 #include "../minilibx-linux/mlx.h"
 #include <math.h>
 
-static void	draw_square(int x, int y, int w, int h, t_data *d);
-
 void	init_player(t_data *d)
 {
 	d->player.dirX = 1;
 	d->player.dirY = 0;
-	d->player.posX = 22;
-	d->player.posY = 22;
-	d->player.moveSpeed = 0.2;
+	d->player.posX = 4;
+	d->player.posY = 4;
+	d->player.moveSpeed = MOVE_SPEED;
 	d->player.ctrl.up_down = 0;
 	d->player.ctrl.left_right = 0;
 	d->player.ctrl.turn = 0;
 }
 
-void	draw_player(t_data *d)
+static void move_player(t_data *d, int direction)
 {
-	double scaled = 180 / MAPWIDTH;
-	double posX = d->player.posX * scaled;
-	double posY = d->player.posY * scaled;
+    double moveSpeed = d->player.moveSpeed;
+    double dirX = d->player.dirX;
+    double dirY = d->player.dirY;
+    double posX = d->player.posX;
+    double posY = d->player.posY;
 
-	ft_bzero(d->mmap.data, 180 * 180 * (d->mmap.bpp / 8));
-	draw_square(posX, posY, 10, 10, d);
-	mlx_put_image_to_window(d->img.mlx, d->img.win, d->mmap.image, 0, 0);
+    if (direction == 1)  // Move forward
+    {
+        if (d->worldMap[(int)(posX + dirX * moveSpeed)][(int)posY] == 0)
+            d->player.posX += dirX * moveSpeed * 0.5;
+        if (d->worldMap[(int)posX][(int)(posY + dirY * moveSpeed)] == 0)
+            d->player.posY += dirY * moveSpeed * 0.5;
+    }
+    else if (direction == -1)  // Move backward
+    {
+        if (d->worldMap[(int)(posX - dirX * moveSpeed)][(int)posY] == 0)
+            d->player.posX -= dirX * moveSpeed * 0.5;
+        if (d->worldMap[(int)posX][(int)(posY - dirY * moveSpeed)] == 0)
+            d->player.posY -= dirY * moveSpeed * 0.5;
+    }
 }
 
-void	put_minimap(t_data *d, int x, int y, int color)
+static void rotate_player(t_data *d, int direction)
 {
-	char	*dst;
+    double rotSpeed = ROT_S;
+    double dirX = d->player.dirX;
+    double dirY = d->player.dirY;
+    double planeX = d->planeX;
+    double planeY = d->planeY;
 
-	dst = d->mmap.data + (y * d->mmap.sizeline + x * (d->mmap.bpp >> 3));
-	*(unsigned int *)dst = color;
+    if (direction == 1)  // Rotate left
+    {
+        double oldDirX = dirX;
+        dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
+        dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
+        double oldPlaneX = planeX;
+        planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
+        planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
+    }
+    else if (direction == -1)  // Rotate right
+    {
+        double oldDirX = dirX;
+        dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
+        dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
+        double oldPlaneX = planeX;
+        planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+        planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+    }
+
+    d->player.dirX = dirX;
+    d->player.dirY = dirY;
+    d->planeX = planeX;
+    d->planeY = planeY;
 }
 
-static void	draw_square(int x, int y, int w, int h, t_data *d)
+void handle_player(t_data *d)
 {
-	int	j;
-	int	i;
-
-	i = 0;
-	while (i++ < w)
-	{
-		j = 0;
-		while (j++ < h)
-			put_minimap(d, x + i, y + j, 0xFFFF0000);
-		i++;
-	}
+	move_player(d, d->player.ctrl.up_down);
+	rotate_player(d, d->player.ctrl.turn);	
 }
