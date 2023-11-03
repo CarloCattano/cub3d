@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:46:03 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/30 15:00:23 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:33:42 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define TEXHEIGHT 64
 # define MAPWIDTH 24
 # define MAPHEIGHT 24
-# define BLOCK 42
 # define ROTATION_ANGLE 0.04f
 # define MOVE_SPEED 0.1
 # define ROT_S 0.02

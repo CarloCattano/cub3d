@@ -39,14 +39,21 @@ int	main(int ac, char **av)
 {
 	t_data			d;
 
-	if (!(init_variables(&d)) || ac != 2)
+	if (ac != 2)
 	{
 		ft_putendl_fd("Failed to initialize variables", 1);
 		mlx_terminate(&d);
 	}
 	ft_putendl_fd("Program initialized successfully", 1);
 	ft_putendl_fd(av[1], 1);
+	// Check config and init map
+	// else exit
 
+	if (!(init_variables(&d)))
+	{
+		ft_putendl_fd("Failed to initialize variables", 1);
+		return (1);
+	}
 	d.planeX = 0;
 	d.planeY = 0.66;
 	d.player.moveSpeed = 0.2;
@@ -58,7 +65,6 @@ int	main(int ac, char **av)
 		}
 	}
 	
-	/* mlx_do_key_autorepeatoff(d.img.mlx); */
 	mlx_mouse_hook(d.img.win, mouse_scaling_hook, &d);
 	mlx_hook(d.img.win, ON_KEYDOWN, 1L << 0, key_down_hook, &d);
 	mlx_hook(d.img.win, ON_KEYUP, 1L << 1, key_up_hook, &d);

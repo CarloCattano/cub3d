@@ -60,6 +60,7 @@ typedef struct s_ray
     double	sideDistY;
 }			t_ray;
 
+
 typedef struct player
 {
 	double			posX;
