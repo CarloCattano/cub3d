@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:47 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/30 15:53:28 by ccattano         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:41:44 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include <mlx.h>
 #include <time.h>
-
+// copied from stackoverflow.com/questions/34250742/how-to-draw-a-vertical-line-in-c-without-using-graphics-h
 static void vertical_line(int x, int drawStart, int drawEnd, unsigned int color, t_data *d)
 {
 	int	y;
@@ -21,11 +21,11 @@ static void vertical_line(int x, int drawStart, int drawEnd, unsigned int color,
 	y = 0;
 	while (y++ < HEIGHT)
 	{
-		if (y < drawStart)
+		if (y < drawStart)	// ceiling
 			my_mlx_pixel_put(d, x, y, 0xFF0000FF);
 		else if (y > drawStart && y < drawEnd)
 			my_mlx_pixel_put(d, x, y, color);
-		else if (y > drawEnd)
+		else if (y > drawEnd) // floor
 			my_mlx_pixel_put(d, x, y, 0xAA008800);
 	}
 }
