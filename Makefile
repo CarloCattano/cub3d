@@ -1,14 +1,18 @@
 NAME = cub3d
+NAME1 = cub3dmac
 SOURCES = hooks.c main.c keyhooks.c utils.c draw.c player.c init.c exit.c map.c minimap.c
 HEADER = include
 SRC_PATH  = src
 OBJ_PATH  = objs
 CFLAGS = -Wall -Wextra -Werror
+MACLIB = -L./libft -lft -L./minilibx-linux -lmlx -L./ft_printf -lftprintf -lm -framework OpenGL -framework AppKit -lz
 LDLIBS = -L./libft -lft -L./minilibx-linux -lmlx -L./ft_printf -lftprintf -lm -lXext -lX11 -lz
 LIBFT_DIR = libft
 PRINTF_DIR = ft_printf
 MLX_DIR = minilibx-linux
 INCLUDES = -I./include -I./libft -I./minilibx-linux -I./ft_printf 
+
+CHECK_MAC = ./$(MLX_DIR)
 
 SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
@@ -16,6 +20,15 @@ OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
 TST = tst.c 
 
 all: $(NAME)
+
+
+getmlxmac:     
+		echo "Downloading miniLibX..."; \
+		curl -x  "" -# -O https://cdn.intra.42.fr/document/document/21670/minilibx_opengl.tgz; \
+		tar -xzf minilibx_opengl.tgz; \
+		rm minilibx_opengl.tgz; \
+		
+	
 
 getmlxlib:
 	@if [ ! -d minilibx-linux ]; then \
@@ -37,6 +50,16 @@ mem:
 
 run: all
 	@./$(NAME) "Cubemap.cub"
+
+mac: $(NAME1)
+
+$(CHECK_MAC): getmlxmac
+
+$(NAME1): $(CHECK_MAC) $(OBJS)
+	make mlibft
+	make mlx
+	make printf
+	@cc $(CFLAGS) $(OBJS) -o $(NAME1) $(INCLUDES) $(MACLIB)
 
 $(NAME): getmlxlib $(OBJS)
 	make mlibft

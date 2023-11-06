@@ -16,7 +16,7 @@ int	mlx_terminate(t_data *d)
 {
 	mlx_destroy_image(d->img.mlx, d->img.image);
 	mlx_destroy_window(d->img.mlx, d->img.win);
-	mlx_destroy_display(d->img.mlx);
+	//mlx_destroy_display(d->img.mlx);
 	free(d->img.mlx);
 	ft_putendl_fd("Program terminated Gracefully ❤️", 1);
 	exit (0);
