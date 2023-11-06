@@ -14,7 +14,7 @@
 
 # define CUBE3D_H
 
-
+# include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft.h"
@@ -24,8 +24,8 @@
 # define ERROR_ARG "CUBE3D NEEDS ONLY ONE ARG"
 # define ERROR_PARS "PARSING FAILD"
 # define ERROR_FILE "CUB FILE CORRUPTED" 
-# define ERROR_CUB " FILE NEED .CUB EXTENSION"
-# define 
+# define ERROR_CUB "FILE NEED .CUB EXTENSION"
+# define ERROR_FILE_OPEN "OPEN CUB FILE FAIL"
 
 int     cub_error(char const *msg, void (*f)(), void *ptr);
 int		cub_parser(char *input);

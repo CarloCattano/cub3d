@@ -23,7 +23,8 @@ int	cub_parser(char *input)
 		return (cub_error(ERROR_CUB, NULL, NULL));
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
-		return (
+		return (perror("ERROR OPEN"), cub_error(ERROR_FILE_OPEN, NULL, NULL));
+	 
 	return (0);
 	
 
