@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub_evalfile.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/07 12:10:00 by jstrotbe         ###   ########.fr       */
+/*   Created: 2023/11/07 11:37:47 by jstrotbe          #+#    #+#             */
+/*   Updated: 2023/11/07 12:09:39 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-#include <stdio.h>
 
 
-
-int	main (int ac, char *av[])
+int		cub_evalfile(int fd, t_load *load)
 {
-	if (ac != 2)
-		return (cub_error(ERROR_ARG, NULL, NULL));
-	if (cub_parser(av[1]))
-		return (cub_error(ERROR_PARS, NULL, NULL));
-			
-
+	char *line;
+	char **parts;
 	
-	return (0);
+	ft_bzero(load);
+	line = get_next_line(fd);
+	while (line)
+	{
+		parts = ft_split(line, " ");
+		if (!parts)
+			return (close(fd), get_next_line(-2), cub_error(ERROR_MALOC, free, line));
+		
+		
+
+
+
+	}
+	return (close(fd), cub_error(ERROR_FILE_WRONG, NULL, NULL));
 }
+
+
