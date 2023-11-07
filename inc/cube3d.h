@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/07 12:09:57 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:45:56 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@
 # define ERROR_FILE "CUB FILE CORRUPTED" 
 # define ERROR_CUB "FILE NEED .CUB EXTENSION"
 # define ERROR_FILE_OPEN "OPEN CUB FILE FAIL"
-# define ERROR_FILE_WRONG " FILE IS NOT RIGHT CINFIGUERD"
-# define ERROR_MALOC	"MALLOC_FAIL"
+# define E_FW " FILE IS NOT RIGHT CINFIGUERD"
+# define E_MAL	"MALLOC_FAIL"
+/* MSG CUB FILE */
+# define SAMEARG " CUB HAVE DUPLICATE TYPES "
+# define MANYARG " CUBE HAVE TO MANY ARG"	
 
 
 /* structs */
@@ -51,8 +54,8 @@ enum e_type
 	EA,
 	F,
 	C,
-	COMMENT = 99
-
+	S,
+	MAP	
 }
 
 struct s_scene
@@ -110,8 +113,8 @@ struct s_lextra
 struct	s_load
 {
 	char *wall[4];
-	int *c_floor;
-	int *c_ceiling;	
+	int *floor;
+	int *ceiling;	
 	t_list *map;
 	t_list *extra;
 }
@@ -130,6 +133,9 @@ int     cub_error(char const *msg, void (*f)(), void *ptr);
 /* parser */
 int		cub_parser(char *input, t_scene *scene);
 int		cub_loadscene(int fd, t_scene *scene);
+int     cub_evalfile(int fd, t_load *load);
 
+/* free */
+void    cub_dfree(char ***tofree);
 
 #endif	

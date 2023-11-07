@@ -15,9 +15,9 @@ SRC_DIR := ./src/
 OBJ_DIR := ./obj/
 
 
-C := cub_error cub_parser 
-H :=  cube3d
-MAIN := main.c
+C := 
+H :=  
+MAIN := test.c
 
 INC := $(addprefix $(INC_DIR), $(addsuffix .h, $(H))) 
 SRC := $(addprefix $(SRC_DIR),$(addsuffix .c, $(C)))
@@ -42,7 +42,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(COMPILE) -c $< -o $@
 
 $(NAME):$(OBJ) 
-	$(COMPILE) $(OBJ)  main.c $(LIB) -o $(NAME) 
+	$(COMPILE) $(OBJ)  $(MAIN) $(LIB) -o $(NAME) 
 
 #$(NAME): $(OBJ) $(MAIN)
 #	$(COMPILE) -L./libft -lft $^ -o $@		
