@@ -17,9 +17,11 @@
 
 int	main (int ac, char *av[])
 {
+	t_scene sc;
+
 	if (ac != 2)
 		return (cub_error(ERROR_ARG, NULL, NULL));
-	if (cub_parser(av[1]))
+	if (cub_parser(av[1]), &sc)
 		return (cub_error(ERROR_PARS, NULL, NULL));
 			
 

@@ -22,12 +22,13 @@ int		cub_evalfile(int fd, t_load *load)
 	ft_bzero(load);
 	line = get_next_line(fd);
 	while (line)
-	{
-		parts = ft_split(line, " ");
+	{	
+		error = 0;
+		parts = cub_split(line, ' \n');
 		if (!parts)
 			return (close(fd), get_next_line(-2), cub_error(E_MAL, free, line));
 		if (parts[0])
-			error = cub_evalline(fd, load, parts);
+			error = cub_evalline(fd, load, line, parts);
 		gnl_free (&line);
 		cub_dfree (&parts);	
 		if (error == 2)

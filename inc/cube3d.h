@@ -31,8 +31,13 @@
 # define E_FW " FILE IS NOT RIGHT CINFIGUERD"
 # define E_MAL	"MALLOC_FAIL"
 /* MSG CUB FILE */
-# define SAMEARG " CUB HAVE DUPLICATE TYPES "
-# define MANYARG " CUBE HAVE TO MANY ARG"	
+# define SAMEARG " .CUB HAVE DUPLICATE TYPES "
+# define SCENEARG " .CUB TYPE HAS NOT THE RIGHT NUMBER OF ARG"	
+# define SCENECOL " .CUB HAS DUPLICATE COLOUR "
+# define SCENEWCOL " .CUB WRONG COLOUR IMNPUT "	
+# define SOPEN " .CUB OPEN TEXTURE FAIL"
+# define E_M " MAP IS NOT CORRECT"	
+# defien E_T " NOT ALL NECESSARY TYPES ARE DECLAIRED BEFOR MAP"
 
 
 /* structs */
@@ -128,14 +133,22 @@ struct s_map
 
 
 /* functions */
-int     cub_error(char const *msg, void (*f)(), void *ptr);
+int     cub_error(char cons *msg, void (*f)(), void *ptr);
 
 /* parser */
 int		cub_parser(char *input, t_scene *scene);
 int		cub_loadscene(int fd, t_scene *scene);
-int     cub_evalfile(int fd, t_load *load);
+int		cub_evalfile(int fd, t_load *load);
+int             cub_evalline(int fd, t_load *load,  char *line, char **parts);
+int		cub_psprites(t_load *load, char **parts);
+int		cub_pfloor(t_load *load, char *line, int type);
+int		cub_pwalls(t_load *load, char **parts, int type);
+int		cub_readmap(int fd, t_load *load,  char *line);
 
 /* free */
 void    cub_dfree(char ***tofree);
 
-#endif	
+/* helper */
+char    **cub_splits(char const *str, char const *set);
+int	cub_countparts(char **parts);
+#endif

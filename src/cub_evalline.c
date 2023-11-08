@@ -35,69 +35,6 @@ int		ft_gettype(char *c)
 			return (S);
 		return (0);
 }
-int ft_count_parts(char **parts)
-{
-	int c;
-	while ((*parts)++)
-		c++
-	return (c);
-}
-
-
-int ft_get_rgb(int count, char **parts, int *rgb)
-{
-	int rgb[3];
-	int c;
-	int k;
-	char **values;
-
-	c = 1;
-	k = 0;
-
-	while (count--)
-	{
-		if (c >= 4)
-			return ()
-		values = ft_split(parts + c, ',');
-		while (values[k++])
-		{	
-			if (c < 4)
-				rgb[c - 1] = 
-			
-			if ( c++ == 4)
-				return (); 
-		}	
-
-
-	} 
-
-
-
-}
-
-
-
-
-
-/* check floor */
-int	ft_floor(t_load *load, char **parts, int type)
-{	
-	int count;
-	int rgb;
-		
-	if ((type == F && load->floor) || type == C && load->ceiling)
-		return (cub_error(SAMEARG, NULL, NULL));
-	count = ft_count_parts(parts + 1);
-	if ( !count || count >3)
-		return (cub_error(MANYARG, NULL ,NULL));
-	if ( 
-			
-}
-
-
-
-
-
 
 int		cub_evalline(int fd, t_load *load,  char *line, char **parts)
 {
@@ -107,18 +44,10 @@ int		cub_evalline(int fd, t_load *load,  char *line, char **parts)
 	if (!type)
 		return (1);
 	if (type == S)
-		return (ft_sprite(load, parts));
+		return (cub_psprite(load, parts));
 	if (type <= EA)
-		return (ft_walls(load, parts);
+		return (cub_pwalls(load, parts, type);
 	if (type <= C)
-		return (ft_floor(load, parts, type);
-	return (cub_readmap (fd, load, line));
+		return (cub_pfloor(load, line, type);
+	return (cub_readmap (fd, load, ft_strdup(line)));
 }			
-	
-
-
-
-
-
-
-}	
