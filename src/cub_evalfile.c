@@ -19,12 +19,12 @@ int		cub_evalfile(int fd, t_load *load)
 	char	**parts;
 	int		error;	
 	
-	ft_bzero(load);
+	ft_bzero(load, sizeof(t_load));
 	line = get_next_line(fd);
 	while (line)
 	{	
 		error = 0;
-		parts = cub_split(line, ' \n');
+		parts = cub_splits(line, " \n");
 		if (!parts)
 			return (close(fd), get_next_line(-2), cub_error(E_MAL, free, line));
 		if (parts[0])

@@ -21,7 +21,7 @@ void	cub_dfree(char ***tofree)
 	{
 		while ((*tofree)[i])
 		{
-			min_free(&((*tofree)[i]));
+			gnl_free(&((*tofree)[i]));
 			i++;
 		}
 		free(*tofree);

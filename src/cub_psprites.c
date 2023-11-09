@@ -1,13 +1,13 @@
-#include "cube3D.h"
+#include "cube3d.h"
 
 char **ft_cparr(char **parts)
 {
 	int amount;
 	char **cp;
-	int in;
+	int i;
 	
 	amount = cub_countparts(parts);
-	cp = malloc(sizeof(char *) * (amount + 1); 
+	cp = malloc(sizeof(char *) * (amount + 1)); 
 	if (!cp)
 		return (NULL);
 	i = -1;
@@ -16,7 +16,7 @@ char **ft_cparr(char **parts)
 		cp[i] = ft_strdup(parts[i]);	
 		if (!cp[i])
 			return (cub_dfree(&cp), NULL);
-	)
+	}
 	cp[i] = NULL;	
 	return (cp);
 }
@@ -42,9 +42,9 @@ t_lextra	*ft_lextra(char **parts)
 	t_lextra *nextra;
 	int t;
 	
-	if ((!ft_strcmp(parts[0]), "S"  && cub_countparts(parts) < 4) ||  cub_countparts(parts) != 2)
+	if ((!ft_strncmp(parts[0], "S", 1)  && cub_countparts(parts) < 4) ||  (ft_strncmp(parts[0], "S", 1) && cub_countparts(parts) != 2))
 		return (ft_error(SCENEARG, NULL));
-	t = open(parts[1))
+	t = open(parts[1], O_RDONLY);
 	if (t == -1)
 		return (ft_error(SOPEN, NULL)); 
 	nextra = malloc(sizeof(t_lextra));
@@ -52,11 +52,11 @@ t_lextra	*ft_lextra(char **parts)
 		return (ft_error(E_MAL, NULL));
 	ft_bzero(nextra, sizeof(t_lextra));
 	nextra->key = ft_strdup(parts[0]);
-	nextra->path = ft_strdup(parts[1)];
+	nextra->path = ft_strdup(parts[1]);
 	nextra->value = ft_cparr(parts + 2);
 	if ( !nextra->key || !nextra->path || !nextra->value)
 		return (ft_error(E_MAL, nextra)); 	
-	if (!ft_strcmp(nextra->key, "S") && ft_evsprit(nextra->value))
+	if (!ft_strncmp(nextra->key, "S", 1) && ft_evsprit(nextra->value))
 		return (ft_error(E_MAL, nextra));
 	return (nextra);		
 }

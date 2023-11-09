@@ -4,7 +4,7 @@
 
 int cub_countparts(char **parts)
 {
-	int c
+	int c;
 	
 	c = 0;
 	while (parts[c])

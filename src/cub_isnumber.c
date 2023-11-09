@@ -1,6 +1,6 @@
-#include "libft.h"
+#include "cube3d.h"
 
-int	ft_isnumber(char const *str)
+int	cub_isnumber(char const *str)
 {
 	while (*str)
 	{

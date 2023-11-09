@@ -14,7 +14,7 @@
 
 
 /*
-static vois ft_delmmap()
+static void ft_delmmap()
 {
 
 
@@ -22,24 +22,32 @@ static vois ft_delmmap()
 }*/
 void mprint(void *value)
 {
-        printf("%s\n", (char *)value);
+        printf("%s", (char *)value);
 }
 
-void eprint(void *value)
+static void eprint(void *value)
 {
-	printf("%s\n", (t_lextra *)value->key);
-	printf("%s\n", (t_lextra *)value->path);
+	printf("%s ", ((t_lextra *)value)->key);
+	printf("%s ", ((t_lextra *)value)->path);
+	while (*((t_lextra *)value)->value)
+		printf("%s ", *((t_lextra *)value)->value++);
+	printf("\n");	
 }
 
-ft_pload(t_load *l)
+static void ft_pload(t_load *l)
 {
+	
+	printf("\n");	
 	printf("W1:  %s\n", l->wall[0]);			
 	printf("W2:  %s\n", l->wall[1]);			
 	printf("W3:  %s\n", l->wall[2]);
+	printf("W4:  %s\n", l->wall[3]);
 	printf("F:  %i\n", *(l->floor));
 	printf("C:  %i\n", *(l->ceiling));
+	printf("\n");	
 	ft_lstiter(l->map, mprint);
-	ft_lstiter(l->exxtra, eprint);
+	printf("\n");	
+	ft_lstiter(l->extra, eprint);
 				
 }
 
@@ -54,15 +62,17 @@ static void ft_freeload(t_load *load)
 		return;
 	c = -1;
 	while (++c < 3)
-		gnl_free(load->wall[i]);
+		gnl_free(&load->wall[c]);
 	if (load->floor)
 		free(load->floor);
 	if (load->ceiling)
 		free(load->ceiling);
+/*	
 	if (load->map)
 		ft_lstclear(&(load->map), gnl_free);
 	if (load->extra)
 		ft_lstclear(&(load->extra),  cub_freelextra);	
+*/
 }
 
 
@@ -72,6 +82,7 @@ int	cub_loadscene(int fd, t_scene *scene)
 	
 	if (cub_evalfile(fd, &load))
 		return (ft_freeload(&load), 1);
+	(void) scene;
 	/*   	
 	if (cub_loadmap(&load), scene)
 		return (ft_freeload(&load), 1);   	

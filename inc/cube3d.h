@@ -37,18 +37,20 @@
 # define SCENEWCOL " .CUB WRONG COLOUR IMNPUT "	
 # define SOPEN " .CUB OPEN TEXTURE FAIL"
 # define E_M " MAP IS NOT CORRECT"	
-# defien E_T " NOT ALL NECESSARY TYPES ARE DECLAIRED BEFOR MAP"
+# define E_T " NOT ALL NECESSARY TYPES ARE DECLAIRED BEFOR MAP"
 
 
 /* structs */
 
-typedef e_type t_type;
-typedef s_scene t_scene;
-typedef s_image	t_image;
-typedef s_map t_map;
-typedef	s_sprites t_sprites;
-typedef s_lextra	t_lextra;
-typedef s_extra		t_extra;
+typedef enum e_type t_type;
+typedef struct s_image	t_image;
+typedef struct s_scene t_scene;
+typedef struct s_map t_map;
+typedef	struct s_sprites t_sprites;
+typedef struct s_lextra	t_lextra;
+typedef struct s_extra	t_extra;
+typedef struct s_map	t_map;
+typedef struct s_load	t_load;
 
 enum e_type
 {
@@ -61,7 +63,25 @@ enum e_type
 	C,
 	S,
 	MAP	
-}
+};
+
+struct s_image
+{
+	void		*img;
+	char		*pix;
+	int			line_lenght;
+	int			bpp;
+	int			endian;
+	int 		x;
+	int 		y;
+};
+
+struct s_map
+{
+	size_t				height;
+	size_t				width;
+	char				**val;
+};
 
 struct s_scene
 {
@@ -75,36 +95,27 @@ struct s_scene
 	t_image		*weapon;
 	t_sprites 	*sprites;
 	t_extra		*extra;
-}
+};
 
-struct s_image
-{
-	void		*img;
-	char		*pix;
-	int			line_lenght;
-	int			bpp;
-	int			endian;
-	int 		x;
-	int 		y;
-}
 
 struct s_sprites
 {
-	t_vector			position;
+	int				x;
+	int				y;
 	t_image				sprites;
 	double				z;
 	double				dist;
 	int					hdiv;
 	int					vdiv;
 	t_sprites			*next;
-}
+};
 
 struct	s_extra
 {
 	char	*key;
 	t_image	extra;
 	t_extra *next;	
-}	
+};	
 
 
 struct s_lextra
@@ -112,7 +123,7 @@ struct s_lextra
 	char *key;
 	char *path;		
 	char **value;
-}
+};
 
 
 struct	s_load
@@ -122,18 +133,12 @@ struct	s_load
 	int *ceiling;	
 	t_list *map;
 	t_list *extra;
-}
+};
 
-struct s_map
-{
-	t_size				height;
-	t_size				width;
-	char				**val;
-}	t_map;
 
 
 /* functions */
-int     cub_error(char cons *msg, void (*f)(), void *ptr);
+int     cub_error(char const *msg, void (*f)(), void *ptr);
 
 /* parser */
 int		cub_parser(char *input, t_scene *scene);
@@ -147,8 +152,11 @@ int		cub_readmap(int fd, t_load *load,  char *line);
 
 /* free */
 void    cub_dfree(char ***tofree);
+void    cub_freelextra(t_lextra **node);
+
 
 /* helper */
 char    **cub_splits(char const *str, char const *set);
 int	cub_countparts(char **parts);
+int	cub_isnumber(char const *str);
 #endif
