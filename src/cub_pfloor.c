@@ -39,12 +39,12 @@ int	cub_pfloor(t_load *load, char *line, int type)
 	if (ft_getrgb(parts , &rgb))
 		return (1);
 	if ((type == F && load->ceiling && *(load->ceiling) == rgb) || (type == C && load->floor && *(load->floor) == rgb))
-		return (cub_error(SCENECOL, cub_dfree, parts));
+		return (cub_error(SCENECOL, cub_dfree, &parts));
 	if (type == F)
 	{
 		load->floor = (int *)malloc(sizeof(int));
 		if (!load->floor)
-			return (cub_error(E_MAL, cub_dfree, parts));
+			return (cub_error(E_MAL, cub_dfree, &parts));
 		*(load->floor) = rgb;
 	}
 	if (type == C)				
