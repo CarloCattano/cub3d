@@ -22,7 +22,7 @@ static void ft_delmmap()
 }*/
 void mprint(void *value)
 {
-        printf("%s", (char *)value);
+        printf("%s\n", (char *)value);
 }
 
 static void eprint(void *value)
@@ -46,6 +46,9 @@ static void ft_pload(t_load *l)
 	printf("C:  %i\n", *(l->ceiling));
 	printf("\n");	
 	ft_lstiter(l->map, mprint);
+	printf("height: %i, width: %i\n", l->ymap, l->xmap);
+	printf("Player [ DIR: %c / x: %i / y: %i]\n", l->dir, *l->xpl, *l->ypl);
+	
 	printf("\n");	
 	ft_lstiter(l->extra, eprint);
 				

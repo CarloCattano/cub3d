@@ -22,6 +22,13 @@
 # include "get_next_line.h"
 # include <stdbool.h>
 
+
+/* constants */
+
+/* MAP */
+# define DIRECT "NSEW"
+# define INMAP	" 10D"
+
 /* MSG */
 # define ERROR_ARG "CUBE3D NEEDS ONLY ONE ARG"
 # define ERROR_PARS "PARSING FAILD"
@@ -38,7 +45,7 @@
 # define SOPEN " .CUB OPEN TEXTURE FAIL"
 # define E_M " MAP IS NOT CORRECT"	
 # define E_T " NOT ALL NECESSARY TYPES ARE DECLAIRED BEFOR MAP"
-
+# define M_P " MULTIPLE PLAYER"
 
 /* structs */
 
@@ -130,7 +137,12 @@ struct	s_load
 {
 	char *wall[4];
 	int *floor;
-	int *ceiling;	
+	int *ceiling;
+	int *xpl;
+	int *ypl;
+	char dir;
+	int xmap;
+	int ymap;
 	t_list *map;
 	t_list *extra;
 };
