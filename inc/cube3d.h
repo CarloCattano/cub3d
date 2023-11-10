@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/07 17:45:56 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:22:03 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define E_M " MAP IS NOT CORRECT"	
 # define E_T " NOT ALL NECESSARY TYPES ARE DECLAIRED BEFOR MAP"
 # define M_P " MULTIPLE PLAYER"
-
+# define M_W "MAP NOT CLOESD BY WALS"
 /* structs */
 
 typedef enum e_type t_type;
@@ -85,8 +85,8 @@ struct s_image
 
 struct s_map
 {
-	size_t				height;
-	size_t				width;
+	int					height;
+	int					width;
 	char				**val;
 };
 
