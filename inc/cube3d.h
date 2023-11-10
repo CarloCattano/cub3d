@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/10 12:22:03 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/10 16:51:45 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define E_M " MAP IS NOT CORRECT"	
 # define E_T " NOT ALL NECESSARY TYPES ARE DECLAIRED BEFOR MAP"
 # define M_P " MULTIPLE PLAYER"
-# define M_W "MAP NOT CLOESD BY WALS"
+# define M_W "MAP NOT CLOESD BY WALLS"
 /* structs */
 
 typedef enum e_type t_type;
@@ -161,7 +161,7 @@ int		cub_psprites(t_load *load, char **parts);
 int		cub_pfloor(t_load *load, char *line, int type);
 int		cub_pwalls(t_load *load, char **parts, int type);
 int		cub_readmap(int fd, t_load *load,  char *line);
-
+int		cub_loadmap(t_load *load, t_map *map);
 /* free */
 void    cub_dfree(char ***tofree);
 void    cub_freelextra(t_lextra **node);
@@ -171,4 +171,5 @@ void    cub_freelextra(t_lextra **node);
 char    **cub_splits(char const *str, char const *set);
 int	cub_countparts(char **parts);
 int	cub_isnumber(char const *str);
+char **cub_cparr(char **parts);
 #endif

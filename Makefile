@@ -15,7 +15,7 @@ SRC_DIR := ./src/
 OBJ_DIR := ./obj/
 
 
-C := cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadscene cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls
+C := cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadscene cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls cub_loadmap cub_cparr
 H :=  cube3d
 MAIN := main.c
 

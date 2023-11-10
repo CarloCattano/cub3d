@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:21:23 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/10 12:21:48 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:49:12 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ int	cub_loadscene(int fd, t_scene *scene)
 	
 	if (cub_evalfile(fd, &load))
 		return (ft_freeload(&load), 1);	
-	if (DEBUG)
-		ft_pload(&load);	   	
+	//if (DEBUG)
+	ft_pload(&load);	   	
 	ft_bzero(scene, sizeof(t_scene));
-	if (cub_loadmap(&load), &(scene->map))
-		return (ft_freeload(&load), ft_freescene, 1);   	
+	if (cub_loadmap(&load, &(scene->map)))
+		return (ft_freeload(&load), 1);   	
 	/*
 	if (cub_loadwalls(&load), scene)
 		return (ft_freeload(&load), 1);   	
