@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:21:23 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/11 15:17:28 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/11 16:19:47 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	cub_loadscene(int fd, t_scene *scene)
 		return (ft_freeload(&load), 1);   	
 	if (cub_loadplayer(&load, &(scene->player)))
 		return (ft_freeload(&load), 1);
+	scene->c_floor = *load.floor;
+	scene->c_ceiling = *load.ceiling;
 	/*
 	if (cub_loadwalls(&load), scene)
 		return (ft_freeload(&load), 1);   	

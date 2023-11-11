@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/11 15:23:07 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:53:36 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@
 # define MWIDTH 200
 # define MHEIGHT 200
 
+
+/* COLOURS MINIMAP*/
+
+# define W1 0xffffd39b
+# define W2 0xff8b7355
+# define F1 0xff545454
+# define F2 0xff8deeee
 
 /* MSG */
 # define ERROR_ARG "CUBE3D NEEDS ONLY ONE ARG"
@@ -207,6 +214,8 @@ int		cub_loadmap(t_load *load, t_map *map);
 int cub_loadplayer(t_load *load, t_player *player);
 int cub_init(t_cub *c, t_scene *sc);
 void cub_draw_minimap(t_cub *c);
+void    cub_mpp(t_image *data, int x, int y, int color);
+void cub_draw(t_cub *c);
 
 
 
