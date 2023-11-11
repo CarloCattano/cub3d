@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub_loadplayer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/11 15:43:53 by jstrotbe         ###   ########.fr       */
+/*   Created: 2023/11/11 14:06:41 by jstrotbe          #+#    #+#             */
+/*   Updated: 2023/11/11 14:13:21 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-
-
-int	main (int ac, char *av[])
+int	cub_loadplayer(t_load *load, t_player *player)
 {
-	t_scene sc;
-	t_cub	c;
-
-	if (ac != 2)
-		return (cub_error(ERROR_ARG, NULL, NULL));
-	if (cub_parser(av[1], &sc))
-		return (cub_error(ERROR_PARS, NULL, NULL));
-	if (cub_init(&c, &sc))
-		return (cub_error(MAIN, NULL, NULL));	
-	cub_draw_minimap(&c);
-	mlx_loop(c.mlx);	
+	player->posX = *(load->xpl); 
+	player->posY = *(load->ypl);
+	if (load->dir == 'S')
+	{	
+		player->dirX = 0;
+		player->dirY = -1;
+	}	
+	if (load->dir == 'W')
+	{	
+		player->dirX = -1;
+		player->dirY = 0;
+	}	
+	if (load->dir == 'N')
+	{	
+		player->dirX = 0;
+		player->dirY = 1;
+	}	
+	if (load->dir == 'E')
+	{	
+		player->dirX = 1;
+		player->dirY = 0;
+	}	
 	return (0);
 }

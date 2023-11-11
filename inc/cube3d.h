@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/10 16:51:45 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/11 15:23:07 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,20 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include <stdbool.h>
-
+# include "mlx.h"
 
 /* constants */
 
 /* MAP */
 # define DIRECT "NSEW"
 # define INMAP	" 10D"
+
+/* WINDOWS  */
+# define WIDTH 800
+# define HEIGHT 600
+# define MWIDTH 200
+# define MHEIGHT 200
+
 
 /* MSG */
 # define ERROR_ARG "CUBE3D NEEDS ONLY ONE ARG"
@@ -47,6 +54,7 @@
 # define E_T " NOT ALL NECESSARY TYPES ARE DECLAIRED BEFOR MAP"
 # define M_P " MULTIPLE PLAYER"
 # define M_W "MAP NOT CLOESD BY WALLS"
+#define MAIN "MAIN FAILOR"
 /* structs */
 
 typedef enum e_type t_type;
@@ -58,6 +66,8 @@ typedef struct s_lextra	t_lextra;
 typedef struct s_extra	t_extra;
 typedef struct s_map	t_map;
 typedef struct s_load	t_load;
+typedef struct s_cub	t_cub;
+
 
 enum e_type
 {
@@ -72,11 +82,26 @@ enum e_type
 	MAP	
 };
 
+
+
+typedef struct s_player
+{
+	double			posX;
+	double			posY;
+	double			dirX;
+	double			dirY;
+	double			moveSpeed;
+	double			rotSpeed;
+	int				lastX;
+//	t_weapon		weapon;
+//	t_ctrl_states	ctrl;
+}					t_player;
+
 struct s_image
 {
 	void		*img;
 	char		*pix;
-	int			line_lenght;
+	int			line_length;
 	int			bpp;
 	int			endian;
 	int 		x;
@@ -99,6 +124,7 @@ struct s_scene
 	t_image		*ceiling;
 	t_image		walls[4];
 	t_map		map;
+	t_player	player;
 	t_image		*weapon;
 	t_sprites 	*sprites;
 	t_extra		*extra;
@@ -133,6 +159,7 @@ struct s_lextra
 };
 
 
+
 struct	s_load
 {
 	char *wall[4];
@@ -145,6 +172,19 @@ struct	s_load
 	int ymap;
 	t_list *map;
 	t_list *extra;
+};
+
+/* test raycast minimap etc */
+
+struct	s_cub
+{
+	void				*mlx;
+	void				*win;
+	int					win_h;
+	int					win_w;
+	t_scene				scene;
+	t_image				screen;
+	t_image				mini;
 };
 
 
@@ -162,6 +202,14 @@ int		cub_pfloor(t_load *load, char *line, int type);
 int		cub_pwalls(t_load *load, char **parts, int type);
 int		cub_readmap(int fd, t_load *load,  char *line);
 int		cub_loadmap(t_load *load, t_map *map);
+
+/* jtest*/
+int cub_loadplayer(t_load *load, t_player *player);
+int cub_init(t_cub *c, t_scene *sc);
+void cub_draw_minimap(t_cub *c);
+
+
+
 /* free */
 void    cub_dfree(char ***tofree);
 void    cub_freelextra(t_lextra **node);
