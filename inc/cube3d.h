@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/11 17:53:36 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/12 17:12:41 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <math.h>	
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
@@ -42,6 +43,7 @@
 # define W2 0xff8b7355
 # define F1 0xff545454
 # define F2 0xff8deeee
+# define PL 0xff0000ff
 
 /* MSG */
 # define ERROR_ARG "CUBE3D NEEDS ONLY ONE ARG"
@@ -111,8 +113,12 @@ struct s_image
 	int			line_length;
 	int			bpp;
 	int			endian;
-	int 		x;
-	int 		y;
+	int 		w;
+	int 		h;
+	int			wxoff;
+	int			wyoff;
+	double		xoff;
+	double		yoff;
 };
 
 struct s_map
@@ -165,8 +171,6 @@ struct s_lextra
 	char **value;
 };
 
-
-
 struct	s_load
 {
 	char *wall[4];
@@ -180,6 +184,32 @@ struct	s_load
 	t_list *map;
 	t_list *extra;
 };
+
+/* draw lines */
+typedef struct s_2Dpoint
+{
+	float		x;
+	float		y;
+	int			colour;
+}	t_point;
+
+typedef struct s_line
+{
+	int			dx;
+	int			sx;
+	int			dy;
+	int			sy;
+	int			err;
+	int			e2;
+	int			ax;
+	int			ay;
+	int			bx;
+	int			by;
+	int			colour;
+	int			w;
+	int			h;
+}	t_line;	
+
 
 /* test raycast minimap etc */
 
@@ -210,13 +240,17 @@ int		cub_pwalls(t_load *load, char **parts, int type);
 int		cub_readmap(int fd, t_load *load,  char *line);
 int		cub_loadmap(t_load *load, t_map *map);
 
-/* jtest*/
+/* draw */
 int cub_loadplayer(t_load *load, t_player *player);
 int cub_init(t_cub *c, t_scene *sc);
 void cub_draw_minimap(t_cub *c);
-void    cub_mpp(t_image *data, int x, int y, int color);
 void cub_draw(t_cub *c);
-
+/* draw_pixel*/
+void    cub_mpp(t_image *data, int x, int y, int color);
+/* init_point*/
+t_point cub_point(double x, double y, int colour);
+/* draw_line */
+void    cub_line(t_point a, t_point b, t_image *data);
 
 
 /* free */
