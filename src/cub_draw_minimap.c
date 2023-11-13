@@ -27,7 +27,7 @@ void draw_rays(t_image *img, t_scene *sc, int width)
 	t_point plp;
 	t_point w;
 	//(void)img;
-	ray = cub_ray(sc, width);
+	ray = cub_ray(sc, width, FOV);
 	int i;
 	int xoff;
 	int yoff;
@@ -113,7 +113,6 @@ void cub_draw_minimap(t_cub *c)
 	c->mini.xoff = xoff;
 	c->mini.yoff = yoff;
 	
-	printf ("%f / %f  ]\n", xoff, yoff);
 
 	y = -1;
 	while (++y < c->scene.map.height)
@@ -153,14 +152,12 @@ void cub_draw_minimap(t_cub *c)
 					}
 				}				
 			}
-			else
-				printf("out: %c\n", c->scene.map.val[y][x]);
 		}
 	
 	}		
 	draw_rays(&(c->mini), &(c->scene), WIDTH);
 	draw_player(&(c->mini), &(c->scene.player));
-	mlx_put_image_to_window(c->mlx, c->win, c->mini.img, 5, 5);	
+//	mlx_put_image_to_window(c->mlx, c->win, c->mini.img, 5, 5);	
 	
 
 }

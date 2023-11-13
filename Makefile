@@ -9,7 +9,7 @@ REMOVE := rm -rf
 LIBPATH = ./libft/
 LIB =$(LIBPATH)libft.a
 LIB2 = ./mlx_linux/libmlx_Linux.a ./mlx_linux/libmlx.a
-FDF = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+FDF = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX1 -lm -lz1
 
 INC_DIR := ./inc/
 SRC_DIR := ./src/
@@ -43,7 +43,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(COMPILE) -c $< -o $@
 
 $(NAME):$(OBJ) 
-	$(COMPILE) $(OBJ) $(MAIN) $(LIB) $(FDF)  -o $(NAME) 
+	$(COMPILE) $(OBJ) $(MAIN) $(LIB)   -o $(NAME) 
 
 mlx: 
 	@if [ ! -d "$(MLX)" ]; then \

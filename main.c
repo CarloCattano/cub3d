@@ -27,6 +27,6 @@ int	main (int ac, char *av[])
 		return (cub_error(MAIN, NULL, NULL));	
 	cub_draw(&c);
 	cub_draw_minimap(&c);
-	mlx_loop(c.mlx);	
+//	mlx_loop(c.mlx);	
 	return (0);
 }

@@ -94,8 +94,8 @@ int	cub_loadscene(int fd, t_scene *scene)
 		return (ft_freeload(&load), 1);
 	scene->c_floor = *load.floor;
 	scene->c_ceiling = *load.ceiling;
-	scene->planeX = 0;
-	scene->planeY = 0.66;
+	scene->planeX =  - scene->player.dirY;
+	scene->planeY =  scene->player.dirX;
 	/*
 	if (cub_loadwalls(&load), scene)
 		return (ft_freeload(&load), 1);   	

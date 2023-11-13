@@ -22,7 +22,7 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include <stdbool.h>
-# include "mlx.h"
+//# include "mlx.h"
 
 /* constants */
 
@@ -36,6 +36,8 @@
 # define MWIDTH 200
 # define MHEIGHT 200
 
+/* GAME */
+# define FOV 0.66
 
 /* COLOURS MINIMAP*/
 
@@ -273,7 +275,7 @@ t_point cub_point(double x, double y, int colour);
 void    cub_line(t_point a, t_point b, t_image *data);
 
 /*ray*/
-t_ray *cub_ray(t_scene *d,  int width);
+t_ray *cub_ray(t_scene *d,  int width, double fov);
 
 
 /* free */

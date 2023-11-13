@@ -12,7 +12,7 @@
 
 #include "cube3d.h"
 
-t_ray *cub_ray(t_scene *d,  int width)
+t_ray *cub_ray(t_scene *d,  int width, double fov)
 {
 	
 	t_ray	*rays;
@@ -29,7 +29,7 @@ t_ray *cub_ray(t_scene *d,  int width)
 		double 			cameraX = 2 * x / (double)width  -1; //x-coordinate in camera space
 		//	init ray position and direction
 		double 			rayDirX = d->player.dirX + d->planeX * cameraX;
-		double 			rayDirY = d->player.dirY + d->planeY * cameraX;
+		double 			rayDirY = d->player.dirY + (d->planeY + fov) * cameraX;
 		//	which box of the map we're in
 	  	int 			mapX = (int)d->player.posX;
 	  	int 			mapY = (int)d->player.posY;
@@ -38,11 +38,15 @@ t_ray *cub_ray(t_scene *d,  int width)
       double sideDistX;
       double sideDistY;
 
-      //length of ray from one x or y-side to next x or y-side
+/*      double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+      double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+*/	//length of ray from one x or y-side to next x or y-side
       double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
       double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
       double perpWallDist;
-
+	
+/*	ray.delta.x = 1e30;
+	ray.delta.y = 1e30;*/
       //what direction to step in x or y-direction (either +1 or -1)
       int stepX;
       int stepY;

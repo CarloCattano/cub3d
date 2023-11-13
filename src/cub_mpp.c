@@ -15,8 +15,12 @@
 
 void	cub_mpp(t_image *data, int x, int y, int color)
 {
-	char	*dst;
+	(void)data;
+	(void)x;
+	(void)y;
+	(void)color;
+/*	char	*dst;
 
 	dst = data->pix + (y * data->line_length + x * (data->bpp / 8));
-	*(unsigned int *)dst = color;
+	*(unsigned int *)dst = color;*/
 }
