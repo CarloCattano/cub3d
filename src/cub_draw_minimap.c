@@ -6,11 +6,17 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/13 14:21:17 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:23:43 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void	rayprint(t_ray *ray)
+{
+printf ("ray: x%f y%f dx%f dy%f s%i \n", ray->hitX, ray->hitY, ray->rayDirX, ray->rayDirY,ray->side); 	
+
+}
 
  
 
@@ -23,13 +29,22 @@ void draw_rays(t_image *img, t_scene *sc, int width)
 	//(void)img;
 	ray = cub_ray(sc, width);
 	int i;
+	int xoff;
+	int yoff;
 	i = -1;
 	if (!ray)
 		return;
 	plp = cub_point(sc->player.posX *(img->xoff)  + 0.5 * img->xoff, sc->player.posY * (img->yoff) + 0.5 * img->yoff, RY);
 	while (++i < width)
 	{
-		w = cub_point(ray[i].hitX * img->xoff, ray[i].hitY * img->yoff, RY);
+		rayprint(&(ray[i]));
+		xoff = 0;
+		yoff = 0;
+		if (ray[i].rayDirY   < 0)
+			yoff = fabs(img->yoff);
+		if (ray[i].rayDirX  < 0)	
+			xoff = fabs(img->xoff);
+		w = cub_point(ray[i].hitX * img->xoff + xoff, ray[i].hitY * img->yoff +yoff, RY);
 		cub_line(plp, w, img);
 	
 	}

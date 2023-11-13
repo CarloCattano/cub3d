@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/13 14:21:23 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:42:53 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ typedef struct s_ray
     int			stepY;
     double		sideDistX;
     double		sideDistY;
+	int			side;
 	double		hitX;
 	double		hitY;
 }				t_ray;

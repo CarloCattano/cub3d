@@ -173,7 +173,7 @@ int main(int /*argc*/, char */*argv*/[])
       {
         //jump to next map square, either in x-direction, or in y-direction
         if(sideDistX < sideDistY)
-        {
+floor((wallX))        {
           sideDistX += deltaDistX;
           mapX += stepX;
           side = 0;
