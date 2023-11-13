@@ -6,11 +6,41 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/12 17:11:38 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:21:17 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+ 
+
+
+void draw_rays(t_image *img, t_scene *sc, int width)
+{
+	t_ray *ray;
+	t_point plp;
+	t_point w;
+	//(void)img;
+	ray = cub_ray(sc, width);
+	int i;
+	i = -1;
+	if (!ray)
+		return;
+	plp = cub_point(sc->player.posX *(img->xoff)  + 0.5 * img->xoff, sc->player.posY * (img->yoff) + 0.5 * img->yoff, RY);
+	while (++i < width)
+	{
+		w = cub_point(ray[i].hitX * img->xoff, ray[i].hitY * img->yoff, RY);
+		cub_line(plp, w, img);
+	
+	}
+	free(ray); 
+}
+	
+
+
+
+
+
 
 void draw_cub(t_image *img, bool edge, t_point *a, t_point *b)
 {
@@ -113,7 +143,7 @@ void cub_draw_minimap(t_cub *c)
 		}
 	
 	}		
-	cub_mpp(&(c->mini) , MWIDTH / 2, MHEIGHT / 2,  F1);
+	draw_rays(&(c->mini), &(c->scene), WIDTH);
 	draw_player(&(c->mini), &(c->scene.player));
 	mlx_put_image_to_window(c->mlx, c->win, c->mini.img, 5, 5);	
 	

@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/12 17:12:41 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:21:23 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define F1 0xff545454
 # define F2 0xff8deeee
 # define PL 0xff0000ff
+# define RY 0xffff0000
 
 /* MSG */
 # define ERROR_ARG "CUBE3D NEEDS ONLY ONE ARG"
@@ -133,6 +134,8 @@ struct s_scene
 	bool		setting[3];
 	int			c_floor;
 	int			c_ceiling;
+	double		planeX;
+	double		planeY;
 	t_image		*floor;
 	t_image		*ceiling;
 	t_image		walls[4];
@@ -224,7 +227,23 @@ struct	s_cub
 	t_image				mini;
 };
 
+/* rays */
+typedef struct s_ray
+{
+    double		rayDirX;
+    double		rayDirY;
+    double		deltaDistX;
+    double		deltaDistY;
+    int			stepX;
+    int			stepY;
+    double		sideDistX;
+    double		sideDistY;
+	double		hitX;
+	double		hitY;
+}				t_ray;
 
+/* camera */
+	
 
 /* functions */
 int     cub_error(char const *msg, void (*f)(), void *ptr);
@@ -251,6 +270,9 @@ void    cub_mpp(t_image *data, int x, int y, int color);
 t_point cub_point(double x, double y, int colour);
 /* draw_line */
 void    cub_line(t_point a, t_point b, t_image *data);
+
+/*ray*/
+t_ray *cub_ray(t_scene *d,  int width);
 
 
 /* free */
