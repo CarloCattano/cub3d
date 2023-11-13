@@ -27,5 +27,5 @@ void cub_draw(t_cub *c)
 				cub_mpp(&(c->screen), x, y, c->scene.c_floor);
 		}
 	}
-//	 mlx_put_image_to_window(c->mlx, c->win, c->screen.img, 0, 0);
+	 mlx_put_image_to_window(c->mlx, c->win, c->screen.img, 0, 0);
 }

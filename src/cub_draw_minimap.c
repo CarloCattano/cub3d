@@ -157,7 +157,7 @@ void cub_draw_minimap(t_cub *c)
 	}		
 	draw_rays(&(c->mini), &(c->scene), WIDTH);
 	draw_player(&(c->mini), &(c->scene.player));
-//	mlx_put_image_to_window(c->mlx, c->win, c->mini.img, 5, 5);	
+	mlx_put_image_to_window(c->mlx, c->win, c->mini.img, 5, 5);	
 	
 
 }

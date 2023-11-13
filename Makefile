@@ -43,7 +43,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(COMPILE) -c $< -o $@
 
 $(NAME):$(OBJ) 
-	$(COMPILE) $(OBJ) $(MAIN) $(LIB)   -o $(NAME) 
+	$(COMPILE) $(OBJ) $(MAIN) $(LIB) $(FDF)  -o $(NAME) 
 
 mlx: 
 	@if [ ! -d "$(MLX)" ]; then \
