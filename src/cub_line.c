@@ -61,10 +61,18 @@ static void	plotline(t_line l, t_image *data)
 	}
 }
 
+void	ppoint(t_point *a)
+{
+	printf("P %f / %f \n", a->x, a->y);
+}
+
+
+
 void	cub_line(t_point a, t_point b, t_image *data)
 {
 	t_line	line;
-
+	
+	ppoint(&b);
 	init_line(&a, &b, &line, data);
 	plotline(line, data);
 }
