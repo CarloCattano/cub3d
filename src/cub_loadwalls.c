@@ -12,22 +12,16 @@
 
 #include "cube3d.h"
 
-int		cub_loadwalls(t_load *l, t_scene *sc)
+int		cub_loadwalls(t_load *l, t_scene *sc, void *mlx)
 {
 	int i;
 	
 	i = 0;
 	while (i < 4)
 	{
-		if( cub_loadfile( 
-
+		if (cub_loadfile(&(sc->wall[i]), mlx, l->wall[i]) 
+			return(1); 	
+		i++;	
 	}
-	
-	
-
-
-
-
-
-
+	return (0);
 }

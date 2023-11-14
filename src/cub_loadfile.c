@@ -12,7 +12,7 @@
 
 #include "cube3d.h"
 
-int		cub_loadfile(t_imgage *img, void *mlx, char *path)
+int		cub_loadfile(t_image *img, void *mlx, char *path)
 {
 	img->img = mlx_xpm_file_to_image(mlx, path, &(img->w), &(img->h));
 	if (!(img->img))

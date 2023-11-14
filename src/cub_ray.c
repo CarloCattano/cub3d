@@ -129,6 +129,7 @@ t_ray *cub_ray(t_scene *d,  int width, double fov)
 		}
 		rays[x] = ray; 
 	}
+	ray.perpWallDist = perpWallDist;
 	return (rays);
 }	
 

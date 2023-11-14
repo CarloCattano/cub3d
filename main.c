@@ -21,7 +21,7 @@ int	main (int ac, char *av[])
 
 	if (ac != 2)
 		return (cub_error(ERROR_ARG, NULL, NULL));
-	if (cub_parser(av[1], &sc))
+	if (cub_parser(av[1], &sc, &c))
 		return (cub_error(ERROR_PARS, NULL, NULL));
 	if (cub_init(&c, &sc))
 		return (cub_error(MAIN, NULL, NULL));	

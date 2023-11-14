@@ -144,7 +144,7 @@ struct s_scene
 	double		planeY;
 	t_image		*floor;
 	t_image		*ceiling;
-	t_image		walls[4];
+	t_image		wall[4];
 	t_map		map;
 	t_player	player;
 	t_image		*weapon;
@@ -242,8 +242,9 @@ typedef struct s_ray
     double		deltaDistY;
     int			stepX;
     int			stepY;
-    double		sideDistX;
-    double		sideDistY;
+	double		sideDistX;
+	double		sideDistY;
+	double		perpWallDist;	
 	int			side;
 	double		hitX;
 	double		hitY;

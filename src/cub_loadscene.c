@@ -79,7 +79,7 @@ static void ft_freeload(t_load *load)
 }
 
 
-int	cub_loadscene(int fd, t_scene *scene, )
+int	cub_loadscene(int fd, t_scene *scene, t_cub *c)
 {
 	t_load	load;
 	
@@ -96,9 +96,11 @@ int	cub_loadscene(int fd, t_scene *scene, )
 	scene->c_ceiling = *load.ceiling;
 	scene->planeX =  - scene->player.dirY;
 	scene->planeY =  scene->player.dirX;
-	if (cub_loadwalls(&load), scene)
+	ft_bezero(c, sizeof(t_cub));
+	c->mlx = mlx_init();
+	if (cub_loadwalls(&load), scene, c->mlx)
 		return (ft_freeload(&load), ft_freescene(scene), 1);   	
-	/*if (cub_loadextra(&load), scene)
+	/*if (cub_loadextra(&load), scene, c->mlx)
 		return (ft_freeload(&load), 1);
 	*/
 	return (ft_freeload(&load), 0);
