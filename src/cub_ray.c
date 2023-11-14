@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:10:08 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/13 21:23:24 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/14 10:47:22 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_ray *cub_ray(t_scene *d,  int width, double fov)
 		double 			cameraX = 2 * x / (double)width  -1; //x-coordinate in camera space
 		//	init ray position and direction
 		double 			rayDirX = d->player.dirX + d->planeX * cameraX;
-		double 			rayDirY = d->player.dirY + (d->planeY + fov) * cameraX;
+		double 			rayDirY = d->player.dirY + (d->planeY * fov) * cameraX;
 		//	which box of the map we're in
 	  	int 			mapX = (int)d->player.posX;
 	  	int 			mapY = (int)d->player.posY;

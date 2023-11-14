@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/13 19:42:53 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:30:50 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include <stdbool.h>
-//# include "mlx.h"
+# include "mlx.h"
 
 /* constants */
 
@@ -38,6 +38,7 @@
 
 /* GAME */
 # define FOV 0.66
+
 
 /* COLOURS MINIMAP*/
 
