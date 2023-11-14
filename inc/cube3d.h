@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/14 11:30:50 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:52:17 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@
 # define MWIDTH 200
 # define MHEIGHT 200
 
-/* GAME */
-# define FOV 0.66
+/* TEXTURE */
+# define TX 64	
+# define TY 64
 
+/* PLAYER */
+# define FOV 0.66
 
 /* COLOURS MINIMAP*/
 
