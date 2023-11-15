@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_loadfile.c                                     :+:      :+:    :+:   */
+/*   cub_piinte.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:27:27 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/15 13:44:37 by jstrotbe         ###   ########.fr       */
+/*   Created: 2023/11/15 10:28:15 by jstrotbe          #+#    #+#             */
+/*   Updated: 2023/11/15 14:35:43 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int		cub_loadfile(t_image *img, void *mlx, char *path)
+int		cub_piinte(t_fp *fp)
 {
-	img->img = mlx_xpm_file_to_image(mlx, path, &(img->w), &(img->h));
-	if (!(img->img))
-		return (1);
-	img->pix = mlx_get_data_addr(img->img, &(img->bpp), &(img->line_length), &(img->endian));
-	if (!(img->pix))
-		return ( 1);
-	img->xoff = img->w / (double)TX;
-	img->yoff = img->h / (double)TY;
-	return (0);
-}  		
+	double x;
+	double y;
+	int index;
+	char *tbuf;
+
+	x = (double)fp->texX * fp->tex->xoff;
+	y = (double)fp->texY * fp->tex->yoff; 
+		
+	index = (int)y * fp->tex->line_length + (int) x * (fp->tex->bpp >> 3);
+	tbuf = &(fp->tex->pix[index]);
+	fp->texY += fp->step;
+	return (*(int*)tbuf);
+}

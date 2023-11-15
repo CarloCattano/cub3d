@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./tex/bricks.xpm
+SO ./tex/bricks.xpm
+WE ./tex/bricks.xpm
+EA ./tex/bricks.xpm
 
 S ./path_to_the_east_texture 55 55
 
@@ -18,7 +18,7 @@ C 225,30,0
 
 1111111111111111111111
 1000000000000000000001
-101000000S000000100001
+101000000W000000100001
 1000000000000000000001
 1000111111111111110001
 10001            10001

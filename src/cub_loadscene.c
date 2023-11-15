@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:21:23 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/14 15:01:41 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:38:15 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,15 @@ int	cub_loadscene(int fd, t_scene *scene, t_cub *c)
 	if (cub_loadmap(&load, &(scene->map)))
 		return (ft_freeload(&load), 1);   	
 	if (cub_loadplayer(&load, &(scene->player)))
-		return (ft_freeload(&load), ft_freescene(scene), 1);
+		return (ft_freeload(&load), /*ft_freescene(scene),*/ 1);
 	scene->c_floor = *load.floor;
 	scene->c_ceiling = *load.ceiling;
 	scene->planeX =  - scene->player.dirY;
 	scene->planeY =  scene->player.dirX;
-	ft_bezero(c, sizeof(t_cub));
+	ft_bzero(c, sizeof(t_cub));
 	c->mlx = mlx_init();
-	if (cub_loadwalls(&load), scene, c->mlx)
-		return (ft_freeload(&load), ft_freescene(scene), 1);   	
+	if (cub_loadwalls(&load, scene, c->mlx))
+		return (ft_freeload(&load), /*ft_freescene(scene),*/ 1);   	
 	/*if (cub_loadextra(&load), scene, c->mlx)
 		return (ft_freeload(&load), 1);
 	*/

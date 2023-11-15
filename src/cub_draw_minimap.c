@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/14 12:05:20 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:55:57 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,15 @@ printf ("ray: x%f y%f dx%f dy%f s%i \n", ray->hitX, ray->hitY, ray->rayDirX, ray
 /* some more cases off offset;*/ 
 
 
-void draw_rays(t_image *img, t_scene *sc, int width)
+void draw_rays(t_image *img, t_scene *sc, int width, t_ray *ray)
 {
-	t_ray *ray;
 	t_point plp;
 	t_point w;
 	//(void)img;
-	ray = cub_ray(sc, width, FOV);
-	int i;
 	int xoff;
 	int yoff;
+	int i;
 	i = -1;
-	if (!ray)
-		return;
 	plp = cub_point(sc->player.posX *(img->xoff)  + 0.5 * img->xoff, sc->player.posY * (img->yoff) + 0.5 * img->yoff, RY);
 	while (++i < width)
 	{
@@ -60,7 +56,6 @@ void draw_rays(t_image *img, t_scene *sc, int width)
 		cub_line(plp, w, img);
 	
 	}
-	free(ray); 
 }
 	
 
@@ -107,7 +102,7 @@ void draw_player(t_image *img, t_player *pl)
 
 
 
-void cub_draw_minimap(t_cub *c)
+void cub_draw_minimap(t_cub *c, t_ray *ray)
 {
 	double xoff;
 	double yoff;
@@ -167,7 +162,7 @@ void cub_draw_minimap(t_cub *c)
 		}
 	
 	}		
-	draw_rays(&(c->mini), &(c->scene), WIDTH);
+	draw_rays(&(c->mini), &(c->scene), c->screen.w, ray);
 	draw_player(&(c->mini), &(c->scene.player));
 	mlx_put_image_to_window(c->mlx, c->win, c->mini.img, 5, 5);	
 	

@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:23:07 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/14 15:01:37 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:01:55 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		cub_loadwalls(t_load *l, t_scene *sc, void *mlx)
 	i = 0;
 	while (i < 4)
 	{
-		if (cub_loadfile(&(sc->wall[i]), mlx, l->wall[i]) 
+		if (cub_loadfile(&(sc->wall[i]), mlx, l->wall[i])) 
 			return(1); 	
 		i++;	
 	}

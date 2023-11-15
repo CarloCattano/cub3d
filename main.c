@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/13 21:23:27 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:03:48 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main (int ac, char *av[])
 	if (cub_init(&c, &sc))
 		return (cub_error(MAIN, NULL, NULL));	
 	cub_draw(&c);
-	cub_draw_minimap(&c);
 	mlx_loop(c.mlx);	
 	return (0);
 }

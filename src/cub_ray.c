@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:10:08 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/14 10:47:22 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:45:28 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,9 @@ t_ray *cub_ray(t_scene *d,  int width, double fov)
     		ray.hitX = mapX; 
     		ray.hitY = wallX;
 		}
+		ray.perpWallDist = perpWallDist;
 		rays[x] = ray; 
 	}
-	ray.perpWallDist = perpWallDist;
 	return (rays);
 }	
 

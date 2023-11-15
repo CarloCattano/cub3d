@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/14 14:52:17 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:01:11 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_extra	t_extra;
 typedef struct s_map	t_map;
 typedef struct s_load	t_load;
 typedef struct s_cub	t_cub;
-
+typedef struct s_fp		t_fp;	
 
 enum e_type
 {
@@ -134,6 +134,16 @@ struct s_map
 	int					width;
 	char				**val;
 };
+/*
+struct s_weapon
+{
+	t_image		*weapon;
+	bool		zoom;
+	double		fov;
+	int[2]		whzoom;
+}*/
+
+
 
 struct s_scene
 {
@@ -151,6 +161,8 @@ struct s_scene
 	t_sprites 	*sprites;
 	t_extra		*extra;
 };
+
+
 
 
 struct s_sprites
@@ -233,6 +245,20 @@ struct	s_cub
 	t_image				mini;
 };
 
+struct s_fp
+{
+	/* image */
+	t_image *tex;
+	/* x */
+	double	texX;
+	/* y*/ 
+	double	step;
+	double  texY;  	
+};		
+
+
+
+
 /* rays */
 typedef struct s_ray
 {
@@ -245,6 +271,7 @@ typedef struct s_ray
 	double		sideDistX;
 	double		sideDistY;
 	double		perpWallDist;	
+	int			lineHeight;
 	int			side;
 	double		hitX;
 	double		hitY;
@@ -257,8 +284,8 @@ typedef struct s_ray
 int     cub_error(char const *msg, void (*f)(), void *ptr);
 
 /* parser */
-int		cub_parser(char *input, t_scene *scene);
-int		cub_loadscene(int fd, t_scene *scene);
+int		cub_parser(char *input, t_scene *scene, t_cub *c);
+int		cub_loadscene(int fd, t_scene *scene, t_cub *c);
 int		cub_evalfile(int fd, t_load *load);
 int             cub_evalline(int fd, t_load *load,  char *line, char **parts);
 int		cub_psprites(t_load *load, char **parts);
@@ -266,12 +293,17 @@ int		cub_pfloor(t_load *load, char *line, int type);
 int		cub_pwalls(t_load *load, char **parts, int type);
 int		cub_readmap(int fd, t_load *load,  char *line);
 int		cub_loadmap(t_load *load, t_map *map);
+int     cub_loadwalls(t_load *l, t_scene *sc, void *mlx);
+int     cub_loadfile(t_image *img, void *mlx, char *path);
+
 
 /* draw */
 int cub_loadplayer(t_load *load, t_player *player);
 int cub_init(t_cub *c, t_scene *sc);
-void cub_draw_minimap(t_cub *c);
-void cub_draw(t_cub *c);
+void cub_draw_minimap(t_cub *c, t_ray *ray);
+int cub_draw(t_cub *c);
+void cub_draw_screen(t_cub *c, t_ray *ray);
+	
 /* draw_pixel*/
 void    cub_mpp(t_image *data, int x, int y, int color);
 /* init_point*/
@@ -282,6 +314,8 @@ void    cub_line(t_point a, t_point b, t_image *data);
 /*ray*/
 t_ray *cub_ray(t_scene *d,  int width, double fov);
 
+/* draw_walls*/
+int     cub_piinte(t_fp *fp);
 
 /* free */
 void    cub_dfree(char ***tofree);
