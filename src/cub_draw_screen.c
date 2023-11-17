@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_draw_screen.c                                  :+:      :+:    :+:   */
+/*   cub_draw_scr.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,20 +21,20 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 
 
 	x = -1;
-	while (++x < c->screen.w)
+	while (++x < c->scr.w)
 	{
 		if (ray[x].side)
            	wallX = ray[x].hitX;
 		else
 			wallX = ray[x].hitY;
 
-		ray[x].lineHeight = (int)(c->screen.h /ray[x].perpWallDist);
-		int drawStart = -(ray[x].lineHeight) / 2 + c->screen.h / 2;
+		ray[x].lineHeight = (int)(c->scr.h /ray[x].perpWallDist);
+		int drawStart = -(ray[x].lineHeight) / 2 + c->scr.h / 2;
       	if(drawStart < 0) 
 			drawStart = 0;
-      	int drawEnd = ray[x].lineHeight / 2 + c->screen.h / 2;
-      	if(drawEnd >= c->screen.h) 
-			drawEnd = c->screen.h - 1;
+      	int drawEnd = ray[x].lineHeight / 2 + c->scr.h / 2;
+      	if(drawEnd >= c->scr.h) 
+			drawEnd = c->scr.h - 1;
 		
 		
       //x coordinate on the texture
@@ -45,10 +45,10 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 			texX = TX - texX - 1;
 
       // TODO: an integer-only bresenham or DDA like algorithm could make the texture coordinate stepping faster
-      // How much to increase the texture coordinate per screen pixel
+      // How much to increase the texture coordinate per scr pixel
       	double step = 1.0 * TY / ray[x].lineHeight;
       // Starting texture coordinate
-      	double texPos = (drawStart - c->screen.h / 2 + ray[x].lineHeight / 2) * step;
+      	double texPos = (drawStart - c->scr.h / 2 + ray[x].lineHeight / 2) * step;
 		
 		t_fp fp;
 		
@@ -62,14 +62,14 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		while (++y < HEIGHT)
 		{
 			if (y < drawStart)	// ceiling
-				cub_mpp(&(c->screen), x, y, c->sc.c_ceiling);
+				cub_mpp(&(c->scr), x, y, c->sc.c_ceiling);
 			else if (y > drawStart && y < drawEnd)
 			{
-				cub_mpp(&(c->screen), x, y,  cub_piinte(&fp)); 
+				cub_mpp(&(c->scr), x, y,  cub_piinte(&fp)); 
 			}
 			else if (y > drawEnd) // floor
-				cub_mpp(&(c->screen), x, y, c->sc.c_floor);
+				cub_mpp(&(c->scr), x, y, c->sc.c_floor);
 		}
 	}
-	 mlx_put_image_to_window(c->mlx, c->win, c->screen.img, 0, 0);
+	 mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
 }

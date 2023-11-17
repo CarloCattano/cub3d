@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 22:17:31 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 22:45:58 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void cub_draw_minimap(t_cub *c, t_ray *ray)
 		}
 	
 	}		
-	draw_rays(&(c->mini), &(c->sc), c->screen.w, ray);
+	draw_rays(&(c->mini), &(c->sc), c->scr.w, ray);
 	draw_ply(&(c->mini), &(c->sc.ply));
 	mlx_put_image_to_window(c->mlx, c->win, c->mini.img, 5, 5);	
 	

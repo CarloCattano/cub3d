@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:21:54 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 22:17:31 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 22:46:21 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	cub_draw(t_cub *c)
 	t_ray	*nray;
 	//t_ray	*wray; // -> zoom rays for wps etc
 
-	nray = cub_ray(&(c->sc), c->screen.w,/* c->screen.fov*/ FOV);
+	nray = cub_ray(&(c->sc), c->scr.w,/* c->scr.fov*/ FOV);
 	if (!nray)
 		return (1);
 
 /*	if (c->wp.zoom)
-		wray = cub_ray(&(c->sc), c->screen.w, c->wp.fov);
+		wray = cub_ray(&(c->sc), c->scr.w, c->wp.fov);
 	else	*/
 	//wray = NULL;
 	cub_draw_screen(c, nray);

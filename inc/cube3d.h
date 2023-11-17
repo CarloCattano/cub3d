@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 22:20:36 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 22:45:58 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,7 @@ struct	s_cub
 	int			win_h;
 	int			win_w;
 	t_sc		sc;
-	t_image		screen;
+	t_image		scr;
 	t_image		mini;
 };
 
