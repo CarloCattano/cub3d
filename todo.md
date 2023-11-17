@@ -13,7 +13,7 @@
 	- FOV 
 
 ### Player:
-	- initial dirX dirY = N | S | E | W
+	- initial dirX diry = N | S | E | W
 
 ### Program flow:
 - check config file

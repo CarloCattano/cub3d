@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:21:23 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 14:25:44 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 19:22:35 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int	cub_loadscene(int fd, t_scene *scene, t_cub *c)
 		return (ft_freeload(&load), /*ft_freescene(scene),*/ 1);
 	scene->c_floor = *load.floor;
 	scene->c_ceiling = *load.ceiling;
-	scene->planeX =  - scene->player.dirY;
-	scene->planeY =  scene->player.dirX;
+	scene->plane_x =  - scene->player.diry;
+	scene->plane_y =  scene->player.dirX;
 	ft_bzero(c, sizeof(t_cub));
 	c->mlx = mlx_init();
 	if (cub_loadwalls(&load, scene, c->mlx))

@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 18:47:37 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 19:25:58 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include <math.h>	
+# include <math.h>
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
@@ -71,20 +71,20 @@
 # define E_T " NOT ALL NECESSARY TYPES ARE DECLAIRED BEFOR MAP"
 # define M_P " MULTIPLE PLAYER"
 # define M_W "MAP NOT CLOESD BY WALLS"
-#define MAIN "MAIN FAILOR"
+# define MAIN "MAIN FAILOR"
 /* structs */
 
-typedef enum e_type t_type;
-typedef struct s_image	t_image;
-typedef struct s_scene t_scene;
-typedef struct s_map t_map;
-typedef	struct s_sprites t_sprites;
-typedef struct s_lextra	t_lextra;
-typedef struct s_extra	t_extra;
-typedef struct s_map	t_map;
-typedef struct s_load	t_load;
-typedef struct s_cub	t_cub;
-typedef struct s_fp		t_fp;	
+typedef enum e_type			t_type;
+typedef struct s_image		t_image;
+typedef struct s_scene		t_scene;
+typedef struct s_map		t_map;
+typedef struct s_sprites	t_sprites;
+typedef struct s_lextra		t_lextra;
+typedef struct s_extra		t_extra;
+typedef struct s_map		t_map;
+typedef struct s_load		t_load;
+typedef struct s_cub		t_cub;
+typedef struct s_fp			t_fp;	
 
 enum e_type
 {
@@ -122,15 +122,15 @@ struct s_image
 	int			line_length;
 	int			bpp;
 	int			endian;
-	int 		w;
-	int 		h;
+	int			w;
+	int			h;
 	int			wxoff;
 	int			wyoff;
 	double		xoff;
 	double		yoff;
 };
 
-typedef struct	s_weapon
+typedef struct s_weapon
 {
 	t_image		img;
 	char		*path;
@@ -138,11 +138,11 @@ typedef struct	s_weapon
 
 typedef struct s_player
 {
-	double			posX;
-	double			posY;
+	double			posx;
+	double			posy;
 	double			dirX;
-	double			dirY;
-	double			moveSpeed;
+	double			diry;
+	double			movespeed;
 	double			rotSpeed;
 	int				lastX;
 	t_weapon		weapon;
@@ -161,8 +161,8 @@ struct s_scene
 	bool		setting[3];
 	int			c_floor;
 	int			c_ceiling;
-	double		planeX;
-	double		planeY;
+	double		plane_x;
+	double		plane_y;
 	t_image		*floor;
 	t_image		*ceiling;
 	t_image		wall[4];
@@ -177,40 +177,40 @@ struct s_sprites
 {
 	int				x;
 	int				y;
-	t_image				sprites;
-	double				z;
-	double				dist;
-	int					hdiv;
-	int					vdiv;
-	t_sprites			*next;
+	t_image			sprites;
+	double			z;
+	double			dist;
+	int				hdiv;
+	int				vdiv;
+	t_sprites		*next;
 };
 
 struct	s_extra
 {
-	char	*key;
-	t_image	extra;
-	t_extra *next;	
+	char		*key;
+	t_image		extra;
+	t_extra		*next;
 };	
 
 struct s_lextra
 {
-	char *key;
-	char *path;		
-	char **value;
+	char	*key;
+	char	*path;
+	char	**value;
 };
 
 struct	s_load
 {
-	char *wall[4];
-	int *floor;
-	int *ceiling;
-	int *xpl;
-	int *ypl;
-	char dir;
-	int xmap;
-	int ymap;
-	t_list *map;
-	t_list *extra;
+	char	*wall[4];
+	int		*floor;
+	int		*ceiling;
+	int		*xpl;
+	int		*ypl;
+	char	dir;
+	int		xmap;
+	int		ymap;
+	t_list	*map;
+	t_list	*extra;
 };
 
 /* draw lines */
@@ -242,13 +242,13 @@ typedef struct s_line
 
 struct	s_cub
 {
-	void				*mlx;
-	void				*win;
-	int					win_h;
-	int					win_w;
-	t_scene				scene;
-	t_image				screen;
-	t_image				mini;
+	void		*mlx;
+	void		*win;
+	int			win_h;
+	int			win_w;
+	t_scene		scene;
+	t_image		screen;
+	t_image		mini;
 };
 
 struct s_fp
@@ -265,12 +265,12 @@ struct s_fp
 /* rays */
 typedef struct s_ray
 {
-    double		rayDirX;
-    double		rayDirY;
-    double		deltaDistX;
-    double		deltaDistY;
-    int			stepX;
-    int			stepY;
+	double		raydirX;
+	double		raydiry;
+	double		deltaDistX;
+	double		deltaDistY;
+	int			stepX;
+	int			stepY;
 	double		sideDistX;
 	double		sideDistY;
 	double		perpWallDist;	
@@ -289,47 +289,45 @@ int     cub_error(char const *msg, void (*f)(), void *ptr);
 int		cub_parser(char *input, t_scene *scene, t_cub *c);
 int		cub_loadscene(int fd, t_scene *scene, t_cub *c);
 int		cub_evalfile(int fd, t_load *load);
-int             cub_evalline(int fd, t_load *load,  char *line, char **parts);
+int		cub_evalline(int fd, t_load *load,  char *line, char **parts);
 int		cub_psprites(t_load *load, char **parts);
 int		cub_pfloor(t_load *load, char *line, int type);
 int		cub_pwalls(t_load *load, char **parts, int type);
 int		cub_readmap(int fd, t_load *load,  char *line);
 int		cub_loadmap(t_load *load, t_map *map);
-int     cub_loadwalls(t_load *l, t_scene *sc, void *mlx);
-int     cub_loadfile(t_image *img, void *mlx, char *path);
+int		cub_loadwalls(t_load *l, t_scene *sc, void *mlx);
+int		cub_loadfile(t_image *img, void *mlx, char *path);
 
 
 /* draw */
-int cub_loadplayer(t_load *load, t_player *player);
-int cub_init(t_cub *c, t_scene *sc);
-void cub_draw_minimap(t_cub *c, t_ray *ray);
-int cub_draw(t_cub *c);
-void cub_draw_screen(t_cub *c, t_ray *ray);
-	
+int		cub_loadplayer(t_load *load, t_player *player);
+int		cub_init(t_cub *c, t_scene *sc);
+void	cub_draw_minimap(t_cub *c, t_ray *ray);
+int		cub_draw(t_cub *c);
+void	cub_draw_screen(t_cub *c, t_ray *ray);
+
 /* draw_pixel*/
-void    cub_mpp(t_image *data, int x, int y, int color);
+void	cub_mpp(t_image *data, int x, int y, int color);
 /* init_point*/
-t_point cub_point(double x, double y, int colour);
+t_point	cub_point(double x, double y, int colour);
 /* draw_line */
-void    cub_line(t_point a, t_point b, t_image *data);
+void	cub_line(t_point a, t_point b, t_image *data);
 
 /*ray*/
-t_ray *cub_ray(t_scene *d,  int width, double fov);
+t_ray	*cub_ray(t_scene *d,  int width, double fov);
 
 /* draw_walls*/
-int     cub_piinte(t_fp *fp);
+int		cub_piinte(t_fp *fp);
 
 /* free */
-void    cub_dfree(char ***tofree);
-void    cub_freelextra(t_lextra **node);
-
+void	cub_dfree(char ***tofree);
+void	cub_freelextra(t_lextra **node);
 
 /* helper */
-char    **cub_splits(char const *str, char const *set);
+char	**cub_splits(char const *str, char const *set);
 int		cub_countparts(char **parts);
 int		cub_isnumber(char const *str);
 char	**cub_cparr(char **parts);
-
 
 /* hooks */
 int		motion_hook(int x, int y, t_cub *d);
@@ -347,9 +345,9 @@ void	handle_player(t_cub *c);
 
 /* weapon */
 void	init_weapon(t_cub *c);
-void 	draw_weapon(t_cub *c);
+void	draw_weapon(t_cub *c);
 
 /* free willis */
-int	mlx_terminate(t_cub *d);
+int		mlx_terminate(t_cub *d);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 18:48:05 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 19:22:35 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // void	rayprint(t_ray *ray)
 // {
-// printf ("ray: x%f y%f dx%f dy%f s%i \n", ray->hitX, ray->hitY, ray->rayDirX, ray->rayDirY,ray->side); 	
+// printf ("ray: x%f y%f dx%f dy%f s%i \n", ray->hitX, ray->hitY, ray->raydirX, ray->raydiry,ray->side); 	
 // }
 
 /* some more cases off offset;*/ 
@@ -28,28 +28,28 @@ void draw_rays(t_image *img, t_scene *sc, int width, t_ray *ray)
 	int yoff;
 	int i;
 	i = -1;
-	plp = cub_point(sc->player.posX *(img->xoff)  + 0.5 * img->xoff, sc->player.posY * (img->yoff) + 0.5 * img->yoff, RY);
+	plp = cub_point(sc->player.posx *(img->xoff)  + 0.5 * img->xoff, sc->player.posy * (img->yoff) + 0.5 * img->yoff, RY);
 	// todo clear every time
 	while (++i < width)
 	{
 		//rayprint(&(ray[i]));
 		xoff = 0;
 		yoff = 0;
-		if (ray[i].rayDirY  < 0 && ray[i].rayDirX >= 0 && !ray[i].side)	
+		if (ray[i].raydiry  < 0 && ray[i].raydirX >= 0 && !ray[i].side)	
 			yoff = fabs(img->yoff);
-		else if (ray[i].rayDirY  < 0 && ray[i].rayDirX < 0 && !ray[i].side)
+		else if (ray[i].raydiry  < 0 && ray[i].raydirX < 0 && !ray[i].side)
 			yoff = fabs(img->yoff);
-		else if (ray[i].rayDirY   < 0 &&  ray[i].rayDirX > 0 && ray[i].side)
+		else if (ray[i].raydiry   < 0 &&  ray[i].raydirX > 0 && ray[i].side)
 			yoff = fabs(img->yoff);
-		else if  (ray[i].rayDirY   < 0 && ray[i].rayDirX < 0 && ray[i].side)
+		else if  (ray[i].raydiry   < 0 && ray[i].raydirX < 0 && ray[i].side)
 			yoff = fabs(img->yoff);
-		if (ray[i].rayDirX  < 0 && ray[i].rayDirY >= 0 && !ray[i].side)	
+		if (ray[i].raydirX  < 0 && ray[i].raydiry >= 0 && !ray[i].side)	
 			xoff = fabs(img->xoff);
-		else if (ray[i].rayDirX  < 0 && ray[i].rayDirY < 0 && !ray[i].side)
+		else if (ray[i].raydirX  < 0 && ray[i].raydiry < 0 && !ray[i].side)
 			xoff = fabs(img->xoff);
-		else if (ray[i].rayDirX   < 0 &&  ray[i].rayDirY > 0 && ray[i].side)
+		else if (ray[i].raydirX   < 0 &&  ray[i].raydiry > 0 && ray[i].side)
 			xoff = fabs(img->xoff);
-		else if  (ray[i].rayDirX   < 0 && ray[i].rayDirY < 0 && ray[i].side)
+		else if  (ray[i].raydirX   < 0 && ray[i].raydiry < 0 && ray[i].side)
 			xoff = fabs(img->xoff);
 		w = cub_point(ray[i].hitX * img->xoff + xoff, ray[i].hitY * img->yoff +yoff, RY);
 		cub_line(plp, w, img);
@@ -81,9 +81,9 @@ void draw_player(t_image *img, t_player *pl)
 	t_point plv2;
 	t_point plv1;
 	
-	plp = cub_point(pl->posX * img->xoff, pl->posY * img->yoff, PL);
+	plp = cub_point(pl->posx * img->xoff, pl->posy * img->yoff, PL);
 	plv1 = cub_point(plp.x + (0.5 * img->xoff), plp.y + (0.5 * img->yoff), PL); 
-	plv2 = cub_point((plv1.x + ( 1.2 * pl->dirX  * img->xoff)),  (plv1.y  + (1.2 * pl->dirY  * img->yoff)), PL);
+	plv2 = cub_point((plv1.x + ( 1.2 * pl->dirX  * img->xoff)),  (plv1.y  + (1.2 * pl->diry  * img->yoff)), PL);
 	
 	draw_cub(img, false, &plp, NULL); 
 	cub_line(plv1, plv2, img);

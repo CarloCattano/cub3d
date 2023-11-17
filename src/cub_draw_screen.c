@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_draw_screen.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/15 14:26:33 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:22:35 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		
       //x coordinate on the texture
       	int texX = (int)(wallX * (double)TX);
-      	if(ray[x].side == 0 && ray[x].rayDirX > 0) 
+      	if(ray[x].side == 0 && ray[x].raydirX > 0) 
 			texX = TX - texX - 1;
-      	if(ray[x].side == 1 && ray[x].rayDirY < 0) 
+      	if(ray[x].side == 1 && ray[x].raydiry < 0) 
 			texX = TX - texX - 1;
 
       // TODO: an integer-only bresenham or DDA like algorithm could make the texture coordinate stepping faster

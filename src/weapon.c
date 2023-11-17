@@ -1,6 +1,6 @@
 #include "cube3d.h"
 
-void init_weapon(t_cub *d)
+void	init_weapon(t_cub *d)
 {
 	d->scene.player.weapon.path = "./res/gun3.xpm";
 	d->scene.player.weapon.img.img = mlx_xpm_file_to_image(d->mlx, d->scene.player.weapon.path, &d->scene.player.weapon.img.w, &d->scene.player.weapon.img.h);
@@ -27,7 +27,8 @@ u_int32_t	color_pixel(u_int32_t *pixel)
 void	put_weapon(t_cub *d, int x, int y, int color)
 {
 	char	*dst;
-	dst = d->screen.pix + ((y + 380) * d->screen.line_length + (x + 200) * (d->screen.bpp >> 3));
+
+	dst = d->screen.pix + ((y + 380) * d->screen.line_length + (x + 200) *(d->screen.bpp >> 3));
 	*(unsigned int *)dst = color;
 }
 

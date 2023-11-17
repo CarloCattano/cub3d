@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:41 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/17 17:27:13 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 19:39:55 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 int	entered(t_cub *d)
 {
 	(void)d;
-	return 0;
+	return (0);
 }
 
 int	exited(t_cub *d)
 {
 	if (d->scene.player.lastX > WIDTH - 10)
-	{	
+	{
 		mlx_mouse_move(d->mlx,d->win ,WIDTH - 10, HEIGHT >> 1);
 		d->scene.player.lastX = WIDTH - 10;
 	}
