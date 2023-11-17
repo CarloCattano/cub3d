@@ -14,7 +14,7 @@ int	ft_checkload(t_load *l)
 	check if map is valid 
 	- only valid symbols
 	
-	Player : x / y / direction; only one;
+	ply : x / y / direction; only one;
 	
 
 
@@ -31,7 +31,7 @@ int ft_initpl(t_load *load)
 
 
 
-int	ft_setplayer(t_load *load, char d, int c)
+int	ft_setply(t_load *load, char d, int c)
 {
 	if (load->xpl)
 		return (cub_error(M_P, NULL, NULL));
@@ -61,7 +61,7 @@ int	ft_evalmap(t_load *load, char *line)
 			continue;
 		if (ft_strchr(DIRECT, line[c]))
 		{
-			if (ft_setplayer(load, line[c], c ))
+			if (ft_setply(load, line[c], c ))
 				return (1);
 			continue;
 		}

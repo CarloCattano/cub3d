@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 19:25:58 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 22:20:36 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@
 
 typedef enum e_type			t_type;
 typedef struct s_image		t_image;
-typedef struct s_scene		t_scene;
+typedef struct s_sc			t_sc;
 typedef struct s_map		t_map;
 typedef struct s_sprites	t_sprites;
 typedef struct s_lextra		t_lextra;
@@ -119,7 +119,7 @@ struct s_image
 {
 	void		*img;
 	char		*pix;
-	int			line_length;
+	int			ll;
 	int			bpp;
 	int			endian;
 	int			w;
@@ -130,13 +130,13 @@ struct s_image
 	double		yoff;
 };
 
-typedef struct s_weapon
+typedef struct s_wp
 {
 	t_image		img;
 	char		*path;
-}				t_weapon;
+}				t_wp;
 
-typedef struct s_player
+typedef struct s_ply
 {
 	double			posx;
 	double			posy;
@@ -145,9 +145,9 @@ typedef struct s_player
 	double			movespeed;
 	double			rotSpeed;
 	int				lastX;
-	t_weapon		weapon;
+	t_wp		wp;
 	t_ctrl_states	ctrl;
-}					t_player;
+}					t_ply;
 
 struct s_map
 {
@@ -156,7 +156,7 @@ struct s_map
 	char	**val;
 };
 
-struct s_scene
+struct s_sc
 {
 	bool		setting[3];
 	int			c_floor;
@@ -167,8 +167,8 @@ struct s_scene
 	t_image		*ceiling;
 	t_image		wall[4];
 	t_map		map;
-	t_player	player;
-	t_image		*weapon;
+	t_ply		ply;
+	t_image		*wp;
 	t_sprites 	*sprites;
 	t_extra		*extra;
 };
@@ -246,7 +246,7 @@ struct	s_cub
 	void		*win;
 	int			win_h;
 	int			win_w;
-	t_scene		scene;
+	t_sc		sc;
 	t_image		screen;
 	t_image		mini;
 };
@@ -286,8 +286,8 @@ typedef struct s_ray
 int     cub_error(char const *msg, void (*f)(), void *ptr);
 
 /* parser */
-int		cub_parser(char *input, t_scene *scene, t_cub *c);
-int		cub_loadscene(int fd, t_scene *scene, t_cub *c);
+int		cub_parser(char *input, t_sc *sc, t_cub *c);
+int		cub_loadsc(int fd, t_sc *sc, t_cub *c);
 int		cub_evalfile(int fd, t_load *load);
 int		cub_evalline(int fd, t_load *load,  char *line, char **parts);
 int		cub_psprites(t_load *load, char **parts);
@@ -295,13 +295,13 @@ int		cub_pfloor(t_load *load, char *line, int type);
 int		cub_pwalls(t_load *load, char **parts, int type);
 int		cub_readmap(int fd, t_load *load,  char *line);
 int		cub_loadmap(t_load *load, t_map *map);
-int		cub_loadwalls(t_load *l, t_scene *sc, void *mlx);
+int		cub_loadwalls(t_load *l, t_sc *sc, void *mlx);
 int		cub_loadfile(t_image *img, void *mlx, char *path);
 
 
 /* draw */
-int		cub_loadplayer(t_load *load, t_player *player);
-int		cub_init(t_cub *c, t_scene *sc);
+int		cub_loadply(t_load *load, t_ply *ply);
+int		cub_init(t_cub *c, t_sc *sc);
 void	cub_draw_minimap(t_cub *c, t_ray *ray);
 int		cub_draw(t_cub *c);
 void	cub_draw_screen(t_cub *c, t_ray *ray);
@@ -314,7 +314,7 @@ t_point	cub_point(double x, double y, int colour);
 void	cub_line(t_point a, t_point b, t_image *data);
 
 /*ray*/
-t_ray	*cub_ray(t_scene *d,  int width, double fov);
+t_ray	*cub_ray(t_sc *d,  int width, double fov);
 
 /* draw_walls*/
 int		cub_piinte(t_fp *fp);
@@ -333,19 +333,19 @@ char	**cub_cparr(char **parts);
 int		motion_hook(int x, int y, t_cub *d);
 int		key_down_hook(int keycode, t_cub *d);
 int		key_up_hook(int keycode, t_cub *d);
-int		mouse_buttons(int button, int x, int y, t_scene *d);
+int		mouse_buttons(int button, int x, int y, t_sc *d);
 
 int		exited(t_cub *d);
 int		entered(t_cub *d);
 
-/* player */
-void	init_player(t_cub *c);
-void	rotate_player(t_cub *c, int direction);
-void	handle_player(t_cub *c);
+/* ply */
+void	init_ply(t_cub *c);
+void	rotate_ply(t_cub *c, int direction);
+void	handle_ply(t_cub *c);
 
-/* weapon */
-void	init_weapon(t_cub *c);
-void	draw_weapon(t_cub *c);
+/* wp */
+void	init_wp(t_cub *c);
+void	draw_wp(t_cub *c);
 
 /* free willis */
 int		mlx_terminate(t_cub *d);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_loadplayer.c                                   :+:      :+:    :+:   */
+/*   cub_loadply.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,31 +12,31 @@
 
 #include "cube3d.h"
 
-int	cub_loadplayer(t_load *load, t_player *player)
+int	cub_loadply(t_load *load, t_ply *ply)
 {
-	player->posx = *(load->xpl); 
-	player->posy = *(load->ypl);
+	ply->posx = *(load->xpl); 
+	ply->posy = *(load->ypl);
 	if (load->dir == 'S')
 	{	
-		player->dirX = 0;
-		player->diry = 1;
+		ply->dirX = 0;
+		ply->diry = 1;
 	}	
 	if (load->dir == 'W')
 	{	
-		player->dirX = -1;
-		player->diry = 0;
+		ply->dirX = -1;
+		ply->diry = 0;
 	}	
 	if (load->dir == 'N')
 	{	
-		player->dirX = 0;
-		player->diry = -1;
+		ply->dirX = 0;
+		ply->diry = -1;
 	}	
 	if (load->dir == 'E')
 	{	
-		player->dirX = 1;
-		player->diry = 0;
+		ply->dirX = 1;
+		ply->diry = 0;
 	}
-	printf("player->posx: %f\n", player->posx);
-	printf("player->posy: %f\n", player->posy);
+	printf("ply->posx: %f\n", ply->posx);
+	printf("ply->posy: %f\n", ply->posy);
 	return (0);
 }

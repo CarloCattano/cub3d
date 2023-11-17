@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   ply.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,45 +12,45 @@
 
 #include "cube3d.h"
 
-void	init_player(t_cub *d)
+void	init_ply(t_cub *d)
 {
-	d->scene.player.movespeed = MOVE_SPEED;
-	d->scene.player.ctrl.up_down = 0;
-	d->scene.player.ctrl.left_right = 0;
-	d->scene.player.ctrl.turn = 0;
-	d->scene.player.lastX = WIDTH >> 1;
-	d->scene.player.rotSpeed = ROT_S;
+	d->sc.ply.movespeed = MOVE_SPEED;
+	d->sc.ply.ctrl.up_down = 0;
+	d->sc.ply.ctrl.left_right = 0;
+	d->sc.ply.ctrl.turn = 0;
+	d->sc.ply.lastX = WIDTH >> 1;
+	d->sc.ply.rotSpeed = ROT_S;
 }
 
-void	move_player(t_cub *d, int direction)
+void	move_ply(t_cub *d, int direction)
 {
-	double movespeed = d->scene.player.movespeed;
-	double dirX = d->scene.player.dirX;
-	double diry = d->scene.player.diry;
-	double posx = d->scene.player.posx;
-	double posy = d->scene.player.posy;
+	double movespeed = d->sc.ply.movespeed;
+	double dirX = d->sc.ply.dirX;
+	double diry = d->sc.ply.diry;
+	double posx = d->sc.ply.posx;
+	double posy = d->sc.ply.posy;
 	double newposx = posx + direction * dirX * movespeed;
 	double newposy = posy + direction * diry * movespeed;
 	int cellX = (int)newposx;
 	int cellY = (int)newposy;
 
-	if (d->scene.map.val[cellY][cellX] == '0')
+	if (d->sc.map.val[cellY][cellX] == '0')
 	{
-		if (d->scene.map.val[cellY][(int)posx] == '0' &&
+		if (d->sc.map.val[cellY][(int)posx] == '0' &&
 			fabs(newposx - posx) > EPSILON)
-			d->scene.player.posx = newposx;
-		if (d->scene.map.val[(int)posy][cellX] == '0' &&
+			d->sc.ply.posx = newposx;
+		if (d->sc.map.val[(int)posy][cellX] == '0' &&
 			fabs(newposy - posy) > EPSILON)
-			d->scene.player.posy = newposy;
+			d->sc.ply.posy = newposy;
 	}
 }
 
-void	rotate_player(t_cub *d, int direction)
+void	rotate_ply(t_cub *d, int direction)
 {
-	double	dirX = d->scene.player.dirX;
-	double	diry = d->scene.player.diry;
-	double	plane_x = d->scene.plane_x;
-	double	plane_y = d->scene.plane_y;
+	double	dirX = d->sc.ply.dirX;
+	double	diry = d->sc.ply.diry;
+	double	plane_x = d->sc.plane_x;
+	double	plane_y = d->sc.plane_y;
 
 	if (direction >= 1)
 	{
@@ -70,14 +70,14 @@ void	rotate_player(t_cub *d, int direction)
 		plane_x = plane_x * cos(-ROT_S) - plane_y * sin(-ROT_S);
 		plane_y = oldplane_x * sin(-ROT_S) + plane_y * cos(-ROT_S);
 	}
-	d->scene.player.dirX = dirX;
-	d->scene.player.diry = diry;
-	d->scene.plane_x = plane_x;
-	d->scene.plane_y = plane_y;
+	d->sc.ply.dirX = dirX;
+	d->sc.ply.diry = diry;
+	d->sc.plane_x = plane_x;
+	d->sc.plane_y = plane_y;
 }
 
-void	handle_player(t_cub *d)
+void	handle_ply(t_cub *d)
 {
-	move_player(d, d->scene.player.ctrl.up_down);
-	rotate_player(d, d->scene.player.ctrl.turn);
+	move_ply(d, d->sc.ply.ctrl.up_down);
+	rotate_ply(d, d->sc.ply.ctrl.turn);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_mpp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:12:25 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/11 16:13:21 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:16:00 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	cub_mpp(t_image *data, int x, int y, int color)
 	(void)color;*/
 	char	*dst;
 
-	dst = data->pix + (y * data->line_length + x * (data->bpp / 8));
+	dst = data->pix + (y * data->ll + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
 }

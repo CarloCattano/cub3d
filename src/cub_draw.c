@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:21:54 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 18:47:33 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 22:17:31 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 int	cub_draw(t_cub *c)
 {
 	t_ray	*nray;
-	//t_ray	*wray; // -> zoom rays for weapons etc
+	//t_ray	*wray; // -> zoom rays for wps etc
 
-	nray = cub_ray(&(c->scene), c->screen.w,/* c->screen.fov*/ FOV);
+	nray = cub_ray(&(c->sc), c->screen.w,/* c->screen.fov*/ FOV);
 	if (!nray)
 		return (1);
 
-/*	if (c->weapon.zoom)
-		wray = cub_ray(&(c->scene), c->screen.w, c->weapon.fov);
+/*	if (c->wp.zoom)
+		wray = cub_ray(&(c->sc), c->screen.w, c->wp.fov);
 	else	*/
 	//wray = NULL;
 	cub_draw_screen(c, nray);
@@ -32,8 +32,8 @@ int	cub_draw(t_cub *c)
 	/*
 	cub_draw_weappon(c);*/
 	cub_draw_minimap(c, nray);
-	handle_player(c);
-	draw_weapon(c);
+	handle_ply(c);
+	draw_wp(c);
 	free(nray);
 	return (0);
 }

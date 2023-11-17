@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wp.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: carlo <no@way.zip>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/17 22:09:32 by carlo             #+#    #+#             */
+/*   Updated: 2023/11/17 22:10:36 by carlo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
-void	init_weapon(t_cub *d)
+void	init_wp(t_cub *d)
 {
-	d->scene.player.weapon.path = "./res/gun3.xpm";
-	d->scene.player.weapon.img.img = mlx_xpm_file_to_image(d->mlx, d->scene.player.weapon.path, &d->scene.player.weapon.img.w, &d->scene.player.weapon.img.h);
-	d->scene.player.weapon.img.pix = mlx_get_data_addr(d->scene.player.weapon.img.img, &d->scene.player.weapon.img.bpp, &d->scene.player.weapon.img.line_length, &d->scene.player.weapon.img.endian);
+	d->sc.ply.wp.path = "./res/gun3.xpm";
+	d->sc.ply.wp.img.img = mlx_xpm_file_to_image(d->mlx, d->sc.ply.wp.path, &d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h);
+	d->sc.ply.wp.img.pix = mlx_get_data_addr(d->sc.ply.wp.img.img, &d->sc.ply.wp.img.bpp, &d->sc.ply.wp.img.ll, &d->sc.ply.wp.img.endian);
 }
 
 u_int32_t	color_pixel(u_int32_t *pixel)
@@ -24,30 +36,31 @@ u_int32_t	color_pixel(u_int32_t *pixel)
 		| ((u_int32_t)blue << 8) | (u_int32_t)alpha);
 }
 
-void	put_weapon(t_cub *d, int x, int y, int color)
+void	put_wp(t_cub *d, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = d->screen.pix + ((y + 380) * d->screen.line_length + (x + 200) *(d->screen.bpp >> 3));
+	dst = d->screen.pix + ((y + 380) * d->screen.ll + (x + 200) *(d->screen.bpp >> 3));
 	*(unsigned int *)dst = color;
 }
 
-void	draw_weapon(t_cub *d)
+void	draw_wp(t_cub *d)
 {
 	int				x;
 	int				y;
 	int				color;
+	int				index;
 
 	x = 0;
-	while (x < d->scene.player.weapon.img.w)
+	while (x < d->sc.ply.wp.img.w)
 	{
 		y = 0;
-		while (y < d->scene.player.weapon.img.h)
+		while (y < d->sc.ply.wp.img.h)
 		{
-			int index = (y * d->scene.player.weapon.img.line_length + x * (d->scene.player.weapon.img.bpp >> 3));
-			color = color_pixel((u_int32_t *)&(d->scene.player.weapon.img.pix[index]));
+			index = (y * d->sc.ply.wp.img.ll + x * (d->sc.ply.wp.img.bpp >> 3));
+			color = color_pixel((u_int32_t *)&(d->sc.ply.wp.img.pix[index]));
 			if ( color != (int)0xFF000000) 
-				put_weapon(d, x, y, color);
+				put_wp(d, x, y, color);
 			y++;
 		}
 		x++;

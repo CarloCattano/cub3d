@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 19:22:35 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 22:17:31 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		
 		t_fp fp;
 		
-		fp.tex = &(c->scene.wall[0]);
+		fp.tex = &(c->sc.wall[0]);
 		fp.texX = texX;
 		fp.step = step;
 		fp.texY = texPos;	
@@ -62,13 +62,13 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		while (++y < HEIGHT)
 		{
 			if (y < drawStart)	// ceiling
-				cub_mpp(&(c->screen), x, y, c->scene.c_ceiling);
+				cub_mpp(&(c->screen), x, y, c->sc.c_ceiling);
 			else if (y > drawStart && y < drawEnd)
 			{
 				cub_mpp(&(c->screen), x, y,  cub_piinte(&fp)); 
 			}
 			else if (y > drawEnd) // floor
-				cub_mpp(&(c->screen), x, y, c->scene.c_floor);
+				cub_mpp(&(c->screen), x, y, c->sc.c_floor);
 		}
 	}
 	 mlx_put_image_to_window(c->mlx, c->win, c->screen.img, 0, 0);

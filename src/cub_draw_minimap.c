@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 19:22:35 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 22:17:31 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 /* some more cases off offset;*/ 
 
-void draw_rays(t_image *img, t_scene *sc, int width, t_ray *ray)
+void draw_rays(t_image *img, t_sc *sc, int width, t_ray *ray)
 {
 	t_point plp;
 	t_point w;
@@ -28,7 +28,7 @@ void draw_rays(t_image *img, t_scene *sc, int width, t_ray *ray)
 	int yoff;
 	int i;
 	i = -1;
-	plp = cub_point(sc->player.posx *(img->xoff)  + 0.5 * img->xoff, sc->player.posy * (img->yoff) + 0.5 * img->yoff, RY);
+	plp = cub_point(sc->ply.posx *(img->xoff)  + 0.5 * img->xoff, sc->ply.posy * (img->yoff) + 0.5 * img->yoff, RY);
 	// todo clear every time
 	while (++i < width)
 	{
@@ -75,7 +75,7 @@ void draw_cub(t_image *img, bool edge, t_point *a, t_point *b)
 	}				
 }
 
-void draw_player(t_image *img, t_player *pl)
+void draw_ply(t_image *img, t_ply *pl)
 {
 	t_point plp;
 	t_point plv2;
@@ -102,19 +102,19 @@ void cub_draw_minimap(t_cub *c, t_ray *ray)
 	int x1;
 	int y1;
 
-	xoff = MWIDTH / (double)(c->scene.map.width) ;
-	yoff = MHEIGHT / (double)(c->scene.map.height);
+	xoff = MWIDTH / (double)(c->sc.map.width) ;
+	yoff = MHEIGHT / (double)(c->sc.map.height);
 	c->mini.xoff = xoff;
 	c->mini.yoff = yoff;
 	
 
 	y = -1;
-	while (++y < c->scene.map.height)
+	while (++y < c->sc.map.height)
 	{
 		x = -1;
-		while (++x < c->scene.map.width)
+		while (++x < c->sc.map.width)
 		{
-			if (c->scene.map.val[y][x] == '1')
+			if (c->sc.map.val[y][x] == '1')
 			{		
 				y1 = -1;
 				while ( ++y1 < yoff)
@@ -131,7 +131,7 @@ void cub_draw_minimap(t_cub *c, t_ray *ray)
 		
 			}
 			
-			else if (c->scene.map.val[y][x] == '0')
+			else if (c->sc.map.val[y][x] == '0')
 			{
 				y1 = -1;
 				while ( ++y1 < yoff)
@@ -149,8 +149,8 @@ void cub_draw_minimap(t_cub *c, t_ray *ray)
 		}
 	
 	}		
-	draw_rays(&(c->mini), &(c->scene), c->screen.w, ray);
-	draw_player(&(c->mini), &(c->scene.player));
+	draw_rays(&(c->mini), &(c->sc), c->screen.w, ray);
+	draw_ply(&(c->mini), &(c->sc.ply));
 	mlx_put_image_to_window(c->mlx, c->win, c->mini.img, 5, 5);	
 	
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_loadscene.c                                    :+:      :+:    :+:   */
+/*   cub_loadsc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:21:23 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 19:22:35 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 22:14:27 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void ft_delmmap()
 // 	// printf("\n");	
 // 	ft_lstiter(l->map, mprint);
 // 	// printf("height: %i, width: %i\n", l->ymap, l->xmap);
-// 	// printf("Player [ DIR: %c / x: %i / y: %i]\n", l->dir, *l->xpl, *l->ypl);
+// 	// printf("ply [ DIR: %c / x: %i / y: %i]\n", l->dir, *l->xpl, *l->ypl);
 	
 // 	// printf("\n");	
 // 	ft_lstiter(l->extra, eprint);
@@ -79,7 +79,7 @@ static void ft_freeload(t_load *load)
 }
 
 
-int	cub_loadscene(int fd, t_scene *scene, t_cub *c)
+int	cub_loadsc(int fd, t_sc *sc, t_cub *c)
 {
 	t_load	load;
 	
@@ -87,20 +87,20 @@ int	cub_loadscene(int fd, t_scene *scene, t_cub *c)
 		return (ft_freeload(&load), 1);	
 	//if (DEBUG)
 	//ft_pload(&load);	   	
-	ft_bzero(scene, sizeof(t_scene));
-	if (cub_loadmap(&load, &(scene->map)))
+	ft_bzero(sc, sizeof(t_sc));
+	if (cub_loadmap(&load, &(sc->map)))
 		return (ft_freeload(&load), 1);   	
-	if (cub_loadplayer(&load, &(scene->player)))
-		return (ft_freeload(&load), /*ft_freescene(scene),*/ 1);
-	scene->c_floor = *load.floor;
-	scene->c_ceiling = *load.ceiling;
-	scene->plane_x =  - scene->player.diry;
-	scene->plane_y =  scene->player.dirX;
+	if (cub_loadply(&load, &(sc->ply)))
+		return (ft_freeload(&load), /*ft_freesc(sc),*/ 1);
+	sc->c_floor = *load.floor;
+	sc->c_ceiling = *load.ceiling;
+	sc->plane_x =  - sc->ply.diry;
+	sc->plane_y =  sc->ply.dirX;
 	ft_bzero(c, sizeof(t_cub));
 	c->mlx = mlx_init();
-	if (cub_loadwalls(&load, scene, c->mlx))
-		return (ft_freeload(&load), /*ft_freescene(scene),*/ 1);   	
-	/*if (cub_loadextra(&load), scene, c->mlx)
+	if (cub_loadwalls(&load, sc, c->mlx))
+		return (ft_freeload(&load), /*ft_freesc(sc),*/ 1);   	
+	/*if (cub_loadextra(&load), sc, c->mlx)
 		return (ft_freeload(&load), 1);
 	*/
 	return (ft_freeload(&load), 0);

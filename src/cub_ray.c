@@ -6,13 +6,13 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:10:08 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 19:22:35 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 22:17:31 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-t_ray *cub_ray(t_scene *d,  int width, double fov)
+t_ray *cub_ray(t_sc *d,  int width, double fov)
 {
 	
 	t_ray	*rays;
@@ -28,11 +28,11 @@ t_ray *cub_ray(t_scene *d,  int width, double fov)
 	{
 		double 			cameraX = 2 * x / (double)width  -1; //x-coordinate in camera space
 		//	init ray position and direction
-		double 			raydirX = d->player.dirX + d->plane_x * cameraX;
-		double 			raydiry = d->player.diry + (d->plane_y * fov) * cameraX;
+		double 			raydirX = d->ply.dirX + d->plane_x * cameraX;
+		double 			raydiry = d->ply.diry + (d->plane_y * fov) * cameraX;
 		//	which box of the map we're in
-	  	int 			mapX = (int)d->player.posx;
-	  	int 			mapY = (int)d->player.posy;
+	  	int 			mapX = (int)d->ply.posx;
+	  	int 			mapY = (int)d->ply.posy;
 
  //length of ray from current position to next x or y-side
       double sideDistX;
@@ -57,22 +57,22 @@ t_ray *cub_ray(t_scene *d,  int width, double fov)
       if(raydirX < 0)
       {
         stepX = -1;
-        sideDistX = (d->player.posx - mapX) * deltaDistX;
+        sideDistX = (d->ply.posx - mapX) * deltaDistX;
       }
       else
       {
         stepX = 1;
-        sideDistX = (mapX + 1.0 - d->player.posx) * deltaDistX;
+        sideDistX = (mapX + 1.0 - d->ply.posx) * deltaDistX;
       }
       if(raydiry < 0)
       {
         stepY = -1;
-        sideDistY = (d->player.posy - mapY) * deltaDistY;
+        sideDistY = (d->ply.posy - mapY) * deltaDistY;
       }
       else
       {
         stepY = 1;
-        sideDistY = (mapY + 1.0 - d->player.posy) * deltaDistY;
+        sideDistY = (mapY + 1.0 - d->ply.posy) * deltaDistY;
       }
       //perform DDA
       while(hit == 0)
@@ -103,8 +103,8 @@ t_ray *cub_ray(t_scene *d,  int width, double fov)
 
       //calculate value of wallX
       double wallX; //where exactly the wall was hit
-      if(side == 0) wallX = d->player.posy + perpWallDist * raydiry;
-      else          wallX = d->player.posx + perpWallDist * raydirX;
+      if(side == 0) wallX = d->ply.posy + perpWallDist * raydiry;
+      else          wallX = d->ply.posx + perpWallDist * raydirX;
 	
 		t_ray ray;
 		

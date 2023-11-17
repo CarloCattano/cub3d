@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub_loadwalls.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:23:07 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/15 13:01:55 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/17 22:17:31 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int		cub_loadwalls(t_load *l, t_scene *sc, void *mlx)
+int		cub_loadwalls(t_load *l, t_sc *sc, void *mlx)
 {
 	int i;
 	
