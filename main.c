@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 14:45:38 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 15:09:51 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	main (int ac, char *av[])
 		return (cub_error(ERROR_PARS, NULL, NULL));
 	if (cub_init(&c, &sc))
 		return (cub_error(MAIN, NULL, NULL));	
-	init_player(&sc);
+	init_player(&(c.scene));
+
 	//mlx_mouse_hide(c.mlx, c.screen.img);
 	//mlx_mouse_hook(c.screen.img, mouse_buttons, &c);
 	//mlx_hook(c.screen.img, ON_WIN_ENTER, 1L<<4, entered, &c);

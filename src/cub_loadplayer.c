@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_loadplayer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:06:41 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/12 17:06:20 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/17 15:03:28 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	cub_loadplayer(t_load *load, t_player *player)
 	{	
 		player->dirX = 1;
 		player->dirY = 0;
-	}	
+	}
+	printf("player->posX: %f\n", player->posX);
+	printf("player->posY: %f\n", player->posY);
 	return (0);
 }
