@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:11:22 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/17 17:33:15 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 19:06:31 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 void	init_player(t_cub *d)
 {
-	//d->player.dirX = 1;
-	//d->player.dirY = 0;
 	d->scene.player.moveSpeed = MOVE_SPEED;
 	d->scene.player.ctrl.up_down = 0;
 	d->scene.player.ctrl.left_right = 0;
@@ -33,19 +31,18 @@ void move_player(t_cub *d, int direction)
     double posX = d->scene.player.posX;
     double posY = d->scene.player.posY;
 
-    if (direction == 1)  		// Move forward
+    double newPosX = posX + direction * dirX * moveSpeed;
+    double newPosY = posY + direction * dirY * moveSpeed;
+
+    int cellX = (int)newPosX;
+    int cellY = (int)newPosY;
+
+    if (d->scene.map.val[cellY][cellX] == '0')
     {
-        if (d->scene.map.val[(int)(posX + dirX * moveSpeed)][(int)posY] == '0')
-            d->scene.player.posX += dirX * moveSpeed;
-        if (d->scene.map.val[(int)posX][(int)(posY + dirY * moveSpeed)] == '0')
-            d->scene.player.posY += dirY * moveSpeed;
-    }
-    else if (direction == -1)  	// Move backward
-    {
-        if (d->scene.map.val[(int)(posX - dirX * moveSpeed)][(int)posY] == '0')
-            d->scene.player.posX -= dirX * moveSpeed;
-        if (d->scene.map.val[(int)posX][(int)(posY - dirY * moveSpeed)] == '0')
-            d->scene.player.posY -= dirY * moveSpeed;
+        if (d->scene.map.val[cellY][(int)posX] == '0' && fabs(newPosX - posX) > EPSILON)
+            d->scene.player.posX = newPosX;
+        if (d->scene.map.val[(int)posY][cellX] == '0' && fabs(newPosY - posY) > EPSILON)
+            d->scene.player.posY = newPosY;
     }
 }
 
