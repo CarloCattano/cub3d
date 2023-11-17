@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 22:45:58 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 22:49:25 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	loop_hook(t_cub *c)
 	wp weapon
 	sc scene
 	c cub
+	screen scr
 */
 
 int	main (int ac, char *av[])
