@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 14:07:20 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 17:34:16 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,19 +115,6 @@ typedef struct s_ctrl_states
 	int		turn;
 }			t_ctrl_states;
 
-typedef struct s_player
-{
-	double			posX;
-	double			posY;
-	double			dirX;
-	double			dirY;
-	double			moveSpeed;
-	double			rotSpeed;
-	int				lastX;
-//	t_weapon		weapon;
-	t_ctrl_states	ctrl;
-}					t_player;
-
 struct s_image
 {
 	void		*img;
@@ -143,22 +130,31 @@ struct s_image
 	double		yoff;
 };
 
+typedef struct	s_weapon
+{
+	t_image		img;
+	char		*path;
+}				t_weapon;
+
+typedef struct s_player
+{
+	double			posX;
+	double			posY;
+	double			dirX;
+	double			dirY;
+	double			moveSpeed;
+	double			rotSpeed;
+	int				lastX;
+	t_weapon		weapon;
+	t_ctrl_states	ctrl;
+}					t_player;
+
 struct s_map
 {
-	int					height;
-	int					width;
-	char				**val;
+	int		height;
+	int		width;
+	char	**val;
 };
-/*
-struct s_weapon
-{
-	t_image		*weapon;
-	bool		zoom;
-	double		fov;
-	int[2]		whzoom;
-}*/
-
-
 
 struct s_scene
 {
@@ -176,9 +172,6 @@ struct s_scene
 	t_sprites 	*sprites;
 	t_extra		*extra;
 };
-
-
-
 
 struct s_sprites
 {
@@ -198,7 +191,6 @@ struct	s_extra
 	t_image	extra;
 	t_extra *next;	
 };	
-
 
 struct s_lextra
 {
@@ -246,7 +238,6 @@ typedef struct s_line
 	int			h;
 }	t_line;	
 
-
 /* test raycast minimap etc */
 
 struct	s_cub
@@ -271,9 +262,6 @@ struct s_fp
 	double  texY;  	
 };		
 
-
-
-
 /* rays */
 typedef struct s_ray
 {
@@ -293,7 +281,6 @@ typedef struct s_ray
 }				t_ray;
 
 /* camera */
-	
 
 /* functions */
 int     cub_error(char const *msg, void (*f)(), void *ptr);
@@ -350,13 +337,17 @@ int		key_down_hook(int keycode, t_cub *d);
 int		key_up_hook(int keycode, t_cub *d);
 int		mouse_buttons(int button, int x, int y, t_scene *d);
 
-int					exited(t_cub *d);
-int					entered(t_cub *d);
+int		exited(t_cub *d);
+int		entered(t_cub *d);
 
 /* player */
-void	init_player(t_scene *c);
-void	rotate_player(t_scene *c, int direction);
-void	handle_player(t_scene *c);
+void	init_player(t_cub *c);
+void	rotate_player(t_cub *c, int direction);
+void	handle_player(t_cub *c);
+
+/* weapon */
+void	init_weapon(t_cub *c);
+void 	draw_weapon(t_cub *c);
 
 /* free willis */
 int	mlx_terminate(t_cub *d);

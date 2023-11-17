@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:21:54 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 14:41:40 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 17:34:51 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	cub_draw(t_cub *c)
 	/*
 	cub_draw_weappon(c);*/
 	cub_draw_minimap(c, nray);
-	handle_player(&c->scene);
+	handle_player(c);
+	draw_weapon(c);
 	free(nray);
 	return (0);
 }

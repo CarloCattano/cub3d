@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 15:09:51 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 17:31:36 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	loop_hook(t_cub *c)
 	return (0);
 }
 
-
 int	main (int ac, char *av[])
 {
 	t_scene sc;
@@ -41,8 +40,8 @@ int	main (int ac, char *av[])
 		return (cub_error(ERROR_PARS, NULL, NULL));
 	if (cub_init(&c, &sc))
 		return (cub_error(MAIN, NULL, NULL));	
-	init_player(&(c.scene));
-
+	init_player(&c);
+	init_weapon(&c);
 	//mlx_mouse_hide(c.mlx, c.screen.img);
 	//mlx_mouse_hook(c.screen.img, mouse_buttons, &c);
 	//mlx_hook(c.screen.img, ON_WIN_ENTER, 1L<<4, entered, &c);

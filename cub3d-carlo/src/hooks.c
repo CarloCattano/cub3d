@@ -3,59 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:41 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/17 17:27:13 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/06 10:57:59 by ccattano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../include/cub3d.h"
 
 /*
 	mouse pos 
 */
 
-int	entered(t_cub *d)
+int	entered(t_data *d)
 {
 	(void)d;
 	return 0;
 }
 
-int	exited(t_cub *d)
+int	exited(t_data *d)
 {
-	if (d->scene.player.lastX > WIDTH - 10)
+	if (d->player.lastX > WIDTH - 10)
 	{	
 		mlx_mouse_move(d->mlx,d->win ,WIDTH - 10, HEIGHT >> 1);
-		d->scene.player.lastX = WIDTH - 10;
+		d->player.lastX = WIDTH - 10;
 	}
 	else
 	{
 		mlx_mouse_move(d->mlx,d->win ,10, HEIGHT >> 1);
-		d->scene.player.lastX = 10;
+		d->player.lastX = 10;
 	}
 	return 0;
 }
 
-int	motion_hook(int x, int y, t_cub *d)
+int	motion_hook(int x, int y, t_data *d)
 {
-	if (x > d->scene.player.lastX)
+	if (x > d->player.lastX)
 	{
-		d->scene.player.rotSpeed = (d->scene.player.lastX - x) * 10.0;
+		d->player.rotSpeed = (d->player.lastX - x) * 10.0;
 		rotate_player(d, 1);
 	}
 	else
 	{
-		d->scene.player.rotSpeed = (d->scene.player.lastX - x) * 10.0;
+		d->player.rotSpeed = (d->player.lastX - x) * 10.0;
 		rotate_player(d, -1);
 	}
 	(void)y;
-	d->scene.player.lastX = x;
+	d->player.lastX = x;
 	return (0);
 }
 
 
-int	mouse_buttons(int k, int x, int y, t_scene *d)
+int	mouse_buttons(int k, int x, int y, t_data *d)
 {
 	(void)d;
 	if ((k == 1 || k == 2)

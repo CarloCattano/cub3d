@@ -1,6 +1,5 @@
+
 #include "cube3d.h"
-
-
 
 int cub_countparts(char **parts)
 {
