@@ -9,14 +9,14 @@ REMOVE := rm -rf
 LIBPATH = ./libft/
 LIB =$(LIBPATH)libft.a
 LIB2 = ./mlx_linux/libmlx_Linux.a ./mlx_linux/libmlx.a
-FDF = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+FDF = -Lmlx_linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 INC_DIR := ./inc/
 SRC_DIR := ./src/
 OBJ_DIR := ./obj/
 
 
-C := cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadscene cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls cub_loadmap cub_cparr cub_loadplayer cub_init cub_draw_minimap cub_draw cub_mpp cub_point cub_line cub_draw_ray cub_ray cub_piinte cub_draw_screen cub_loadwalls cub_loadfile
+C := cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadscene cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls cub_loadmap cub_cparr cub_loadplayer cub_init cub_draw_minimap cub_draw cub_mpp cub_point cub_line cub_draw_ray cub_ray cub_piinte cub_draw_screen cub_loadwalls cub_loadfile player hooks keyhooks
 H :=  cube3d
 MAIN := main.c
 

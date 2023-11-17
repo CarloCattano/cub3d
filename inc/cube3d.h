@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/15 13:01:11 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:07:20 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include "get_next_line.h"
 # include <stdbool.h>
 # include "mlx.h"
-
+# include "key_codes.h"
+# include "constants.h"
 /* constants */
 
 /* MAP */
@@ -98,7 +99,21 @@ enum e_type
 	MAP	
 };
 
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEMOVE = 6,
+	ON_WINDOWCLOSE = 17,
+	ON_WIN_LEAVE = 8,
+	ON_WIN_ENTER = 7
+};
 
+typedef struct s_ctrl_states
+{
+	int		up_down;
+	int		left_right;
+	int		turn;
+}			t_ctrl_states;
 
 typedef struct s_player
 {
@@ -110,7 +125,7 @@ typedef struct s_player
 	double			rotSpeed;
 	int				lastX;
 //	t_weapon		weapon;
-//	t_ctrl_states	ctrl;
+	t_ctrl_states	ctrl;
 }					t_player;
 
 struct s_image
@@ -324,7 +339,26 @@ void    cub_freelextra(t_lextra **node);
 
 /* helper */
 char    **cub_splits(char const *str, char const *set);
-int	cub_countparts(char **parts);
-int	cub_isnumber(char const *str);
-char **cub_cparr(char **parts);
+int		cub_countparts(char **parts);
+int		cub_isnumber(char const *str);
+char	**cub_cparr(char **parts);
+
+
+/* hooks */
+int		motion_hook(int x, int y, t_cub *d);
+int		key_down_hook(int keycode, t_cub *d);
+int		key_up_hook(int keycode, t_cub *d);
+int		mouse_buttons(int button, int x, int y, t_scene *d);
+
+int					exited(t_cub *d);
+int					entered(t_cub *d);
+
+/* player */
+void	init_player(t_scene *c);
+void	rotate_player(t_scene *c, int direction);
+void	handle_player(t_scene *c);
+
+/* free willis */
+int	mlx_terminate(t_cub *d);
+
 #endif

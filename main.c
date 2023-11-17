@@ -3,15 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/15 13:03:48 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:06:48 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
+int	mlx_terminate(t_cub *d)
+{
+	mlx_destroy_image(d->mlx, d->screen.img);
+	mlx_destroy_window(d->mlx, d->screen.img);
+	mlx_destroy_display(d->mlx);
+	free(d->mlx);
+	ft_putendl_fd("Program terminated Gracefully ❤️", 1);
+	exit (0);
+	return (0);
+}
+
+int	loop_hook(t_cub *c)
+{
+	cub_draw(c);
+	return (0);
+}
 
 
 int	main (int ac, char *av[])
@@ -25,7 +41,19 @@ int	main (int ac, char *av[])
 		return (cub_error(ERROR_PARS, NULL, NULL));
 	if (cub_init(&c, &sc))
 		return (cub_error(MAIN, NULL, NULL));	
-	cub_draw(&c);
-	mlx_loop(c.mlx);	
+	
+	/* mlx_mouse_hide(c.mlx, c.screen.img); */
+	/* mlx_mouse_hook(c.win, mouse_buttons, &c); */
+	/* mlx_hook(c.win, ON_WIN_ENTER, 1L<<4, entered, &c); */
+	/* mlx_hook(c.win, ON_WIN_LEAVE, 1L<<5, exited, &c); */
+	/* mlx_hook(c.win, ON_KEYDOWN, 1L << 0, key_down_hook, &sc); */
+	/* mlx_hook(c.win, ON_KEYUP, 1L << 1, key_up_hook, &sc); */
+	/* mlx_hook(c.win, ON_MOUSEMOVE, 1 << 6, motion_hook, &sc); */
+	
+	mlx_hook(c.win, ON_WINDOWCLOSE, 1L << 17, mlx_terminate, &c);
+	mlx_loop_hook(c.mlx, loop_hook, &c);
+	mlx_loop(c.mlx);
+	mlx_terminate(&c);
+
 	return (0);
 }
