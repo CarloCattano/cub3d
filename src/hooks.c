@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:41 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/17 14:06:48 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 14:46:26 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	exited(t_cub *d)
 {
 	if (d->scene.player.lastX > WIDTH - 10)
 	{	
-		mlx_mouse_move(d->mlx,d->screen.img ,WIDTH - 10, HEIGHT >> 1);
+		mlx_mouse_move(d->mlx,d->win ,WIDTH - 10, HEIGHT >> 1);
 		d->scene.player.lastX = WIDTH - 10;
 	}
 	else
 	{
-		mlx_mouse_move(d->mlx,d->screen.img ,10, HEIGHT >> 1);
+		mlx_mouse_move(d->mlx,d->win ,10, HEIGHT >> 1);
 		d->scene.player.lastX = 10;
 	}
 	return 0;

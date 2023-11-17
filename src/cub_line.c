@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:01:30 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/12 15:58:05 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:26:43 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cube3d.h"
 
+#include "cube3d.h"
 
 static void	init_line(t_point *a, t_point *b, t_line *l, t_image *w)
 {
@@ -61,10 +61,10 @@ static void	plotline(t_line l, t_image *data)
 	}
 }
 
-void	ppoint(t_point *a)
-{
-	printf("P %f / %f \n", a->x, a->y);
-}
+// void	ppoint(t_point *a)
+// {
+// 	// printf("P %f / %f \n", a->x, a->y);
+// }
 
 
 
@@ -72,7 +72,7 @@ void	cub_line(t_point a, t_point b, t_image *data)
 {
 	t_line	line;
 	
-	ppoint(&b);
+	// ppoint(&b);
 	init_line(&a, &b, &line, data);
 	plotline(line, data);
 }

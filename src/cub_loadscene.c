@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_loadscene.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:21:23 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/15 12:38:15 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:25:44 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,39 +20,39 @@ static void ft_delmmap()
 
 
 }*/
-void mprint(void *value)
-{
-        printf("%s\n", (char *)value);
-}
+// void mprint(void *value)
+// {
+//         printf("%s\n", (char *)value);
+// }
 
-static void eprint(void *value)
-{
-	printf("%s ", ((t_lextra *)value)->key);
-	printf("%s ", ((t_lextra *)value)->path);
-	while (*((t_lextra *)value)->value)
-		printf("%s ", *((t_lextra *)value)->value++);
-	printf("\n");	
-}
+// static void eprint(void *value)
+// {
+// 	printf("%s ", ((t_lextra *)value)->key);
+// 	printf("%s ", ((t_lextra *)value)->path);
+// 	while (*((t_lextra *)value)->value)
+// 		printf("%s ", *((t_lextra *)value)->value++);
+// 	printf("\n");	
+// }
 
-static void ft_pload(t_load *l)
-{
+// static void ft_pload(t_load *l)
+// {
 	
-	printf("\n");	
-	printf("W1:  %s\n", l->wall[0]);			
-	printf("W2:  %s\n", l->wall[1]);			
-	printf("W3:  %s\n", l->wall[2]);
-	printf("W4:  %s\n", l->wall[3]);
-	printf("F:  %i\n", *(l->floor));
-	printf("C:  %i\n", *(l->ceiling));
-	printf("\n");	
-	ft_lstiter(l->map, mprint);
-	printf("height: %i, width: %i\n", l->ymap, l->xmap);
-	printf("Player [ DIR: %c / x: %i / y: %i]\n", l->dir, *l->xpl, *l->ypl);
+// 	// printf("\n");	
+// 	// printf("W1:  %s\n", l->wall[0]);			
+// 	// printf("W2:  %s\n", l->wall[1]);			
+// 	// printf("W3:  %s\n", l->wall[2]);
+// 	// printf("W4:  %s\n", l->wall[3]);
+// 	// printf("F:  %i\n", *(l->floor));
+// 	// printf("C:  %i\n", *(l->ceiling));
+// 	// printf("\n");	
+// 	ft_lstiter(l->map, mprint);
+// 	// printf("height: %i, width: %i\n", l->ymap, l->xmap);
+// 	// printf("Player [ DIR: %c / x: %i / y: %i]\n", l->dir, *l->xpl, *l->ypl);
 	
-	printf("\n");	
-	ft_lstiter(l->extra, eprint);
+// 	// printf("\n");	
+// 	ft_lstiter(l->extra, eprint);
 				
-}
+// }
 
 
 
@@ -86,7 +86,7 @@ int	cub_loadscene(int fd, t_scene *scene, t_cub *c)
 	if (cub_evalfile(fd, &load))
 		return (ft_freeload(&load), 1);	
 	//if (DEBUG)
-	ft_pload(&load);	   	
+	//ft_pload(&load);	   	
 	ft_bzero(scene, sizeof(t_scene));
 	if (cub_loadmap(&load, &(scene->map)))
 		return (ft_freeload(&load), 1);   	

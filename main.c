@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 14:06:48 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 14:45:38 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int	main (int ac, char *av[])
 		return (cub_error(ERROR_PARS, NULL, NULL));
 	if (cub_init(&c, &sc))
 		return (cub_error(MAIN, NULL, NULL));	
-	
-	/* mlx_mouse_hide(c.mlx, c.screen.img); */
-	/* mlx_mouse_hook(c.win, mouse_buttons, &c); */
-	/* mlx_hook(c.win, ON_WIN_ENTER, 1L<<4, entered, &c); */
-	/* mlx_hook(c.win, ON_WIN_LEAVE, 1L<<5, exited, &c); */
-	/* mlx_hook(c.win, ON_KEYDOWN, 1L << 0, key_down_hook, &sc); */
-	/* mlx_hook(c.win, ON_KEYUP, 1L << 1, key_up_hook, &sc); */
-	/* mlx_hook(c.win, ON_MOUSEMOVE, 1 << 6, motion_hook, &sc); */
-	
+	init_player(&sc);
+	//mlx_mouse_hide(c.mlx, c.screen.img);
+	//mlx_mouse_hook(c.screen.img, mouse_buttons, &c);
+	//mlx_hook(c.screen.img, ON_WIN_ENTER, 1L<<4, entered, &c);
+	mlx_hook(c.win, ON_WIN_LEAVE, 1L<<5, exited, &c);
+	mlx_hook(c.win, ON_KEYDOWN, 1L << 0, key_down_hook, &c);
+	mlx_hook(c.win, ON_KEYUP, 1L << 1, key_up_hook, &c); 
+	mlx_hook(c.win, ON_MOUSEMOVE, 1 << 6, motion_hook, &c); 
+
 	mlx_hook(c.win, ON_WINDOWCLOSE, 1L << 17, mlx_terminate, &c);
 	mlx_loop_hook(c.mlx, loop_hook, &c);
 	mlx_loop(c.mlx);

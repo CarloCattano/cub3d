@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:11:22 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/17 13:54:16 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 14:52:50 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	init_player(t_scene *d)
 {
 	d->player.dirX = 1;
 	d->player.dirY = 0;
-	d->player.posX = 4;
-	d->player.posY = 4;
 	d->player.moveSpeed = MOVE_SPEED;
 	d->player.ctrl.up_down = 0;
 	d->player.ctrl.left_right = 0;
@@ -27,7 +25,7 @@ void	init_player(t_scene *d)
 	d->player.rotSpeed = ROT_S;
 }
 
-static void move_player(t_scene *d, int direction)
+void move_player(t_scene *d, int direction)
 {
     double moveSpeed = d->player.moveSpeed;
     double dirX = d->player.dirX;
@@ -37,16 +35,16 @@ static void move_player(t_scene *d, int direction)
 	
     if (direction == 1)  		// Move forward
     {
-        if (d->map.val[(int)(posX + dirX * moveSpeed)][(int)posY] == 0)
+        if (d->map.val[(int)(posX + dirX * moveSpeed)][(int)posY] == '0')
             d->player.posX += dirX * moveSpeed;
-        if (d->map.val[(int)posX][(int)(posY + dirY * moveSpeed)] == 0)
+        if (d->map.val[(int)posX][(int)(posY + dirY * moveSpeed)] == '0')
             d->player.posY += dirY * moveSpeed;
     }
     else if (direction == -1)  	// Move backward
     {
-        if (d->map.val[(int)(posX - dirX * moveSpeed)][(int)posY] == 0)
+        if (d->map.val[(int)(posX - dirX * moveSpeed)][(int)posY] == '0')
             d->player.posX -= dirX * moveSpeed;
-        if (d->map.val[(int)posX][(int)(posY - dirY * moveSpeed)] == 0)
+        if (d->map.val[(int)posX][(int)(posY - dirY * moveSpeed)] == '0')
             d->player.posY -= dirY * moveSpeed;
     }
 }
@@ -86,6 +84,7 @@ void rotate_player(t_scene *d, int direction)
 
 void handle_player(t_scene *d)
 {
+	printf("plahyer ctrl: %f\n", d->player.posY);
 	move_player(d, d->player.ctrl.up_down);
 	rotate_player(d, d->player.ctrl.turn);	
 }

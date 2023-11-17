@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cub_draw_minimap.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/15 13:55:57 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:27:31 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	rayprint(t_ray *ray)
-{
-printf ("ray: x%f y%f dx%f dy%f s%i \n", ray->hitX, ray->hitY, ray->rayDirX, ray->rayDirY,ray->side); 	
+// void	rayprint(t_ray *ray)
+// {
+// printf ("ray: x%f y%f dx%f dy%f s%i \n", ray->hitX, ray->hitY, ray->rayDirX, ray->rayDirY,ray->side); 	
 
-}
+// }
 
 /* some more cases off offset;*/ 
 
@@ -33,7 +33,7 @@ void draw_rays(t_image *img, t_scene *sc, int width, t_ray *ray)
 	plp = cub_point(sc->player.posX *(img->xoff)  + 0.5 * img->xoff, sc->player.posY * (img->yoff) + 0.5 * img->yoff, RY);
 	while (++i < width)
 	{
-		rayprint(&(ray[i]));
+		//rayprint(&(ray[i]));
 		xoff = 0;
 		yoff = 0;
 		if (ray[i].rayDirY  < 0 && ray[i].rayDirX >= 0 && !ray[i].side)	

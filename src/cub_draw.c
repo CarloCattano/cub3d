@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_draw.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:21:54 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/15 14:35:49 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:41:40 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	cub_draw(t_cub *c)
 	/*
 	cub_draw_weappon(c);*/
 	cub_draw_minimap(c, nray);
+	handle_player(&c->scene);
 	free(nray);
 	return (0);
 }

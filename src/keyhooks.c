@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhooks.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccattano <ccattano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:32 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/17 13:44:25 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/17 14:33:22 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int	key_down_hook(int k, t_cub *d)
 {
+	printf("key: %i\n", k);
 	if (k == KEY_UP || k == KEY_W)
 		d->scene.player.ctrl.up_down = 1;
 	else if (k == KEY_DOWN || k == KEY_S)
