@@ -14,13 +14,18 @@
 
 
 
-int		cub_error(char const *msg, void (*f)(), void *ptr)
+int		cub_error(char const *msg, char er, void (*f)(), void *ptr)
 {
 	if (f)
 	{
 		f(ptr);
 	}
-	ft_printf("Error\n%s\n", msg);
+	
+	if (pe)
+		ft_printf("%s\n", E_);
+	if (pe == 2)
+		perror("ERROR OPEN");
+	ft_printf("%s\n", msg);
 	return (1);
 }
 

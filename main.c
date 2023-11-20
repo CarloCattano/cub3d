@@ -43,11 +43,11 @@ int	main (int ac, char *av[])
 	t_cub	c;
 
 	if (ac != 2)
-		return (cub_error(ERROR_ARG, NULL, NULL));
+		return (cub_error(E_ARG, 1, NULL, NULL));
 	if (cub_parser(av[1], &sc, &c))
-		return (cub_error(ERROR_PARS, NULL, NULL));
+		return (cub_error(E_PARS, 0, NULL, NULL));
 	if (cub_init(&c, &sc))
-		return (cub_error(MAIN, NULL, NULL));	
+		return (cub_error(E_IN, 0, NULL, NULL));	
 	init_ply(&c);
 	init_wp(&c);
 	mlx_mouse_hide(c.mlx, c.win);

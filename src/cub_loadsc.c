@@ -12,49 +12,63 @@
 
 #include "cube3d.h"
 
-
-/*
-static void ft_delmmap()
+/* print for debug */
+void mprint(void *value)
 {
+         printf("%s\n", (char *)value);
+}
 
+static void eprint(void *value)
+{
+ 	printf("%s ", ((t_lextra *)value)->key);
+ 	printf("%s ", ((t_lextra *)value)->path);
+ 	while (*((t_lextra *)value)->value)
+ 		printf("%s ", *((t_lextra *)value)->value++);
+ 	printf("\n");	
+}
 
-
-}*/
-// void mprint(void *value)
-// {
-//         printf("%s\n", (char *)value);
-// }
-
-// static void eprint(void *value)
-// {
-// 	printf("%s ", ((t_lextra *)value)->key);
-// 	printf("%s ", ((t_lextra *)value)->path);
-// 	while (*((t_lextra *)value)->value)
-// 		printf("%s ", *((t_lextra *)value)->value++);
-// 	printf("\n");	
-// }
-
-// static void ft_pload(t_load *l)
-// {
+static void ft_pload(t_load *l)
+{
 	
-// 	// printf("\n");	
-// 	// printf("W1:  %s\n", l->wall[0]);			
-// 	// printf("W2:  %s\n", l->wall[1]);			
-// 	// printf("W3:  %s\n", l->wall[2]);
-// 	// printf("W4:  %s\n", l->wall[3]);
-// 	// printf("F:  %i\n", *(l->floor));
-// 	// printf("C:  %i\n", *(l->ceiling));
-// 	// printf("\n");	
-// 	ft_lstiter(l->map, mprint);
-// 	// printf("height: %i, width: %i\n", l->ymap, l->xmap);
-// 	// printf("ply [ DIR: %c / x: %i / y: %i]\n", l->dir, *l->xpl, *l->ypl);
-	
-// 	// printf("\n");	
-// 	ft_lstiter(l->extra, eprint);
-				
-// }
+ 	 printf("\n");	
+ 	 printf("W1:  %s\n", l->wall[0]);			
+	 printf("W2:  %s\n", l->wall[1]);			
+ 	 printf("W3:  %s\n", l->wall[2]);
+ 	 printf("W4:  %s\n", l->wall[3]);
+ 	 printf("F:  %i\n", *(l->floor));
+ 	 printf("C:  %i\n", *(l->ceiling));
+ 	 printf("\n");	
+ 	ft_lstiter(l->map, mprint);
+ 	 printf("height: %i, width: %i\n", l->ymap, l->xmap);
+ 	 printf("ply [ DIR: %c / x: %i / y: %i]\n", l->dir, *l->xpl, *l->ypl);
+ 	 printf("\n");	
+ 	ft_lstiter(l->extra, eprint);			
+}
 
+/* free load struct */
+static void	ft_lstdelone2(t_list *lst, void (*del)())
+{
+	if (lst)
+	{
+		del(&(lst->content));
+		free(lst);
+	}
+}
 
+static void	ft_lstclear2(t_list **lst, void (*del)())
+{
+	t_list	*temp;
+	t_list	*curr;	
+
+	curr = *lst;
+	while (curr)
+	{
+		temp = curr->next;
+		ft_lstdelone2(curr, del);
+		curr = temp;
+	}
+	*lst = NULL;
+}
 
 
 static void ft_freeload(t_load *load)
@@ -70,12 +84,10 @@ static void ft_freeload(t_load *load)
 		free(load->floor);
 	if (load->ceiling)
 		free(load->ceiling);
-/*	
 	if (load->map)
-		ft_lstclear(&(load->map), gnl_free);
+		ft_lstclear2(&(load->map), gnl_free);
 	if (load->extra)
-		ft_lstclear(&(load->extra),  cub_freelextra);	
-*/
+		ft_lstclear2(&(load->extra),  cub_freelextra);
 }
 
 
@@ -85,8 +97,8 @@ int	cub_loadsc(int fd, t_sc *sc, t_cub *c)
 	
 	if (cub_evalfile(fd, &load))
 		return (ft_freeload(&load), 1);	
-	//if (DEBUG)
-	//ft_pload(&load);	   	
+	if (DEBUG)
+		ft_pload(&load);	   	
 	ft_bzero(sc, sizeof(t_sc));
 	if (cub_loadmap(&load, &(sc->map)))
 		return (ft_freeload(&load), 1);   	
@@ -104,5 +116,4 @@ int	cub_loadsc(int fd, t_sc *sc, t_cub *c)
 		return (ft_freeload(&load), 1);
 	*/
 	return (ft_freeload(&load), 0);
-
 }

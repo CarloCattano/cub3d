@@ -22,10 +22,18 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include <stdbool.h>
-# include "mlx.h"
+//# include "mlx.h"
 # include "key_codes.h"
 # include "constants.h"
+
 /* constants */
+/* DEBUG */
+# define DEBUG 0
+
+
+/* FILE */
+# define EXTRAS 0
+
 
 /* MAP */
 # define DIRECT "NSEW"
@@ -54,12 +62,13 @@
 # define RY 0xffff0000
 
 /* MSG */
-# define ERROR_ARG "CUBE3D NEEDS ONLY ONE ARG"
-# define ERROR_PARS "PARSING FAILD"
-# define ERROR_FILE "CUB FILE CORRUPTED" 
-# define ERROR_CUB "FILE NEED .CUB EXTENSION"
-# define ERROR_FILE_OPEN "OPEN CUB FILE FAIL"
-# define E_FW " FILE IS NOT RIGHT CINFIGUERD"
+# define E_ "ERROR"	
+# define E_ARG "CUBE3D NEEDS ONLY ONE ARG"
+# define E_PARS "PARSING FAILD"
+# define E_FILE "CUB FILE CORRUPTED" 
+# define E_CUB "FILE NEED .CUB EXTENSION"
+# define E_FO "OPEN CUB FILE FAIL"
+# define E_FC " FILE IS NOT RIGHT CINFIGUERD"
 # define E_MAL	"MALLOC_FAIL"
 /* MSG CUB FILE */
 # define SAMEARG " .CUB HAVE DUPLICATE TYPES "
@@ -283,7 +292,7 @@ typedef struct s_ray
 /* camera */
 
 /* functions */
-int     cub_error(char const *msg, void (*f)(), void *ptr);
+int     cub_error(char const *msg, char er, void (*f)(), void *ptr);
 
 /* parser */
 int		cub_parser(char *input, t_sc *sc, t_cub *c);
