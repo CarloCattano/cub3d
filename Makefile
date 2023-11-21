@@ -79,6 +79,8 @@ getmlxlib:
 		rm $(MLX).tgz; \
 		echo "MLX LIBRARY Downloaded"; \
 	fi
+
+	@make -C $(MLX)
 	
 run : all
 	./$(NAME) test.cub
