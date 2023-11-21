@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/22 00:04:18 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/22 00:07:49 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,11 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		
 		t_fp fp;
 		
-		//fp.tex = &(c->sc.wall[0]);
 		fp.texX = texX;
 		fp.step = step;
 		fp.texY = texPos;
 		get_wall_orientation(&ray[x], c, &fp);
-		// get_wall_texture(c, &ray[x], fp);
+	
 		y = -1;
 		while (++y < HEIGHT)
 		{
