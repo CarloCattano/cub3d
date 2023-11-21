@@ -18,7 +18,7 @@ OBJ_DIR := ./obj/
 
 C := cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadscene cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls cub_loadmap cub_cparr cub_loadplayer cub_init cub_draw_minimap cub_draw cub_mpp cub_point cub_line cub_draw_ray cub_ray cub_piinte cub_draw_screen cub_loadwalls cub_loadfile player hooks keyhooks weapon wall_orientation
 
-H :=  cube3d
+H :=  cub3d
 MAIN := main.c
 
 INC := $(addprefix $(INC_DIR), $(addsuffix .h, $(H))) 
