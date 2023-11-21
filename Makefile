@@ -1,33 +1,42 @@
 NAME := cub3d
-
+ARCH := $(shell uname -s)
 CC := cc
-CFLAGS := -Werror -Wextra -Wall 
+CFLAGS := -Werror -Wextra -Wall
 DEBUGFLAGS := -ggdb3 -fsanitize=address
-INCLUDES := -Iinc -Ilibft/inc -Imlx_linux 
-COMPILE := $(CC) $(CFLAGS) $(INCLUDES)
+INCLUDES := -Iinc -Ilibft/inc
+
+ifeq ($(ARCH), Darwin)
+	INCLUDES += -Iminilibx-mac
+else ifeq ($(ARCH), Linux)
+	INCLUDES += -Iminilibx-linux
+endif
+
 REMOVE := rm -rf 
 
 LIBPATH = ./libft/
 LIB =$(LIBPATH)libft.a
-LIB2 = ./mlx_linux/libmlx_Linux.a ./mlx_linux/libmlx.a
-FDF = -Lmlx_linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 INC_DIR := ./inc/
 SRC_DIR := ./src/
 OBJ_DIR := ./obj/
 
-C := cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadscene cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls cub_loadmap cub_cparr cub_loadplayer cub_init cub_draw_minimap cub_draw cub_mpp cub_point cub_line cub_draw_ray cub_ray cub_piinte cub_draw_screen cub_loadwalls cub_loadfile player hooks keyhooks weapon wall_orientation exit
+YELLOW := $(shell tput setaf 3)
+NC := $(shell tput sgr0)
+
+C := cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadscene \
+	 cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls cub_loadmap cub_cparr \
+	 cub_loadplayer cub_init cub_draw_minimap cub_draw cub_mpp cub_point cub_line cub_draw_ray cub_ray cub_piinte \
+	 cub_draw_screen cub_loadwalls cub_loadfile player hooks keyhooks weapon wall_orientation exit
 
 H :=  cub3d
 MAIN := main.c
 
-INC := $(addprefix $(INC_DIR), $(addsuffix .h, $(H))) 
+INC := $(addprefix $(INC_DIR), $(addsuffix .h, $(H)))
 SRC := $(addprefix $(SRC_DIR),$(addsuffix .c, $(C)))
 OBJ := $(addprefix $(OBJ_DIR), $(notdir $(SRC:.c=.o)))
 
 all: init $(NAME)
-
-init: libft $(SRC_DIR) $(INC_DIR) $(OBJ_DIR)
+init: libft $(SRC_DIR) $(INC_DIR) $(OBJ_DIR) getmlxlib
 
 $(INC_DIR):
 	@echo "CREATE $(INC_DIR)" && mkdir -p $(INC_DIR)
@@ -41,31 +50,49 @@ $(OBJ_DIR):
 	@echo "CREATE $(OBJ_DIR)" && mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	$(COMPILE) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(NAME):$(OBJ) 
-	$(COMPILE) $(OBJ) $(MAIN) $(LIB) $(FDF)  -o $(NAME) 
+$(NAME):$(OBJ)
+	$(CC) $(INCLUDES) $(OBJ) $(MAIN) $(LIB) $(MLXFLAGS) -o $(NAME) 
+	@echo "$(YELLOW)------------------------"
+	@echo "FINISHED COMPILING $(NAME) for $(ARCH)"
+	@echo "--------------------------------------"
+	@echo "$(NC)"
 
-mlx: 
-	@if [ ! -d "$(MLX)" ]; then \
-		echo "creating MLX";\
-		wget https://cdn.intra.42.fr/document/document/21669/minilibx-linux.tgz; \
-		tar -xvzf minilibx-linux.tgz; \
-		mv minilibx-linux mlx_linux; \
-		rm minilibx-linux.tgz; \
-		$(MAKE) -C ./mlx_linux; \
-		echo "MLX ready";\
+MLX_URL = ""
+
+ifeq ($(ARCH), Darwin)
+	MLX := "minilibx-mac"
+	MLX_URL = "https://cdn.intra.42.fr/document/document/22380/minilibx_opengl.tgz"
+	MLXFLAGS := -Lminilibx-linux -lmlx -framework OpenGL -framework AppKit 
+else ifeq ($(ARCH), Linux)
+	MLX := "minilibx-linux"
+	MLX_URL = "https://cdn.intra.42.fr/document/document/22379/minilibx-linux.tgz"
+	MLXFLAGS := -Lminilibx-linux -lmlx -L./minilibx-linux -Iminilibx-linux -lXext -lX11 -lm -lz
+endif
+
+getmlxlib:
+	@if [ ! -d $(MLX) ]; then \
+		echo "GETTING MLX LIBRARY"; \
+		wget $(MLX_URL) -O minilibx.tgz; \
+		tar -xvf minilibx.tgz; \
+		rm minilibx.tgz; \
+		mv minilibx* $(MLX); \
+		echo "MLX LIBRARY Downloaded"; \
 	fi
-
+	
 run : all
 	./$(NAME) test.cub
+
 debug: all
-	$(COMPILE) $(DEBUGFLAGS) $(OBJ) $(MAIN) $(LIB) $(FDF)  -o $(NAME) 
+	$(CC) $(DEBUGFLAGS) $(OBJ) $(MAIN) $(LIB) $(MLXFLAGS) -o $(NAME) 
 	./$(NAME) test.cub
+
 clean:
 	make clean -C ./libft
+	make fclean -C ./libft
+	make clean -C ./minilibx-linux
 	@$(REMOVE) $(OBJ)
-
 
 fclean: clean
 	@$(REMOVE) $(NAME)
