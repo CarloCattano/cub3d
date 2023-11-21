@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:11:22 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/17 22:48:47 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 17:07:52 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	rotate_ply(t_cub *d, int direction)
 		plane_x = plane_x * cos(-ROT_S) - plane_y * sin(-ROT_S);
 		plane_y = oldplane_x * sin(-ROT_S) + plane_y * cos(-ROT_S);
 	}
+
+	d->sc.ply.rot = (int)(atan2(diry, dirX) * 180 / M_PI);
 	d->sc.ply.dirX = dirX;
 	d->sc.ply.diry = diry;
 	d->sc.plane_x = plane_x;

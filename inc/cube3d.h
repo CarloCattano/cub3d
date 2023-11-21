@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/20 18:28:00 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 16:59:02 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct s_ply
 	double			diry;
 	double			movespeed;
 	double			rotSpeed;
+	int				rot;
 	int				lastX;
 	t_wp			wp;
 	t_ctrl_states	ctrl;
@@ -346,5 +347,8 @@ void	draw_wp(t_cub *c);
 
 /* free willis */
 int		mlx_terminate(t_cub *d);
+
+
+int		get_wall_orientation(char c, t_ply *ply);
 
 #endif
