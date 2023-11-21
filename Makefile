@@ -74,10 +74,9 @@ endif
 getmlxlib:
 	@if [ ! -d $(MLX) ]; then \
 		echo "GETTING MLX LIBRARY"; \
-		wget $(MLX_URL) -O minilibx.tgz; \
-		tar -xvf minilibx.tgz; \
-		rm minilibx.tgz; \
-		mv minilibx* $(MLX); \
+		wget $(MLX_URL) -O $(MLX).tgz; \
+		tar -xvf $(MLX).tgz; \
+		rm $(MLX).tgz; \
 		echo "MLX LIBRARY Downloaded"; \
 	fi
 	
