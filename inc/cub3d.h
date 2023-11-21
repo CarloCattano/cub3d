@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                           :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 16:59:02 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 18:36:20 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define MHEIGHT 200
 
 /* TEXTURE */
-# define TX 64	
+# define TX 64
 # define TY 64
 
 /* PLAYER */
@@ -347,7 +347,6 @@ void	draw_wp(t_cub *c);
 
 /* free willis */
 int		mlx_terminate(t_cub *d);
-
 
 int		get_wall_orientation(char c, t_ply *ply);
 

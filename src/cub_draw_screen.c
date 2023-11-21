@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 18:44:53 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,23 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
            	wallX = ray[x].hitX;
 		else
 			wallX = ray[x].hitY;
-		ray[x].lineHeight = (int)(c->scr.h /ray[x].perpWallDist);
-		int drawStart = -(ray[x].lineHeight) / 2 + c->scr.h / 2;
+		ray[x].lineHeight = (c->scr.h / ray[x].perpWallDist);
+		int drawStart = -((ray[x].lineHeight) >> 1) + (c->scr.h >> 1);
       	if(drawStart < 0) 
 			drawStart = 0;
-      	int drawEnd = ray[x].lineHeight / 2 + c->scr.h / 2;
+      	int drawEnd = (ray[x].lineHeight >> 1) + (c->scr.h >> 1);
       	if(drawEnd >= c->scr.h) 
 			drawEnd = c->scr.h - 1;
 	
-		//x coordinate on the texture
-      	int texX = (int)(wallX * (double)TX);
+      	int texX = (wallX * TX) + 1;
       	if(ray[x].side == 0 && ray[x].raydirX > 0) 
 			texX = TX - texX - 1;
-      	if(ray[x].side == 1 && ray[x].raydiry < 0) 
+      	if(ray[x].side == 1 && ray[x].raydiry < 0)
 			texX = TX - texX - 1;
       	// How much to increase the texture coordinate per scr pixel
-      	double step = 1.0 * TY / ray[x].lineHeight;
+      	double step = (1.0 * TY) / ray[x].lineHeight;
       	// Starting texture coordinate
-      	double texPos = (drawStart - c->scr.h / 2.0 + ray[x].lineHeight / 2.0) * step;
+      	double texPos = (drawStart - c->scr.h * 0.5 + ray[x].lineHeight * 0.5) * step;
 		
 		t_fp fp;
 		
@@ -55,13 +54,13 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		y = -1;
 		while (++y < HEIGHT)
 		{
-			if (y < drawStart)	// ceiling
+			if (y < drawStart)
 				cub_mpp(&(c->scr), x, y, c->sc.c_ceiling);
 			else if (y > drawStart && y < drawEnd)
 			{
 				cub_mpp(&(c->scr), x, y,  cub_piinte(&fp)); 
 			}
-			else if (y > drawEnd) // floor
+			else if (y > drawEnd) 
 				cub_mpp(&(c->scr), x, y, c->sc.c_floor);
 		}
 	}
