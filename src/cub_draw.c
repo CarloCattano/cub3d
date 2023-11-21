@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:21:54 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 23:29:11 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ int	cub_draw(t_cub *c)
 	if (!nray)
 		return (1);
 
-/*	if (c->wp.zoom)
+	/*	if (c->wp.zoom)
 		wray = cub_ray(&(c->sc), c->scr.w, c->wp.fov);
 	else	*/
 	//wray = NULL;
 	cub_draw_screen(c, nray);
 	//cub_draw_sprites();
-	/*
-	cub_draw_weappon(c);*/
 	cub_draw_minimap(c, nray);
 	handle_ply(c);
 	draw_wp(c);

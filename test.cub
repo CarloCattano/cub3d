@@ -1,17 +1,7 @@
 NO ./tex/brick_wall.xpm
-SO ./tex/brick_wall.xpm
-WE ./tex/brick_wall.xpm
-EA ./tex/brick_wall.xpm
-
-S ./path_to_the_east_texture 55 55
-
-W ././path_to_the_east_texture
-
-S ./path_to_the_east_texture 66 66 
-
-D ./path_to_the_east_texture
-
-E ./path_to_the_east_texture
+SO ./tex/bookshelf.xpm
+WE ./tex/bricks.xpm
+EA ./tex/gold1.xpm
 
 F 22,22,22
 C 0,10,222

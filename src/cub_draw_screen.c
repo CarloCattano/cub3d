@@ -6,12 +6,11 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 18:44:53 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/22 00:04:18 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
 void cub_draw_screen(t_cub *c, t_ray *ray)
 {
@@ -46,20 +45,19 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		
 		t_fp fp;
 		
-		fp.tex = &(c->sc.wall[0]);
+		//fp.tex = &(c->sc.wall[0]);
 		fp.texX = texX;
 		fp.step = step;
-		fp.texY = texPos;	
-		
+		fp.texY = texPos;
+		get_wall_orientation(&ray[x], c, &fp);
+		// get_wall_texture(c, &ray[x], fp);
 		y = -1;
 		while (++y < HEIGHT)
 		{
 			if (y < drawStart)
 				cub_mpp(&(c->scr), x, y, c->sc.c_ceiling);
 			else if (y > drawStart && y < drawEnd)
-			{
 				cub_mpp(&(c->scr), x, y,  cub_piinte(&fp)); 
-			}
 			else if (y > drawEnd) 
 				cub_mpp(&(c->scr), x, y, c->sc.c_floor);
 		}
