@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 22:09:32 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/17 22:45:58 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/20 18:20:55 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	draw_wp(t_cub *d)
 		{
 			index = (y * d->sc.ply.wp.img.ll + x * (d->sc.ply.wp.img.bpp >> 3));
 			color = color_pixel((u_int32_t *)&(d->sc.ply.wp.img.pix[index]));
-			if ( color != (int)0xFF000000) 
+			if (color != (int)0xFF000000) 
 				put_wp(d, x, y, color);
 			y++;
 		}

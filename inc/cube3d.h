@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 22:45:58 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/20 18:28:00 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ typedef struct s_ply
 	double			movespeed;
 	double			rotSpeed;
 	int				lastX;
-	t_wp		wp;
+	t_wp			wp;
 	t_ctrl_states	ctrl;
 }					t_ply;
 
@@ -169,7 +169,7 @@ struct s_sc
 	t_map		map;
 	t_ply		ply;
 	t_image		*wp;
-	t_sprites 	*sprites;
+	t_sprites	*sprites;
 	t_extra		*extra;
 };
 
@@ -253,14 +253,11 @@ struct	s_cub
 
 struct s_fp
 {
-	/* image */
-	t_image *tex;
-	/* x */
+	t_image	*tex;
 	double	texX;
-	/* y*/ 
 	double	step;
-	double  texY;  	
-};		
+	double	texY;
+};
 
 /* rays */
 typedef struct s_ray
@@ -283,17 +280,17 @@ typedef struct s_ray
 /* camera */
 
 /* functions */
-int     cub_error(char const *msg, void (*f)(), void *ptr);
+int		cub_error(char const *msg, void (*f)(), void *ptr);
 
 /* parser */
 int		cub_parser(char *input, t_sc *sc, t_cub *c);
 int		cub_loadsc(int fd, t_sc *sc, t_cub *c);
 int		cub_evalfile(int fd, t_load *load);
-int		cub_evalline(int fd, t_load *load,  char *line, char **parts);
+int		cub_evalline(int fd, t_load *load, char *line, char **parts);
 int		cub_psprites(t_load *load, char **parts);
 int		cub_pfloor(t_load *load, char *line, int type);
 int		cub_pwalls(t_load *load, char **parts, int type);
-int		cub_readmap(int fd, t_load *load,  char *line);
+int		cub_readmap(int fd, t_load *load, char *line);
 int		cub_loadmap(t_load *load, t_map *map);
 int		cub_loadwalls(t_load *l, t_sc *sc, void *mlx);
 int		cub_loadfile(t_image *img, void *mlx, char *path);
@@ -314,7 +311,7 @@ t_point	cub_point(double x, double y, int colour);
 void	cub_line(t_point a, t_point b, t_image *data);
 
 /*ray*/
-t_ray	*cub_ray(t_sc *d,  int width, double fov);
+t_ray	*cub_ray(t_sc *d, int width, double fov);
 
 /* draw_walls*/
 int		cub_piinte(t_fp *fp);

@@ -1,7 +1,7 @@
 NAME := cube3
 
 CC := cc
-CFLAGS := -Werror -Wextra -Wall
+CFLAGS := -Werror -Wextra -Wall -ggdb3 -O3 -fsanitize=address -O3
 INCLUDES := -Iinc -Ilibft/inc -Imlx_linux 
 COMPILE := $(CC) $(CFLAGS) $(INCLUDES)
 REMOVE := rm -rf 
