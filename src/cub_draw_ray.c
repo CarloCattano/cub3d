@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub_draw_ray.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:59:17 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/12 15:59:01 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 /*
 void	cub_draw_ray(t_point *map, t_image *img, int mod)
 {

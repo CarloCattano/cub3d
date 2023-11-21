@@ -1,4 +1,4 @@
-#include "cube3d.h"
+#include "cub3d.h"
 
 
 int cub_pwalls(t_load *load, char **parts, int type)

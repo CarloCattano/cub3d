@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub_point.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:23:59 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/12 15:08:47 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 t_point	cub_point(double x, double y, int colour)
 {

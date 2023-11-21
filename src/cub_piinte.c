@@ -6,11 +6,11 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:28:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 22:16:00 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 int		cub_piinte(t_fp *fp)
 {

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:13:11 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/06 11:32:23 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:48:55 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cube3d.h"
 
-
-
+#include "cub3d.h"
 
 int		cub_error(char const *msg, void (*f)(), void *ptr)
 {

@@ -6,11 +6,11 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:22:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 22:45:58 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 int	cub_init(t_cub *c, t_sc *sc)
 {

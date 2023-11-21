@@ -6,11 +6,11 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:06:41 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 16:59:48 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 int	cub_loadply(t_load *load, t_ply *ply)
 {

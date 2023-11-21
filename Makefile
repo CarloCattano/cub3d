@@ -1,4 +1,4 @@
-NAME := cube3
+NAME := cub3d
 
 CC := cc
 CFLAGS := -Werror -Wextra -Wall 
@@ -63,7 +63,9 @@ debug: all
 	$(COMPILE) $(DEBUGFLAGS) $(OBJ) $(MAIN) $(LIB) $(FDF)  -o $(NAME) 
 	./$(NAME) test.cub
 clean:
+	make clean -C ./libft
 	@$(REMOVE) $(OBJ)
+
 
 fclean: clean
 	@$(REMOVE) $(NAME)

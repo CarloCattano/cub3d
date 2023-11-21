@@ -6,11 +6,11 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:32 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/17 22:17:31 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 #include "key_codes.h"
 
 int	key_down_hook(int k, t_cub *d)

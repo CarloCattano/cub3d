@@ -6,11 +6,11 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:01:30 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/17 14:26:43 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 static void	init_line(t_point *a, t_point *b, t_line *l, t_image *w)
 {

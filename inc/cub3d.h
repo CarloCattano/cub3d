@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   cub3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 /* inc */
 # include <stdio.h>
@@ -54,7 +54,7 @@
 # define RY 0xffff0000
 
 /* MSG */
-# define ERROR_ARG "CUBE3D NEEDS ONLY ONE ARG"
+# define ERROR_ARG "cub3d NEEDS ONLY ONE ARG"
 # define ERROR_PARS "PARSING FAILD"
 # define ERROR_FILE "CUB FILE CORRUPTED" 
 # define ERROR_CUB "FILE NEED .CUB EXTENSION"

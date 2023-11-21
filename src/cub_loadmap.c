@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub_loadmap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 10:30:53 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/10 17:49:38 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 
 

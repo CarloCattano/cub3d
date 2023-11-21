@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub_cparr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:11:08 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/10 17:03:40 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 char **cub_cparr(char **parts)
 {
