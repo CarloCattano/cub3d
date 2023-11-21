@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 18:36:20 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/22 00:02:44 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,7 +347,7 @@ void	draw_wp(t_cub *c);
 
 /* free willis */
 int		mlx_terminate(t_cub *d);
-
-int		get_wall_orientation(char c, t_ply *ply);
+void 	get_wall_orientation(t_ray *ray,t_cub *c, t_fp *fp);
+// void get_wall_texture(t_cub *c, t_ray *ray, t_fp fp);
 
 #endif

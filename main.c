@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 17:58:06 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 22:36:01 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	main (int ac, char *av[])
 	mlx_hook(c.win, ON_WIN_ENTER, 1L<<4, entered, &c);
 	mlx_hook(c.win, ON_WIN_LEAVE, 1L<<5, exited, &c);
 	mlx_hook(c.win, ON_KEYDOWN, 1L << 0, key_down_hook, &c);
-	mlx_hook(c.win, ON_KEYUP, 1L << 1, key_up_hook, &c); 
-	mlx_hook(c.win, ON_MOUSEMOVE, 1 << 6, motion_hook, &c); 
+	mlx_hook(c.win, ON_KEYUP, 1L << 1, key_up_hook, &c);
+	mlx_hook(c.win, ON_MOUSEMOVE, 1 << 6, motion_hook, &c);
 	mlx_hook(c.win, ON_WINDOWCLOSE, 1L << 17, mlx_terminate, &c);
 	mlx_loop_hook(c.mlx, loop_hook, &c);
 	mlx_loop(c.mlx);
