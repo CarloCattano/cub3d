@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/20 18:31:17 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/21 07:56:27 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,6 @@ int	loop_hook(t_cub *c)
 	return (0);
 }
 
-/* 
-	ply player
-	wp weapon
-	sc scene
-	c cub
-	screen scr
-*/
-
 int	main (int ac, char *av[])
 {
 	t_sc	sc;
@@ -59,7 +51,7 @@ int	main (int ac, char *av[])
 	mlx_hook(c.win, ON_KEYDOWN, 1L << 0, key_down_hook, &c);
 	mlx_hook(c.win, ON_KEYUP, 1L << 1, key_up_hook, &c); 
 	mlx_hook(c.win, ON_MOUSEMOVE, 1 << 6, motion_hook, &c); 
-	//mlx_hook(c.win, ON_WINDOWCLOSE, 1L << 17, mlx_terminate, &c);
+	mlx_hook(c.win, ON_WINDOWCLOSE, 1L << 17, mlx_terminate, &c);
 	mlx_loop_hook(c.mlx, loop_hook, &c);
 	mlx_loop(c.mlx);
 	mlx_terminate(&c);

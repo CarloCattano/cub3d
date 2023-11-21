@@ -1,7 +1,8 @@
 NAME := cube3
 
 CC := cc
-CFLAGS := -Werror -Wextra -Wall -ggdb3 -O3 -fsanitize=address -O3
+CFLAGS := -Werror -Wextra -Wall 
+DEBUGFLAGS := -ggdb3 -fsanitize=address
 INCLUDES := -Iinc -Ilibft/inc -Imlx_linux 
 COMPILE := $(CC) $(CFLAGS) $(INCLUDES)
 REMOVE := rm -rf 
@@ -58,12 +59,14 @@ mlx:
 
 run : all
 	./$(NAME) test.cub
+debug: all
+	$(COMPILE) $(DEBUGFLAGS) $(OBJ) $(MAIN) $(LIB) $(FDF)  -o $(NAME) 
+	./$(NAME) test.cub
 clean:
 	@$(REMOVE) $(OBJ)
 
 fclean: clean
 	@$(REMOVE) $(NAME)
-
 
 re: fclean all
 
