@@ -79,14 +79,14 @@ getmlxlib:
 		rm $(MLX).tgz; \
 		echo "MLX LIBRARY Downloaded"; \
 	fi
-
+	
 	@make -C $(MLX)
 	
 run : all
 	./$(NAME) test.cub
 
 debug: all
-	$(CC) $(DEBUGFLAGS) $(OBJ) $(MAIN) $(LIB) $(MLXFLAGS) -o $(NAME) 
+	$(CC) $(INCLUDES) $(DEBUGFLAGS) $(OBJ) $(MAIN) $(LIB) $(MLXFLAGS) -o $(NAME) 
 	./$(NAME) test.cub
 
 clean:
