@@ -1,7 +1,7 @@
 NAME := cube3
 
 CC := cc
-CFLAGS := -Werror -Wextra -Wall
+CFLAGS := -Werror -Wextra -Wall -fsanitize=address
 INCLUDES := -Iinc -Ilibft/inc -Imlx_linux 
 COMPILE := $(CC) $(CFLAGS) $(INCLUDES)
 REMOVE := rm -rf 
@@ -15,7 +15,7 @@ INC_DIR := ./inc/
 SRC_DIR := ./src/
 OBJ_DIR := ./obj/
 
-C := cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadscene cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls cub_loadmap cub_cparr cub_loadplayer cub_init cub_draw_minimap cub_draw cub_mpp cub_point cub_line cub_draw_ray cub_ray cub_piinte cub_draw_screen cub_loadwalls cub_loadfile player hooks keyhooks weapon
+C := cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadsc cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls cub_loadmap cub_cparr cub_freesc cub_checkmap 
 
 H :=  cube3d
 MAIN := main.c
@@ -43,7 +43,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(COMPILE) -c $< -o $@
 
 $(NAME):$(OBJ) 
-	$(COMPILE) $(OBJ) $(MAIN) $(LIB) $(FDF)  -o $(NAME) 
+	$(COMPILE) $(OBJ) $(MAIN) $(LIB)  -o $(NAME) 
 
 mlx: 
 	@if [ ! -d "$(MLX)" ]; then \

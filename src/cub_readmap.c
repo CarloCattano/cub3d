@@ -21,7 +21,7 @@ int	ft_initpl(t_load *load)
 int	ft_setply(t_load *load, char d, int c)
 {
 	if (load->xpl)
-		return (cub_error(M_MP, 1, NULL, NULL));
+		return (cub_error(E_MP, 1, NULL, NULL));
 	if (ft_initpl(load))
 		return (1);
 	*load->ypl = load->ymap;

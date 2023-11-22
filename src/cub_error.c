@@ -21,9 +21,9 @@ int		cub_error(char const *msg, char er, void (*f)(), void *ptr)
 		f(ptr);
 	}
 	
-	if (pe)
+	if (er)
 		ft_printf("%s\n", E_);
-	if (pe == 2)
+	if (er == 2)
 		perror("ERROR OPEN");
 	ft_printf("%s\n", msg);
 	return (1);

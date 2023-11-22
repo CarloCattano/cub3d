@@ -1,6 +1,6 @@
 #include "cube3d.h"
 
-static t_lextra	*ft_error(char *msg, t_lextra *nodei, char er)
+static t_lextra	*ft_error(char *msg, t_lextra *node, char er)
 {
 	if (er)
 		ft_printf("%s\n", E_);

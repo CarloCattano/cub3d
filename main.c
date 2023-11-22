@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
+/*
 int	mlx_terminate(t_cub *d)
 {
 	mlx_destroy_image(d->mlx, d->scr.img);
@@ -28,7 +28,7 @@ int	loop_hook(t_cub *c)
 	cub_draw(c);
 	return (0);
 }
-
+*/
 /* 
 	ply player
 	wp weapon
@@ -46,7 +46,7 @@ int	main (int ac, char *av[])
 		return (cub_error(E_ARG, 1, NULL, NULL));
 	if (cub_parser(av[1], &sc, &c))
 		return (cub_error(E_PARS, 0, NULL, NULL));
-	if (cub_init(&c, &sc))
+	/*if (cub_init(&c, &sc))
 		return (cub_error(E_IN, 0, NULL, NULL));	
 	init_ply(&c);
 	init_wp(&c);
@@ -61,7 +61,7 @@ int	main (int ac, char *av[])
 	mlx_hook(c.win, ON_WINDOWCLOSE, 1L << 17, mlx_terminate, &c);
 	mlx_loop_hook(c.mlx, loop_hook, &c);
 	mlx_loop(c.mlx);
-	mlx_terminate(&c);
-
+	mlx_terminate(&c);*/
+	cub_freesc(&(sc), NULL);
 	return (0);
 }

@@ -30,7 +30,7 @@
 
 /* constants */
 /* DEBUG */
-# define DEBUG 0
+# define DEBUG 1
 
 
 /* FILE */
@@ -63,27 +63,6 @@
 # define PL 0xff0000ff
 # define RY 0xffff0000
 
-/* MSG */
-/*
-# define E_ "ERROR"	
-# define E_ARG "CUBE3D NEEDS ONLY ONE ARG"
-# define E_PARS "PARSING FAILD"
-# define E_FILE "CUB FILE CORRUPTED" 
-# define E_CUB "FILE NEED .CUB EXTENSION"
-# define E_FO "OPEN CUB FILE FAIL"
-# define E_FC " FILE IS NOT RIGHT CINFIGUERD"
-# define E_MAL	"MALLOC_FAIL"
-# define SAMEARG " .CUB HAVE DUPLICATE TYPES "
-# define SCENEARG " .CUB TYPE HAS NOT THE RIGHT NUMBER OF ARG"	
-# define SCENECOL " .CUB HAS DUPLICATE COLOUR "
-# define SCENEWCOL " .CUB WRONG COLOUR IMNPUT "	
-# define SOPEN " .CUB OPEN TEXTURE FAIL"
-# define E_M " MAP IS NOT CORRECT"	
-# define E_T " NOT ALL NECESSARY TYPES ARE DECLAIRED BEFOR MAP"
-# define M_P " MULTIPLE PLAYER"
-# define M_W "MAP NOT CLOESD BY WALLS"
-# define MAIN "MAIN FAILOR"
-*/
 /* structs */
 
 typedef enum e_type			t_type;
@@ -334,7 +313,7 @@ int		cub_piinte(t_fp *fp);
 /* free */
 void	cub_dfree(char ***tofree);
 void	cub_freelextra(t_lextra **node);
-
+void    cub_freesc(t_sc *sc, void *mlx);
 /* helper */
 char	**cub_splits(char const *str, char const *set);
 int		cub_countparts(char **parts);

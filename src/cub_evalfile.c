@@ -16,10 +16,7 @@ static int ft_norm(int fd, char er, char *msg, void (*f)(), void *ptr)
 {
 	close(fd);
 	get_next_line(-2);
-	return (cub_error(E_MAL, er, free, line)
-	
-
-
+	return (cub_error(msg, er, f, ptr));
 }
 
 int	cub_evalfile(int fd, t_load *load)
@@ -43,8 +40,8 @@ int	cub_evalfile(int fd, t_load *load)
 		if (error == 2)
 			return (close(fd), 0);
 		if (error == 1)
-			return (ft_norm(fd, 0, E_FW, NULL, NULL));
+			return (ft_norm(fd, 0, E_FC, NULL, NULL));
 		line = get_next_line(fd);
 	}
-	return (close(fd), cub_error(E_FW, 1, NULL, NULL));
+	return (close(fd), cub_error(E_FC, 1, NULL, NULL));
 }
