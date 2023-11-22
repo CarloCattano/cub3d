@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/22 00:02:44 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/22 17:19:47 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "mlx.h"
 # include "key_codes.h"
 # include "constants.h"
-/* constants */
 
 /* MAP */
 # define DIRECT "NSEW"
@@ -45,7 +44,6 @@
 # define FOV 0.66
 
 /* COLOURS MINIMAP*/
-
 # define W1 0xffffd39b
 # define W2 0xff8b7355
 # define F1 0xff545454
@@ -72,8 +70,8 @@
 # define M_P " MULTIPLE PLAYER"
 # define M_W "MAP NOT CLOESD BY WALLS"
 # define MAIN "MAIN FAILOR"
-/* structs */
 
+/* structs */
 typedef enum e_type			t_type;
 typedef struct s_image		t_image;
 typedef struct s_sc			t_sc;
@@ -240,7 +238,6 @@ typedef struct s_line
 }	t_line;	
 
 /* test raycast minimap etc */
-
 struct	s_cub
 {
 	void		*mlx;
@@ -271,7 +268,7 @@ typedef struct s_ray
 	int			stepY;
 	double		sideDistX;
 	double		sideDistY;
-	double		perpWallDist;	
+	double		perpWallDist;
 	int			lineHeight;
 	int			side;
 	double		hitX;
@@ -347,7 +344,6 @@ void	draw_wp(t_cub *c);
 
 /* free willis */
 int		mlx_terminate(t_cub *d);
-void 	get_wall_orientation(t_ray *ray,t_cub *c, t_fp *fp);
-// void get_wall_texture(t_cub *c, t_ray *ray, t_fp fp);
+void	get_wall_orientation(t_ray *ray, t_cub *c, t_fp *fp);
 
 #endif
