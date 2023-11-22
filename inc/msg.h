@@ -48,4 +48,4 @@
 
 /* INIT */
 # define E_IN "INIT FAILOR"
-
+#endif

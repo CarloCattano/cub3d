@@ -12,29 +12,28 @@
 
 #include "cube3d.h"
 
-int	cub_loadply(t_load *load, t_ply *ply)
+void cub_loadply(t_load *load, t_ply *ply)
 {
-	ply->posx = *(load->xpl); 
+	ply->posx = *(load->xpl);
 	ply->posy = *(load->ypl);
 	if (load->dir == 'S')
-	{	
+	{
 		ply->dirX = 0;
 		ply->diry = 1;
-	}	
+	}
 	if (load->dir == 'W')
-	{	
+	{
 		ply->dirX = -1;
 		ply->diry = 0;
-	}	
+	}
 	if (load->dir == 'N')
-	{	
+	{
 		ply->dirX = 0;
 		ply->diry = -1;
-	}	
+	}
 	if (load->dir == 'E')
-	{	
+	{
 		ply->dirX = 1;
 		ply->diry = 0;
 	}
-	return (0);
 }

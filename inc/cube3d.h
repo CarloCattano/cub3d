@@ -25,6 +25,8 @@
 //# include "mlx.h"
 # include "key_codes.h"
 # include "constants.h"
+# include "msg.h"
+
 
 /* constants */
 /* DEBUG */
@@ -62,6 +64,7 @@
 # define RY 0xffff0000
 
 /* MSG */
+/*
 # define E_ "ERROR"	
 # define E_ARG "CUBE3D NEEDS ONLY ONE ARG"
 # define E_PARS "PARSING FAILD"
@@ -70,7 +73,6 @@
 # define E_FO "OPEN CUB FILE FAIL"
 # define E_FC " FILE IS NOT RIGHT CINFIGUERD"
 # define E_MAL	"MALLOC_FAIL"
-/* MSG CUB FILE */
 # define SAMEARG " .CUB HAVE DUPLICATE TYPES "
 # define SCENEARG " .CUB TYPE HAS NOT THE RIGHT NUMBER OF ARG"	
 # define SCENECOL " .CUB HAS DUPLICATE COLOUR "
@@ -81,6 +83,7 @@
 # define M_P " MULTIPLE PLAYER"
 # define M_W "MAP NOT CLOESD BY WALLS"
 # define MAIN "MAIN FAILOR"
+*/
 /* structs */
 
 typedef enum e_type			t_type;
@@ -306,10 +309,10 @@ int		cub_readmap(int fd, t_load *load,  char *line);
 int		cub_loadmap(t_load *load, t_map *map);
 int		cub_loadwalls(t_load *l, t_sc *sc, void *mlx);
 int		cub_loadfile(t_image *img, void *mlx, char *path);
-
+int		cub_checkmap(char **val, t_load *load);
+void		cub_loadply(t_load *load, t_ply *ply);
 
 /* draw */
-int		cub_loadply(t_load *load, t_ply *ply);
 int		cub_init(t_cub *c, t_sc *sc);
 void	cub_draw_minimap(t_cub *c, t_ray *ray);
 int		cub_draw(t_cub *c);

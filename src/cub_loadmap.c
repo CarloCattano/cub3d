@@ -32,11 +32,11 @@ static int	ft_init_map(t_map *map)
 	return (0);
 }
 
-int	ft_cpmap(t_map *map, t_list *lmap, char dir)
+static void	ft_cpmap(t_map *map, t_list *lmap, char dir)
 {
-	int y;
-	int x;
-	int len;
+	int	y;
+	int	x;
+	int	len;
 
 	y = -1;
 	while (++y < map->height)
@@ -48,25 +48,25 @@ int	ft_cpmap(t_map *map, t_list *lmap, char dir)
 			if	(x < len)
 			{
 				if ((((char *)(lmap->content))[x]) != dir)
-					(map->val)[y][x] = ((char *)(lmap->content))[x];
+					(map->val)[y][x] = ((char *)
+						(lmap->content))[x];
 				else
 					(map->val)[y][x] = '0';
 			}
 			else 
 				(map->val)[y][x] = ' ';
 		}
-		lmap = lmap->next;	
+		lmap = lmap->next;
 	}
-	return (0);
 }
 
-int cub_loadmap(t_load *load, t_map *map)
+int	cub_loadmap(t_load *load, t_map *map)
 {
 	map->height =  load->ymap;
 	map->width = load->xmap;
 	if (ft_init_map(map))
 		return (cub_error(E_MAL, 1, NULL, NULL));
-	ft_cpmap(map, load->map, load->dir)
+	ft_cpmap(map, load->map, load->dir);
 	if (cub_checkmap(map->val, load))
 		return (1);
 	return (0);

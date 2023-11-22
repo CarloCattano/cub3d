@@ -4,7 +4,6 @@
 and can also check if all items are reachabel (not impl. yet) */
 static bool	ft_flood(char **val, int x, int y, t_load *load)
 {
-
 	if (x < 0 || y < 0 || x >= load->xmap || y >= load->ymap || val[y][x] == ' ')
 	{
 		printf("wrong at [%i][%i]\n", y  + 1, x + 1);
@@ -13,18 +12,18 @@ static bool	ft_flood(char **val, int x, int y, t_load *load)
 	if (val[y][x] == '1' || val[y][x] == 'x')
 		return true;
 	val[y][x] = 'x';
-	if (!ft_flood(val, x + 1 ,y , load))
+	if (!ft_flood(val, x + 1, y, load))
 		return (false);
-	if (!ft_flood(val, x - 1,y , load))
+	if (!ft_flood(val, x - 1, y, load))
 		return (false);
-	if (!ft_flood(val, x ,y + 1, load))
+	if (!ft_flood(val, x, y + 1, load))
 		return (false);
-	if (!ft_flood(val, x ,y -1, load))
+	if (!ft_flood(val, x, y - 1, load))
 		return (false);
 	return (true);
 }
 
-static int	check(char **val, t_load *load, int x, int y)
+static int	check(t_load *load, char **val, int x, int y)
 {
 	return (x >= load->xmap || y >= load->ymap || val[y][x] == ' ');
 }
@@ -34,7 +33,7 @@ static bool	ft_check_floor(char **val, t_load *load)
 	int	j;
 	int	i;
 
-	j = -1
+	j = -1;
 	while (++j < load->ymap)
 	{
 		i = -1;

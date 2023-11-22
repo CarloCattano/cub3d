@@ -9,10 +9,9 @@
 /*   Updated: 2023/11/17 22:16:00 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "cube3d.h"
 
-int		cub_loadfile(t_image *img, void *mlx, char *path)
+int	cub_loadfile(t_image *img, void *mlx, char *path)
 {
 	img->img = mlx_xpm_file_to_image(mlx, path, &(img->w), &(img->h));
 	if (!(img->img))
@@ -23,4 +22,4 @@ int		cub_loadfile(t_image *img, void *mlx, char *path)
 	img->xoff = img->w / (double)TX;
 	img->yoff = img->h / (double)TY;
 	return (0);
-}  		
+}

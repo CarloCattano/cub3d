@@ -102,18 +102,13 @@ int	cub_loadsc(int fd, t_sc *sc, t_cub *c)
 	ft_bzero(sc, sizeof(t_sc));
 	if (cub_loadmap(&load, &(sc->map)))
 		return (ft_freeload(&load), 1);   	
-	if (cub_loadply(&load, &(sc->ply)))
-		return (ft_freeload(&load), /*ft_freesc(sc),*/ 1);
-	sc->c_floor = *load.floor;
-	sc->c_ceiling = *load.ceiling;
-	sc->plane_x =  - sc->ply.diry;
-	sc->plane_y =  sc->ply.dirX;
+	cub_loadply(&load, &(sc->ply));
+	cub_loadcfpl(&load, sc);
 	ft_bzero(c, sizeof(t_cub));
 	c->mlx = mlx_init();
 	if (cub_loadwalls(&load, sc, c->mlx))
-		return (ft_freeload(&load), /*ft_freesc(sc),*/ 1);   	
+		return (ft_freeload(&load), cub_freesc(sc, c->mlx), 1);   	
 	/*if (cub_loadextra(&load), sc, c->mlx)
-		return (ft_freeload(&load), 1);
-	*/
+		return (ft_freeload(&load), cub_freesc(sc, c->mlx), 1);*/
 	return (ft_freeload(&load), 0);
 }
