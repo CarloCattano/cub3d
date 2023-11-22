@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/22 00:07:49 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/22 17:00:39 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,26 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 	while (++x < c->scr.w)
 	{
 		if (ray[x].side)
-           	wallX = ray[x].hitX;
+		   	wallX = ray[x].hitX;
 		else
 			wallX = ray[x].hitY;
 		ray[x].lineHeight = (c->scr.h / ray[x].perpWallDist);
 		int drawStart = -((ray[x].lineHeight) >> 1) + (c->scr.h >> 1);
-      	if(drawStart < 0) 
+	  	if(drawStart < 0) 
 			drawStart = 0;
-      	int drawEnd = (ray[x].lineHeight >> 1) + (c->scr.h >> 1);
-      	if(drawEnd >= c->scr.h) 
+	  	int drawEnd = (ray[x].lineHeight >> 1) + (c->scr.h >> 1);
+	  	if(drawEnd >= c->scr.h) 
 			drawEnd = c->scr.h - 1;
 	
-      	int texX = (wallX * TX) + 1;
-      	if(ray[x].side == 0 && ray[x].raydirX > 0) 
+	  	int texX = (wallX * TX) + 1;
+	  	if(ray[x].side == 0 && ray[x].raydirX > 0) 
 			texX = TX - texX - 1;
-      	if(ray[x].side == 1 && ray[x].raydiry < 0)
+	  	if(ray[x].side == 1 && ray[x].raydiry < 0)
 			texX = TX - texX - 1;
-      	// How much to increase the texture coordinate per scr pixel
-      	double step = (1.0 * TY) / ray[x].lineHeight;
-      	// Starting texture coordinate
-      	double texPos = (drawStart - c->scr.h * 0.5 + ray[x].lineHeight * 0.5) * step;
+	  	// How much to increase the texture coordinate per scr pixel
+	  	double step = (1.0 * TY) / ray[x].lineHeight;
+	  	// Starting texture coordinate
+	  	double texPos = (drawStart - c->scr.h * 0.5 + ray[x].lineHeight * 0.5) * step;
 		
 		t_fp fp;
 		
