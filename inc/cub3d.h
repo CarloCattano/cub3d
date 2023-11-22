@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/22 17:19:47 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/22 17:20:55 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,7 +292,6 @@ int		cub_readmap(int fd, t_load *load, char *line);
 int		cub_loadmap(t_load *load, t_map *map);
 int		cub_loadwalls(t_load *l, t_sc *sc, void *mlx);
 int		cub_loadfile(t_image *img, void *mlx, char *path);
-
 
 /* draw */
 int		cub_loadply(t_load *load, t_ply *ply);

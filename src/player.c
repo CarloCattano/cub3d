@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:11:22 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/22 17:15:51 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/22 17:42:11 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,74 +22,55 @@ void	init_ply(t_cub *d)
 	d->sc.ply.rotSpeed = ROT_S;
 }
 
-void	move_ply(t_cub *d, int direction)
+static void	update_position(t_cub *d, double direction)
 {
 	double	movespeed;
-	double	dirX;
-	double	diry;
-	double	posx;
-	double	posy;
 	double	newposx;
 	double	newposy;
 	int		cellX;
 	int		cellY;
 
 	movespeed = d->sc.ply.movespeed;
-	dirX = d->sc.ply.dirX;
-	diry = d->sc.ply.diry;
-	posx = d->sc.ply.posx;
-	posy = d->sc.ply.posy;
-	newposx = posx + direction * dirX * movespeed;
-	newposy = posy + direction * diry * movespeed;
+	newposx = d->sc.ply.posx + direction * d->sc.ply.dirX * movespeed;
+	newposy = d->sc.ply.posy + direction * d->sc.ply.diry * movespeed;
 	cellX = (int)newposx;
 	cellY = (int)newposy;
 	if (d->sc.map.val[cellY][cellX] == '0')
 	{
-		if (d->sc.map.val[cellY][(int)posx] == '0' && fabs(newposx
-				- posx) > EPSILON)
+		if (d->sc.map.val[cellY][(int)d->sc.ply.posx] == '0' && fabs(newposx
+				- d->sc.ply.posx) > EPSILON)
 			d->sc.ply.posx = newposx;
-		if (d->sc.map.val[(int)posy][cellX] == '0' && fabs(newposy
-				- posy) > EPSILON)
+		if (d->sc.map.val[(int)d->sc.ply.posy][cellX] == '0' && fabs(newposy
+				- d->sc.ply.posy) > EPSILON)
 			d->sc.ply.posy = newposy;
 	}
 }
 
-void	rotate_ply(t_cub *d, int direction)
+void	move_ply(t_cub *d, int direction)
 {
-	double	dirX;
-	double	diry;
-	double	plane_x;
-	double	plane_y;
-	double	olddirX;
+	update_position(d, direction);
+}
+
+static void	update_rotation(t_cub *d, double angle)
+{
+	double	olddirx;
 	double	oldplane_x;
 
-	dirX = d->sc.ply.dirX;
-	diry = d->sc.ply.diry;
-	plane_x = d->sc.plane_x;
-	plane_y = d->sc.plane_y;
+	olddirx = d->sc.ply.dirX;
+	oldplane_x = d->sc.plane_x;
+	d->sc.ply.dirX = olddirx * cos(angle) - d->sc.ply.diry * sin(angle);
+	d->sc.ply.diry = olddirx * sin(angle) + d->sc.ply.diry * cos(angle);
+	d->sc.plane_x = oldplane_x * cos(angle) - d->sc.plane_y * sin(angle);
+	d->sc.plane_y = oldplane_x * sin(angle) + d->sc.plane_y * cos(angle);
+}
+
+void	rotate_ply(t_cub *d, int direction)
+{
 	if (direction >= 1)
-	{
-		olddirX = dirX;
-		dirX = dirX * cos(ROT_S) - diry * sin(ROT_S);
-		diry = olddirX * sin(ROT_S) + diry * cos(ROT_S);
-		oldplane_x = plane_x;
-		plane_x = plane_x * cos(ROT_S) - plane_y * sin(ROT_S);
-		plane_y = oldplane_x * sin(ROT_S) + plane_y * cos(ROT_S);
-	}
+		update_rotation(d, ROT_S);
 	else if (direction <= -1)
-	{
-		olddirX = dirX;
-		oldplane_x = plane_x;
-		dirX = dirX * cos(-ROT_S) - diry * sin(-ROT_S);
-		diry = olddirX * sin(-ROT_S) + diry * cos(-ROT_S);
-		plane_x = plane_x * cos(-ROT_S) - plane_y * sin(-ROT_S);
-		plane_y = oldplane_x * sin(-ROT_S) + plane_y * cos(-ROT_S);
-	}
-	d->sc.ply.rot = (int)(atan2(diry, dirX) * 180 / M_PI);
-	d->sc.ply.dirX = dirX;
-	d->sc.ply.diry = diry;
-	d->sc.plane_x = plane_x;
-	d->sc.plane_y = plane_y;
+		update_rotation(d, -ROT_S);
+	d->sc.ply.rot = (int)(atan2(d->sc.ply.diry, d->sc.ply.dirX) * 180 / M_PI);
 }
 
 void	handle_ply(t_cub *d)
