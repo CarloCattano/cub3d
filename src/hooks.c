@@ -22,16 +22,28 @@ int	entered(t_cub *d)
 	return (0);
 }
 
+
+
+
+
 int	exited(t_cub *d)
 {
 	if (d->sc.ply.lastX > WIDTH - 10)
 	{
+	#ifdef __linux__	
 		mlx_mouse_move(d->mlx, d->win, WIDTH - 10, HEIGHT >> 1);
+	#elif __APPLE__
+		mlx_mouse_move(d->win,  WIDTH - 10, HEIGHT >> 1);
+	#endif		
 		d->sc.ply.lastX = WIDTH - 10;
 	}
 	else
 	{
-		mlx_mouse_move(d->mlx, d->win, 10, HEIGHT >> 1);
+	#ifdef __linux__	
+		mlx_mouse_move(d->mlx, d->win, WIDTH - 10, HEIGHT >> 1);
+	#elif __APPLE__
+		mlx_mouse_move(d->win,  WIDTH - 10, HEIGHT >> 1);
+	#endif		
 		d->sc.ply.lastX = 10;
 	}
 	return (0);

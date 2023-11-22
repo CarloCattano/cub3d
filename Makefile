@@ -6,7 +6,7 @@ DEBUGFLAGS := -ggdb3 -fsanitize=address
 INCLUDES := -Iinc -Ilibft/inc
 
 ifeq ($(ARCH), Darwin)
-	INCLUDES += -Iminilibx-mac
+	INCLUDES += -Iminilibx_opengl_20191021
 else ifeq ($(ARCH), Linux)
 	INCLUDES += -Iminilibx-linux
 endif
@@ -62,9 +62,9 @@ $(NAME):$(OBJ)
 MLX_URL = ""
 
 ifeq ($(ARCH), Darwin)
-	MLX := "minilibx-mac"
+	MLX := "minilibx_opengl_20191021"
 	MLX_URL = "https://cdn.intra.42.fr/document/document/22380/minilibx_opengl.tgz"
-	MLXFLAGS := -Lminilibx-linux -lmlx -framework OpenGL -framework AppKit 
+	MLXFLAGS := -L$(MLX) -lmlx -framework OpenGL -framework AppKit 
 else ifeq ($(ARCH), Linux)
 	MLX := "minilibx-linux"
 	MLX_URL = "https://cdn.intra.42.fr/document/document/22379/minilibx-linux.tgz"
@@ -92,7 +92,7 @@ debug: all
 clean:
 	make clean -C ./libft
 	make fclean -C ./libft
-	make clean -C ./minilibx-linux
+	make clean -C ./$(MLX)
 	@$(REMOVE) $(OBJ)
 
 fclean: clean
