@@ -6,6 +6,7 @@ tags
 .vscode
 compile_commands.json
 *.o
+Doxyfile
 minilibx-linux
 minilibx-mac
 MLX42

@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 22:09:32 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/22 16:52:58 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,35 @@ void	init_wp(t_cub *d)
 
 u_int32_t	color_pixel(u_int32_t *pixel)
 {
-	u_int8_t	red;
-	u_int8_t	green;
-	u_int8_t	blue;
-	u_int8_t	alpha;
+	u_int8_t	r;
+	u_int8_t	g;
+	u_int8_t	b;
+	u_int8_t	a;
 
 	if (pixel == NULL)
 		return (0);
-	red = (pixel[0] >> 24) & 0xFF;
-	green = (pixel[0] >> 16) & 0xFF;
-	blue = (pixel[0] >> 8) & 0xFF;
-	alpha = (pixel[0]) & 0xFF;
-	return (((u_int32_t)red << 24) | ((u_int32_t)green << 16)
-		| ((u_int32_t)blue << 8) | (u_int32_t)alpha);
+	r = (pixel[0] >> 24) & 0xFF;
+	g = (pixel[0] >> 16) & 0xFF;
+	b = (pixel[0] >> 8) & 0xFF;
+	a = (pixel[0]) & 0xFF;
+	return (((u_int32_t)r << 24) | ((u_int32_t)g << 16)
+		| ((u_int32_t)b << 8) | (u_int32_t)a);
 }
 
 void	put_wp(t_cub *d, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = d->scr.pix + ((y + 380) * d->scr.ll + (x + 200) *(d->scr.bpp >> 3));
+	dst = d->scr.pix + ((y + 380) * d->scr.ll + (x + 200) * (d->scr.bpp >> 3));
 	*(unsigned int *)dst = color;
 }
 
 void	draw_wp(t_cub *d)
 {
-	int				x;
-	int				y;
-	int				color;
-	int				index;
+	int	x;
+	int	y;
+	int	color;
+	int	index;
 
 	x = 0;
 	while (x < d->sc.ply.wp.img.w)
@@ -62,7 +62,7 @@ void	draw_wp(t_cub *d)
 		{
 			index = (y * d->sc.ply.wp.img.ll + x * (d->sc.ply.wp.img.bpp >> 3));
 			color = color_pixel((u_int32_t *)&(d->sc.ply.wp.img.pix[index]));
-			if (color != (int)0xFF000000) 
+			if (color != (int)0xFF000000)
 				put_wp(d, x, y, color);
 			y++;
 		}
