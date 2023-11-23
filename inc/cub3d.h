@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/23 17:40:54 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 18:17:23 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,7 +329,7 @@ char	**cub_cparr(char **parts);
 int		motion_hook(int x, int y, t_cub *d);
 int		key_down_hook(int keycode, t_cub *d);
 int		key_up_hook(int keycode, t_cub *d);
-int		mouse_buttons(int button, int x, int y, t_sc *d);
+int		mouse_buttons(int button, int x, int y, t_cub *d);
 
 int		exited(t_cub *d);
 int		entered(t_cub *d);

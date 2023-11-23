@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 22:36:01 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 18:24:33 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main (int ac, char *av[])
 	init_ply(&c);
 	init_wp(&c);
 	mlx_mouse_hide(c.mlx, c.win);
-	//mlx_mouse_hook(c.scr.img, mouse_buttons, &c);
+	mlx_mouse_hook(c.win, mouse_buttons, &c);
 	mlx_hook(c.win, ON_WIN_ENTER, 1L<<4, entered, &c);
 	mlx_hook(c.win, ON_WIN_LEAVE, 1L<<5, exited, &c);
 	mlx_hook(c.win, ON_KEYDOWN, 1L << 0, key_down_hook, &c);
