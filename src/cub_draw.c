@@ -6,13 +6,11 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:21:54 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 23:29:11 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 22:23:04 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/* possible to give minimap */
 
 int	cub_draw(t_cub *c)
 {
@@ -29,11 +27,11 @@ int	cub_draw(t_cub *c)
 	//wray = NULL;
 	cub_draw_screen(c, nray);
 	//cub_draw_sprites();
-	cub_draw_minimap(c, nray);
+	if (c->bonus == 1)
+		cub_draw_minimap(c, nray);
 	handle_ply(c);
 	draw_wp(c);
 	free(nray);
 	return (0);
 }
-
 

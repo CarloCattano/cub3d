@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:32 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/23 18:23:40 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 22:24:28 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ int	key_up_hook(int k, t_cub *d)
 		d->sc.ply.shooting = 0;
 	if (k == KEY_ESCAPE)
 		mlx_terminate(d);
+	if (k == KEY_B)
+		d->bonus = !d->bonus;
 	return (k);
 }

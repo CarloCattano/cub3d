@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/23 18:17:23 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 22:18:49 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <math.h>
+# include <time.h>
+# include <stdbool.h>
+
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
-# include <stdbool.h>
 # include "mlx.h"
 # include "key_codes.h"
 # include "constants.h"
@@ -244,11 +246,11 @@ struct	s_cub
 {
 	void		*mlx;
 	void		*win;
-	int			win_h;
-	int			win_w;
 	t_sc		sc;
 	t_image		scr;
 	t_image		mini;
+	float		fps;
+	int			bonus;
 };
 
 struct s_fp
@@ -346,5 +348,9 @@ void	draw_wp(t_cub *c);
 /* free willis */
 int		mlx_terminate(t_cub *d);
 void	get_wall_orientation(t_ray *ray, t_cub *c, t_fp *fp);
+
+void	cub_fps(t_cub *c);
+
+void	show_fps(t_cub *c, char *str);
 
 #endif

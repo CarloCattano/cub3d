@@ -6,15 +6,17 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/23 18:24:33 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 22:21:13 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "./inc/cub3d.h"
 
 int	loop_hook(t_cub *c)
 {
 	cub_draw(c);
+	if ( c->bonus == 1)
+		show_fps(c, "FPS: 42");
 	return (0);
 }
 

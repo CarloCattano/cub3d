@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:58:41 by ccattano          #+#    #+#             */
-/*   Updated: 2023/10/05 11:49:00 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 22:23:34 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define KEY_ESCAPE		65307
 
 # define KEY_R			114
+# define KEY_M			109
 
 # define MOUSE_LEFT		1
 # define MOUSE_RIGHT	3

@@ -6,14 +6,6 @@
 	- extraneous characters in map ?
 - map validation
 	- check for allowed chars:
-	 ```0, 1 , D, space, initial_player_dir```
-
-#### Minimap:
-	- direction ray
-	- FOV 
-
-### Player:
-	- initial dirX diry = N | S | E | W
 
 ### Program flow:
 - check config file
@@ -22,9 +14,8 @@
 	- check texture path -> floor/ceiling color -> map
 - parse map
 
-
 ### refactor
 - draw function from tutorial into norminette friendly 
 
-
-### 
+## FPS COUNTER with time.h
+## time for anims in sprites

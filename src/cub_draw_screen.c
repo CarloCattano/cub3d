@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/22 17:00:39 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 21:45:11 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void cub_draw_screen(t_cub *c, t_ray *ray)
 {
-	int x;
-	int y;
-	double wallX;
+	clock_t	start_t;
+	clock_t	end_t;
+	int 	x;
+	int		y;
+	double	wallX;
 
+	start_t = clock();
 	x = -1;
 	while (++x < c->scr.w)
 	{
@@ -61,5 +64,7 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 				cub_mpp(&(c->scr), x, y, c->sc.c_floor);
 		}
 	}
-	 mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
+	mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
+	end_t = clock();
+	c->fps = 1.0 / (((double)(end_t - start_t) / CLOCKS_PER_SEC));
 }
