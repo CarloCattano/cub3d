@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/23 22:21:13 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 22:43:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	loop_hook(t_cub *c)
 {
 	cub_draw(c);
 	if ( c->bonus == 1)
-		show_fps(c, "FPS: 42");
+		show_fps(c, "PLACE HOLDER 42");
+	printf("d->fps: %f\n", c->fps);
 	return (0);
 }
 
