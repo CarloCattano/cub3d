@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/23 22:33:42 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 00:25:10 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct s_ply
 	t_ctrl_states	ctrl;
 	int				wp_s;
 	int				shooting;
+	t_image			**wp_imgs;
 }					t_ply;
 
 struct s_map
@@ -352,5 +353,7 @@ void	get_wall_orientation(t_ray *ray, t_cub *c, t_fp *fp);
 void	cub_fps(t_cub *c);
 
 void	show_fps(t_cub *c, char *str);
+void	cub_animate_sprite(t_cub *c );
+t_image **init_all_frames(t_cub *c);
 
 #endif

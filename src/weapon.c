@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 22:09:32 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/23 18:06:26 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 00:49:54 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_wp(t_cub *d)
 	d->sc.ply.wp.img.pix = mlx_get_data_addr(d->sc.ply.wp.img.img,
 			&d->sc.ply.wp.img.bpp, &d->sc.ply.wp.img.ll,
 			&d->sc.ply.wp.img.endian);
+	/* d->sc.ply.wp_imgs = init_all_frames(d); */
 }
 
 u_int32_t	color_pixel(u_int32_t *pixel)
@@ -49,6 +50,7 @@ void	put_wp(t_cub *d, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+
 void	draw_wp(t_cub *d)
 {
 	int	x;
@@ -57,7 +59,10 @@ void	draw_wp(t_cub *d)
 	int	index;
 
 	if (d->sc.ply.shooting)
+	{
 		d->sc.ply.wp_s = 10;
+		/* cub_animate_sprite(d); */
+	}
 	else
 		d->sc.ply.wp_s = 1;
 	x = 0;
