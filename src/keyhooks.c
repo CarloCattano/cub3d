@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:32 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 17:36:44 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	key_down_hook(int k, t_cub *d)
 		d->sc.ply.ctrl.turn = -1;
 	else if (k == KEY_RIGHT)
 		d->sc.ply.ctrl.turn = 1;
-
+	if (k == KEY_SPACE)
+		d->sc.ply.shooting = 1;
 	if (k == KEY_ESCAPE)
 		mlx_terminate(d);
 	return (k);
@@ -41,5 +42,7 @@ int	key_up_hook(int k, t_cub *d)
 		d->sc.ply.ctrl.left_right = 0;
 	if (k == KEY_LEFT || k == KEY_RIGHT)
 		d->sc.ply.ctrl.turn = 0;
+	if (k == KEY_SPACE)
+		d->sc.ply.shooting = 0;
 	return (k);
 }

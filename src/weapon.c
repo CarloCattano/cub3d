@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 22:09:32 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/22 16:52:58 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/23 17:41:47 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void	put_wp(t_cub *d, int x, int y, int color)
 {
 	char	*dst;
 
+	x = d->sc.ply.wp_s + x;
+	y = d->sc.ply.wp_s + y;
+
 	dst = d->scr.pix + ((y + 380) * d->scr.ll + (x + 200) * (d->scr.bpp >> 3));
 	*(unsigned int *)dst = color;
 }
@@ -53,7 +56,11 @@ void	draw_wp(t_cub *d)
 	int	y;
 	int	color;
 	int	index;
-
+	
+	if (d->sc.ply.shooting)
+		d->sc.ply.wp_s = 10;
+	else
+		d->sc.ply.wp_s = 1;
 	x = 0;
 	while (x < d->sc.ply.wp.img.w)
 	{
