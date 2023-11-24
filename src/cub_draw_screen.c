@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/24 21:14:00 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 21:32:59 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 void cub_draw_screen(t_cub *c, t_ray *ray)
 {
-	clock_t	start_t;
-	clock_t	end_t;
 	int 	x;
 	int		y;
 	double	wallX;
 
-	start_t = clock();
 	x = -1;
 	while (++x < c->scr.w)
 	{
@@ -41,9 +38,7 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 			texX = TX - texX - 1;
 	  	if(ray[x].side == 1 && ray[x].raydiry < 0)
 			texX = TX - texX - 1;
-	  	// How much to increase the texture coordinate per scr pixel
 	  	double step = (1.0 * TY) / ray[x].lineHeight;
-	  	// Starting texture coordinate
 	  	double texPos = (drawStart - c->scr.h * 0.5 + ray[x].lineHeight * 0.5) * step;
 		
 		t_fp fp;
@@ -65,8 +60,5 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		}
 	}
 	mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
-	end_t = clock();
 	add_frame(c);
-	c->fps = 1.0 / (((double)(end_t - start_t) / CLOCKS_PER_SEC));
-
 }

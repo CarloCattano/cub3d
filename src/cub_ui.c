@@ -6,7 +6,7 @@
 /*   By: carlo <no@way.zip>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 21:46:38 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/23 23:03:38 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 21:27:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ void	show_fps(t_cub *c, char *str)
 {
 	int	left_corner;
 
-	left_corner = WIDTH - (WIDTH >> 3);
+	left_corner = WIDTH - (WIDTH >> 3) + 10;
 	border(c);
 	panel(c);
-	mlx_string_put(c->mlx, c->win, left_corner - 6, 18, 0xFFFFFFFF, str);
+	mlx_string_put(c->mlx, c->win, left_corner + 26, 18, 0xFFFFFFFF, " FPS");
+	mlx_string_put(c->mlx, c->win, left_corner + 8, 18, 0xFFFFFFFF, str);
 }

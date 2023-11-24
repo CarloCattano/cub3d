@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:35:16 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/22 16:58:11 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 21:27:52 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	mlx_terminate(t_cub *d)
 	free(d->mlx);
 	ft_putendl_fd("Program terminated Gracefully ❤️", 1);
 	exit (0);
+	return (0);
 }
 
 #else

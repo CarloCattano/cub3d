@@ -6,17 +6,21 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/23 23:34:41 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 21:31:01 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./inc/cub3d.h"
+#include "cub3d.h"
 
 int	loop_hook(t_cub *c)
 {
+	char *str;
+
+	str = ft_itoa(c->fps);
 	cub_draw(c);
 	if ( c->bonus == 1)
-		show_fps(c, "PLACE HOLDER 42");
+		show_fps(c, str);
+	free(str);
 	return (0);
 }
 

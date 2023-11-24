@@ -23,14 +23,13 @@ OBJ_DIR := ./obj/
 YELLOW := $(shell tput setaf 3)
 NC := $(shell tput sgr0)
 
-C := cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadscene \
+C := main cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_dfree cub_evalline cub_loadscene \
 	 cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls cub_loadmap cub_cparr \
 	 cub_loadplayer cub_init cub_draw_minimap cub_draw cub_mpp cub_point cub_line cub_draw_ray cub_ray cub_piinte \
 	 cub_draw_screen cub_loadwalls cub_loadfile player hooks keyhooks weapon wall_orientation exit \
 	 cub_fps cub_ui cub_animate_sprite utils
 
 H :=  cub3d
-MAIN := main.c
 
 INC := $(addprefix $(INC_DIR), $(addsuffix .h, $(H)))
 SRC := $(addprefix $(SRC_DIR),$(addsuffix .c, $(C)))
@@ -54,7 +53,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME):$(OBJ)
-	$(CC) $(INCLUDES) $(OBJ) $(MAIN) $(LIB) $(MLXFLAGS) -o $(NAME) 
+	$(CC) $(INCLUDES) $(OBJ) $(LIB) $(MLXFLAGS) -o $(NAME) 
 	@echo "$(YELLOW)------------------------"
 	@echo "FINISHED COMPILING $(NAME) for $(ARCH)"
 	@echo "--------------------------------------"
@@ -87,7 +86,7 @@ run : all
 	./$(NAME) test.cub
 
 debug: all
-	$(CC) $(INCLUDES) $(DEBUGFLAGS) $(OBJ) $(MAIN) $(LIB) $(MLXFLAGS) -o $(NAME) 
+	$(CC) $(INCLUDES) $(DEBUGFLAGS) $(OBJ) $(LIB) $(MLXFLAGS) -o $(NAME) 
 	./$(NAME) test.cub
 
 clean:
