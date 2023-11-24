@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 22:09:32 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/24 00:49:54 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 19:46:59 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	init_wp(t_cub *d)
 {
-	d->sc.ply.wp.path = "./res/gun3.xpm";
+	d->sc.ply.wp.path = "./res/gun/gun3.xpm";
 	d->sc.ply.wp.img.img = mlx_xpm_file_to_image(d->mlx, d->sc.ply.wp.path,
 			&d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h);
 	d->sc.ply.wp.img.pix = mlx_get_data_addr(d->sc.ply.wp.img.img,
 			&d->sc.ply.wp.img.bpp, &d->sc.ply.wp.img.ll,
 			&d->sc.ply.wp.img.endian);
-	/* d->sc.ply.wp_imgs = init_all_frames(d); */
+	init_wp_sprites(d);
 }
 
 u_int32_t	color_pixel(u_int32_t *pixel)
@@ -58,13 +58,17 @@ void	draw_wp(t_cub *d)
 	int	color;
 	int	index;
 
-	if (d->sc.ply.shooting)
+	if (d->sc.ply.shooting )
 	{
-		d->sc.ply.wp_s = 10;
-		/* cub_animate_sprite(d); */
+		d->sc.ply.wp_s = 22;
+		int r = rand() % 4 + 1;
+		d->sc.ply.wp.img = *d->sc.sprites[r].img;
 	}
 	else
+	{
 		d->sc.ply.wp_s = 1;
+		d->sc.ply.wp.img = *d->sc.sprites[0].img;
+	}
 	x = 0;
 	while (x < d->sc.ply.wp.img.w)
 	{

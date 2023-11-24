@@ -6,40 +6,34 @@
 /*   By: carlo <no@way.zip>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:13:23 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/24 00:49:18 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 19:46:05 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* animate images logic works
- * but it needs allocated image frames
- * for the weapon anims	
- * 
- */
+void	init_wp_sprites(t_cub *c)
+{
+	char	*paths[5];
+	int		i;
 
-/* t_image	**init_all_frames(t_cub *d) */
-/* { */
-/* 	t_image **frames = malloc(4 * sizeof(t_image *)); */
-/*     frames[0] = mlx_xpm_file_to_image(d->mlx, "./res/gun3.xpm", &d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h); */
-/*     frames[1] = mlx_xpm_file_to_image(d->mlx, "./res/guna.xpm", &d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h); */
-/*     frames[2] = mlx_xpm_file_to_image(d->mlx, "./res/gunb.xpm", &d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h); */
-/*     frames[3] = mlx_xpm_file_to_image(d->mlx, "./res/gunc.xpm", &d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h); */ 
-/* 	return (); */
-/* } */
-
-/* void	cub_animate_sprite(t_cub *d) */
-/* { */
-/* 	static int		i = 0; */
-/* 	static clock_t	start_t; */
-/* 	clock_t			end_t; */
-
-/* 	end_t = clock(); */
-/* 	if (end_t - start_t > 100000) */
-/* 	{ */
-/*         i = (i + 1) % 4; */
-/* 		start_t = end_t; */
-/* 		d->sc.ply.wp.img = *(d->sc.ply.wp_imgs[i]); */
-/* 	} */
-/* } */
-
+	paths[0] = "./res/gun/gun3.xpm";
+	paths[1] = "./res/gun/guna.xpm";
+	paths[2] = "./res/gun/gunb.xpm";
+	paths[3] = "./res/gun/gunc.xpm";
+	paths[4] = "./res/gun/gund.xpm";
+	c->sc.sprites = malloc(sizeof(t_sprites) * 5);
+	i = 0;
+	while (i < 5)
+	{
+		c->sc.sprites[i].path = paths[i];
+		c->sc.sprites[i].img = malloc(sizeof(t_image));
+		c->sc.sprites[i].img->img = mlx_xpm_file_to_image(c->mlx,
+				c->sc.sprites[i].path, &c->sc.sprites[i].img->w,
+				&c->sc.sprites[i].img->h);
+		c->sc.sprites[i].img->pix = mlx_get_data_addr(c->sc.sprites[i].img->img,
+				&c->sc.sprites[i].img->bpp, &c->sc.sprites[i].img->ll,
+				&c->sc.sprites[i].img->endian);
+		i++;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/24 00:25:10 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 19:44:49 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,8 +181,9 @@ struct s_sprites
 {
 	int				x;
 	int				y;
-	t_image			sprites;
 	double			z;
+	t_image			*img;
+	char			*path;
 	double			dist;
 	int				hdiv;
 	int				vdiv;
@@ -353,7 +354,7 @@ void	get_wall_orientation(t_ray *ray, t_cub *c, t_fp *fp);
 void	cub_fps(t_cub *c);
 
 void	show_fps(t_cub *c, char *str);
-void	cub_animate_sprite(t_cub *c );
-t_image **init_all_frames(t_cub *c);
+void	draw_sprites(t_cub *c,int x, int y);
+void    init_wp_sprites(t_cub *c);
 
 #endif
