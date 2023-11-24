@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 22:09:32 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/24 19:46:59 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 20:13:19 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_wp(t_cub *d)
 {
-	d->sc.ply.wp.path = "./res/gun/gun3.xpm";
+	d->sc.ply.wp.path = "./res/gun/gun.xpm";
 	d->sc.ply.wp.img.img = mlx_xpm_file_to_image(d->mlx, d->sc.ply.wp.path,
 			&d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h);
 	d->sc.ply.wp.img.pix = mlx_get_data_addr(d->sc.ply.wp.img.img,
@@ -57,11 +57,13 @@ void	draw_wp(t_cub *d)
 	int	y;
 	int	color;
 	int	index;
+	
+	static int r = 0;
 
-	if (d->sc.ply.shooting )
+	if (d->sc.ply.shooting)
 	{
 		d->sc.ply.wp_s = 22;
-		int r = rand() % 4 + 1;
+		r = (r % 8) + 1;
 		d->sc.ply.wp.img = *d->sc.sprites[r].img;
 	}
 	else
@@ -69,6 +71,7 @@ void	draw_wp(t_cub *d)
 		d->sc.ply.wp_s = 1;
 		d->sc.ply.wp.img = *d->sc.sprites[0].img;
 	}
+	r++;
 	x = 0;
 	while (x < d->sc.ply.wp.img.w)
 	{
