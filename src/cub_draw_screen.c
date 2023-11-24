@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/23 22:34:04 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 21:14:00 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 	}
 	mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
 	end_t = clock();
+	add_frame(c);
 	c->fps = 1.0 / (((double)(end_t - start_t) / CLOCKS_PER_SEC));
+
 }

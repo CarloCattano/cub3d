@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/24 20:17:57 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 21:14:21 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /* inc */
 # include <stdio.h>
 # include <fcntl.h>
+#include <sys/types.h>
 # include <unistd.h>
 # include <math.h>
 # include <time.h>
@@ -244,16 +245,16 @@ typedef struct s_line
 	int			h;
 }	t_line;	
 
-/* test raycast minimap etc */
 struct	s_cub
 {
-	void		*mlx;
-	void		*win;
-	t_sc		sc;
-	t_image		scr;
-	t_image		mini;
-	float		fps;
-	int			bonus;
+	void			*mlx;
+	void			*win;
+	t_sc			sc;
+	t_image			scr;
+	t_image			mini;
+	float			fps;
+	int				bonus;
+	unsigned int	frame;
 };
 
 struct s_fp
@@ -264,7 +265,6 @@ struct s_fp
 	double	texY;
 };
 
-/* rays */
 typedef struct s_ray
 {
 	double		raydirX;
@@ -282,9 +282,6 @@ typedef struct s_ray
 	double		hitY;
 }				t_ray;
 
-/* camera */
-
-/* functions */
 int		cub_error(char const *msg, void (*f)(), void *ptr);
 
 /* parser */
@@ -307,14 +304,10 @@ void	cub_draw_minimap(t_cub *c, t_ray *ray);
 int		cub_draw(t_cub *c);
 void	cub_draw_screen(t_cub *c, t_ray *ray);
 
-/* draw_pixel*/
 void	cub_mpp(t_image *data, int x, int y, int color);
-/* init_point*/
 t_point	cub_point(double x, double y, int colour);
-/* draw_line */
 void	cub_line(t_point a, t_point b, t_image *data);
 
-/*ray*/
 t_ray	*cub_ray(t_sc *d, int width, double fov);
 
 /* draw_walls*/
@@ -355,7 +348,10 @@ void	get_wall_orientation(t_ray *ray, t_cub *c, t_fp *fp);
 void	cub_fps(t_cub *c);
 
 void	show_fps(t_cub *c, char *str);
+
+void	add_frame(t_cub *c);
 void	draw_sprites(t_cub *c,int x, int y);
 void    init_wp_sprites(t_cub *c);
 
+u_int32_t color_pixel(u_int32_t *pixel);
 #endif
