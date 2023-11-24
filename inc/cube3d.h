@@ -166,11 +166,11 @@ struct s_sc
 
 struct s_sprites
 {
-	int				x;
-	int				y;
+	double				x;
+	double				y;
 	t_image			sprites;
 	double			z;
-	double			dist;
+	double			sv;
 	int				hdiv;
 	int				vdiv;
 	t_sprites		*next;
