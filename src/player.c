@@ -6,24 +6,11 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:11:22 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/23 17:38:19 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 20:26:54 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/* todo - put this function in init logic */
-
-void	init_ply(t_cub *d)
-{
-	d->sc.ply.movespeed = MOVE_SPEED;
-	d->sc.ply.ctrl.up_down = 0;
-	d->sc.ply.ctrl.left_right = 0;
-	d->sc.ply.ctrl.turn = 0;
-	d->sc.ply.lastX = WIDTH >> 1;
-	d->sc.ply.rotSpeed = ROT_S;
-	d->sc.ply.wp_s = 1.0f;
-}
 
 static void	lateral_movement(t_cub *d, int direction)
 {

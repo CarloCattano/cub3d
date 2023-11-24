@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:58:41 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/23 22:23:34 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 20:19:50 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@
 
 # define MOUSE_LEFT		1
 # define MOUSE_RIGHT	3
+
+# define LEFT_SHIFT		65505
 
 #endif

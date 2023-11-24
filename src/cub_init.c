@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:22:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 20:25:33 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,13 @@ int	cub_init(t_cub *c, t_sc *sc)
 	return (0);
 }	
 
-
+void	init_ply(t_cub *d)
+{
+	d->sc.ply.movespeed = MOVE_SPEED;
+	d->sc.ply.ctrl.up_down = 0;
+	d->sc.ply.ctrl.left_right = 0;
+	d->sc.ply.ctrl.turn = 0;
+	d->sc.ply.lastX = WIDTH >> 1;
+	d->sc.ply.rotSpeed = ROT_S;
+	d->sc.ply.wp_s = 1.0f;
+}

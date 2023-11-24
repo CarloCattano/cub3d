@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:32 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/23 22:28:33 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 20:20:46 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	key_down_hook(int k, t_cub *d)
 		d->sc.ply.shooting = 1;
 	if (k == KEY_ESCAPE)
 		mlx_terminate(d);
+	if (k == LEFT_SHIFT)
+		d->sc.ply.movespeed = MOVE_SPEED *2;
 	return (k);
 }
 
@@ -48,5 +50,7 @@ int	key_up_hook(int k, t_cub *d)
 		mlx_terminate(d);
 	if (k == KEY_M)
 		d->bonus = !d->bonus;
+	if (k == LEFT_SHIFT)
+		d->sc.ply.movespeed = MOVE_SPEED / 2;
 	return (k);
 }

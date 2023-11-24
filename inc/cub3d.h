@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/24 19:44:49 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/24 20:17:57 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct s_ply
 	t_ctrl_states	ctrl;
 	int				wp_s;
 	int				shooting;
+	int				walking;
 	t_image			**wp_imgs;
 }					t_ply;
 
