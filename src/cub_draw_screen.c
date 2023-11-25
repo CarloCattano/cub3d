@@ -6,12 +6,24 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 18:35:49 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/25 21:29:58 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <sys/types.h>
+
+
+static void	ft_initfp(t_ray *r, t_tp *tp, t_cub *c)
+{
+	if (ray->s)
+		tp->wx = ray->.hx;
+	else
+		tp->wx = ray->.hy;
+	
+		
+
+ 
+}
 
 void cub_draw_screen(t_cub *c, t_ray *ray)
 {
@@ -22,10 +34,6 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 	x = -1;
 	while (++x < c->scr.w)
 	{
-		if (ray[x].side)
-		   	wallX = ray[x].hitX;
-		else
-			wallX = ray[x].hitY;
 		ray[x].lineHeight = (c->scr.h / ray[x].perpWallDist);
 		int drawStart = -((ray[x].lineHeight) >> 1) + (c->scr.h >> 1);
 	  	if(drawStart < 0) 

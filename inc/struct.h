@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:13:02 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 20:02:14 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 21:29:51 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STRUCT_H
@@ -199,10 +199,14 @@ struct	s_cub
 
 struct s_fp
 {
+	double	wx;
+	int		ds;
+	int		de:
 	t_image	*tex;
 	double	texX;
 	double	step;
 	double	texY;
+	double	scalar;	
 };
 
 typedef struct s_ray
