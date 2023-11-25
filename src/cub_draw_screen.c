@@ -34,7 +34,7 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 	  	if(drawEnd >= c->scr.h) 
 			  drawEnd = c->scr.h - 1;
 	
-	  	int texX = (wallX * TX) + 1;
+	  	int texX = (wallX * TX);
 	  	if(ray[x].side == 0 && ray[x].raydirX > 0) 
 			texX = TX - texX - 1;
 	  	if(ray[x].side == 1 && ray[x].raydiry < 0)

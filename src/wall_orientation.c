@@ -12,15 +12,27 @@
 
 #include "cub3d.h"
 
+/** 
+ * @brief
+ * 		Assigns the texture to the wall depending on the ray side and ray direction.
+ * 		0 = north, 1 = south, 2 = east, 3 = west
+ * 		hardcoded to match the order of the textures in the struct
+ * @param
+ * 		ray: the ray struct
+ * 		c: the cub struct
+ * 		fp: the fp struct
+*/
+
 void	get_wall_orientation(t_ray *ray, t_cub *c, t_fp *fp)
 {
 	if (ray->side == 0 && ray->raydirX > 0)
-		fp->tex = &(c->sc.wall[0]);
-	else if (ray->side == 0 && ray->raydirX < 0)
-		fp->tex = &(c->sc.wall[1]);
-	else if (ray->side == 1 && ray->raydiry > 0)
 		fp->tex = &(c->sc.wall[2]);
-	else if (ray->side == 1 && ray->raydiry < 0)
+	else if (ray->side == 0 && ray->raydirX < 0)
 		fp->tex = &(c->sc.wall[3]);
-	(void)fp;
+	else if (ray->side == 1 && ray->raydiry > 0)
+		fp->tex = &(c->sc.wall[1]);
+	else if (ray->side == 1 && ray->raydiry < 0)
+		fp->tex = &(c->sc.wall[0]);
+	else
+		(void)fp;
 }
