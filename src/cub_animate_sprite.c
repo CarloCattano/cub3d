@@ -6,7 +6,7 @@
 /*   By: carlo <no@way.zip>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 23:13:23 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/24 20:15:49 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/25 17:43:08 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,17 @@ void	init_wp_sprites(t_cub *c)
 	paths[6] = "./res/gun/gun6.xpm";
 	paths[7] = "./res/gun/gun7.xpm";
 	paths[8] = "./res/gun/gun8.xpm";
-	c->sc.sprites = malloc(sizeof(t_sprites) * 9);
 	i = 0;
 	while (i < 9)
 	{
-		c->sc.sprites[i].path = paths[i];
-		c->sc.sprites[i].img = malloc(sizeof(t_image));
-		c->sc.sprites[i].img->img = mlx_xpm_file_to_image(c->mlx,
-				c->sc.sprites[i].path, &c->sc.sprites[i].img->w,
-				&c->sc.sprites[i].img->h);
-		c->sc.sprites[i].img->pix = mlx_get_data_addr(c->sc.sprites[i].img->img,
-				&c->sc.sprites[i].img->bpp, &c->sc.sprites[i].img->ll,
-				&c->sc.sprites[i].img->endian);
+		c->sc.ply.sprites[i].path = paths[i];
+		c->sc.ply.sprites[i].img = malloc(sizeof(t_image));
+		c->sc.ply.sprites[i].img->img = mlx_xpm_file_to_image(c->mlx,
+				c->sc.ply.sprites[i].path, &c->sc.ply.sprites[i].img->w,
+				&c->sc.ply.sprites[i].img->h);
+		c->sc.ply.sprites[i].img->pix = mlx_get_data_addr(c->sc.ply.sprites[i].img->img,
+				&c->sc.ply.sprites[i].img->bpp, &c->sc.ply.sprites[i].img->ll,
+				&c->sc.ply.sprites[i].img->endian);
 		i++;
 	}
 }
