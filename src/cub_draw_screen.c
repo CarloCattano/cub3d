@@ -6,73 +6,58 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 21:29:58 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 22:13:29 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "cub3d.h"
 
-
-static void	ft_initfp(t_ray *r, t_tp *tp, t_cub *c)
+/* refactor TX */
+static void	ft_initfp(t_ray *r, t_fp *tp, t_cub *c)
 {
 	if (ray->s)
-		tp->wx = ray->.hx;
+		tp->wx = r->.hx;
 	else
-		tp->wx = ray->.hy;
-	
-		
-
- 
+		tp->wx = r->.hy;
+	tp->ds = -((r->lh) >> 1) + (c->scr.h >> 1);
+	if (tp->ds < 0) 
+		tp->ds = 0;
+	tp->de = (r->lh >> 1) + (c->scr.h >> 1);
+	if (tp->de >= c->scr.h)
+		draw = c->scr.h - 1;
+	get_wall_orientation(&ray[x], c, &fp);
+	tp->texx = (tp->wx * tp->tex.w) + 1;
+	if (r->s == 0 && r->rdx > 0) 
+		tp->texx = tp->tex.w - tp->texx - 1;
+	if (r->s == 1 && r->rdy < 0)
+		tp->texx = tp->tex.w - tp->texx - 1;
+	tp->step = (1.0 * tp->tex.h) / r->lh;
+	tp->texy = (tp->ds - c->scr.h * 0.5 + r->lh * 0.5) * tp->step;
 }
 
-void cub_draw_screen(t_cub *c, t_ray *ray)
+void	cub_draw_screen(t_cub *c, t_ray *r)
 {
-	int 	x;
+	int		x;
 	int		y;
-	double	wallX;
+	t_fp	tp;
 
 	x = -1;
 	while (++x < c->scr.w)
 	{
-		ray[x].lineHeight = (c->scr.h / ray[x].perpWallDist);
-		int drawStart = -((ray[x].lineHeight) >> 1) + (c->scr.h >> 1);
-	  	if(drawStart < 0) 
-			  drawStart = 0;
-	  	int drawEnd = (ray[x].lineHeight >> 1) + (c->scr.h >> 1);
-	  	if(drawEnd >= c->scr.h) 
-			  drawEnd = c->scr.h - 1;
-	
-	  	int texX = (wallX * TX) + 1;
-	  	if(ray[x].side == 0 && ray[x].raydirX > 0) 
-			texX = TX - texX - 1;
-	  	if(ray[x].side == 1 && ray[x].raydiry < 0)
-			texX = TX - texX - 1;
-	  	double step = (1.0 * TY) / ray[x].lineHeight;
-	  	double texPos = (drawStart - c->scr.h * 0.5 + ray[x].lineHeight * 0.5) * step;
-		
-		t_fp fp;
-		
-		fp.texX = texX;
-		fp.step = step;
-		fp.texY = texPos;
-		get_wall_orientation(&ray[x], c, &fp);
-	
-    double scalar;
-
+		ft_initfp(&(r[x]), &tp, c);
 		y = -1;
 		while (++y < HEIGHT)
 		{
-			if (y < drawStart)
+			if (y < tp.ds)
 				cub_mpp(&(c->scr), x, y, c->sc.c_ceiling);
-			else if (y > drawStart && y < drawEnd)
-				cub_mpp(&(c->scr), x, y,  cub_darken(cub_piinte(&fp), ray[x].perpWallDist));
-			else if (y > drawEnd) 
-      { 
-        scalar = ((double)HEIGHT - y ) / 16.0;
-        cub_mpp(&(c->scr), x, y, cub_darken(c->sc.c_floor, scalar));
-      }
+			else if (y >= tp.ds && y <= tp.de)
+				cub_mpp(&(c->scr), x, y, cub_darken(cub_piinte(&fp), r[x].pwd));
+			else if (y > tp.de) 
+			{
+				tp.scalar = ((double)HEIGHT - y) / 16.0;
+				cub_mpp(&(c->scr), x, y, cub_darken(c->sc.c_floor, tp.scalar));
+			}
 		}
 	}
-  mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
+	mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
 	add_frame(c);
 }
