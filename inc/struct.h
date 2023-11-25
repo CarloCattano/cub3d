@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:13:02 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 12:01:57 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:39:40 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STRUCT_H
@@ -92,7 +92,7 @@ typedef struct s_ply
 	int				wp_s;
 	int				shooting;
 	int				walking;
-	t_image			**wp_imgs;
+	t_sprites		*sprites;
 }					t_ply;
 
 struct s_map

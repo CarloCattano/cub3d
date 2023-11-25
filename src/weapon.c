@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 22:09:32 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/24 21:14:35 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/25 17:44:26 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_wp(t_cub *d)
 	d->sc.ply.wp.img.pix = mlx_get_data_addr(d->sc.ply.wp.img.img,
 			&d->sc.ply.wp.img.bpp, &d->sc.ply.wp.img.ll,
 			&d->sc.ply.wp.img.endian);
+	d->sc.ply.sprites = malloc(sizeof(t_sprites) * 9);
 	init_wp_sprites(d);
 }
 
@@ -41,10 +42,10 @@ static void	when_shooting(t_cub *d)
 	{
 		if (d->frame % 8 == 0)
 			j++;
-		d->sc.ply.wp.img = *d->sc.sprites[j].img;
+		d->sc.ply.wp.img = *d->sc.ply.sprites[j].img;
 	}
 	else
-		d->sc.ply.wp.img = *d->sc.sprites[0].img;
+		d->sc.ply.wp.img = *d->sc.ply.sprites[0].img;
 	if (d->sc.ply.shooting && j >= 7)
 	{
 		d->sc.ply.shooting = 0;

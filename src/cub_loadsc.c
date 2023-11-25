@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:21:23 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 14:14:01 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 16:53:16 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -63,6 +63,7 @@ int	cub_loadsc(int fd, t_sc *sc, t_cub *c)
 {
 	t_load	load;
 
+	ft_bzero(c, sizeof(t_cub));
 	if (cub_evalfile(fd, &load))
 		return (ft_freeload(&load), 1);
 	if (DEBUG)
@@ -72,13 +73,12 @@ int	cub_loadsc(int fd, t_sc *sc, t_cub *c)
 		return (ft_freeload(&load), 1);
 	cub_loadply(&load, &(sc->ply));
 	cub_loadcfpl(sc, &load);
-	ft_bzero(c, sizeof(t_cub));
-	c->mlx = mlx_init();
+		c->mlx = mlx_init();
 	if (cub_loadwalls(&load, sc, c->mlx))
 		return (ft_freeload(&load), cub_freesc(sc, c->mlx), 1);
 	if (EXTRAS)
 	{
-		if (cub_loadextra(&load), sc, c->mlx)
+		if (cub_loadextra(&load, sc, c->mlx))
 			return (ft_freeload(&load), cub_freesc(sc, c->mlx), 1);
 	}
 	return (ft_freeload(&load), 0);
