@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:21:23 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 14:14:01 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 14:47:34 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -78,7 +78,7 @@ int	cub_loadsc(int fd, t_sc *sc, t_cub *c)
 		return (ft_freeload(&load), cub_freesc(sc, c->mlx), 1);
 	if (EXTRAS)
 	{
-		if (cub_loadextra(&load), sc, c->mlx)
+		if (cub_loadextra(&load, sc, c->mlx))
 			return (ft_freeload(&load), cub_freesc(sc, c->mlx), 1);
 	}
 	return (ft_freeload(&load), 0);
