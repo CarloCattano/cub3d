@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:11:22 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/24 20:26:54 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/25 22:54:48 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	update_position(t_cub *d, double direction)
 	int		celly;
 
 	m_speed = d->sc.ply.movespeed;
-	new_x = d->sc.ply.posx + direction * d->sc.ply.dirX * m_speed;
+	new_x = d->sc.ply.posx + direction * d->sc.ply.dirx * m_speed;
 	new_y = d->sc.ply.posy + direction * d->sc.ply.diry * m_speed;
 	cellx = (int)new_x;
 	celly = (int)new_y;
@@ -65,9 +65,9 @@ static void	update_rotation(t_cub *d, double angle)
 	double	olddirx;
 	double	oldplane_x;
 
-	olddirx = d->sc.ply.dirX;
+	olddirx = d->sc.ply.dirx;
 	oldplane_x = d->sc.plane_x;
-	d->sc.ply.dirX = olddirx * cos(angle) - d->sc.ply.diry * sin(angle);
+	d->sc.ply.dirx = olddirx * cos(angle) - d->sc.ply.diry * sin(angle);
 	d->sc.ply.diry = olddirx * sin(angle) + d->sc.ply.diry * cos(angle);
 	d->sc.plane_x = oldplane_x * cos(angle) - d->sc.plane_y * sin(angle);
 	d->sc.plane_y = oldplane_x * sin(angle) + d->sc.plane_y * cos(angle);
@@ -79,7 +79,7 @@ void	rotate_ply(t_cub *d, int direction)
 		update_rotation(d, ROT_S);
 	else if (direction <= -1)
 		update_rotation(d, -ROT_S);
-	d->sc.ply.rot = (int)(atan2(d->sc.ply.diry, d->sc.ply.dirX) * 180 / M_PI);
+	d->sc.ply.rot = (int)(atan2(d->sc.ply.diry, d->sc.ply.dirx) * 180 / M_PI);
 }
 
 void	handle_ply(t_cub *d)

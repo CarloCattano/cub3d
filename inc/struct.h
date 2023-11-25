@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:13:02 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 21:52:13 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 00:27:02 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STRUCT_H
@@ -92,6 +92,7 @@ typedef struct s_ply
 	int				wp_s;
 	int				shooting;
 	int				walking;
+	t_sprites		*sprites;
 	t_image			**wp_imgs;
 }					t_ply;
 
@@ -201,9 +202,9 @@ struct s_fp
 {
 	double	wx;
 	int		ds;
-	int		de:
+	int		de;
 	t_image	*tex;
-	double	texx;
+	int		texx;
 	double	step;
 	double	texy;
 	double	scalar;	

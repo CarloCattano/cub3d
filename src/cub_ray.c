@@ -6,17 +6,17 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2023/11/13 11:10:08 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 21:29:54 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 00:26:59 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
 
-static void	ft_initray(t_ray *r, int width, double fov, t_sc *s)
+static void	ft_initray(t_ray *r, double fov, t_sc *s)
 {
 	r->rdx = s->ply.dirx + s->plane_x * r->cx;
-	r->rdy = s->ply.diry + (d->plane_y * fov) * r->cx;
-	r->hx = (int)c->ply.posx;
-	r->hy = (int)c->ply.posy;
+	r->rdy = s->ply.diry + (s->plane_y * fov) * r->cx;
+	r->hx = (int)s->ply.posx;
+	r->hy = (int)s->ply.posy;
 	r->ddx = fabs(1 / r->rdx);
 	r->ddy = fabs(1 / r->rdy);
 }
@@ -25,7 +25,7 @@ static void	ft_sdxsdy(t_ray *r, t_sc *s)
 {
 	if (r->rdx < 0)
 	{
-		r->stx -1;
+		r->stx = -1;
 		r->sdx = (s->ply.posx - r->hx) * r->ddx;
 	}
 	else
@@ -33,7 +33,7 @@ static void	ft_sdxsdy(t_ray *r, t_sc *s)
 		r->stx = 1;
 		r->sdx = (r->hx + 1.0 - s->ply.posx) * r->ddx;
 	}
-	if (raydiry < 0)
+	if (r->rdy < 0)
 	{
 		r->sty = -1;
 		r->sdy = (s->ply.posy - r->hy) * r->ddy;
@@ -64,7 +64,7 @@ static void	ft_dda(t_ray *r, t_sc *s)
 			r->hy += r->sty;
 			r->s = 1;
 		}
-		if (d->map.val[(int)(r->hy)][(int)(r->hx)] == '1')
+		if (s->map.val[(int)(r->hy)][(int)(r->hx)] == '1')
 		{
 			hit = 1;
 		}
@@ -81,7 +81,7 @@ static void	ft_after(t_ray *r, t_sc *s)
 		r->hy = s->ply.posy + r->pwd * r->rdy;
 	else
 		r->hx = s->ply.posx + r->pwd * r->rdx;
-	r->lh = (s->scr.h / r->pwd);
+//	r->lh = (HEIGHT / r->pwd);
 }
 
 t_ray	*cub_ray(t_sc *s, int width, double fov)
@@ -96,11 +96,11 @@ t_ray	*cub_ray(t_sc *s, int width, double fov)
 	ft_bzero(rays, sizeof(t_ray) * width);
 	while (++x < width)
 	{
-		(ray[i]).cx = 2 * x / (double)width - 1;
-		ft_initray(&(ray[i]), width, fov, s);
-		ft_sdxsdy(&(ray[i]), s);
-		ft_dda(&(ray[i]), s);
-		ft_after(&(ray[i]), s);
+		(rays[x]).cx = 2 * x / (double)width - 1;
+		ft_initray(&(rays[x]), fov, s);
+		ft_sdxsdy(&(rays[x]), s);
+		ft_dda(&(rays[x]), s);
+		ft_after(&(rays[x]), s);
 	}
 	return (rays);
 }

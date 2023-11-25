@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/25 22:35:31 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ void draw_rays(t_image *img, t_sc *sc, int width, t_ray *ray)
 		//rayprint(&(ray[i]));
 		xoff = 0;
 		yoff = 0;
-		if (ray[i].raydiry  < 0 && ray[i].raydirX >= 0 && !ray[i].side)	
+		if (ray[i].rdy  < 0 && ray[i].rdx >= 0 && !ray[i].s)	
 			yoff = fabs(img->yoff);
-		else if (ray[i].raydiry  < 0 && ray[i].raydirX < 0 && !ray[i].side)
+		else if (ray[i].rdy  < 0 && ray[i].rdx < 0 && !ray[i].s)
 			yoff = fabs(img->yoff);
-		else if (ray[i].raydiry   < 0 &&  ray[i].raydirX > 0 && ray[i].side)
+		else if (ray[i].rdy   < 0 &&  ray[i].rdx > 0 && ray[i].s)
 			yoff = fabs(img->yoff);
-		else if  (ray[i].raydiry   < 0 && ray[i].raydirX < 0 && ray[i].side)
+		else if  (ray[i].rdy   < 0 && ray[i].rdx < 0 && ray[i].s)
 			yoff = fabs(img->yoff);
-		if (ray[i].raydirX  < 0 && ray[i].raydiry >= 0 && !ray[i].side)	
+		if (ray[i].rdx  < 0 && ray[i].rdy >= 0 && !ray[i].s)	
 			xoff = fabs(img->xoff);
-		else if (ray[i].raydirX  < 0 && ray[i].raydiry < 0 && !ray[i].side)
+		else if (ray[i].rdx  < 0 && ray[i].rdy < 0 && !ray[i].s)
 			xoff = fabs(img->xoff);
-		else if (ray[i].raydirX   < 0 &&  ray[i].raydiry > 0 && ray[i].side)
+		else if (ray[i].rdx   < 0 &&  ray[i].rdy > 0 && ray[i].s)
 			xoff = fabs(img->xoff);
-		else if  (ray[i].raydirX   < 0 && ray[i].raydiry < 0 && ray[i].side)
+		else if  (ray[i].rdx   < 0 && ray[i].rdy < 0 && ray[i].s)
 			xoff = fabs(img->xoff);
-		w = cub_point(ray[i].hitX * img->xoff + xoff, ray[i].hitY * img->yoff +yoff, RY);
+		w = cub_point(ray[i].hx * img->xoff + xoff, ray[i].hy * img->yoff +yoff, RY);
 		cub_line(plp, w, img);
 	}
 }
@@ -83,7 +83,7 @@ void draw_ply(t_image *img, t_ply *pl)
 	
 	plp = cub_point(pl->posx * img->xoff, pl->posy * img->yoff, PL);
 	plv1 = cub_point(plp.x + (0.5 * img->xoff), plp.y + (0.5 * img->yoff), PL); 
-	plv2 = cub_point((plv1.x + ( 1.2 * pl->dirX  * img->xoff)),  (plv1.y  + (1.2 * pl->diry  * img->yoff)), PL);
+	plv2 = cub_point((plv1.x + ( 1.2 * pl->dirx * img->xoff)),  (plv1.y  + (1.2 * pl->diry  * img->yoff)), PL);
 	
 	draw_cub(img, false, &plp, NULL); 
 	cub_line(plv1, plv2, img);
