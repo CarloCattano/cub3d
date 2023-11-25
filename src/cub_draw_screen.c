@@ -29,10 +29,10 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		ray[x].lineHeight = (c->scr.h / ray[x].perpWallDist);
 		int drawStart = -((ray[x].lineHeight) >> 1) + (c->scr.h >> 1);
 	  	if(drawStart < 0) 
-			drawStart = 0;
+			  drawStart = 0;
 	  	int drawEnd = (ray[x].lineHeight >> 1) + (c->scr.h >> 1);
 	  	if(drawEnd >= c->scr.h) 
-			drawEnd = c->scr.h - 1;
+			  drawEnd = c->scr.h - 1;
 	
 	  	int texX = (wallX * TX) + 1;
 	  	if(ray[x].side == 0 && ray[x].raydirX > 0) 
@@ -49,6 +49,8 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		fp.texY = texPos;
 		get_wall_orientation(&ray[x], c, &fp);
 	
+    double scalar;
+
 		y = -1;
 		while (++y < HEIGHT)
 		{
@@ -57,9 +59,12 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 			else if (y > drawStart && y < drawEnd)
 				cub_mpp(&(c->scr), x, y,  cub_darken(cub_piinte(&fp), ray[x].perpWallDist));
 			else if (y > drawEnd) 
-				cub_mpp(&(c->scr), x, y, c->sc.c_floor);
+      { 
+        scalar = ((double)HEIGHT - y ) / 16.0;
+        cub_mpp(&(c->scr), x, y, cub_darken(c->sc.c_floor, scalar));
+      }
 		}
 	}
-	mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
+  mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
 	add_frame(c);
 }
