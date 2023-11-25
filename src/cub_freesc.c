@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_error.c                                        :+:      :+:    :+:   */
+/*   cub_freesc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 10:13:11 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 13:46:49 by jstrotbe         ###   ########.fr       */
+/*   Created: 2023/11/25 11:58:32 by jstrotbe          #+#    #+#             */
+/*   Updated: 2023/11/25 13:55:23 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "cub3d.h"
 
-int	cub_error(char const *msg, char er, void (*f)(), void *ptr)
+/*TODO freesc has also to free mlx and dteroy display */
+void	cub_freesc(t_sc *sc, void *mlx)
 {
-	if (f)
+	int	i;
+
+	if (sc->floor)
+		mlx_destroy_image(mlx, sc->floor->img);
+	if (sc->ceiling)
+		mlx_destroy_image(mlx, sc->ceiling->img);
+	i = -1;
+	while (++i < 4)
 	{
-		f(ptr);
+		if (sc->wall[i].img)
+			mlx_destroy_image(mlx, sc->wall[i].img);
 	}
-	if (er)
-		ft_printf("%s\n", E_);
-	if (er == 2)
-		perror("ERROR OPEN");
-	ft_printf("%s\n", msg);
-	return (1);
+	cub_dfree(&(sc->map.val));
 }

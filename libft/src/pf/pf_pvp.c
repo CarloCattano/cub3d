@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:06:33 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/02/04 14:44:58 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:52:34 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,4 @@ void	pf_pvp(unsigned long long value, t_printf *form)
 	}
 	else
 		ft_putstr_fd("(nil)", 1);
-}	
+}

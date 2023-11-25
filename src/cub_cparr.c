@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   cub_cparr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:11:08 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/25 13:45:14 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char **cub_cparr(char **parts)
+char	**cub_cparr(char **parts)
 {
-	int amount;
-	char **cp;
-	int i;
-	
+	int		amount;
+	char	**cp;
+	int		i;
+
 	amount = cub_countparts(parts);
-	cp = malloc(sizeof(char *) * (amount + 1)); 
+	cp = (char **)malloc(sizeof(char *) * (amount + 1));
 	if (!cp)
 		return (NULL);
 	i = -1;
-	while (parts[++i])
+	while (++i < amount)
 	{
-		cp[i] = ft_strdup(parts[i]);	
+		cp[i] = ft_strdup(parts[i]);
 		if (!cp[i])
 			return (cub_dfree(&cp), NULL);
 	}
-	cp[i] = NULL;	
+	cp[i] = NULL;
 	return (cp);
 }

@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:08:33 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/06 10:58:23 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:47:57 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*get_next_line(int fd)
 	if (0 >= BUFFER_SIZE || BUFFER_SIZE > INT_MAX)
 		return (NULL);
 	if (fd < 0)
-	{	
+	{
 		if (fd == -2)
 			gnl_free(&store);
 		return (NULL);

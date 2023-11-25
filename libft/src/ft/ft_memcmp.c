@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:56:10 by jstrotbe          #+#    #+#             */
-/*   Updated: 2022/12/08 09:24:26 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:45:38 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -32,4 +32,4 @@ int	ft_memcmp(const void *b1, const void *b2, size_t len)
 	}
 	else
 		return (0);
-}	
+}

@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/24 21:14:21 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/25 14:13:29 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,291 +14,51 @@
 # define CUB3D_H
 
 /* inc */
+
+/* extern */
 # include <stdio.h>
 # include <fcntl.h>
-#include <sys/types.h>
+# include <sys/types.h>
 # include <unistd.h>
 # include <math.h>
 # include <time.h>
 # include <stdbool.h>
+# include "mlx.h"
 
+/* our */
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
-# include "mlx.h"
 # include "key_codes.h"
 # include "constants.h"
+# include "msg.h"
+# include "struct.h"
 
-/* MAP */
-# define DIRECT "NSEW"
-# define INMAP	" 10D"
-
-/* WINDOWS  */
-# define WIDTH 800
-# define HEIGHT 600
-# define MWIDTH 200
-# define MHEIGHT 200
-
-/* TEXTURE */
-# define TX 64
-# define TY 64
-
-/* PLAYER */
-# define FOV 0.66
-
-/* COLOURS MINIMAP*/
-# define W1 0xffffd39b
-# define W2 0xff8b7355
-# define F1 0xff545454
-# define F2 0xff8deeee
-# define PL 0xff0000ff
-# define RY 0xffff0000
-
-/* MSG */
-# define ERROR_ARG "cub3d NEEDS ONLY ONE ARG"
-# define ERROR_PARS "PARSING FAILD"
-# define ERROR_FILE "CUB FILE CORRUPTED" 
-# define ERROR_CUB "FILE NEED .CUB EXTENSION"
-# define ERROR_FILE_OPEN "OPEN CUB FILE FAIL"
-# define E_FW " FILE IS NOT RIGHT CINFIGUERD"
-# define E_MAL	"MALLOC_FAIL"
-/* MSG CUB FILE */
-# define SAMEARG " .CUB HAVE DUPLICATE TYPES "
-# define SCENEARG " .CUB TYPE HAS NOT THE RIGHT NUMBER OF ARG"	
-# define SCENECOL " .CUB HAS DUPLICATE COLOUR "
-# define SCENEWCOL " .CUB WRONG COLOUR IMNPUT "	
-# define SOPEN " .CUB OPEN TEXTURE FAIL"
-# define E_M " MAP IS NOT CORRECT"	
-# define E_T " NOT ALL NECESSARY TYPES ARE DECLAIRED BEFOR MAP"
-# define M_P " MULTIPLE PLAYER"
-# define M_W "MAP NOT CLOESD BY WALLS"
-# define MAIN "MAIN FAILOR"
-
-/* structs */
-typedef enum e_type			t_type;
-typedef struct s_image		t_image;
-typedef struct s_sc			t_sc;
-typedef struct s_map		t_map;
-typedef struct s_sprites	t_sprites;
-typedef struct s_lextra		t_lextra;
-typedef struct s_extra		t_extra;
-typedef struct s_map		t_map;
-typedef struct s_load		t_load;
-typedef struct s_cub		t_cub;
-typedef struct s_fp			t_fp;	
-
-enum e_type
-{
-	NOT = 0,
-	NO,
-	SO,
-	WE,
-	EA,
-	F,
-	C,
-	S,
-	MAP	
-};
-
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEMOVE = 6,
-	ON_WINDOWCLOSE = 17,
-	ON_WIN_LEAVE = 8,
-	ON_WIN_ENTER = 7
-};
-
-typedef struct s_ctrl_states
-{
-	int		up_down;
-	int		left_right;
-	int		turn;
-}			t_ctrl_states;
-
-struct s_image
-{
-	void		*img;
-	char		*pix;
-	int			ll;
-	int			bpp;
-	int			endian;
-	int			w;
-	int			h;
-	int			wxoff;
-	int			wyoff;
-	double		xoff;
-	double		yoff;
-};
-
-typedef struct s_wp
-{
-	t_image		img;
-	char		*path;
-}				t_wp;
-
-typedef struct s_ply
-{
-	double			posx;
-	double			posy;
-	double			dirX;
-	double			diry;
-	double			movespeed;
-	double			rotSpeed;
-	int				rot;
-	int				lastX;
-	t_wp			wp;
-	t_ctrl_states	ctrl;
-	int				wp_s;
-	int				shooting;
-	int				walking;
-	t_image			**wp_imgs;
-}					t_ply;
-
-struct s_map
-{
-	int		height;
-	int		width;
-	char	**val;
-};
-
-struct s_sc
-{
-	bool		setting[3];
-	int			c_floor;
-	int			c_ceiling;
-	double		plane_x;
-	double		plane_y;
-	t_image		*floor;
-	t_image		*ceiling;
-	t_image		wall[4];
-	t_map		map;
-	t_ply		ply;
-	t_image		*wp;
-	t_sprites	*sprites;
-	t_extra		*extra;
-};
-
-struct s_sprites
-{
-	int				x;
-	int				y;
-	double			z;
-	t_image			*img;
-	char			*path;
-	double			dist;
-	int				hdiv;
-	int				vdiv;
-	t_sprites		*next;
-};
-
-struct	s_extra
-{
-	char		*key;
-	t_image		extra;
-	t_extra		*next;
-};	
-
-struct s_lextra
-{
-	char	*key;
-	char	*path;
-	char	**value;
-};
-
-struct	s_load
-{
-	char	*wall[4];
-	int		*floor;
-	int		*ceiling;
-	int		*xpl;
-	int		*ypl;
-	char	dir;
-	int		xmap;
-	int		ymap;
-	t_list	*map;
-	t_list	*extra;
-};
-
-/* draw lines */
-typedef struct s_2Dpoint
-{
-	float		x;
-	float		y;
-	int			colour;
-}	t_point;
-
-typedef struct s_line
-{
-	int			dx;
-	int			sx;
-	int			dy;
-	int			sy;
-	int			err;
-	int			e2;
-	int			ax;
-	int			ay;
-	int			bx;
-	int			by;
-	int			colour;
-	int			w;
-	int			h;
-}	t_line;	
-
-struct	s_cub
-{
-	void			*mlx;
-	void			*win;
-	t_sc			sc;
-	t_image			scr;
-	t_image			mini;
-	float			fps;
-	int				bonus;
-	unsigned int	frame;
-};
-
-struct s_fp
-{
-	t_image	*tex;
-	double	texX;
-	double	step;
-	double	texY;
-};
-
-typedef struct s_ray
-{
-	double		raydirX;
-	double		raydiry;
-	double		deltaDistX;
-	double		deltaDistY;
-	int			stepX;
-	int			stepY;
-	double		sideDistX;
-	double		sideDistY;
-	double		perpWallDist;
-	int			lineHeight;
-	int			side;
-	double		hitX;
-	double		hitY;
-}				t_ray;
-
-int		cub_error(char const *msg, void (*f)(), void *ptr);
+/* functions */
+int     cub_error(char const *msg, char er, void (*f)(), void *ptr);
 
 /* parser */
 int		cub_parser(char *input, t_sc *sc, t_cub *c);
 int		cub_loadsc(int fd, t_sc *sc, t_cub *c);
 int		cub_evalfile(int fd, t_load *load);
-int		cub_evalline(int fd, t_load *load, char *line, char **parts);
+int		cub_evalline(int fd, t_load *load,  char *line, char **parts);
 int		cub_psprites(t_load *load, char **parts);
 int		cub_pfloor(t_load *load, char *line, int type);
 int		cub_pwalls(t_load *load, char **parts, int type);
-int		cub_readmap(int fd, t_load *load, char *line);
+int		cub_readmap(int fd, t_load *load,  char *line);
 int		cub_loadmap(t_load *load, t_map *map);
 int		cub_loadwalls(t_load *l, t_sc *sc, void *mlx);
 int		cub_loadfile(t_image *img, void *mlx, char *path);
+int		cub_checkmap(char **val, t_load *load);
+void	cub_loadply(t_load *load, t_ply *ply);
+void	cub_pload(t_load *l);
+void    cub_loadcfpl(t_sc *sc, t_load *load);
+int		cub_loadextra(t_load *l, t_sc *sc, void *mlx);
+
+
+
 
 /* draw */
-int		cub_loadply(t_load *load, t_ply *ply);
 int		cub_init(t_cub *c, t_sc *sc);
 void	cub_draw_minimap(t_cub *c, t_ray *ray);
 int		cub_draw(t_cub *c);
@@ -316,6 +76,7 @@ int		cub_piinte(t_fp *fp);
 /* free */
 void	cub_dfree(char ***tofree);
 void	cub_freelextra(t_lextra **node);
+void    cub_freesc(t_sc *sc, void *mlx);
 
 /* helper */
 char	**cub_splits(char const *str, char const *set);

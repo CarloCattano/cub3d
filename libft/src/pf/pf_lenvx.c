@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:38:56 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/02/04 14:38:45 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:50:26 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	pf_lenvx(unsigned int value, t_printf *form)
 		lenvx = 0;
 	form->clen = lenvx;
 	if (form->flgzr && !form->perb && !form->flgmns)
-	{	
+	{
 		while (lenvx < form->width)
 			lenvx++;
 		form->flgzr = lenvx - form->clen;

@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   cub_loadcfpl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/02 12:42:14 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 10:46:56 by jstrotbe         ###   ########.fr       */
+/*   Created: 2023/11/25 12:09:54 by jstrotbe          #+#    #+#             */
+/*   Updated: 2023/11/25 13:56:51 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "cub3d.h"
 
-char	*ft_strchr(const char *s, int c)
+void	cub_loadcfpl(t_sc *sc, t_load *load)
 {
-	while (*s != '\0' && *s != (char)c)
-		s++;
-	if (!*s && (char)c)
-		return (NULL);
-	return ((char *)s);
+	sc->c_floor = *(load->floor);
+	sc->c_ceiling = *(load->ceiling);
+	sc->plane_x = -sc->ply.diry;
+	sc->plane_y = sc->ply.dirX;
 }

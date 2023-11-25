@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:57:09 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/02/04 14:37:24 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:49:53 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	pf_lenvp(unsigned long long value, t_printf *form)
 	int	lenvp;
 
 	if (form->ctype)
-	{	
+	{
 		lenvp = pf_count_base_ull(value, 16);
 		form->clen = lenvp;
 		if (!form->perb && !form->flgmns)

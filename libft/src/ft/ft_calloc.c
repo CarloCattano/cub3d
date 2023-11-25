@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:50:27 by jstrotbe          #+#    #+#             */
-/*   Updated: 2022/12/12 09:41:13 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:42:52 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -24,4 +24,4 @@ void	*ft_calloc(size_t number, size_t size)
 		return (NULL);
 	ft_bzero(nptr, number * size);
 	return (nptr);
-}		
+}

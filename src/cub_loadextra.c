@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   cub_loadextra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/02 12:42:14 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 10:46:56 by jstrotbe         ###   ########.fr       */
+/*   Created: 2023/11/25 14:09:36 by jstrotbe          #+#    #+#             */
+/*   Updated: 2023/11/25 14:15:18 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "cub3d.h"
 
-char	*ft_strchr(const char *s, int c)
+int	cub_loadextra(t_load *l, t_sc *sc, void *mlx)
 {
-	while (*s != '\0' && *s != (char)c)
-		s++;
-	if (!*s && (char)c)
-		return (NULL);
-	return ((char *)s);
+	(void)l;
+	(void)sc;
+	(void)mlx;
+	return (0);
 }

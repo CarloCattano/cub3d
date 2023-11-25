@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:16:18 by jstrotbe          #+#    #+#             */
-/*   Updated: 2022/12/07 17:05:57 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:43:14 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -17,4 +17,4 @@ int	ft_isdigit(int a)
 		return (1);
 	else
 		return (0);
-}	
+}

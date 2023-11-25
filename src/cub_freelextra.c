@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub_freelextra.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/25 11:58:20 by jstrotbe          #+#    #+#             */
+/*   Updated: 2023/11/25 13:54:02 by jstrotbe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void 	cub_freelextra(t_lextra **node)
+void	cub_freelextra(t_lextra **node)
 {
 	if (*node)
 	{
@@ -13,5 +25,4 @@ void 	cub_freelextra(t_lextra **node)
 		free (*node);
 	}
 	*node = NULL;
-}	
-
+}

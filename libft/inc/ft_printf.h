@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:28:02 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/02/04 11:52:35 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:41:42 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FT_PRINTF_H
@@ -17,7 +17,7 @@
 # include "libft.h"
 
 typedef struct s_printf
-{	
+{
 	int		flgmns;
 	int		flgzr;
 	int		flgpls;

@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 10:51:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2022/12/12 09:36:48 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:46:37 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -95,4 +95,4 @@ char	**ft_split(char const *s, char c)
 		rs[cins] = NULL;
 		return (rs);
 	}
-}	
+}

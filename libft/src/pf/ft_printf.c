@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 09:47:21 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/02/04 14:50:17 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:48:45 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"	
@@ -31,7 +31,7 @@ int	ft_printf(const char *formstr, ...)
 	counter = 0;
 	va_start(arg, formstr);
 	while (*temp)
-	{	
+	{
 		if (*temp != '%')
 			temp += ft_hprintf(&counter, *temp);
 		else
@@ -40,7 +40,7 @@ int	ft_printf(const char *formstr, ...)
 			temp += pf_setform(temp, &form, arg);
 			counter += pf_process(arg, &form);
 		}
-	}						
+	}
 	va_end(arg);
 	return (counter);
 }

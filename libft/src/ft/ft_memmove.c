@@ -6,7 +6,7 @@
 /*   By: jstrotbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:49:34 by jstrotbe          #+#    #+#             */
-/*   Updated: 2022/12/07 19:15:28 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:46:03 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -25,4 +25,4 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 		while (len--)
 			*de++ = *sr++;
 	return (dest);
-}		
+}
