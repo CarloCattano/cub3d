@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 00:26:56 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 00:55:31 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -31,8 +31,8 @@ static void	ft_initfp(t_ray *r, t_fp *tp, t_cub *c )
 		tp->texx = TX - tp->texx - 1;
 	if (r->s == 1 && r->rdy < 0)
 		tp->texx = TX - tp->texx - 1;
-	tp->step = (1.0 * TY) / r->lh;
-	tp->texy = (tp->ds - c->scr.h * 0.5 + r->lh * 0.5) * tp->step;
+	tp->fp.step = (1.0 * TY) / r->lh;
+	tp->texy = (tp->ds - c->scr.h * 0.5 + r->lh * 0.5) * tp->fp.step;
 }
 
 void	cub_draw_screen(t_cub *c, t_ray *r)
@@ -68,52 +68,46 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 {
 	int 	x;
 	int		y;
-	double	wallX;
 	t_fp fp;
 
 	x = -1;
 	while (++x < c->scr.w)
-	{
-		
+	{	
 		get_wall_orientation(&ray[x], c, &fp);
 		if (ray[x].s)
-		   	wallX = ray[x].hx;
+		   	fp.wx = ray[x].hx;
 		else
-			wallX = ray[x].hy;
+			fp.wx = ray[x].hy;
 		ray[x].lh = (c->scr.h / ray[x].pwd);
-		int drawStart = -((ray[x].lh) >> 1) + (c->scr.h >> 1);
-	  	if(drawStart < 0) 
-			  drawStart = 0;
-	  	int drawEnd = (ray[x].lh >> 1) + (c->scr.h >> 1);
-	  	if(drawEnd >= c->scr.h) 
-			  drawEnd = c->scr.h - 1;
+		fp.ds = -((ray[x].lh) >> 1) + (c->scr.h >> 1);
+	  	if(fp.ds < 0) 
+			  fp.ds = 0;
+	  	fp.de = (ray[x].lh >> 1) + (c->scr.h >> 1);
+	  	if(fp.de >= c->scr.h) 
+			  fp.de = c->scr.h - 1;
 	
-	  	int texX = (wallX * fp.tex->w);
+	  	fp.texx = (fp.wx * fp.tex->w);
 	  	if(ray[x].s == 0 && ray[x].rdx > 0) 
-			texX = fp.tex->w - texX - 1;
+			fp.texx = fp.tex->w - fp.texx - 1;
 	  	if(ray[x].s == 1 && ray[x].rdy < 0)
-			texX = fp->tex->w - texX - 1;
-	  	double step = (1.0 * fp->tex->h) / ray[x].lh;
-	  	double texPos = (drawStart - c->scr.h * 0.5 + ray[x].lh * 0.5) * step;
+			fp.texx = fp.tex->w - fp.texx - 1;
+	  	fp.step = (1.0 * fp.tex->h) / ray[x].lh;
+	  	fp.texy = (fp.ds - c->scr.h * 0.5 + ray[x].lh * 0.5) * fp.step;
 		
 		
-		fp.texx = texX;
-		fp.step = step;
-		fp.texy = texPos;
 	
-    double scalar;
 
 		y = -1;
 		while (++y < HEIGHT)
 		{
-			if (y < drawStart)
+			if (y < fp.ds)
 				cub_mpp(&(c->scr), x, y, c->sc.c_ceiling);
-			else if (y >= drawStart && y <= drawEnd)
+			else if (y >= fp.ds && y <= fp.de)
 				cub_mpp(&(c->scr), x, y,  cub_darken(cub_piinte(&fp), ray[x].pwd));
-			else if (y > drawEnd) 
+			else if (y > fp.de) 
       { 
-        scalar = ((double)HEIGHT - y ) / 16.0;
-        cub_mpp(&(c->scr), x, y, cub_darken(c->sc.c_floor, scalar));
+        fp.scalar = ((double)HEIGHT - y ) / 16.0;
+        cub_mpp(&(c->scr), x, y, cub_darken(c->sc.c_floor, fp.scalar));
       }
 		}
 	}
