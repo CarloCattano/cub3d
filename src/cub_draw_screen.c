@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 18:35:49 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/25 22:37:59 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void cub_draw_screen(t_cub *c, t_ray *ray)
 		{
 			if (y < drawStart)
 				cub_mpp(&(c->scr), x, y, c->sc.c_ceiling);
-			else if (y > drawStart && y < drawEnd)
+			else if (y >= drawStart && y <= drawEnd)
 				cub_mpp(&(c->scr), x, y,  cub_darken(cub_piinte(&fp), ray[x].perpWallDist));
 			else if (y > drawEnd) 
       { 
