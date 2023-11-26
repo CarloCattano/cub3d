@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:22:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 17:50:33 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:54:47 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	ft_init_ply(t_cub *d)
 	d->sc.ply.ctrl.up_down = 0;
 	d->sc.ply.ctrl.left_right = 0;
 	d->sc.ply.ctrl.turn = 0;
-	d->sc.ply.lastX = WIDTH >> 1;
-	d->sc.ply.rotSpeed = ROT_S;
+	d->sc.ply.lastx = WIDTH >> 1;
+	d->sc.ply.rotspeed = ROT_S;
 	d->sc.ply.wp_s = 1.0f;
 }
 
