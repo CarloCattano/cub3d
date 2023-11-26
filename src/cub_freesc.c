@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:58:32 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 13:55:23 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:43:37 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*TODO freesc has also to free mlx and dteroy display */
 void	cub_freesc(t_sc *sc, void *mlx)
 {
-		int	i;
+	int	i;
 
 	if (sc->floor)
 		mlx_destroy_image(mlx, sc->floor->img);

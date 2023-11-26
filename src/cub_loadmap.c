@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 10:30:53 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 14:00:51 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:43:13 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -46,12 +46,11 @@ static void	ft_cpmap(t_map *map, t_list *lmap, char dir)
 			if (x < len)
 			{
 				if ((((char *)(lmap->content))[x]) != dir)
-					(map->val)[y][x] = ((char *)
-							(lmap->content))[x];
+					(map->val)[y][x] = ((char *)(lmap->content))[x];
 				else
 					(map->val)[y][x] = '0';
 			}
-			else 
+			else
 				(map->val)[y][x] = ' ';
 		}
 		(map->val)[y][x] = 0;
