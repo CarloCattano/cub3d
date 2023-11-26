@@ -1,6 +1,6 @@
 ### TO DO 
 
-## FPS COUNTER with time.h
-## time for anims in sprites
- weapon needs an array of images?? and swap
-## 
+    - Read subject and check list
+    - Make pretty weapon animation
+    - check map parsing
+
