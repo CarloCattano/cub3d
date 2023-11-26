@@ -19,40 +19,57 @@
 
 /* some more cases off offset;*/ 
 
-void draw_rays(t_image *img, t_sc *sc, int width, t_ray *ray)
+typedef struct pr
 {
 	t_point plp;
 	t_point w;
-	//(void)img;
 	int xoff;
 	int yoff;
-	int i;
+}t_pr;
+
+
+static void	ft_off(t_pr *p, t_ray *r, t_image i)
+{ 
+	p->xoff = 0;
+	p->yoff = 0;
+	if (!r->s && r->rdy  < 0 && r->rdx >= 0)	
+		p->yoff = fabs(i->yoff);
+
+	/*	
+	else if (ray[i].rdy  < 0 && ray[i].rdx < 0 && !ray[i].s)
+			yoff = fabs(i->yoff);
+	else if (ray[i].rdy   < 0 &&  ray[i].rdx > 0 && ray[i].s)
+			yoff = fabs(i->yoff);
+	else if  (ray[i].rdy   < 0 && ray[i].rdx < 0 && ray[i].s)
+			yoff = fabs(img->yoff);
+	if (ray[i].rdx  < 0 && ray[i].rdy >= 0 && !ray[i].s)	
+			xoff = fabs(img->xoff);
+	else if (ray[i].rdx  < 0 && ray[i].rdy < 0 && !ray[i].s)
+			xoff = fabs(img->xoff);
+	else if (ray[i].rdx   < 0 &&  ray[i].rdy > 0 && ray[i].s)
+			xoff = fabs(img->xoff);
+	else if  (ray[i].rdx   < 0 && ray[i].rdy < 0 && ray[i].s)
+			xoff = fabs(img->xoff);
+*/
+}
+
+static void ft_ray(t_sc *s, t_image *i, t_image *m, t_ray *r)
+{
+	int	i;
+	t_pr	p;
 	i = -1;
-	plp = cub_point(sc->ply.posx *(img->xoff)  + 0.5 * img->xoff, sc->ply.posy * (img->yoff) + 0.5 * img->yoff, RY);
+	p.plp = cub_point(sc->ply.posx *(img->xoff)  + 0.5 * img->xoff,
+		 sc->ply.posy * (img->yoff) + 0.5 * img->yoff, RY);
 	// todo clear every time
-	while (++i < width)
+	while (++i < i->w)
 	{
-		//rayprint(&(ray[i]));
-		xoff = 0;
-		yoff = 0;
-		if (ray[i].rdy  < 0 && ray[i].rdx >= 0 && !ray[i].s)	
-			yoff = fabs(img->yoff);
-		else if (ray[i].rdy  < 0 && ray[i].rdx < 0 && !ray[i].s)
-			yoff = fabs(img->yoff);
-		else if (ray[i].rdy   < 0 &&  ray[i].rdx > 0 && ray[i].s)
-			yoff = fabs(img->yoff);
-		else if  (ray[i].rdy   < 0 && ray[i].rdx < 0 && ray[i].s)
-			yoff = fabs(img->yoff);
-		if (ray[i].rdx  < 0 && ray[i].rdy >= 0 && !ray[i].s)	
-			xoff = fabs(img->xoff);
-		else if (ray[i].rdx  < 0 && ray[i].rdy < 0 && !ray[i].s)
-			xoff = fabs(img->xoff);
-		else if (ray[i].rdx   < 0 &&  ray[i].rdy > 0 && ray[i].s)
-			xoff = fabs(img->xoff);
-		else if  (ray[i].rdx   < 0 && ray[i].rdy < 0 && ray[i].s)
-			xoff = fabs(img->xoff);
-		w = cub_point(ray[i].hx * img->xoff + xoff, ray[i].hy * img->yoff +yoff, RY);
-		cub_line(plp, w, img);
+		if (!i % 5)
+		{
+			ft_off(&p, &r[i], m);
+			p.w = cub_point(ray[i].hx * img->xoff + xoff
+				, ray[i].hy * img->yoff +yoff, RY);
+			cub_linep.(p.plp, p.w, img);
+		}
 	}
 }
 	
@@ -89,7 +106,7 @@ void draw_ply(t_image *img, t_ply *pl)
 	cub_line(plv1, plv2, img);
 }
 
-void cub_draw_minimap(t_cub *c, t_ray *ray)
+void ft_draw_minimap(t_cub *c, t_ray *ray)
 {
 	double xoff;
 	double yoff;
@@ -153,5 +170,12 @@ void cub_draw_minimap(t_cub *c, t_ray *ray)
 	draw_ply(&(c->mini), &(c->sc.ply));
 	mlx_put_image_to_window(c->mlx, c->win, c->mini.img, 5, 5);	
 	
-
 }
+
+void	cub_draw_minimap(t_cub *c, t_ray *ray)
+{
+	ft_map();
+	ft_ray();
+	ft_ply();
+}	
+
