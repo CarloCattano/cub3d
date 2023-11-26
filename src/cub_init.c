@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:22:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 20:05:10 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:20:31 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	ft_init_wp(t_cub *d)
 {
 	d->sc.ply.sprites = malloc(sizeof(t_sprites) * 9);
 	if (!d->sc.ply.sprites)
-		return (cub_error(E_MAL, 1, NULL, NULL);
+		return (cub_error(E_MAL, 1, NULL, NULL));
 	init_wp_sprites(d);
 	return (0);
 }

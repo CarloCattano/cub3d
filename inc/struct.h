@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:13:02 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 20:05:25 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:47:22 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STRUCT_H
@@ -109,6 +109,7 @@ struct						s_sc
 	int						c_ceiling;
 	double					plane_x;
 	double					plane_y;
+	t_image					*floor;
 	t_image					*ceiling;
 	t_image					wall[4];
 	t_map					map;

@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 19:44:52 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:47:31 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	main(int ac, char *av[])
 	if (ac != 2)
 		return (cub_error(E_ARG, 1, NULL, NULL));
 	if (cub_parser(av[1], &sc, &c))
-		return (cub_error(E_PARS, 0, mlx_terminate, &c));
+		return (cub_error(E_PARS, 0, (void*)mlx_terminate, &c));
 	if (cub_init(&c, &sc))
-		return (cub_error(E_IN, 0, mlx_terminate, &c));
+		return (cub_error(E_IN, 0, (void*)mlx_terminate, &c));
 	mlx_mouse_hide(c.mlx, c.win);
 	mlx_mouse_hook(c.win, mouse_buttons, &c);
 	mlx_hook(c.win, ON_WIN_ENTER, 1L << 4, entered, &c);
@@ -39,6 +39,6 @@ int	main(int ac, char *av[])
 	mlx_hook(c.win, ON_WINDOWCLOSE, 1L << 17, mlx_terminate, &c);
 	mlx_loop_hook(c.mlx, loop_hook, &c);
 	mlx_loop(c.mlx);
-	mlx_terminate(&c);
+	
 	return (0);
 }
