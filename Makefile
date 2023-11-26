@@ -12,7 +12,6 @@ else ifeq ($(ARCH), Linux)
 endif
 
 REMOVE := rm -rf 
-
 LIBPATH = ./libft/
 LIB =$(LIBPATH)libft.a
 

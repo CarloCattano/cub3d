@@ -6,20 +6,16 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 18:37:28 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 14:45:52 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-/* inc */
-
 /* extern */
 # include <stdio.h>
-# include <fcntl.h>
 # include <sys/types.h>
-# include <unistd.h>
 # include <math.h>
 # include <time.h>
 # include <stdbool.h>
@@ -33,6 +29,7 @@
 # include "constants.h"
 # include "msg.h"
 # include "struct.h"
+# include <fcntl.h>
 
 /* functions */
 int     cub_error(char const *msg, char er, void (*f)(), void *ptr);
