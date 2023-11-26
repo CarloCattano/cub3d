@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:21:23 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 18:41:44 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 22:00:31 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,13 @@ int	cub_loadsc(int fd, t_sc *sc, t_cub *c)
 		return (ft_freeload(&load), 1);
 	if (DEBUG)
 		cub_pload(&load);
-	ft_bzero(sc, sizeof(t_sc));
 	if (cub_loadmap(&load, &(sc->map)))
 		return (ft_freeload(&load), 1);
 	cub_loadply(&load, &(sc->ply));
 	cub_loadcfpl(sc, &load);
-	ft_bzero(c, sizeof(t_cub));
 	c->mlx = mlx_init();
 	if (cub_loadwalls(&load, sc, c->mlx))
-		return (ft_freeload(&load), cub_freesc(sc, c->mlx), 1);
+		return (ft_freeload(&load), mlx_terminate(c), 1);
 	if (EXTRAS)
 	{
 		if (cub_loadextra(&load, sc, c->mlx))

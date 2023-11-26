@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:22:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 20:20:31 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 22:22:58 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,27 @@ static void	ft_init_ply(t_cub *d)
 	d->sc.ply.wp_s = 1.0f;
 }
 
+int loop_hook(t_cub *c)
+{
+    cub_draw(c);
+    return (0);
+}
+
+
+
+static void	init_hook(t_cub *c)
+{
+	mlx_mouse_hide(c->mlx, c->win);
+    mlx_mouse_hook(c->win, mouse_buttons, c);
+    mlx_hook(c->win, ON_WIN_ENTER, 1L << 4, entered, c);
+    mlx_hook(c->win, ON_WIN_LEAVE, 1L << 5, exited, c);
+    mlx_hook(c->win, ON_KEYDOWN, 1L << 0, key_down_hook, c);
+    mlx_hook(c->win, ON_KEYUP, 1L << 1, key_up_hook, c);
+    mlx_hook(c->win, ON_MOUSEMOVE, 1 << 6, motion_hook, c);
+    mlx_hook(c->win, ON_WINDOWCLOSE, 1L << 17, mlx_terminate, c);
+    mlx_loop_hook(c->mlx, loop_hook, c);
+}
+
 int	cub_init(t_cub *c, t_sc *sc)
 {
 	c->sc = *sc;
@@ -88,6 +109,7 @@ int	cub_init(t_cub *c, t_sc *sc)
 	ft_init_ply(c);	
 	if (ft_init_wp(c))
 		return (1);
+	init_hook(c);
 	return (0);
 }	
 

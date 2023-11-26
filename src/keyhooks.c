@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:32 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/26 20:48:30 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 22:23:06 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ int	key_down_hook(int k, t_cub *d)
 	if (k == KEY_SPACE)
 		d->sc.ply.shooting = 1;
 	if (k == KEY_ESCAPE)
-	{
 		mlx_terminate(d);
-		exit(0);
-	}
 	if (k == LEFT_SHIFT)
 		d->sc.ply.movespeed = MOVE_SPEED *2;
 	return (k);

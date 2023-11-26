@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:58:32 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 20:47:25 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 22:00:00 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	cub_freesc(t_sc *sc, void *mlx)
 		mlx_destroy_image(mlx, sc->ceiling->img);
 	i = -1;
 	while (++i < 4)
-	{
+	{	
 		if (sc->wall[i].img)
 			mlx_destroy_image(mlx, sc->wall[i].img);
 	}
