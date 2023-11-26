@@ -1,16 +1,13 @@
-NO ./res/tex/gold1.xpm
+F 22,220,22
+C 0,44,100
+EA ./res/tex/leavesop.xpm
 SO ./res/tex/bookshelf.xpm
 WE ./res/tex/bricks.xpm
-EA ./res/tex/leavesop.xpm
-
-F 22,220,22
-C 0,10,222
-
-
+NO ./res/tex/gold1.xpm
 
 1111111111111111111111
 1000000000000000000001
-101000000W000000100001
+101000000E000000100001
 1000000000000000000001
 1000111111111111110001
 10001            10001

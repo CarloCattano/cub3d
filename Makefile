@@ -1,4 +1,4 @@
-NAME := cub3d
+NAME := cub3D
 ARCH := $(shell uname -s)
 CC := cc
 CFLAGS := -Werror -Wextra -Wall
