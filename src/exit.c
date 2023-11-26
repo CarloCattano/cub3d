@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:35:16 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/26 17:31:34 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 18:06:07 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int mlx_terminate(t_cub *d)
 {
 	(void)d;
 	mlx_destroy_image(d->mlx, d->scr.img);
-	mlx_destroy_image(d->mlx, d->sc.ply.wp.img.img);
+	// mlx_destroy_image(d->mlx, d->sc.ply.wp.img.img);
 	/* mlx_destroy_image(d->mlx, d->sc.ply.sprites[1].img->img); */
 	/* mlx_destroy_image(d->mlx, d->sc.ply.sprites[2].img->img); */
 	/* mlx_destroy_image(d->mlx, d->sc.ply.sprites[3].img->img); */

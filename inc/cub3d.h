@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 17:14:00 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 18:16:39 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,25 +88,17 @@ int			exited(t_cub *d);
 int			entered(t_cub *d);
 
 /* ply */
-void		init_ply(t_cub *c);
 void		rotate_ply(t_cub *c, int direction);
 void		handle_ply(t_cub *c);
 
 /* wp */
-void		init_wp(t_cub *c);
 void		draw_wp(t_cub *c);
 
 /* free willis */
 int			mlx_terminate(t_cub *d);
 void		get_wall_orientation(t_ray *ray, t_cub *c, t_fp *fp);
 
-void		cub_fps(t_cub *c);
-
-void		show_fps(t_cub *c, char *str);
-
 void		add_frame(t_cub *c);
-void		draw_sprites(t_cub *c, int x, int y);
-void		init_wp_sprites(t_cub *c);
 
 u_int32_t	color_pixel(u_int32_t *pixel);
 void		clamp(int *color, u_int8_t min, u_int8_t max);

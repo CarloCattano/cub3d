@@ -6,9 +6,10 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:18:13 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 11:33:07 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:05:21 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	cub_parser(char *input, t_sc *scene, t_cub *c)
