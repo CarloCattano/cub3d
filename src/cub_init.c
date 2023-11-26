@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:22:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/24 20:25:33 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 15:28:03 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int	cub_init(t_cub *c, t_sc *sc)
 	c->mini.pix = mlx_get_data_addr(c->mini.img, &c->mini.bpp, &c->mini.ll, &c->mini.endian);	
 	c->mini.h = MHEIGHT;
 	c->mini.w = MWIDTH;	
+	c->mini.xoff = MWIDTH / (double)(c->sc.map.width);
+    c->mini.yoff = MHEIGHT / (double)(c->sc.map.height);
+	c->mini.wxoff = 5;
+	c->mini.wyoff = 5;	
 	return (0);
 }	
 

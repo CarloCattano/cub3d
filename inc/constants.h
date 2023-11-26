@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:46:03 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/25 22:44:41 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 16:55:05 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define W1 0xffffd39b
 # define W2 0xff8b7355
-# define F1 0xff545454
+# define F1 0x00545454
 # define F2 0xff000000
 # define PL 0xff0000ff
 # define RY 0xffff0000

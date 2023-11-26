@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 01:22:22 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:16:42 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -58,6 +58,6 @@ void	cub_draw_screen(t_cub *c, t_ray *r)
 			}
 		}
 	}
-	mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
+//	mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
 	add_frame(c);
 }

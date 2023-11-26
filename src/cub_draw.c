@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:21:54 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/23 22:23:04 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 16:27:45 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	cub_draw(t_cub *c)
 	//cub_draw_sprites();
 	if (c->bonus == 1)
 		cub_draw_minimap(c, nray);
+	mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
 	handle_ply(c);
 	draw_wp(c);
 	free(nray);
