@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 22:35:31 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 13:34:44 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,11 @@ void ft_draw_minimap(t_cub *c, t_ray *ray)
 	mlx_put_image_to_window(c->mlx, c->win, c->mini.img, 5, 5);	
 	
 }
+void	
+
+
+
+
 
 void	cub_draw_minimap(t_cub *c, t_ray *ray)
 {
