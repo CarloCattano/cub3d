@@ -6,18 +6,18 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 18:40:05 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 23:48:31 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /* TODO NORME */
-/* void	rayprint(t_ray *ray) */
-/* { */
-/* 	printf("ray: x%f y%f dx%f dy%f s%i \n", ray->hx, ray->hy, ray->rdx, */
-/* 		ray->rdy, ray->s); */
-/* } */
+ void	rayprint(t_ray *ray, int i) 
+{ 
+ 	printf("%i ray: x%f y%f dx%f dy%f s%i \n",i, ray->hx, ray->hy, ray->rdx, 
+ 		ray->rdy, ray->s); 
+ } 
 
 /* some more cases off offset;*/
 
@@ -35,7 +35,7 @@ static void	ft_off(t_pr *p, t_ray *r, t_image *i)
 {
 	p->xoff = 0;
 	p->yoff = 0;
-	if (!r->s && r->rdy < 0 && r->rdx >= 0)
+	if (!r->s && r->rdy < 0  && r->rdx >= 0)
 		p->yoff = fabs(i->yoff);
 	else if (r->s && r->rdy < 0 && r->rdx > 0)
 		p->yoff = fabs(i->yoff);
@@ -62,6 +62,8 @@ static void	ft_ray(t_sc *s, t_image *to, t_image *o, t_ray *r)
 	// todo clear every time
 	while (++i < to->w)
 	{
+		
+ 		rayprint(&r[i], i); 
 		if (2)
 		{
 			ft_off(&p, &r[i], o);
@@ -127,9 +129,11 @@ void	ft_ply(t_image *to, t_image *o, t_ply *pl)
 	t_point	plp;
 	t_point	plv2;
 	t_point	plv1;
+	
+	
 
-	plp = cub_point(pl->posx * o->xoff + o->wxoff, pl->posy * o->yoff
-			+ o->wyoff, PL);
+	plp = cub_point(pl->posx * o->xoff - (pl->posx  * 1.1)  + o->wxoff, pl->posy * o->yoff 
+		- (pl->posy  *  )	+ o->wyoff, PL);
 	plv1 = cub_point(plp.x + (0.5 * o->xoff), plp.y + (0.5 * o->yoff), PL);
 	plv2 = cub_point((plv1.x + (1.2 * pl->dirx * o->xoff)), (plv1.y + (1.2
 					* pl->diry * o->yoff)), PL);
@@ -144,5 +148,5 @@ void	cub_draw_minimap(t_cub *c, t_ray *ray)
 	ft_map(&c->scr, &c->mini, &c->sc);
 	ft_ray(&c->sc, &c->scr, &c->mini, ray);
 	ft_ply(&c->scr, &c->mini, &c->sc.ply);
-	// ft_ray();
+//	exit (0);
 }
