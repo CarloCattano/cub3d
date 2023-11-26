@@ -14,7 +14,7 @@
 /* print for debug */
 void	mprint(void *value)
 {
-	ft_printf("%s", (char *)value);
+	ft_printf("[%s]\n", (char *)value);
 }
 
 static void	eprint(void *value)

@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:13:02 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 17:39:40 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 00:27:02 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STRUCT_H
@@ -81,7 +81,7 @@ typedef struct s_ply
 {
 	double			posx;
 	double			posy;
-	double			dirX;
+	double			dirx;
 	double			diry;
 	double			movespeed;
 	double			rotSpeed;
@@ -93,6 +93,7 @@ typedef struct s_ply
 	int				shooting;
 	int				walking;
 	t_sprites		*sprites;
+	t_image			**wp_imgs;
 }					t_ply;
 
 struct s_map
@@ -199,27 +200,47 @@ struct	s_cub
 
 struct s_fp
 {
+	double	wx;
+	int		ds;
+	int		de;
 	t_image	*tex;
-	double	texX;
+	int		texx;
 	double	step;
-	double	texY;
+	double	texy;
+	double	scalar;	
 };
 
 typedef struct s_ray
-{
-	double		raydirX;
+{/*
+	double		raydirx;
 	double		raydiry;
-	double		deltaDistX;
-	double		deltaDistY;
-	int			stepX;
-	int			stepY;
-	double		sideDistX;
-	double		sideDistY;
+	double		deltadistx;
+	double		deltadisty;
+	int			stepx;
+	int			stepy;
+	double		sidedistx;
+	double		sideDisty;
 	double		perpWallDist;
 	int			lineHeight;
 	int			side;
 	double		hitX;
 	double		hitY;
+	double		camerax;
+	*/
+	double      rdx;
+    double      rdy;
+    double      ddx;
+    double      ddy;
+    int         stx;
+    int         sty;
+    double      sdx;
+    double      sdy;
+    double      pwd;
+    int         lh;
+    int         s;
+    double      hx;
+    double      hy;
+    double      cx;
 }				t_ray;
 
 #endif

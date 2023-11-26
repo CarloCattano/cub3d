@@ -4,133 +4,103 @@
 /*   cub_ray.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2023/11/13 11:10:08 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 18:15:03 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 00:26:59 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "cub3d.h"
 
-t_ray *cub_ray(t_sc *d,  int width, double fov)
+static void	ft_initray(t_ray *r, double fov, t_sc *s)
 {
-	
-	t_ray	*rays;
-	int		x;		
+	r->rdx = s->ply.dirx + s->plane_x * r->cx;
+	r->rdy = s->ply.diry + (s->plane_y * fov) * r->cx;
+	r->hx = (int)s->ply.posx;
+	r->hy = (int)s->ply.posy;
+	r->ddx = fabs(1 / r->rdx);
+	r->ddy = fabs(1 / r->rdy);
+}
 
-
-	rays = (t_ray *)malloc(sizeof(t_ray) * width);		
-	if (!rays)
-		return (NULL);
-	x = -1;
-	ft_bzero(rays, sizeof(t_ray) * width);	
-	while (++x < width)
+static void	ft_sdxsdy(t_ray *r, t_sc *s)
+{
+	if (r->rdx < 0)
 	{
-		double 			cameraX = 2 * x / (double)width  -1; //x-coordinate in camera space
-		//	init ray position and direction
-		double 			raydirX = d->ply.dirX + d->plane_x * cameraX;
-		double 			raydiry = d->ply.diry + (d->plane_y * fov) * cameraX;
-		//	which box of the map we're in
-	  	int 			mapX = (int)d->ply.posx;
-	  	int 			mapY = (int)d->ply.posy;
+		r->stx = -1;
+		r->sdx = (s->ply.posx - r->hx) * r->ddx;
+	}
+	else
+	{
+		r->stx = 1;
+		r->sdx = (r->hx + 1.0 - s->ply.posx) * r->ddx;
+	}
+	if (r->rdy < 0)
+	{
+		r->sty = -1;
+		r->sdy = (s->ply.posy - r->hy) * r->ddy;
+	}
+	else
+	{
+		r->sty = 1;
+		r->sdy = (r->hy + 1.0 - s->ply.posy) * r->ddy;
+	}
+}
 
- //length of ray from current position to next x or y-side
-      double sideDistX;
-      double sideDistY;
+static void	ft_dda(t_ray *r, t_sc *s)
+{
+	int	hit;
 
-/*      double deltaDistX = sqrt(1 + (raydiry * raydiry) / (raydirX * raydirX));
-      double deltaDistY = sqrt(1 + (raydirX * raydirX) / (raydiry * raydiry));
-*/	//length of ray from one x or y-side to next x or y-side
-      double deltaDistX = (raydirX == 0) ? 1e30 : fabs(1 / raydirX);
-      double deltaDistY = (raydiry == 0) ? 1e30 : fabs(1 / raydiry);
-      double perpWallDist;
-	
-/*	ray.delta.x = 1e30;
-	ray.delta.y = 1e30;*/
-      //what direction to step in x or y-direction (either +1 or -1)
-      int stepX;
-      int stepY;
-
-      int hit = 0; //was there a wall hit?
-      int side; //was a NS or a EW wall hit?
-      //calculate step and initial sideDist
-      if(raydirX < 0)
-      {
-        stepX = -1;
-        sideDistX = (d->ply.posx - mapX) * deltaDistX;
-      }
-      else
-      {
-        stepX = 1;
-        sideDistX = (mapX + 1.0 - d->ply.posx) * deltaDistX;
-      }
-      if(raydiry < 0)
-      {
-        stepY = -1;
-        sideDistY = (d->ply.posy - mapY) * deltaDistY;
-      }
-      else
-      {
-        stepY = 1;
-        sideDistY = (mapY + 1.0 - d->ply.posy) * deltaDistY;
-      }
-      //perform DDA
-      while(hit == 0)
-      {
-        //jump to next map square, either in x-direction, or in y-direction
-        if(sideDistX < sideDistY)
-        {
-          sideDistX += deltaDistX;
-          mapX += stepX;
-          side = 0;
-        }
-        else
-        {
-          sideDistY += deltaDistY;
-          mapY += stepY;
-          side = 1;
-        }
-        //Check if ray has hit a wall
-        if(d->map.val[mapY][mapX]  == '1') 
+	hit = 0;
+	while (hit == 0)
+	{
+		if (r->sdx < r->sdy)
 		{
-			hit = 1;
-		}
-      }
-
-      //Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
-      if(side == 0) perpWallDist = (sideDistX - deltaDistX);
-      else          perpWallDist = (sideDistY - deltaDistY);
-
-      //calculate value of wallX
-      double wallX; //where exactly the wall was hit
-      if(side == 0) wallX = d->ply.posy + perpWallDist * raydiry;
-      else          wallX = d->ply.posx + perpWallDist * raydirX;
-	
-		t_ray ray;
-		
-		ray.raydirX = raydirX;
-    	ray.raydiry = raydiry;
-    	ray.deltaDistX = deltaDistX;
-    	ray.deltaDistY = deltaDistY;
-    	ray.stepX = stepX; 
-    	ray.stepY = stepY;
-    	ray.sideDistX = sideDistX;
-    	ray.sideDistY = sideDistY;
-    	ray.side = side;
-		if (ray.side)
-		{
-    		ray.hitX = wallX;
-    		ray.hitY = mapY;
+			r->sdx += r->ddx;
+			r->hx += r->stx;
+			r->s = 0;
 		}
 		else
 		{
-    		ray.hitX = mapX; 
-    		ray.hitY = wallX;
+			r->sdy += r->ddy;
+			r->hy += r->sty;
+			r->s = 1;
 		}
-		ray.perpWallDist = perpWallDist;
-		rays[x] = ray; 
+		if (s->map.val[(int)(r->hy)][(int)(r->hx)] == '1')
+		{
+			hit = 1;
+		}
+	}
+}
+
+static void	ft_after(t_ray *r, t_sc *s)
+{
+	if (r->s == 0)
+		r->pwd = (r->sdx - r->ddx);
+	else
+		r->pwd = (r->sdy - r->ddy);
+	if (r->s == 0)
+		r->hy = s->ply.posy + r->pwd * r->rdy;
+	else
+		r->hx = s->ply.posx + r->pwd * r->rdx;
+//	r->lh = (HEIGHT / r->pwd);
+}
+
+t_ray	*cub_ray(t_sc *s, int width, double fov)
+{
+	t_ray	*rays;
+	int		x;
+
+	rays = (t_ray *)malloc(sizeof(t_ray) * width);
+	if (!rays)
+		return (NULL);
+	x = -1;
+	ft_bzero(rays, sizeof(t_ray) * width);
+	while (++x < width)
+	{
+		(rays[x]).cx = 2 * x / (double)width - 1;
+		ft_initray(&(rays[x]), fov, s);
+		ft_sdxsdy(&(rays[x]), s);
+		ft_dda(&(rays[x]), s);
+		ft_after(&(rays[x]), s);
 	}
 	return (rays);
-}	
-
-	
+}

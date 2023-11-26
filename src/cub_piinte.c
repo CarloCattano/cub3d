@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:28:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 18:06:29 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 00:27:15 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	cub_piinte(t_fp *fp)
 	int		index;
 	char	*tbuf;
 
-	x = fp->texX * fp->tex->xoff;
-	y = fp->texY * fp->tex->yoff;
+	x = fp->texx * fp->tex->xoff;
+	y = fp->texy * fp->tex->yoff;
 	x = fmod(x, fp->tex->w);
 	y = fmod(y, fp->tex->h);
 	if (x < 0)
@@ -35,7 +35,7 @@ int	cub_piinte(t_fp *fp)
 		y += fp->tex->h;
 	index = ((int)y) * fp->tex->ll + x * (fp->tex->bpp >> 3);
 	tbuf = &(fp->tex->pix[index]);
-	fp->texY += fp->step;
+	fp->texy += fp->step;
 	return (*(int *)tbuf);
 }
 

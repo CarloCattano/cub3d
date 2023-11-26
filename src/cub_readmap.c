@@ -83,7 +83,7 @@ int	cub_readmap(int fd, t_load *load, char *line)
 	{
 		if (ft_evalmap(load, line))
 			return (free(line), 1);
-		temp = ft_strdup(line);
+		temp = ft_substr(line, 0 ,ft_strlen(line) -1);
 		if (!temp)
 			return (cub_error(E_MAL, 1, free, line));
 		node = ft_lstnew(temp);
@@ -94,5 +94,7 @@ int	cub_readmap(int fd, t_load *load, char *line)
 		line = get_next_line(fd);
 		++load->ymap;
 	}
+	if (!(load->xpl))
+		return (cub_error(E_NP, 1, NULL, NULL));	
 	return (2);
 }

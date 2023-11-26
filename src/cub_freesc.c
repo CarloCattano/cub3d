@@ -15,7 +15,7 @@
 /*TODO freesc has also to free mlx and dteroy display */
 void	cub_freesc(t_sc *sc, void *mlx)
 {
-	int	i;
+		int	i;
 
 	if (sc->floor)
 		mlx_destroy_image(mlx, sc->floor->img);
