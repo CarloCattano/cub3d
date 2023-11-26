@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 16:46:33 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/26 13:26:48 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 14:11:40 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	get_wall_orientation(t_ray *ray, t_cub *c, t_fp *fp)
 {
-	if (ray->s == 0 && ray->rdx > 0) // east
+	if (ray->s == 0 && ray->rdx > 0)
 		fp->tex = &(c->sc.wall[3]);
-	else if (ray->s == 0 && ray->rdx < 0) // west
+	else if (ray->s == 0 && ray->rdx < 0)
 		fp->tex = &(c->sc.wall[2]);
-	else if (ray->s == 1 && ray->rdy > 0) // south
+	else if (ray->s == 1 && ray->rdy > 0)
 		fp->tex = &(c->sc.wall[1]);
-	else if (ray->s == 1 && ray->rdy < 0) // north
+	else if (ray->s == 1 && ray->rdy < 0)
 		fp->tex = &(c->sc.wall[0]);
 	else
 		(void)fp;

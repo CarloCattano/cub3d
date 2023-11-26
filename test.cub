@@ -1,7 +1,7 @@
-NO ./tex/gold1.xpm
-SO ./tex/bookshelf.xpm
-WE ./tex/bricks.xpm
-EA ./tex/leavesop.xpm
+NO ./res/tex/gold1.xpm
+SO ./res/tex/bookshelf.xpm
+WE ./res/tex/bricks.xpm
+EA ./res/tex/leavesop.xpm
 
 F 22,220,22
 C 0,10,222

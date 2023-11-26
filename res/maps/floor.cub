@@ -1,7 +1,7 @@
-NO ./tex/brick_wall.xpm
-SO ./tex/brick-wall-1916752_640.xpm
-WE ./tex/leavesop.xpm
-EA ./tex/gold1.xpm
+NO ./res/tex/brick_wall.xpm
+SO ./res/tex/brick-wall-1916752_640.xpm
+WE ./res/tex/leavesop.xpm
+EA ./res/tex/gold1.xpm
 
 F 28,134,38
 C 22,30,222

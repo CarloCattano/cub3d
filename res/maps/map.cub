@@ -1,7 +1,7 @@
-NO ./tex/bricks.xpm
-SO ./tex/bricks.xpm
-WE ./tex/bricks.xpm
-EA ./tex/bricks.xpm
+NO ./res/tex/bricks.xpm
+SO ./res/tex/bricks.xpm
+WE ./res/tex/bricks.xpm
+EA ./res/tex/bricks.xpm
 
 S ./path_to_the_east_texture 55 55
 

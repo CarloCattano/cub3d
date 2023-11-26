@@ -1,11 +1,10 @@
-NO ./tex/brick_wall.xpm
-SO ./tex/brick-wall-1916752_640.xpm
-WE ./tex/bricks.xpm
-EA ./tex/gold1.xpm
+NO ./res/tex/wallhd_1.xpm
+SO ./res/tex/bwall.xpm
+WE ./res/tex/bricks.xpm
+EA ./res/tex/bricked.xpm
 
 F 28,134,38
 C 22,30,222
-
 
 111111111111111111111111111111111111111111111111111
 100000000000000000000000000000100000000001111111101
