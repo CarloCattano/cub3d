@@ -17,7 +17,10 @@ and can also check if all items are reachabel (not impl. yet) */
 static bool	ft_flood(char **val, int x, int y, t_load *l)
 {
 	if (x < 0 || y < 0 || x >= l->xmap || y >= l->ymap || val[y][x] == ' ')
+	{
+		ft_printf("flood false: at [%i/%i]\n", y, x);  
 		return (false);
+	}
 	if (val[y][x] == '1' || val[y][x] == 'x')
 		return (true);
 	val[y][x] = 'x';
@@ -34,6 +37,8 @@ static bool	ft_flood(char **val, int x, int y, t_load *l)
 
 static int	check(t_load *load, char **val, int x, int y)
 {
+	if (x >= load->xmap || y >= load->ymap || val[y][x] == ' ') 
+		ft_printf("floor false: at [%i/%i]\n", y, x); 
 	return (x >= load->xmap || y >= load->ymap || val[y][x] == ' ');
 }
 

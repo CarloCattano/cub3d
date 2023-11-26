@@ -36,6 +36,7 @@ int	main (int ac, char *av[])
 		cub_error(E_PARS, 0, NULL, NULL);
 		mlx_terminate(&c);
 	}
+	
 	if (cub_init(&c, &sc))
 		return (cub_error(E_IN, 0, NULL, NULL));
 	init_ply(&c);
