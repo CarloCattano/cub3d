@@ -4,6 +4,7 @@ tags
 .idea
 .vscode
 compile_commands.json
+*.bak
 *.o
 Doxyfile
 minilibx-linux
