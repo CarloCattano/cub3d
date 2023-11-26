@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:11:22 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 16:46:13 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 14:21:56 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,7 @@
 
 int	loop_hook(t_cub *c)
 {
-	char *str;
-
-	str = ft_itoa(c->fps);
 	cub_draw(c);
-	if ( c->bonus == 1)
-		show_fps(c, str);
-	free(str);
 	return (0);
 }
 

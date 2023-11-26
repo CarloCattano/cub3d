@@ -27,7 +27,7 @@ C := main cub_countparts cub_evalfile cub_isnumber cub_pfloor cub_readmap cub_df
 	 cub_psprites cub_splits cub_error cub_freelextra cub_parser cub_pwalls cub_loadmap cub_cparr \
 	 cub_loadpl cub_loadcfpl cub_pload cub_freesc cub_checkmap cub_loadextra cub_init cub_draw_minimap cub_draw cub_mpp cub_point cub_line cub_draw_ray cub_ray cub_piinte \
 	 cub_draw_screen cub_loadwalls cub_loadfile player hooks keyhooks weapon wall_orientation exit \
-	 cub_fps cub_ui cub_animate_sprite utils
+	 cub_animate_sprite utils
 
 H :=  cub3d
 

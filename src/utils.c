@@ -6,7 +6,7 @@
 /*   By: carlo <no@way.zip>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:11:48 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/26 14:10:55 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 14:23:16 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,11 @@ u_int32_t	color_pixel(u_int32_t *pixel)
 	a = (pixel[0]) & 0xFF;
 	return (((u_int32_t)r << 24) | ((u_int32_t)g << 16)
 		| ((u_int32_t)b << 8) | (u_int32_t)a);
+}
+
+void	add_frame(t_cub *c)
+{
+	c->frame++;
+	if (c->frame >= 512)
+		c->frame = 0;
 }
