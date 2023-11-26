@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:41 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/23 18:30:27 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 17:18:07 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,41 +20,33 @@ int	entered(t_cub *d)
 
 int	exited(t_cub *d)
 {
-	if (d->sc.ply.lastX > WIDTH - 10)
+	if (d->sc.ply.lastx > WIDTH - 10)
 	{
-	#ifdef __linux__	
 		mlx_mouse_move(d->mlx, d->win, WIDTH - 10, HEIGHT >> 1);
-	#elif __APPLE__
-		mlx_mouse_move(d->win,  WIDTH - 10, HEIGHT >> 1);
-	#endif		
-		d->sc.ply.lastX = WIDTH - 10;
+		d->sc.ply.lastx = WIDTH - 10;
 	}
 	else
 	{
-	#ifdef __linux__	
 		mlx_mouse_move(d->mlx, d->win, WIDTH - 10, HEIGHT >> 1);
-	#elif __APPLE__
-		mlx_mouse_move(d->win,  WIDTH - 10, HEIGHT >> 1);
-	#endif		
-		d->sc.ply.lastX = 10;
+		d->sc.ply.lastx = 10;
 	}
 	return (0);
 }
 
 int	motion_hook(int x, int y, t_cub *d)
 {
-	if (x > d->sc.ply.lastX)
+	if (x > d->sc.ply.lastx)
 	{
-		d->sc.ply.rotSpeed = (d->sc.ply.lastX - x) * 10.0;
+		d->sc.ply.rotspeed = (d->sc.ply.lastx - x) * 10.0;
 		rotate_ply(d, 1);
 	}
 	else
 	{
-		d->sc.ply.rotSpeed = (d->sc.ply.lastX - x) * 10.0;
+		d->sc.ply.rotspeed = (d->sc.ply.lastx - x) * 10.0;
 		rotate_ply(d, -1);
 	}
 	(void)y;
-	d->sc.ply.lastX = x;
+	d->sc.ply.lastx = x;
 	return (0);
 }
 

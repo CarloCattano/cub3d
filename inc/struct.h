@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:13:02 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 16:27:48 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:17:32 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STRUCT_H
@@ -25,9 +25,9 @@ typedef struct s_extra		t_extra;
 typedef struct s_map		t_map;
 typedef struct s_load		t_load;
 typedef struct s_cub		t_cub;
-typedef struct s_fp			t_fp;	
+typedef struct s_fp			t_fp;
 
-enum e_type
+enum						e_type
 {
 	NOT = 0,
 	NO,
@@ -37,10 +37,11 @@ enum e_type
 	F,
 	C,
 	S,
-	MAP	
+	MAP
 };
 
-enum {
+enum
+{
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_MOUSEMOVE = 6,
@@ -51,167 +52,166 @@ enum {
 
 typedef struct s_ctrl_states
 {
-	int		up_down;
-	int		left_right;
-	int		turn;
-}			t_ctrl_states;
+	int						up_down;
+	int						left_right;
+	int						turn;
+}							t_ctrl_states;
 
-struct s_image
+struct						s_image
 {
-	void		*img;
-	char		*pix;
-	int			ll;
-	int			bpp;
-	int			endian;
-	int			w;
-	int			h;
-	int			wxoff;
-	int			wyoff;
-	double		xoff;
-	double		yoff;
+	void					*img;
+	char					*pix;
+	int						ll;
+	int						bpp;
+	int						endian;
+	int						w;
+	int						h;
+	int						wxoff;
+	int						wyoff;
+	double					xoff;
+	double					yoff;
 };
 
 typedef struct s_wp
 {
-	t_image		img;
-	char		*path;
-}				t_wp;
+	t_image					img;
+	char					*path;
+}							t_wp;
 
 typedef struct s_ply
 {
-	double			posx;
-	double			posy;
-	double			dirx;
-	double			diry;
-	double			movespeed;
-	double			rotSpeed;
-	int				rot;
-	int				lastX;
-	t_wp			wp;
-	t_ctrl_states	ctrl;
-	int				wp_s;
-	int				shooting;
-	int				walking;
-	t_sprites		*sprites;
-	t_image			**wp_imgs;
-}					t_ply;
+	double					posx;
+	double					posy;
+	double					dirx;
+	double					diry;
+	double					movespeed;
+	double					rotspeed;
+	int						rot;
+	int						lastx;
+	t_wp					wp;
+	t_ctrl_states			ctrl;
+	int						wp_s;
+	int						shooting;
+	int						walking;
+	t_sprites				*sprites;
+	t_image					**wp_imgs;
+}							t_ply;
 
-struct s_map
+struct						s_map
 {
-	int		height;
-	int		width;
-	char	**val;
+	int						height;
+	int						width;
+	char					**val;
 };
 
-struct s_sc
+struct						s_sc
 {
-	bool		setting[3];
-	int			c_floor;
-	int			c_ceiling;
-	double		plane_x;
-	double		plane_y;
-	t_image		*floor;
-	t_image		*ceiling;
-	t_image		wall[4];
-	t_map		map;
-	t_ply		ply;
-	t_image		*wp;
-	t_sprites	*sprites;
-	t_extra		*extra;
+	bool					setting[3];
+	int						c_floor;
+	int						c_ceiling;
+	double					plane_x;
+	double					plane_y;
+	t_image					*floor;
+	t_image					*ceiling;
+	t_image					wall[4];
+	t_map					map;
+	t_ply					ply;
+	t_image					*wp;
+	t_sprites				*sprites;
+	t_extra					*extra;
 };
 
-struct s_sprites
+struct						s_sprites
 {
-	int				x;
-	int				y;
-	double			z;
-	t_image			*img;
-	char			*path;
-	double			dist;
-	int				hdiv;
-	int				vdiv;
-	t_sprites		*next;
+	int						x;
+	int						y;
+	double					z;
+	t_image					*img;
+	char					*path;
+	double					dist;
+	int						hdiv;
+	int						vdiv;
+	t_sprites				*next;
 };
 
-struct	s_extra
+struct						s_extra
 {
-	char		*key;
-	t_image		extra;
-	t_extra		*next;
-};	
-
-struct s_lextra
-{
-	char	*key;
-	char	*path;
-	char	**value;
+	char					*key;
+	t_image					extra;
+	t_extra					*next;
 };
 
-struct	s_load
+struct						s_lextra
 {
-	char	*wall[4];
-	int		*floor;
-	int		*ceiling;
-	int		*xpl;
-	int		*ypl;
-	char	dir;
-	int		xmap;
-	int		ymap;
-	t_list	*map;
-	t_list	*extra;
+	char					*key;
+	char					*path;
+	char					**value;
+};
+
+struct						s_load
+{
+	char					*wall[4];
+	int						*floor;
+	int						*ceiling;
+	int						*xpl;
+	int						*ypl;
+	char					dir;
+	int						xmap;
+	int						ymap;
+	t_list					*map;
+	t_list					*extra;
 };
 
 /* draw lines */
 typedef struct s_2Dpoint
 {
-	float		x;
-	float		y;
-	int			colour;
-}	t_point;
+	float					x;
+	float					y;
+	int						colour;
+}							t_point;
 
 typedef struct s_line
 {
-	int			dx;
-	int			sx;
-	int			dy;
-	int			sy;
-	int			err;
-	int			e2;
-	int			ax;
-	int			ay;
-	int			bx;
-	int			by;
-	int			colour;
-	int			w;
-	int			h;
-}	t_line;	
+	int						dx;
+	int						sx;
+	int						dy;
+	int						sy;
+	int						err;
+	int						e2;
+	int						ax;
+	int						ay;
+	int						bx;
+	int						by;
+	int						colour;
+	int						w;
+	int						h;
+}							t_line;
 
-struct	s_cub
+struct						s_cub
 {
-	void			*mlx;
-	void			*win;
-	t_sc			sc;
-	t_image			scr;
-	t_image			mini;
-	float			fps;
-	int				bonus;
-	unsigned int	frame;
+	void					*mlx;
+	void					*win;
+	t_sc					sc;
+	t_image					scr;
+	t_image					mini;
+	float					fps;
+	int						bonus;
+	unsigned int			frame;
 };
 
-struct s_fp
+struct						s_fp
 {
-	double	wx;
-	int		ds;
-	int		de;
-	t_image	*tex;
-	int		texx;
-	double	step;
-	double	texy;
-	double	scalar;	
+	double					wx;
+	int						ds;
+	int						de;
+	t_image					*tex;
+	int						texx;
+	double					step;
+	double					texy;
+	double					scalar;
 };
 
-typedef struct s_ray
-{/*
+/*
 	double		raydirx;
 	double		raydiry;
 	double		deltadistx;
@@ -226,21 +226,23 @@ typedef struct s_ray
 	double		hitX;
 	double		hitY;
 	double		camerax;
-	*/
-	double      rdx;
-    double      rdy;
-    double      ddx;
-    double      ddy;
-    int         stx;
-    int         sty;
-    double      sdx;
-    double      sdy;
-    double      pwd;
-    int         lh;
-    int         s;
-    double      hx;
-    double      hy;
-    double      cx;
-}				t_ray;
+*/
+typedef struct s_ray
+{
+	double					rdx;
+	double					rdy;
+	double					ddx;
+	double					ddy;
+	int						stx;
+	int						sty;
+	double					sdx;
+	double					sdy;
+	double					pwd;
+	int						lh;
+	int						s;
+	double					hx;
+	double					hy;
+	double					cx;
+}							t_ray;
 
 #endif
