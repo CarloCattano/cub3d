@@ -6,11 +6,12 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:21:23 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 18:06:44 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 18:41:44 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
+
 /* free load struct */
 static void	ft_lstdelone2(t_list *lst, void (*del)())
 {
@@ -24,7 +25,7 @@ static void	ft_lstdelone2(t_list *lst, void (*del)())
 static void	ft_lstclear2(t_list **lst, void (*del)())
 {
 	t_list	*temp;
-	t_list	*curr;	
+	t_list	*curr;
 
 	curr = *lst;
 	while (curr)

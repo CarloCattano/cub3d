@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:09:50 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 14:16:42 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:43:53 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -19,13 +19,13 @@ static void	ft_initfp(t_ray *r, t_cub *c, t_fp *fp)
 	else
 		fp->wx = r->hy;
 	fp->ds = -((r->lh) >> 1) + (c->scr.h >> 1);
-	if (fp->ds < 0) 
+	if (fp->ds < 0)
 		fp->ds = 0;
 	fp->de = (r->lh >> 1) + (c->scr.h >> 1);
-	if (fp->de >= c->scr.h) 
+	if (fp->de >= c->scr.h)
 		fp->de = c->scr.h - 1;
 	fp->texx = (fp->wx * fp->tex->w);
-	if (r->s == 0 && r->rdx > 0) 
+	if (r->s == 0 && r->rdx > 0)
 		fp->texx = fp->tex->w - fp->texx - 1;
 	if (r->s == 1 && r->rdy < 0)
 		fp->texx = fp->tex->w - fp->texx - 1;
@@ -51,13 +51,12 @@ void	cub_draw_screen(t_cub *c, t_ray *r)
 				cub_mpp(&(c->scr), x, y, c->sc.c_ceiling);
 			else if (y >= fp.ds && y <= fp.de)
 				cub_mpp(&(c->scr), x, y, cub_darken(cub_piinte(&fp), r[x].pwd));
-			else if (y > fp.de) 
+			else if (y > fp.de)
 			{
 				fp.scalar = ((double)HEIGHT - y) / 16.0;
 				cub_mpp(&(c->scr), x, y, cub_darken(c->sc.c_floor, fp.scalar));
 			}
 		}
 	}
-//	mlx_put_image_to_window(c->mlx, c->win, c->scr.img, 0, 0);
 	add_frame(c);
 }

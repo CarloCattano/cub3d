@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2023/11/13 11:10:08 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 00:26:59 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:46:40 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -65,9 +65,7 @@ static void	ft_dda(t_ray *r, t_sc *s)
 			r->s = 1;
 		}
 		if (s->map.val[(int)(r->hy)][(int)(r->hx)] == '1')
-		{
 			hit = 1;
-		}
 	}
 }
 
@@ -81,7 +79,6 @@ static void	ft_after(t_ray *r, t_sc *s)
 		r->hy = s->ply.posy + r->pwd * r->rdy;
 	else
 		r->hx = s->ply.posx + r->pwd * r->rdx;
-//	r->lh = (HEIGHT / r->pwd);
 }
 
 t_ray	*cub_ray(t_sc *s, int width, double fov)

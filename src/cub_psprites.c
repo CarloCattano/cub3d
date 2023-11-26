@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:51:44 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 14:20:41 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:42:26 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	cub_psprites(t_load *load, char **parts)
 	if (!nnode)
 		return (cub_error(E_MAL, 1, NULL, NULL));
 	if (!nnode->content)
-		return (1); 
+		return (1);
 	ft_lstadd_back(&(load->extra), nnode);
 	return (0);
 }

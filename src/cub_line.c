@@ -6,11 +6,16 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:01:30 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/21 17:47:32 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 18:45:24 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/* void	ppoint(t_point *a) */
+/* { */
+/* 	// printf("P %f / %f \n", a->x, a->y); */
+/* } */
 
 static void	init_line(t_point *a, t_point *b, t_line *l, t_image *w)
 {
@@ -19,7 +24,7 @@ static void	init_line(t_point *a, t_point *b, t_line *l, t_image *w)
 	l->bx = (int)b->x;
 	l->by = (int)b->y;
 	l->dx = abs(l->bx - l->ax);
-	l->dy = -abs(l->by - l-> ay);
+	l->dy = -abs(l->by - l->ay);
 	l->err = l->dx + l->dy;
 	l->e2 = 2 * l->err;
 	if (l->ax < l->bx)
@@ -61,18 +66,11 @@ static void	plotline(t_line l, t_image *data)
 	}
 }
 
-// void	ppoint(t_point *a)
-// {
-// 	// printf("P %f / %f \n", a->x, a->y);
-// }
-
-
-
+/* ppoint(&b); */
 void	cub_line(t_point a, t_point b, t_image *data)
 {
 	t_line	line;
-	
-	// ppoint(&b);
+
 	init_line(&a, &b, &line, data);
 	plotline(line, data);
 }
