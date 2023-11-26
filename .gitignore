@@ -13,7 +13,7 @@ MLX42
 test
 *.a
 cub3d
-cub3d
+cub3D
 debug
 html/
 latex/
