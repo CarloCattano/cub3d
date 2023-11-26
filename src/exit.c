@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:35:16 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/25 16:55:48 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 17:08:19 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 #ifdef __linux__
 
-int	mlx_terminate(t_cub *d)
+void mlx_terminate(t_cub *d)
 {
 	/* to do , destroy sprites */
 	if (!d->win)
 		printf("no window\n");
-	/* mlx_destroy_image(d->mlx, d->scr.img); */
-	/* mlx_destroy_image(d->mlx, d->sc.ply.wp.img.img); */
-	/* mlx_destroy_window(d->mlx, d->win); */
-	/* mlx_destroy_display(d->mlx); */
-	/* free(d->mlx); */
+	mlx_destroy_image(d->mlx, d->scr.img);
+	mlx_destroy_image(d->mlx, d->sc.ply.wp.img.img);
+	mlx_destroy_window(d->mlx, d->win);
+	mlx_destroy_display(d->mlx);
+	free(d->mlx);
 	ft_putendl_fd("Program terminated Gracefully ❤️", 1);
 	exit (0);
-	return (0);
 }
 
 #else
