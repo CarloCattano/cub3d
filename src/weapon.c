@@ -6,23 +6,11 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 22:09:32 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/26 18:08:08 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 19:18:12 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_wp(t_cub *d)
-{
-	d->sc.ply.wp.path = "./res/gun/gun.xpm";
-	d->sc.ply.wp.img.img = mlx_xpm_file_to_image(d->mlx, d->sc.ply.wp.path,
-			&d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h);
-	d->sc.ply.wp.img.pix = mlx_get_data_addr(d->sc.ply.wp.img.img,
-			&d->sc.ply.wp.img.bpp, &d->sc.ply.wp.img.ll,
-			&d->sc.ply.wp.img.endian);
-	d->sc.ply.sprites = malloc(sizeof(t_sprites) * 9);
-	init_wp_sprites(d);
-}
 
 void	put_wp(t_cub *d, int x, int y, int color)
 {

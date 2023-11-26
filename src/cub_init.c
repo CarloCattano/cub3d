@@ -6,17 +6,17 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:22:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 18:31:24 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 19:23:12 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	init_wp_sprites(t_cub *c)
+static char *ft_txt(int i)
 {
+	
 	char	*paths[9];
-	int		i;
-
+	
 	paths[0] = "./res/gun/gun.xpm";
 	paths[1] = "./res/gun/gun1.xpm";
 	paths[2] = "./res/gun/gun2.xpm";
@@ -26,18 +26,27 @@ static int	init_wp_sprites(t_cub *c)
 	paths[6] = "./res/gun/gun6.xpm";
 	paths[7] = "./res/gun/gun7.xpm";
 	paths[8] = "./res/gun/gun8.xpm";
+	
+	return (paths[i]);
+}
+
+static int	init_wp_sprites(t_cub *c)
+{
+	int		i;
+	int		fd;
+
 	i = -1;
 	while (++i < 9)
 	{
-		c->sc.ply.sprites[i].path = paths[i];
+		fd = open(ft_txt(i), O_RDONLY);
+		if (fd < 0)
+			return (cub_error(E_SOTF, 2, NULL, NULL));
+		close(fd);
 		c->sc.ply.sprites[i].img = malloc(sizeof(t_image));
-		c->sc.ply.sprites[i].img->img = mlx_xpm_file_to_image(c->mlx,
-				c->sc.ply.sprites[i].path, &c->sc.ply.sprites[i].img->w,
-				&c->sc.ply.sprites[i].img->h);
-		c->sc.ply.sprites[i].img->pix = mlx_get_data_addr(
-				c->sc.ply.sprites[i].img->img, &c->sc.ply.sprites[i].img->bpp,
-				&c->sc.ply.sprites[i].img->ll,
-				&c->sc.ply.sprites[i].img->endian);
+		if (!(c->sc.ply.sprites[i].img))
+			return (cub_error(E_MAL, 1, NULL, NULL));
+		if (cub_loadfile(c->sc.ply.sprites[i].img, c->mlx, ft_txt(i)))
+			return (cub_error(E_WL, 1, NULL, NULL));
 	}
 	return (0);
 }
@@ -82,7 +91,8 @@ int	cub_init(t_cub *c, t_sc *sc)
 	c->mini.wxoff = 5;
 	c->mini.wyoff = 5;
 	ft_init_ply(c);	
-	ft_init_wp(c);
+	if (ft_init_wp(c))
+		return (1);
 	return (0);
 }	
 
