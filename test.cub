@@ -1,9 +1,9 @@
 F 22,220,22
 C 0,44,100
 EA ./res/tex/leavesop.xpm
-SO ./res/tex/bookshelf.xpm
+SO ./res/tex/bwall.xpm
 WE ./res/tex/bricks.xpm
-NO ./res/tex/gold1.xpm
+NO ./res/tex/wallhd_1.xpm
 
 1111111111111111111111
 1000000000000000000001
