@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:22:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 18:23:38 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 18:31:24 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	init_wp_sprites(t_cub *c)
 
 static int	ft_init_wp(t_cub *d)
 {
-   // TODO not needed , default weapon state is sprite[0]
+	// TODO not needed , default weapon state is sprite[0]
 	/* d->sc.ply.wp.path = "./res/gun/gun.xpm"; */
 	/* d->sc.ply.wp.img.img = mlx_xpm_file_to_image(d->mlx, d->sc.ply.wp.path, */
 	/* 		&d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h); */

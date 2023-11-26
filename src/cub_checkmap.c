@@ -6,19 +6,19 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:56:00 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 15:30:11 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 18:37:04 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* flood can be used to check if players world is souranded by walls 
+/* flood can be used to check if players world is souranded by walls
 and can also check if all items are reachabel (not impl. yet) */
 static bool	ft_flood(char **val, int x, int y, t_load *l)
 {
 	if (x < 0 || y < 0 || x >= l->xmap || y >= l->ymap || val[y][x] == ' ')
 	{
-		ft_printf("flood false: at [%i/%i]\n", y, x);  
+		ft_printf("flood false: at [%i/%i]\n", y, x);
 		return (false);
 	}
 	if (val[y][x] == '1' || val[y][x] == 'x')
@@ -37,8 +37,8 @@ static bool	ft_flood(char **val, int x, int y, t_load *l)
 
 static int	check(t_load *load, char **val, int x, int y)
 {
-	if (x >= load->xmap || y >= load->ymap || val[y][x] == ' ') 
-		ft_printf("floor false: at [%i/%i]\n", y, x); 
+	if (x >= load->xmap || y >= load->ymap || val[y][x] == ' ')
+		ft_printf("floor false: at [%i/%i]\n", y, x);
 	return (x >= load->xmap || y >= load->ymap || val[y][x] == ' ');
 }
 
@@ -55,10 +55,9 @@ static bool	ft_check_floor(char **val, t_load *load)
 		{
 			if (val[j][i] != '1' && val[j][i] != ' ')
 			{
-				if (check(load, val, i + 1, j) || 
-					(i && check(load, val, i - 1, j)) || 
-					check(load, val, i, j + 1) || 
-					(j && check(load, val, i, j - 1)))
+				if (check(load, val, i + 1, j) || (i && check(load, val, i - 1,
+							j)) || check(load, val, i, j + 1) || (j
+						&& check(load, val, i, j - 1)))
 					return (false);
 			}
 		}

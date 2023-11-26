@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:53:13 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 14:23:52 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:35:55 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -66,7 +66,7 @@ int	ft_evalmap(t_load *load, char *line)
 		return (cub_error(E_MF, 1, NULL, NULL));
 	}
 	if (load->xmap < c)
-		load->xmap = c; 
+		load->xmap = c;
 	return (0);
 }
 
@@ -83,7 +83,7 @@ int	cub_readmap(int fd, t_load *load, char *line)
 	{
 		if (ft_evalmap(load, line))
 			return (free(line), 1);
-		temp = ft_substr(line, 0 ,ft_strlen(line) -1);
+		temp = ft_substr(line, 0, ft_strlen(line) - 1);
 		if (!temp)
 			return (cub_error(E_MAL, 1, free, line));
 		node = ft_lstnew(temp);
@@ -95,6 +95,6 @@ int	cub_readmap(int fd, t_load *load, char *line)
 		++load->ymap;
 	}
 	if (!(load->xpl))
-		return (cub_error(E_NP, 1, NULL, NULL));	
+		return (cub_error(E_NP, 1, NULL, NULL));
 	return (2);
 }

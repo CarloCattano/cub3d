@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:41:49 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 13:52:03 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:35:11 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	cub_evalline(int fd, t_load *load, char *line, char **parts)
 		return (ft_printf("%s\n", E_), 1);
 	if (type == S)
 	{
-		if (EXTRAS) 
+		if (EXTRAS)
 			return (cub_psprites(load, parts));
 		return (cub_error(E_NE, 1, NULL, NULL));
 	}
@@ -74,5 +74,5 @@ int	cub_evalline(int fd, t_load *load, char *line, char **parts)
 		return (cub_pwalls(load, parts, type));
 	if (type <= C)
 		return (cub_pfloor(load, line, type));
-	return (cub_readmap (fd, load, ft_strdup(line)));
+	return (cub_readmap(fd, load, ft_strdup(line)));
 }
