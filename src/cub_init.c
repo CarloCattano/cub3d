@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:22:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 18:12:14 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 18:23:38 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ static int	init_wp_sprites(t_cub *c)
 
 static int	ft_init_wp(t_cub *d)
 {
-	d->sc.ply.wp.path = "./res/gun/gun.xpm";
-	d->sc.ply.wp.img.img = mlx_xpm_file_to_image(d->mlx, d->sc.ply.wp.path,
-			&d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h);
-	d->sc.ply.wp.img.pix = mlx_get_data_addr(d->sc.ply.wp.img.img,
-			&d->sc.ply.wp.img.bpp, &d->sc.ply.wp.img.ll,
-			&d->sc.ply.wp.img.endian);
+   // TODO not needed , default weapon state is sprite[0]
+	/* d->sc.ply.wp.path = "./res/gun/gun.xpm"; */
+	/* d->sc.ply.wp.img.img = mlx_xpm_file_to_image(d->mlx, d->sc.ply.wp.path, */
+	/* 		&d->sc.ply.wp.img.w, &d->sc.ply.wp.img.h); */
+	/* d->sc.ply.wp.img.pix = mlx_get_data_addr(d->sc.ply.wp.img.img, */
+	/* 		&d->sc.ply.wp.img.bpp, &d->sc.ply.wp.img.ll, */
+	/* 		&d->sc.ply.wp.img.endian); */
 	d->sc.ply.sprites = malloc(sizeof(t_sprites) * 9);
 	init_wp_sprites(d);
 	return (0);
