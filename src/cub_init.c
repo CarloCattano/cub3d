@@ -6,17 +6,16 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:22:15 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 22:22:58 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 22:35:42 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char *ft_txt(int i)
+static char	*ft_txt(int i)
 {
-	
 	char	*paths[9];
-	
+
 	paths[0] = "./res/gun/gun.xpm";
 	paths[1] = "./res/gun/gun1.xpm";
 	paths[2] = "./res/gun/gun2.xpm";
@@ -26,14 +25,13 @@ static char *ft_txt(int i)
 	paths[6] = "./res/gun/gun6.xpm";
 	paths[7] = "./res/gun/gun7.xpm";
 	paths[8] = "./res/gun/gun8.xpm";
-	
 	return (paths[i]);
 }
 
 static int	init_wp_sprites(t_cub *c)
 {
-	int		i;
-	int		fd;
+	int	i;
+	int	fd;
 
 	i = -1;
 	while (++i < 9)
@@ -71,45 +69,24 @@ static void	ft_init_ply(t_cub *d)
 	d->sc.ply.wp_s = 1.0f;
 }
 
-int loop_hook(t_cub *c)
-{
-    cub_draw(c);
-    return (0);
-}
-
-
-
-static void	init_hook(t_cub *c)
-{
-	mlx_mouse_hide(c->mlx, c->win);
-    mlx_mouse_hook(c->win, mouse_buttons, c);
-    mlx_hook(c->win, ON_WIN_ENTER, 1L << 4, entered, c);
-    mlx_hook(c->win, ON_WIN_LEAVE, 1L << 5, exited, c);
-    mlx_hook(c->win, ON_KEYDOWN, 1L << 0, key_down_hook, c);
-    mlx_hook(c->win, ON_KEYUP, 1L << 1, key_up_hook, c);
-    mlx_hook(c->win, ON_MOUSEMOVE, 1 << 6, motion_hook, c);
-    mlx_hook(c->win, ON_WINDOWCLOSE, 1L << 17, mlx_terminate, c);
-    mlx_loop_hook(c->mlx, loop_hook, c);
-}
-
 int	cub_init(t_cub *c, t_sc *sc)
 {
 	c->sc = *sc;
 	c->win = mlx_new_window(c->mlx, WIDTH, HEIGHT, "Cub3D");
 	c->scr.img = mlx_new_image(c->mlx, WIDTH, HEIGHT);
-	c->scr.pix = mlx_get_data_addr(c->scr.img, &c->scr.bpp, &c->scr.ll, &c->scr.endian);	
+	c->scr.pix = mlx_get_data_addr(c->scr.img, &c->scr.bpp, &c->scr.ll,
+			&c->scr.endian);
 	c->scr.h = HEIGHT;
-	c->scr.w = WIDTH; 	
+	c->scr.w = WIDTH;
 	c->mini.h = MHEIGHT;
-	c->mini.w = MWIDTH;	
+	c->mini.w = MWIDTH;
 	c->mini.xoff = MWIDTH / (double)(c->sc.map.width);
-    c->mini.yoff = MHEIGHT / (double)(c->sc.map.height);
+	c->mini.yoff = MHEIGHT / (double)(c->sc.map.height);
 	c->mini.wxoff = 5;
 	c->mini.wyoff = 5;
-	ft_init_ply(c);	
+	ft_init_ply(c);
 	if (ft_init_wp(c))
 		return (1);
 	init_hook(c);
 	return (0);
-}	
-
+}

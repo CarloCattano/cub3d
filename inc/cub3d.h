@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 18:16:39 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/26 22:38:46 by carlo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,8 @@ void		add_frame(t_cub *c);
 u_int32_t	color_pixel(u_int32_t *pixel);
 void		clamp(int *color, u_int8_t min, u_int8_t max);
 u_int32_t	cub_darken(u_int32_t argb, double factor);
+
+int			loop_hook(t_cub *c);
+void		init_hook(t_cub *c);
 
 #endif
