@@ -6,16 +6,16 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:02:38 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 16:55:02 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:42:15 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void	rayprint(t_ray *ray)
-// {
-// printf ("ray: x%f y%f dx%f dy%f s%i \n", ray->hitX, ray->hitY, ray->raydirX, ray->raydiry,ray->side); 	
-// }
+ void	rayprint(t_ray *ray)
+ {
+ printf ("ray: x%f y%f dx%f dy%f s%i \n", ray->hx, ray->hy, ray->rdx, ray->rdy,ray->s); 	
+ }
 
 /* some more cases off offset;*/ 
 
@@ -32,25 +32,24 @@ static void	ft_off(t_pr *p, t_ray *r, t_image *i)
 { 
 	p->xoff = 0;
 	p->yoff = 0;
-	if (!r->s && r->rdy  < 0 && r->rdx >= 0)	
+	if (!r->s && r->rdy < 0 && r->rdx >= 0)	
 		p->yoff = fabs(i->yoff);
-/*
-		
-	else if (ray[i].rdy  < 0 && ray[i].rdx < 0 && !ray[i].s)
-			yoff = fabs(i->yoff);
-	else if (ray[i].rdy   < 0 &&  ray[i].rdx > 0 && ray[i].s)
-			yoff = fabs(i->yoff);
-	else if  (ray[i].rdy   < 0 && ray[i].rdx < 0 && ray[i].s)
-			yoff = fabs(img->yoff);
-	if (ray[i].rdx  < 0 && ray[i].rdy >= 0 && !ray[i].s)	
-			xoff = fabs(img->xoff);
-	else if (ray[i].rdx  < 0 && ray[i].rdy < 0 && !ray[i].s)
-			xoff = fabs(img->xoff);
-	else if (ray[i].rdx   < 0 &&  ray[i].rdy > 0 && ray[i].s)
-			xoff = fabs(img->xoff);
-	else if  (ray[i].rdx   < 0 && ray[i].rdy < 0 && ray[i].s)
-			xoff = fabs(img->xoff);
-*/
+	//else if (!r->s && r->rdy < 0 && r->rdx < 0 && r->rdx > -0.5)
+	//		p->yoff = fabs(i->yoff);
+	else if (r->s && r->rdy < 0 &&  r->rdx > 0)
+			p->yoff = fabs(i->yoff);
+	else if  (r->s && r->rdy < 0   && r->rdx < 0)
+			p->yoff = fabs(i->yoff);
+
+	if (!r->s && r->rdx < 0 && r->rdy >= 0)	
+			p->xoff = fabs(i->xoff);
+	else if (!r->s && r->rdx < 0 && r->rdy < 0)
+			p->xoff = fabs(i->xoff);
+	else if (r->s && r->rdx < 0 &&  r->rdy > 0)
+			p->xoff = fabs(i->xoff);
+	else if (r->s &&  r->rdx < 0 && r->rdy < 0)
+			p->xoff = fabs(i->xoff);
+
 }
 
 static void ft_ray(t_sc *s, t_image *to, t_image *o, t_ray *r)
@@ -63,7 +62,8 @@ static void ft_ray(t_sc *s, t_image *to, t_image *o, t_ray *r)
 	// todo clear every time
 	while (++i < to->w)
 	{
-		if (!(i % 25))
+		rayprint(&r[i]);
+		if (2)
 		{
 			ft_off(&p, &r[i], o);
 			p.w = cub_point(r[i].hx * o->xoff + p.xoff + o->wxoff
@@ -80,7 +80,6 @@ void draw_cub(t_image *img, t_image *off, t_point *a, t_point *b)
 
 	y1 = -1;
 	
-	//printf("%f/%f/%f/%f \n", off->yoff, off->xoff, a->x, a->y);
 	while ( ++y1 < off->yoff)
 	{
 		x1 = -1;
@@ -92,7 +91,6 @@ void draw_cub(t_image *img, t_image *off, t_point *a, t_point *b)
 			}
 			else if (a)
 			{	
-			//	printf("p:%f/%f/%f/%f \n", off->yoff, off->xoff, a->x + x1, a->y + y1);
 				cub_mpp(img , (int)(a->x + x1), (int)(a->y  + y1), a->colour);
 			}
 		}
