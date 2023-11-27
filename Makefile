@@ -69,18 +69,19 @@ else ifeq ($(ARCH), Linux)
 	MLX_URL = "https://cdn.intra.42.fr/document/document/22379/minilibx-linux.tgz"
 	MLXFLAGS := -Lminilibx-linux -lmlx -L./minilibx-linux -Iminilibx-linux -lXext -lX11 -lm -lz
 endif
-
+# wget $(MLX_URL) -O $(MLX).tgz; \
+# tar -xvf $(MLX).tgz; \
+# rm $(MLX).tgz; \
+	
 getmlxlib:
 	@if [ ! -d $(MLX) ]; then \
 		echo "GETTING MLX LIBRARY"; \
-		wget $(MLX_URL) -O $(MLX).tgz; \
-		tar -xvf $(MLX).tgz; \
-		rm $(MLX).tgz; \
+		git clone https://github.com/42Paris/minilibx-linux.git; \
 		echo "MLX LIBRARY Downloaded"; \
 	fi
 	
 	@make -C $(MLX)
-	
+
 run : all
 	./$(NAME) test.cub
 
