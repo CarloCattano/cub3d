@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:32 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/27 00:48:01 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/27 13:09:38 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int	key_up_hook(int k, t_cub *d)
 	if (k == KEY_LEFT || k == KEY_RIGHT)
 		d->sc.ply.ctrl.turn = 0;
 	if (k == KEY_SPACE)
+	{
 		d->sc.ply.shooting = 0;
+		cub_open_door(d);
+	}
 	if (k == KEY_ESCAPE)
 		mlx_terminate(d);
 	if (k == KEY_M)

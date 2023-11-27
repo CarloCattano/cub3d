@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:46:03 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/26 16:55:05 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:01:40 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 /* TEXTURE */
 # define TX 64	
 # define TY 64
+# define TD "./res/tex/crate3_8.xpm"
+
 
 /* PLAYER */
 # define FOV 0.66

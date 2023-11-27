@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/27 00:58:19 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:35:55 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ int			entered(t_cub *d);
 /* ply */
 void		rotate_ply(t_cub *c, int direction);
 void		handle_ply(t_cub *c);
+
+/* doors*/
+void	cub_open_door(t_cub *c);
+
 
 /* wp */
 void		draw_wp(t_cub *c);

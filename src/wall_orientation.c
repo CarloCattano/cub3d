@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 16:46:33 by carlo             #+#    #+#             */
-/*   Updated: 2023/11/26 14:11:40 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/27 10:47:34 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	get_wall_orientation(t_ray *ray, t_cub *c, t_fp *fp)
 {
-	if (ray->s == 0 && ray->rdx > 0)
+	if (ray->door)
+		fp->tex = &(c->sc.door);
+	else if (ray->s == 0 && ray->rdx > 0)
 		fp->tex = &(c->sc.wall[3]);
 	else if (ray->s == 0 && ray->rdx < 0)
 		fp->tex = &(c->sc.wall[2]);

@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:23:07 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/25 14:16:04 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/27 13:02:49 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,11 @@ int	cub_loadwalls(t_load *l, t_sc *sc, void *mlx)
 			return (1);
 		i++;
 	}
+	i = open(TD, O_RDONLY);
+	if (i < 0)
+		return (cub_error(E_SOTF, 2, NULL, NULL)); 
+	close(i);
+	if (cub_loadfile(&(sc->door), mlx, TD))
+		return (1);
 	return (0);
 }
