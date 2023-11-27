@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:46:03 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/26 16:55:05 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/27 10:10:06 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 /* MAP */
 # define DIRECT "NSEW"
-# define INMAP	" 10D"
+# define INMAP	" 10"
 
 /* WINDOWS  */
 # define WIDTH 800
