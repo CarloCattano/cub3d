@@ -1,14 +1,8 @@
-compile with
-make
-
-avalilable:
-
+![Screenshot](https://github.com/CarloCattano/cub3d/blob/main/screenshot.png)
  - make run - makes and runs
 
  - make debug - makes and runs in gdb
  
- - make mem - makes and runs in valgrind + help50
-
 start game
 ```
 ./cub3d something_map.cub
