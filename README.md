@@ -1,10 +1,10 @@
 
 <img src="https://github.com/CarloCattano/cub3d/blob/main/screenshot.png"  width="400" height="300">
- - make run - makes and runs
 
- - make debug - makes and runs in gdb
- 
-start game
+ ```bash
+make
+./cub3D res/maps/gpt.cub
 ```
-./cub3d something_map.cub
-```
+
+Made at [42 Berlin](https://github.com/42Berlin)
+by Carlo Cattano and [Torsten Konnopke](https://github.com/TORSTENKONNOPKE)
