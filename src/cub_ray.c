@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2023/11/13 11:10:08 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 18:46:40 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/27 10:39:26 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -19,6 +19,7 @@ static void	ft_initray(t_ray *r, double fov, t_sc *s)
 	r->hy = (int)s->ply.posy;
 	r->ddx = fabs(1 / r->rdx);
 	r->ddy = fabs(1 / r->rdy);
+	r->door = 0;
 }
 
 static void	ft_sdxsdy(t_ray *r, t_sc *s)
@@ -66,6 +67,11 @@ static void	ft_dda(t_ray *r, t_sc *s)
 		}
 		if (s->map.val[(int)(r->hy)][(int)(r->hx)] == '1')
 			hit = 1;
+		if (s->map.val[(int)(r->hy)][(int)(r->hx)] == 'D')
+		{
+			hit = 1;
+			r->door = 1;
+		}
 	}
 }
 

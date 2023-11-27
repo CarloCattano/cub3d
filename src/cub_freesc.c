@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:58:32 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 22:33:39 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/27 13:07:53 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	cub_freesc(t_sc *sc, void *mlx)
 		if (sc->wall[i].img)
 			mlx_destroy_image(mlx, sc->wall[i].img);
 	}
+	if (sc->door.img)
+		mlx_destroy_image(mlx, sc->door.img);
 	cub_dfree(&(sc->map.val));
 	if (sc->ply.sprites)
 	{
