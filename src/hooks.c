@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 19:54:41 by ccattano          #+#    #+#             */
-/*   Updated: 2023/11/26 17:18:07 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/27 00:49:47 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	mouse_buttons(int k, int x, int y, t_cub *d)
 	if ((k == 1 || k == 2)
 		&& (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT))
 	{
-		if (k == 1 || k == 2)		
+		if (k == 1 || k == 2)
 			d->sc.ply.shooting = !d->sc.ply.shooting;
 	}
 	return (0);

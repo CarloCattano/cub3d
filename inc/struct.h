@@ -6,7 +6,7 @@
 /*   By: jstrotbe <jstrotbe@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:13:02 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 20:47:22 by jstrotbe         ###   ########.fr       */
+/*   Updated: 2023/11/27 01:08:58 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STRUCT_H
@@ -242,4 +242,11 @@ typedef struct s_ray
 	double					cx;
 }							t_ray;
 
+typedef struct pr
+{
+	t_point					plp;
+	t_point					w;
+	int						xoff;
+	int						yoff;
+}	t_pr;
 #endif

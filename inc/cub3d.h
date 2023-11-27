@@ -6,7 +6,7 @@
 /*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/26 22:38:46 by carlo            ###   ########.fr       */
+/*   Updated: 2023/11/27 00:58:19 by jstrotbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ t_point		cub_point(double x, double y, int colour);
 void		cub_line(t_point a, t_point b, t_image *data);
 
 t_ray		*cub_ray(t_sc *d, int width, double fov);
+void		ft_map(t_image *to, t_image *o, t_sc *s);
+void		ft_ply(t_image *to, t_image *o, t_ply *pl);
 
 /* draw_walls*/
 int			cub_piinte(t_fp *fp);
