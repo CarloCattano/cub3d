@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*  cub3d.h                                              :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlo <carlo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ccattano <ccattano@42Berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 10:10:47 by jstrotbe          #+#    #+#             */
-/*   Updated: 2023/11/27 12:35:55 by jstrotbe         ###   ########.fr       */
+/*   Created: 2023/11/27 14:31:04 by ccattano          #+#    #+#             */
+/*   Updated: 2023/11/27 14:31:40 by ccattano          ###   ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,7 @@ void		rotate_ply(t_cub *c, int direction);
 void		handle_ply(t_cub *c);
 
 /* doors*/
-void	cub_open_door(t_cub *c);
-
+void		cub_open_door(t_cub *c);
 
 /* wp */
 void		draw_wp(t_cub *c);

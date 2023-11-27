@@ -35,7 +35,6 @@
 # define TY 64
 # define TD "./res/tex/crate3_8.xpm"
 
-
 /* PLAYER */
 # define FOV 0.66
 
